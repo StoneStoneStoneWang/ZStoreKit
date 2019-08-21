@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/ZSign.h</key>
 		<data>
-		ZES8SDgwH3+FIV3r5FUlsD2IxJc=
+		9ckpDAKBn4erYEMCKOVGK3LcAu8=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -38,11 +38,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZES8SDgwH3+FIV3r5FUlsD2IxJc=
+			9ckpDAKBn4erYEMCKOVGK3LcAu8=
 			</data>
 			<key>hash2</key>
 			<data>
-			cuTgrCBTmuPecuZiDnjr1u0piJH3hJj3gJUGrGWmbWI=
+			i6Ka9OoYbB9v3XKeyFafe/cX5QeEcn25fgL46jFVz0Y=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

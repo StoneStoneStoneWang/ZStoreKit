@@ -16,5 +16,5 @@ FOUNDATION_EXPORT const unsigned char ZSignVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ZSign/PublicHeader.h>
 
-#import <ZSign/ZConfigure>
+#import <ZSign/ZConfigure.h>
 
