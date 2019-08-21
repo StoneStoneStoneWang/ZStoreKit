@@ -1,0 +1,6 @@
+framework module ZNoti {
+  umbrella header "ZNoti.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module ZSign {
+  umbrella header "ZSign.h"
+
+  export *
+  module * { export * }
+}
