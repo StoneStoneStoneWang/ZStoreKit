@@ -1,0 +1,6 @@
+framework module ZReq {
+  umbrella header "ZReq.h"
+
+  export *
+  module * { export * }
+}

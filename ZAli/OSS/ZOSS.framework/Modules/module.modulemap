@@ -1,0 +1,6 @@
+framework module ZOSS {
+  umbrella header "ZOSS.h"
+
+  export *
+  module * { export * }
+}

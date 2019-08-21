@@ -1,11 +1,11 @@
 
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZNoti"
+  spec.name         = "ZAli"
   spec.version      = "0.0.1"
   spec.summary      = "A Lib For 阿里封装."
   spec.description  = <<-DESC
-  ZNoti 对所有事件通知的封装
+  ZAli一个阿里的封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -24,7 +24,10 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'ZNoti/ZNoti.framework'
+  spec.subspec 'OSS' do |oss|
+    oss.vendored_frameworks = 'ZAli/OSS/ZOSS.framework'
+    oss.dependency 'AliyunOSSiOS'
+  end
   
 end
 
