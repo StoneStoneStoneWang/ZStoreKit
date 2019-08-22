@@ -1,0 +1,6 @@
+framework module ZNavi {
+  umbrella header "ZNavi.h"
+
+  export *
+  module * { export * }
+}

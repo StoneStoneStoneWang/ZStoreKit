@@ -1,0 +1,6 @@
+framework module ZBase {
+  umbrella header "ZBase.h"
+
+  export *
+  module * { export * }
+}

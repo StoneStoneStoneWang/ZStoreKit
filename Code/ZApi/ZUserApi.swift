@@ -1,5 +1,5 @@
 //
-//  WLUserApi.swift
+//  ZUserApi.swift
 //  ZUserKit
 //
 //  Created by three stone 王 on 2019/3/14.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum WLUserApi {
+public enum ZUserApi {
     
     case login(_ phone: String,password: String)
     

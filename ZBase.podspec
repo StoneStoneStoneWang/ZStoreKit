@@ -1,11 +1,11 @@
 
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZApi"
+  spec.name         = "ZBase"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For Api."
+  spec.summary      = "A Lib For VC."
   spec.description  = <<-DESC
-  ZApi是请求接口的封装呢
+  ZBase是VC的封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -24,11 +24,6 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZApi/*.{swift}"
-  
-  spec.dependency 'ZSign'
-  spec.dependency 'Alamofire'
-  spec.dependency 'WLReqKit'
-  spec.dependency 'WLToolsKit/Common'
+  spec.vendored_frameworks = 'Framework/ZBase/ZBase.framework'
   
 end

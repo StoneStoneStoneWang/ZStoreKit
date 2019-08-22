@@ -12,7 +12,7 @@ import Alamofire
 import WLToolsKit
 import ZSign
 
-extension WLUserApi: WLObserverReq {
+extension ZUserApi: WLObserverReq {
     public var reqName: String {
         
         switch self {
@@ -163,6 +163,7 @@ extension WLUserApi: WLObserverReq {
             }
             
             return result
+            
         case .deleteMyCircle(let encode): return ["cfs.encoded": encode]
             
         case .fetchAreaJson: return [:]
