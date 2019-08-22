@@ -1,0 +1,6 @@
+framework module ZYYCache {
+  umbrella header "ZYYCache.h"
+
+  export *
+  module * { export * }
+}

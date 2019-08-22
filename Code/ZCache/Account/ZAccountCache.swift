@@ -1,5 +1,5 @@
 //
-//  WLAccountCache.swift
+//  ZAccountCache.swift
 //  ZUserKit
 //
 //  Created by three stone 王 on 2019/3/15.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-@objc (WLAccountCache)
-public final class WLAccountCache: NSObject {
+@objc (ZAccountCache)
+public final class ZAccountCache: NSObject {
     @objc (shared)
-    public static let `default`: WLAccountCache = WLAccountCache()
+    public static let `default`: ZAccountCache = ZAccountCache()
     
     private override init() { }
     
@@ -22,7 +22,7 @@ public final class WLAccountCache: NSObject {
     @objc public var uid: String = ""
 }
 
-extension WLAccountCache {
+extension ZAccountCache {
     
     @objc public func isPushOn() -> Bool {
         
