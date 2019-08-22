@@ -7,7 +7,17 @@
 //
 
 #import "ZBaseViewController+ZContainer.h"
+#import <objc/runtime.h>
 
 @implementation ZBaseViewController (ZContainer)
+
+- (void)setBridge:(ZBaseBridge *)bridge {
+    
+    objc_setAssociatedObject(self, @"bridge", bridge, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+-  (ZBaseBridge *)bridge {
+    
+    return objc_getAssociatedObject(self, @"bridge");
+}
 
 @end
