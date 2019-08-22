@@ -25,6 +25,6 @@ Pod::Spec.new do |spec|
   
   spec.vendored_frameworks = 'Framework/ZYYCache/ZYYCache.framework'
   
-  base.dependency 'YYCache'
+  spec.dependency 'YYCache'
   
 end
