@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ZTransiton/ZTViewController.h>
+#import <ZTransition/ZTViewController.h>
 
 typedef NS_ENUM(NSInteger,LoadingStatus) {
     
@@ -49,10 +49,6 @@ typedef NS_ENUM(NSInteger,LoadingStatus) {
 - (void)changeLoadingStatus:(LoadingStatus )status;
 
 @property (nonatomic ,weak) id<ZLoadingViewDelegate> mDelegate;
-
-- (void)setURLCannotOpenforText:(NSString *)text andLogo:(NSString *)logo;
-
-- (void)setDataEmptyforText:(NSString *)text andLogo:(NSString *)logo;
 
 
 @end

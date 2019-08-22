@@ -6,7 +6,7 @@
 //  Copyright © 2018年 three stone 王. All rights reserved.
 //
 
-#import <ZTransiton/ZTViewController.h>
+#import <ZTransition/ZTViewController.h>
 #import "ZLoadingView.h"
 @interface ZLoadingViewController : ZTViewController
 
