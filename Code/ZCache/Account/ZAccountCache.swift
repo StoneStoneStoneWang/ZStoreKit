@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ZBean
 
 @objc (ZAccountCache)
 public final class ZAccountCache: NSObject {
@@ -47,7 +48,7 @@ extension ZAccountCache {
         return !token.isEmpty
     }
     
-    public func saveAccount(acc: WLAccountBean) -> WLAccountBean {
+    public func saveAccount(acc: ZAccountBean) -> ZAccountBean {
         
         UserDefaults.standard.setValue(acc.token, forKey: "token")
         
@@ -66,14 +67,14 @@ extension ZAccountCache {
         return acc
     }
     
-    public func queryAccount() -> WLAccountBean! {
+    public func queryAccount() -> ZAccountBean! {
         
         guard let id = UserDefaults.standard.object(forKey: "uid") else {
             
             return nil
         }
         
-        var acc = WLAccountBean()
+        var acc = ZAccountBean()
         
         acc.token = UserDefaults.standard.object(forKey: "token") as? String ?? ""
         
@@ -99,7 +100,7 @@ extension ZAccountCache {
             return
         }
         
-        var acc = WLAccountBean()
+        var acc = ZAccountBean()
         
         acc.token = UserDefaults.standard.object(forKey: "token") as? String ?? ""
         
