@@ -26,4 +26,10 @@ Pod::Spec.new do |spec|
   
   spec.vendored_frameworks = 'Framework/ZUpload/ZUpload.framework'
   
+  spec.dependency 'AFNetworking'
+  
+  spec.dependency 'DSign'
+  
+  spec.dependency 'ZAli/OSS'
+  
 end

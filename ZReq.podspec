@@ -26,4 +26,8 @@ Pod::Spec.new do |spec|
   
   spec.vendored_frameworks = 'Framework/ZRep/ZRep.framework'
   
+  spec.dependency 'AFNetworking'
+  
+  spec.dependency 'DSign'
+  
 end
