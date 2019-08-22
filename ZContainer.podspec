@@ -32,13 +32,13 @@ Pod::Spec.new do |spec|
     table.source_files = "Code/ZContainer/ZTable/*.{swift}"
     table.dependency 'ZContainer/Base'
     table.dependency 'WLBaseTableView/RTV'
-    table.dependency 'Zloading'
+    table.dependency 'ZLoading'
   end
   
   spec.subspec 'Collection' do |collection|
     collection.source_files = "Code/ZContainer/ZCollect/*.{swift}"
     collection.dependency 'ZContainer/Base'
-    collection.dependency 'Zloading'
+    collection.dependency 'ZLoading'
     collection.dependency 'MJRefresh'
   end
   
