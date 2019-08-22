@@ -11,6 +11,7 @@ import ZSign
 import RxSwift
 import WLReqKit
 import ZCache
+import ZReq
 
 public func onUserDictResp<T : WLObserverReq>(_ req: T) -> Observable<[String:Any]> {
     
