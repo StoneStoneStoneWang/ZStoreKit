@@ -1,0 +1,6 @@
+framework module ZInner {
+  umbrella header "ZInner.h"
+
+  export *
+  module * { export * }
+}

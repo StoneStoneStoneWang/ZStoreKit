@@ -1,11 +1,11 @@
 
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZLoading"
+  spec.name         = "ZInner"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For loading."
+  spec.summary      = "A Lib For inner."
   spec.description  = <<-DESC
-  ZLoading是loading封装
+  ZInner是内置浏览器封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -24,8 +24,8 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'Framework/ZLoading/ZLoading.framework'
+  spec.vendored_frameworks = 'Framework/ZInner/ZInner.framework'
   
-  spec.dependency 'ZTransition'
+  spec.dependency 'ZLoading'
   
 end
