@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
 @objc (ZBaseBridge)
 open class ZBaseBridge: NSObject {
     
-    
-    
+    public final let disposed: DisposeBag = DisposeBag()
 }
