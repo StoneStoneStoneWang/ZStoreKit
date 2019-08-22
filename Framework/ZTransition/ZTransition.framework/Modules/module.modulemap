@@ -1,0 +1,6 @@
+framework module ZTransition {
+  umbrella header "ZTransition.h"
+
+  export *
+  module * { export * }
+}

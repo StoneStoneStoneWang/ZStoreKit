@@ -12,17 +12,17 @@
 		<data>
 		nAcFDUrvtZv3n/BvkOONuxMZ41c=
 		</data>
-		<key>Headers/ZTransiton.h</key>
+		<key>Headers/ZTransition.h</key>
 		<data>
-		fWTf4BvSzLIhy+X35/TIwLMRRmc=
+		lmskKi2kx37JmMiNe9AlM2XYWS8=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		DEfjuS4nMa/pS8rFNKhGkh76LyY=
+		d85zKfb7gLOC5eKz1R2AmO7XyZk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		WNm4Dt75jEDMYoX6+tZ0zVkYJes=
+		eTfwZRjvVGc4r5etlEae0ndPHBs=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -49,26 +49,26 @@
 			nLrZX6PIeaRjsZ+y0Kgq/K5yBNCnHTFK6vWC/Zk6cRo=
 			</data>
 		</dict>
-		<key>Headers/ZTransiton.h</key>
+		<key>Headers/ZTransition.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fWTf4BvSzLIhy+X35/TIwLMRRmc=
+			lmskKi2kx37JmMiNe9AlM2XYWS8=
 			</data>
 			<key>hash2</key>
 			<data>
-			jF7rPglgiqEBbWJ7yEEtiZaa86lzEvyo6CMNczrzous=
+			R7WX8cxY0QlvCiPduh9qqkRxCbUdl8EQCKY1SWPMx+M=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WNm4Dt75jEDMYoX6+tZ0zVkYJes=
+			eTfwZRjvVGc4r5etlEae0ndPHBs=
 			</data>
 			<key>hash2</key>
 			<data>
-			BLsY9U0ni97MwujwwsjEO1R47hVoU768XYZbSBtyDmQ=
+			H9zl45ANVLNW6ejYWdR55wqDBw+mg2NWIdl54hIQVhI=
 			</data>
 		</dict>
 	</dict>

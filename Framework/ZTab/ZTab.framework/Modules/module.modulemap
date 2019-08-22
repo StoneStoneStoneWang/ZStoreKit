@@ -1,0 +1,6 @@
+framework module ZTab {
+  umbrella header "ZTab.h"
+
+  export *
+  module * { export * }
+}
