@@ -31,6 +31,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'User' do |user|
     user.source_files = "Code/ZCache/User/*.{swift}"
     user.dependency 'ZBean/User'
+    user.dependency 'ZYYCache'
   end
   
 end
