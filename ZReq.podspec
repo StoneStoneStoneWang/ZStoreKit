@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZRep"
+  spec.name         = "ZReq"
   spec.version      = "0.0.1"
   spec.summary      = "A Lib For req."
   spec.description  = <<-DESC
