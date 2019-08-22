@@ -29,7 +29,7 @@ Pod::Spec.new do |spec|
   end
   
   spec.subspec 'Table' do |table|
-    base.source_files = "Code/ZContainer/ZTable/*.{swift}"
+    table.source_files = "Code/ZContainer/ZTable/*.{swift}"
     table.dependency 'ZContainer/Base'
     table.dependency 'WLBaseTableView/RTV'
     table.dependency 'Zloading'
