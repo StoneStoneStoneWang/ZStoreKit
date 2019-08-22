@@ -1,0 +1,6 @@
+framework module ZUpload {
+  umbrella header "ZUpload.h"
+
+  export *
+  module * { export * }
+}

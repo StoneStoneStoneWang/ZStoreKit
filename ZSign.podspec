@@ -24,6 +24,6 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'ZSign/ZSign.framework'
+  spec.vendored_frameworks = 'Framework/ZSign/ZSign.framework'
   
 end

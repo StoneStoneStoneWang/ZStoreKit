@@ -1,0 +1,6 @@
+framework module ZWechat {
+  umbrella header "ZWechat.h"
+
+  export *
+  module * { export * }
+}

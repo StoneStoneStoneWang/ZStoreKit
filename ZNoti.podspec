@@ -24,7 +24,7 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'ZNoti/ZNoti.framework'
+  spec.vendored_frameworks = 'Framework/ZNoti/ZNoti.framework'
   
 end
 

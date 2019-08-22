@@ -1,11 +1,11 @@
 
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZAli"
+  spec.name         = "ZApi"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 阿里封装."
+  spec.summary      = "A Lib For Api."
   spec.description  = <<-DESC
-  ZAli一个阿里的封装
+  ZApi是请求接口的封装呢
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -24,11 +24,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.subspec 'OSS' do |oss|
-    oss.vendored_frameworks = 'Framework/ZAli/OSS/ZOSS.framework'
-    oss.dependency 'AliyunOSSiOS'
-  end
-  
+  spec.source_files = "Code/ZApi/*.{swift}"
+  spec.dependency 'DRoutinesKit'
+  spec.dependency 'Alamofire'
+  spec.dependency 'WLReqKit'
+  spec.dependency 'WLToolsKit/Common'
 end
-
-

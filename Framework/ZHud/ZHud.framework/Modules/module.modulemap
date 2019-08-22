@@ -1,0 +1,6 @@
+framework module ZHud {
+  umbrella header "ZHud.h"
+
+  export *
+  module * { export * }
+}
