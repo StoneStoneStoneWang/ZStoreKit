@@ -8,6 +8,7 @@
 
 import Foundation
 import ZBridge
+
 public final class ZWelcomeBridge: ZBaseBridge {
     
     public var viewModel: ZWelcomViewModel!
