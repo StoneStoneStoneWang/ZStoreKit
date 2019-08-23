@@ -14,7 +14,9 @@ import RxDataSources
 import WLBaseTableView
 import ZBridge
 import WLToolsKit
-
+import ZCocoa
+import ZNoti
+import SnapKit
 
 @objc (WLWelComeConfig)
 public protocol WLWelComeConfig {
@@ -23,6 +25,7 @@ public protocol WLWelComeConfig {
     
     var itemColor: String { get }
 }
+
 @objc (ZWelcomeBridge)
 public final class ZWelcomeBridge: ZBaseBridge {
     
@@ -48,6 +51,19 @@ extension ZWelcomeBridge {
         
         vc.view.addSubview(pageControl)
         
+        pageControl.snp.makeConstraints { (make) in
+            
+            make.left.right.equalToSuperview()
+            
+            make.height.equalTo(20)
+            
+            make.bottom.equalTo(-60)
+        }
+        
+        pageControl.pageIndicatorTintColor = WLHEXCOLOR_ALPHA(hexColor: "\(config.itemColor)50")
+        
+        pageControl.currentPageIndicatorTintColor = WLHEXCOLOR(hexColor: config.itemColor)
+        
         let input = ZWelcomViewModel.WLInput(contentoffSetX: vc.collectionView.rx.contentOffset.map({ $0.x }),
                                              skipTap: skipItem.rx.tap.asSignal(),
                                              welcomeImgs:config.welcomeImgs )
@@ -55,7 +71,7 @@ extension ZWelcomeBridge {
         viewModel = ZWelcomViewModel(input, disposed: disposed)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<Section>(
-            configureCell: { ds, cv, ip, item in return vc.configTableViewCell(item, for: ip) })
+            configureCell: { ds, cv, ip, item in return vc.configCollectionViewCell(item, for: ip) })
         
         self.dataSource = dataSource
         
@@ -95,21 +111,19 @@ extension ZWelcomeBridge {
                 .disposed(by: disposed)
         } else {
             
-            //            viewModel
-            //                .output
-            //                .timered
-            //                .bind(to: skipItem.rx.skipTitle)
-            //                .disposed(by: disposed)
+            viewModel
+                .output
+                .timered
+                .bind(to: skipItem.rx.skipTitle)
+                .disposed(by: disposed)
         }
         
         viewModel
             .output
             .skiped
-            .drive(onNext: { [weak self] (_) in
+            .drive(onNext: { (_) in
                 
-                guard let `self` = self else { return }
-                
-                //                DNotificationConfigration.postNotification(withName: NSNotification.Name(rawValue: DNotificationWelcomeSkip), andValue: nil, andFrom: self)
+                ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiWelcomeSkip), andValue: nil, andFrom: vc)
             })
             .disposed(by: disposed)
     }

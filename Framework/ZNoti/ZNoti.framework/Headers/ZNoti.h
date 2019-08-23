@@ -17,4 +17,4 @@ FOUNDATION_EXPORT const unsigned char ZNotiVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <ZNoti/PublicHeader.h>
 
 
-#import <ZNoti/ZNotiConfigration>
+#import <ZNoti/ZNotiConfigration.h>
