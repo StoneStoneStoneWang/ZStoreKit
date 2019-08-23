@@ -24,19 +24,19 @@ Pod::Spec.new do |spec|
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
   spec.subspec 'Base' do |base|
-    base.source_files = "Code/ZContainer/ZBase/*.{swift}"
+    base.source_files = "Code/ZContainer/ZBase/*.{h,m}"
     base.dependency 'ZBridge/Base'
   end
   
   spec.subspec 'Table' do |table|
-    table.source_files = "Code/ZContainer/ZTable/*.{swift}"
+    table.source_files = "Code/ZContainer/ZTable/*.{h,m}"
     table.dependency 'ZContainer/Base'
     table.dependency 'WLBaseTableView/RTV'
     table.dependency 'ZLoading'
   end
   
   spec.subspec 'Collection' do |collection|
-    collection.source_files = "Code/ZContainer/ZCollect/*.{swift}"
+    collection.source_files = "Code/ZContainer/ZCollect/*.{h,m}"
     collection.dependency 'ZContainer/Base'
     collection.dependency 'ZLoading'
     collection.dependency 'MJRefresh'
