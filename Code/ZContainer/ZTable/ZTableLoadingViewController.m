@@ -36,4 +36,8 @@
     return 0;
 }
 
+- (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+}
+
 @end

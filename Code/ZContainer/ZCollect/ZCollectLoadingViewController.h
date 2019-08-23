@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UICollectionViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip ;
 
+- (void)collectViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip;
+
 @end
 
 NS_ASSUME_NONNULL_END

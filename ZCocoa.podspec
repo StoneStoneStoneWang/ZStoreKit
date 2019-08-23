@@ -1,11 +1,10 @@
-
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZNoti"
+  spec.name         = "ZCocoa"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 事件封装."
+  spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
-  ZNoti 对所有事件通知的封装
+  ZCocoa是oc swift 转换的封装呢
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -24,8 +23,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'Framework/ZNoti/ZNoti.framework'
+  spec.subspec 'Button' do |button|
+    button.source_files = "Code/ZCocoa/Button/*.{swift}"
+    button.dependency 'RxCocoa'
+  end
   
 end
-
-

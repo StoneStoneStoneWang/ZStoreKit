@@ -16,8 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)createCollectionWithLayout:(UICollectionViewFlowLayout *)layout;
 
-- (UICollectionViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip ;
+- (UICollectionViewCell *)configCollectionViewCell:(id)data forIndexPath:(NSIndexPath *)ip ;
 
+- (void)collectViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip ;
 @end
 
 NS_ASSUME_NONNULL_END

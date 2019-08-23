@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGFloat )caculateForCell:(id )data forIndexPath:(NSIndexPath *)ip;
 
+- (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip;
+
 @end
 
 

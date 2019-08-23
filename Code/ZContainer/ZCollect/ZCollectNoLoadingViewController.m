@@ -41,9 +41,12 @@
     return self;
 }
 
-- (UICollectionViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip  {
+- (UICollectionViewCell *)configCollectionViewCell:(id)data forIndexPath:(NSIndexPath *)ip  {
     
     return [UICollectionViewCell new];
 }
-
+- (void)collectViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+    
+}
 @end

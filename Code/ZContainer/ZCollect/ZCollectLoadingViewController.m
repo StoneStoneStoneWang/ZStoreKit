@@ -66,4 +66,7 @@
     return [UICollectionViewCell new];
 }
 
+- (void)collectViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+}
 @end
