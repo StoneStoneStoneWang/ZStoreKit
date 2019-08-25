@@ -2,9 +2,9 @@ Pod::Spec.new do |spec|
   
   spec.name         = "ZCocoa"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For bridge."
+  spec.summary      = "A Lib For rxcocoa."
   spec.description  = <<-DESC
-  ZCocoa是oc swift 转换的封装呢
+  ZCocoa是rxcocoa封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"

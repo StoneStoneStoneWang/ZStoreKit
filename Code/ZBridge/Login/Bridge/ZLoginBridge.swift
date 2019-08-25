@@ -12,6 +12,7 @@ import ZHud
 import ZNoti
 import RxCocoa
 import RxSwift
+import ZCocoa
 
 @objc (ZLoginBridge)
 public final class ZLoginBridge: ZBaseBridge {
@@ -23,7 +24,8 @@ extension ZLoginBridge {
     @objc public func configViewModel(_ vc: ZBaseViewController) {
         
         if let phone = vc.view.viewWithTag(201) as? UITextField ,let password = vc.view.viewWithTag(202) as? UITextField ,let loginItem = vc.view.viewWithTag(203) as? UIButton
-         , let swiftLoginItem = vc.view.viewWithTag(204) as? UIButton ,let forgetItem = vc.view.viewWithTag(205) as? UIButton , let passwordItem = password.viewWithTag(206) as? UIButton ,let backItem = vc.navigationItem.leftBarButtonItem {
+         , let swiftLoginItem = vc.view.viewWithTag(204) as? UIButton ,let forgetItem = vc.view.viewWithTag(205) as? UIButton , let passwordItem = password.rightView
+            as? UIButton ,let backItem = vc.navigationItem.leftBarButtonItem {
             
             let input = ZLoginViewModel.WLInput(username: phone.rx.text.orEmpty.asDriver(),
                                                 password: password.rx.text.orEmpty.asDriver() ,
