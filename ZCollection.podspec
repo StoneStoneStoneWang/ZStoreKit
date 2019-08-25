@@ -27,6 +27,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZLoading'
   spec.dependency 'MJRefresh'
   
-  spec.vendored_frameworks = 'Framework/ZTransition/ZTransition.framework'
+  spec.vendored_frameworks = 'Framework/ZCollection/ZCollection.framework'
   
 end
