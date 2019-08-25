@@ -85,7 +85,7 @@ Pod::Spec.new do |spec|
     login.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/ZBridge/Login/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Login/VM'
-      bridge.dependency 'ZCocoa/TextFeild'
+      bridge.dependency 'ZCocoa/TextField'
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZBase'

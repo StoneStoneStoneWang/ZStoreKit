@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZPravicy"
+  spec.name         = "ZLogin"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 隐私与协议."
+  spec.summary      = "A Lib For 登陆."
   spec.description  = <<-DESC
-  ZPravicy是隐私与协议
+  ZLogin是登陆界面
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -23,9 +23,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZPravicy/*.{h,m}"
-  spec.dependency 'ZInner'
+  spec.source_files = "Code/ZLogin/*.{h,m}"
+  spec.dependency 'WLCompnent'
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/Pravicy'
+  spec.dependency 'ZBridge/Login'
   
 end
