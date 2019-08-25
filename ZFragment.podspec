@@ -31,12 +31,12 @@ Pod::Spec.new do |spec|
   spec.subspec 'Welcome' do |welcome|
     
     welcome.source_files = "Code/ZFragment/Welcome/*.{h,m}"
-    welcome.dependency 'ZFragment/Welcome'
     welcome.dependency 'ZCollection'
     welcome.dependency 'ZFragment/Config'
     welcome.dependency 'ZBridge/Welcome'
     welcome.dependency 'SToolsKit'
     welcome.dependency 'Masonry'
   end
+  
   
 end
