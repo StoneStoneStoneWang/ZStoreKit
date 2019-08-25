@@ -39,7 +39,11 @@ extension ZWelcomeBridge {
             viewModel = ZWelcomViewModel(input, disposed: disposed)
             
             let dataSource = RxCollectionViewSectionedReloadDataSource<Section>(
-                configureCell: { ds, cv, ip, item in return vc.configCollectionViewCell(item, for: ip) })
+                configureCell: { ds, cv, ip, item in
+                    
+                    return vc.configCollectionViewCell(item, for: ip)
+                    
+            })
             
             self.dataSource = dataSource
             
