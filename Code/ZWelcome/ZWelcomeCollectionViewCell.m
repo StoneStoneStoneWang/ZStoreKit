@@ -34,8 +34,6 @@
     if (self = [super initWithFrame:frame]) {
         
         [self addSubview:self.iconImageView];
-        
-        self.backgroundColor = [UIColor redColor];
     }
     return self;
 }
@@ -47,8 +45,6 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    NSLog(@"%@" ,NSStringFromCGRect(self.bounds));
     
     self.iconImageView.frame = self.bounds;
 }

@@ -6,7 +6,8 @@
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 @import ZCollection;
-#import "ZFragmentConfig.h"
+@import ZConfig;
+
 NS_ASSUME_NONNULL_BEGIN
 
 
