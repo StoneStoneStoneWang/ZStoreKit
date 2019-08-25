@@ -16,15 +16,6 @@ import ZBridge
 import WLToolsKit
 import ZCocoa
 import ZNoti
-import SnapKit
-
-@objc (WLWelComeConfig)
-public protocol WLWelComeConfig {
-    
-    var welcomeImgs: [String] { get }
-    
-    var itemColor: String { get }
-}
 
 @objc (ZWelcomeBridge)
 public final class ZWelcomeBridge: ZBaseBridge {
@@ -34,97 +25,76 @@ public final class ZWelcomeBridge: ZBaseBridge {
     typealias Section = WLSectionModel<(), String>
     
     var dataSource: RxCollectionViewSectionedReloadDataSource<Section>!
-    
-    public final let skipItem: UIButton = UIButton(type: .custom)
-    
-    public final let pageControl: UIPageControl = UIPageControl(frame: .zero).then {
-        
-        $0.currentPage = 0
-    }
 }
-
+// MARK: skip item 101 pagecontrol 102
 extension ZWelcomeBridge {
     
-    @objc public func configViewModel(_ vc: ZCollectNoLoadingViewController ,config: WLWelComeConfig ,isPageHidden: Bool) {
+    @objc public func configViewModel(_ vc: ZCollectNoLoadingViewController ,welcomeImgs: [String],isPageHidden: Bool) {
         
-        vc.view.addSubview(skipItem)
-        
-        vc.view.addSubview(pageControl)
-        
-        pageControl.snp.makeConstraints { (make) in
+        if let skipItem = vc.view.viewWithTag(101) as? UIButton  ,let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
             
-            make.left.right.equalToSuperview()
+            let input = ZWelcomViewModel.WLInput(contentoffSetX: vc.collectionView.rx.contentOffset.map({ $0.x }),
+                                                 skipTap: skipItem.rx.tap.asSignal(),
+                                                 welcomeImgs:welcomeImgs )
             
-            make.height.equalTo(20)
+            viewModel = ZWelcomViewModel(input, disposed: disposed)
             
-            make.bottom.equalTo(-60)
-        }
-        
-        pageControl.pageIndicatorTintColor = WLHEXCOLOR_ALPHA(hexColor: "\(config.itemColor)50")
-        
-        pageControl.currentPageIndicatorTintColor = WLHEXCOLOR(hexColor: config.itemColor)
-        
-        let input = ZWelcomViewModel.WLInput(contentoffSetX: vc.collectionView.rx.contentOffset.map({ $0.x }),
-                                             skipTap: skipItem.rx.tap.asSignal(),
-                                             welcomeImgs:config.welcomeImgs )
-        
-        viewModel = ZWelcomViewModel(input, disposed: disposed)
-        
-        let dataSource = RxCollectionViewSectionedReloadDataSource<Section>(
-            configureCell: { ds, cv, ip, item in return vc.configCollectionViewCell(item, for: ip) })
-        
-        self.dataSource = dataSource
-        
-        viewModel
-            .output
-            .tableData
-            .asObservable()
-            .map({ [Section(model: (), items: $0)] })
-            .bind(to: vc.collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposed)
-        
-        viewModel
-            .output
-            .currentpage
-            .bind(to: pageControl.rx.currentPage)
-            .disposed(by: disposed)
-        
-        viewModel
-            .output
-            .numofpage
-            .bind(to: pageControl.rx.numberOfPages)
-            .disposed(by: disposed)
-        
-        viewModel
-            .output
-            .skipHidden
-            .asObservable()
-            .bind(to: skipItem.rx.isHidden)
-            .disposed(by: disposed)
-        
-        if isPageHidden {
+            let dataSource = RxCollectionViewSectionedReloadDataSource<Section>(
+                configureCell: { ds, cv, ip, item in return vc.configCollectionViewCell(item, for: ip) })
+            
+            self.dataSource = dataSource
             
             viewModel
                 .output
-                .pageHidden
-                .bind(to: pageControl.rx.isHidden)
+                .tableData
+                .asObservable()
+                .map({ [Section(model: (), items: $0)] })
+                .bind(to: vc.collectionView.rx.items(dataSource: dataSource))
                 .disposed(by: disposed)
-        } else {
             
             viewModel
                 .output
-                .timered
-                .bind(to: skipItem.rx.skipTitle)
+                .currentpage
+                .bind(to: pageControl.rx.currentPage)
                 .disposed(by: disposed)
-        }
-        
-        viewModel
-            .output
-            .skiped
-            .drive(onNext: { (_) in
+            
+            viewModel
+                .output
+                .numofpage
+                .bind(to: pageControl.rx.numberOfPages)
+                .disposed(by: disposed)
+            
+            viewModel
+                .output
+                .skipHidden
+                .asObservable()
+                .bind(to: skipItem.rx.isHidden)
+                .disposed(by: disposed)
+            
+            if isPageHidden {
                 
-                ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiWelcomeSkip), andValue: nil, andFrom: vc)
-            })
-            .disposed(by: disposed)
+                viewModel
+                    .output
+                    .pageHidden
+                    .bind(to: pageControl.rx.isHidden)
+                    .disposed(by: disposed)
+            } else {
+                
+                viewModel
+                    .output
+                    .timered
+                    .bind(to: skipItem.rx.skipTitle)
+                    .disposed(by: disposed)
+            }
+            
+            viewModel
+                .output
+                .skiped
+                .drive(onNext: { (_) in
+                    
+                    ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiWelcomeSkip), andValue: nil, andFrom: vc)
+                })
+                .disposed(by: disposed)
+        }
     }
 }
