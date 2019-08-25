@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ZInner;
+import ZInner
 
 @objc (ZPrivacyBridge)
 public final class ZPrivacyBridge: ZBaseBridge {

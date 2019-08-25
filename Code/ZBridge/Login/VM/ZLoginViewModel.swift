@@ -19,14 +19,15 @@ import ZRealReq
 import ZBean
 import ZReq
 import ZCheck
+import ZCache
 
-struct ZLoginViewModel: WLBaseViewModel {
+public struct ZLoginViewModel: WLBaseViewModel {
     
-    var input: WLInput
+    public var input: WLInput
     
-    var output: WLOutput
+    public var output: WLOutput
     
-    struct WLInput {
+    public struct WLInput {
         
         /* 用户名 序列*/
         let username: Driver<String>
@@ -43,7 +44,7 @@ struct ZLoginViewModel: WLBaseViewModel {
         
         let passwordItemTaps: Signal<Void>
     }
-    struct WLOutput {
+    public struct WLOutput {
         
         /* 登录中... 序列*/
         let logining: Driver<Void>
@@ -72,18 +73,18 @@ struct ZLoginViewModel: WLBaseViewModel {
             .withLatestFrom(uap)
             .flatMapLatest {
                 
-                switch loginCheckResult($0.0, password: $0.1) {
+                switch checkUsernameAndPassword($0.0, password: $0.1) {
                 case .ok:
                     
-//                    return onUserDictResp(ZUserApi.login($0.0,password: $0.1))
-//                        .mapObject(type: ZAccountBean.self)
-//                        .map({ ZAccountCache.default.saveAccount(acc: $0) }) // 存储account
-//                        .map({ $0.toJSON()})
-//                        .mapObject(type: ZUserBean.self)
-//                        .map({ ZUserInfoCache.default.saveUser(data: $0) })
-//                        .map({ _ in WLBaseResult.logined })
-//                        .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
-                    return Driver<WLBaseResult>.empty()
+                    return onUserDictResp(ZUserApi.login($0.0,password: $0.1))
+                        .mapObject(type: ZAccountBean.self)
+                        .map({ ZAccountCache.default.saveAccount(acc: $0) }) // 存储account
+                        .map({ $0.toJSON()})
+                        .mapObject(type: ZUserBean.self)
+                        .map({ ZUserInfoCache.default.saveUser(data: $0) })
+                        .map({ _ in WLBaseResult.logined })
+                        .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
+                    
                 case let .failed(msg): return Driver<WLBaseResult>.just(WLBaseResult.failed(msg))
                     
                 default: return Driver<WLBaseResult>.empty()
