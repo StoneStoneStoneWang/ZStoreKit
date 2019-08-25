@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZWelcome/*.{h,m}"
   spec.dependency 'ZCollection'
-  spec.dependency 'ZWelcome/Config'
+  spec.dependency 'ZConfig'
   spec.dependency 'ZBridge/Welcome'
   spec.dependency 'SToolsKit'
   spec.dependency 'Masonry'
