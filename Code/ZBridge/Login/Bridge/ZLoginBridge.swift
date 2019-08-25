@@ -24,7 +24,7 @@ extension ZLoginBridge {
     @objc public func configViewModel(_ vc: ZBaseViewController) {
         
         if let phone = vc.view.viewWithTag(201) as? UITextField ,let password = vc.view.viewWithTag(202) as? UITextField ,let loginItem = vc.view.viewWithTag(203) as? UIButton
-         , let swiftLoginItem = vc.view.viewWithTag(204) as? UIButton ,let forgetItem = vc.view.viewWithTag(205) as? UIButton , let passwordItem = password.rightView
+            , let swiftLoginItem = vc.view.viewWithTag(204) as? UIButton ,let forgetItem = vc.view.viewWithTag(205) as? UIButton , let passwordItem = password.rightView
             as? UIButton ,let backItem = vc.navigationItem.leftBarButtonItem {
             
             let input = ZLoginViewModel.WLInput(username: phone.rx.text.orEmpty.asDriver(),
@@ -39,10 +39,9 @@ extension ZLoginBridge {
             backItem
                 .rx
                 .tap
-                .subscribe(onNext: { [weak self] (_) in
+                .subscribe(onNext: { (_) in
                     
-                    guard let `self` = self else { return }
-                    
+                    vc.navigationController?.dismiss(animated: true, completion: nil)
                 })
                 .disposed(by: disposed)
             
@@ -50,9 +49,7 @@ extension ZLoginBridge {
             viewModel
                 .output
                 .logining
-                .drive(onNext: { [weak self] _ in
-                    
-                    guard let `self` = self else { return }
+                .drive(onNext: { _ in
                     
                     vc.view.endEditing(true)
                     
@@ -64,8 +61,7 @@ extension ZLoginBridge {
             viewModel
                 .output
                 .logined
-                .drive(onNext: { [weak self] in
-                    guard let `self` = self else { return }
+                .drive(onNext: {
                     
                     ZHudUtil.pop()
                     
@@ -87,9 +83,7 @@ extension ZLoginBridge {
             viewModel
                 .output
                 .swiftLogined
-                .drive(onNext: { [weak self]  (_) in
-                    
-                    guard let `self` = self else { return }
+                .drive(onNext: { (_) in
                     
                     ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiGotoReg), andValue: nil, andFrom: vc)
                     
@@ -99,9 +93,7 @@ extension ZLoginBridge {
             viewModel
                 .output
                 .forgeted
-                .drive(onNext: { [weak self]  (_) in
-                    
-                    guard let `self` = self else { return }
+                .drive(onNext: {(_) in
                     
                     ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiGotoFindPwd), andValue: nil, andFrom: vc)
                     
@@ -120,6 +112,5 @@ extension ZLoginBridge {
                 .drive(password.rx.isSecureTextEntry)
                 .disposed(by: disposed)
         }
-        
     }
 }
