@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import ZContainer
+import ZCollection
 import RxCocoa
 import RxSwift
 import RxDataSources
 import WLBaseTableView
-import ZBridge
 import WLToolsKit
 import ZCocoa
 import ZNoti
@@ -29,7 +28,7 @@ public final class ZWelcomeBridge: ZBaseBridge {
 // MARK: skip item 101 pagecontrol 102
 extension ZWelcomeBridge {
     
-    @objc public func configViewModel(_ vc: ZCollectNoLoadingViewController ,welcomeImgs: [String],isPageHidden: Bool) {
+    @objc public func configViewModel(_ vc: ZCollectionNoLoadingViewController ,welcomeImgs: [String],canPageHidden: Bool) {
         
         if let skipItem = vc.view.viewWithTag(101) as? UIButton  ,let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
             
@@ -71,13 +70,14 @@ extension ZWelcomeBridge {
                 .bind(to: skipItem.rx.isHidden)
                 .disposed(by: disposed)
             
-            if isPageHidden {
+            if canPageHidden {
                 
                 viewModel
                     .output
                     .pageHidden
                     .bind(to: pageControl.rx.isHidden)
                     .disposed(by: disposed)
+                
             } else {
                 
                 viewModel

@@ -28,4 +28,27 @@ Pod::Spec.new do |spec|
     base.dependency 'RxCocoa'
   end
   
+  # 欢迎界面碎片
+  spec.subspec 'Welcome' do |welcome|
+    
+    welcome.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Welcome/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLToolsKit/Common'
+      vm.dependency 'WLBaseViewModel'
+    end
+    
+    welcome.subspec 'Bridge' do |vm|
+      vm.source_files = "Code/ZBridge/Welcome/Bridge/*.{swift}"
+      vm.dependency 'ZBridge/Welcome/VM'
+      vm.dependency 'ZContainer/Collection'
+      vm.dependency 'ZNoti'
+      vm.dependency 'ZCocoa'
+      vm.dependency 'WLBaseTableView/SM'
+      vm.dependency 'ZBridge/Base'
+      vm.dependency 'WLToolsKit/Color'
+    end
+  end
+  
 end
