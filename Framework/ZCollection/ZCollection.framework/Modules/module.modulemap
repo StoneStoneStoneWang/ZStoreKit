@@ -1,0 +1,6 @@
+framework module ZCollection {
+  umbrella header "ZCollection.h"
+
+  export *
+  module * { export * }
+}
