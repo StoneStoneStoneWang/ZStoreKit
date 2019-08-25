@@ -50,5 +50,23 @@ Pod::Spec.new do |spec|
       vm.dependency 'WLToolsKit/Color'
     end
   end
+  # 协议
+  spec.subspec 'Privacy' do |pravicy|
+    
+    pravicy.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Privacy/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZSign'
+    end
+    
+    pravicy.subspec 'Bridge' do |vm|
+      vm.source_files = "Code/ZBridge/Privacy/Bridge/*.{swift}"
+      vm.dependency 'ZBridge/Privacy/VM'
+      vm.dependency 'ZCollection'
+      vm.dependency 'ZInner'
+    end
+  end
   
 end

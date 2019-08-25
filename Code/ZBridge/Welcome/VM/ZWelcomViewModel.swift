@@ -52,7 +52,7 @@ public struct ZWelcomViewModel: WLBaseViewModel {
         let timered: Observable<String>
         
     }
-    init(_ input: WLInput ,disposed: DisposeBag) {
+    public init(_ input: WLInput ,disposed: DisposeBag) {
         
         self.input = input
         
