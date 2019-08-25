@@ -12,7 +12,7 @@
 
 #define ZWelcomeFormTwo 1
 
-#pramga mark ---- 登陆、注册、密码、协议
+#pragma mark ---- 登陆、注册、密码、协议
 
 #define ZLoginFormOne 1
 

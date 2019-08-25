@@ -11,11 +11,23 @@
 
 @interface ZPravicyViewController ()
 
-@property (nonatomic ,strong) ZPravicy *bridge;
+@property (nonatomic ,strong) ZPrivacyBridge *bridge;
 
 @end
 
 @implementation ZPravicyViewController
 
+- (void)configViewModel {
+    
+//    self.bridge = [ZPrivacyBridge new];
+//
+//    [self.bridge configViewModel:self];
+    
+    [self loadReq:@"https://www.baidu.com"];
+}
+- (void)configNaviItem {
+    
+    self.title = @"隐私与协议";
+}
 
 @end
