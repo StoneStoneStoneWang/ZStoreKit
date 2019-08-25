@@ -12,16 +12,16 @@ import ZInner;
 @objc (ZPrivacyBridge)
 public final class ZPrivacyBridge: ZBaseBridge {
     
-    public var viewModel: ZPravicyViewModel!
+    public var viewModel: ZPrivacyViewModel!
     
 }
 extension ZPrivacyBridge {
     
     @objc public func configViewModel(_ vc: ZInnerViewController) {
         
-        let inputs = ZPravicyViewModel.WLInput()
+        let inputs = ZPrivacyViewModel.WLInput()
         
-        viewModel = ZPravicyViewModel(inputs)
+        viewModel = ZPrivacyViewModel(inputs)
         
         viewModel
             .output

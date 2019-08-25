@@ -1,5 +1,5 @@
 //
-//  ZPravicyViewModel.swift
+//  ZPrivacyViewModel.swift
 //  ZBridge
 //
 //  Created by three stone 王 on 2019/8/25.
@@ -12,7 +12,7 @@ import WLBaseViewModel
 import RxCocoa
 import ZSign
 
-public struct ZPravicyViewModel: WLBaseViewModel {
+public struct ZPrivacyViewModel: WLBaseViewModel {
     
     public var input: WLInput
     

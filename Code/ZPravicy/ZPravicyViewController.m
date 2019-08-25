@@ -28,4 +28,6 @@
     self.title = @"隐私与协议";
 }
 
+- (BOOL)canPanResponse { return true; }
+
 @end
