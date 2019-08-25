@@ -22,8 +22,6 @@
     self.bridge = [ZPrivacyBridge new];
 
     [self.bridge configViewModel:self];
-    
-//    [self loadReq:@"https://www.baidu.com"];
 }
 - (void)configNaviItem {
     
