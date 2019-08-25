@@ -3,9 +3,9 @@ Pod::Spec.new do |spec|
   
   spec.name         = "ZRealReq"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For req."
+  spec.summary      = "A Lib For realReq."
   spec.description  = <<-DESC
-  ZRep是请求的封装
+  ZRealReq是请求的封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -26,12 +26,12 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZRealReq/*.{swift}"
   
-  spec.vendored_frameworks = 'Framework/ZRealReq/ZRealReq.framework'
-  
   spec.dependency 'ZCache/User'
   
   spec.dependency 'WLReqKit'
   
   spec.dependency 'ZUpload'
+  
+  spec.dependency 'ZReq'
   
 end

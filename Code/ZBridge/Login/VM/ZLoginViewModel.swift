@@ -13,7 +13,12 @@ import RxCocoa
 import WLReqKit
 import ObjectMapper
 import WLBaseResult
-import DPrepare
+import ZApi
+import ZReq
+import ZRealReq
+import ZBean
+import ZReq
+import ZCheck
 
 struct ZLoginViewModel: WLBaseViewModel {
     
@@ -70,15 +75,15 @@ struct ZLoginViewModel: WLBaseViewModel {
                 switch loginCheckResult($0.0, password: $0.1) {
                 case .ok:
                     
-                    return onUserDictResp(WLUserApi.login($0.0,password: $0.1))
-                        .mapObject(type: WLAccountBean.self)
-                        .map({ WLAccountCache.default.saveAccount(acc: $0) }) // 存储account
-                        .map({ $0.toJSON()})
-                        .mapObject(type: WLUserBean.self)
-                        .map({ WLUserInfoCache.default.saveUser(data: $0) })
-                        .map({ _ in WLBaseResult.logined })
-                        .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
-                    
+//                    return onUserDictResp(ZUserApi.login($0.0,password: $0.1))
+//                        .mapObject(type: ZAccountBean.self)
+//                        .map({ ZAccountCache.default.saveAccount(acc: $0) }) // 存储account
+//                        .map({ $0.toJSON()})
+//                        .mapObject(type: ZUserBean.self)
+//                        .map({ ZUserInfoCache.default.saveUser(data: $0) })
+//                        .map({ _ in WLBaseResult.logined })
+//                        .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
+                    return Driver<WLBaseResult>.empty()
                 case let .failed(msg): return Driver<WLBaseResult>.just(WLBaseResult.failed(msg))
                     
                 default: return Driver<WLBaseResult>.empty()
