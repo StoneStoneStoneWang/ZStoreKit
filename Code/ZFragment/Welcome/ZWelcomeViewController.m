@@ -9,15 +9,15 @@
 #import "ZWelcomeViewController.h"
 @import ZSubBridge;
 @interface ZWelcomeViewController ()
-
-@property (nonatomic ,strong) UIButton *skipItem;
-
-@property (nonatomic ,strong) UIPageControl *pageControl;
-
-@end
+    
+    @property (nonatomic ,strong) UIButton *skipItem;
+    
+    @property (nonatomic ,strong) UIPageControl *pageControl;
+    
+    @end
 
 @implementation ZWelcomeViewController
-
+    
 - (UIButton *)skipItem {
     
     if (!_skipItem) {
@@ -25,7 +25,6 @@
         _skipItem = [UIButton buttonWithType:UIButtonTypeCustom];
         
         _skipItem.tag = 101;
-        
     }
     return _skipItem;
 }
@@ -40,7 +39,7 @@
     }
     return _pageControl;
 }
-
+    
 - (void)addOwnSubViews {
     [super addOwnSubViews];
     
@@ -58,6 +57,6 @@
     
     [bridge configViewModel:self welcomeImgs:@[@"",@""] isPageHidden:true];
 }
-
-
-@end
+    
+    
+    @end

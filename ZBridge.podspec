@@ -42,7 +42,7 @@ Pod::Spec.new do |spec|
     welcome.subspec 'Bridge' do |vm|
       vm.source_files = "Code/ZBridge/Welcome/Bridge/*.{swift}"
       vm.dependency 'ZBridge/Welcome/VM'
-      vm.dependency 'ZContainer/Collection'
+      vm.dependency 'ZCollection'
       vm.dependency 'ZNoti'
       vm.dependency 'ZCocoa'
       vm.dependency 'WLBaseTableView/SM'
