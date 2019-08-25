@@ -7,7 +7,7 @@
 //
 
 #import <ZTransition/ZTransition.h>
-
+#import "ZFragmentConfig.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZLoginViewController : ZTViewController

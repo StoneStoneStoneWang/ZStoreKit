@@ -19,6 +19,8 @@ public final class ZLoginBridge: ZBaseBridge {
     
     public var viewModel: ZLoginViewModel!
 }
+
+// MARK: 201 手机号 202 密码 203 登陆按钮 204 快捷登录按钮 205 忘记密码按钮 206 
 extension ZLoginBridge {
     
     @objc public func configViewModel(_ vc: ZBaseViewController) {
