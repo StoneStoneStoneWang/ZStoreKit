@@ -17,10 +17,16 @@
 
 @implementation ZPravicyViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    
+}
+
 - (void)configViewModel {
     
     self.bridge = [ZPrivacyBridge new];
-
+    
     [self.bridge configViewModel:self];
 }
 - (void)configNaviItem {
