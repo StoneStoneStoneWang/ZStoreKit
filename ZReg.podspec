@@ -28,5 +28,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'WLComponentView/TextFeild/Vcode'
   spec.dependency 'ZConfig'
   spec.dependency 'ZBridge/Reg'
-  
+  spec.dependency 'Masonry'
 end
