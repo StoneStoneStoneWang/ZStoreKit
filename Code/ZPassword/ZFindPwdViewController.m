@@ -1,30 +1,28 @@
 //
-//  ZRegViewController.m
+//  ZFindPwdViewController.m
 //  ZFragment
 //
 //  Created by three stone 王 on 2019/8/26.
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 
-#import "ZRegViewController.h"
+#import "ZFindPwdViewController.h"
 @import Masonry;
 @import WLComponentView;
 @import SToolsKit;
 @import ZBridge;
 
-@interface ZRegViewController ()
+@interface ZFindPwdViewController ()
 
-@property (nonatomic ,strong) ZRegBridge *bridge;
+@property (nonatomic ,strong) zfin *bridge;
 
 @property (nonatomic ,strong) WLLeftImageTextField *phone;
 
 @property (nonatomic ,strong) WLVCodeImageTextField *vcode;
 
-@property (nonatomic ,strong) UIButton *loginItem;
+@property (nonatomic ,strong) WLPasswordImageTextFiled *password;
 
-@property (nonatomic ,strong) UIButton *proItem;
-
-@property (nonatomic ,strong) UIButton *backLoginItem;
+@property (nonatomic ,strong) UIButton *completeItem;
 
 #if ZLoginFormOne
 
@@ -38,20 +36,8 @@
 
 #endif
 @end
-@implementation ZRegViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-#if ZLoginFormOne
-    
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor] ];
-#elif ZLoginFormTwo
-    
-#else
-    
-#endif
-}
+@implementation ZFindPwdViewController
 
 - (WLLeftImageTextField *)phone {
     
@@ -95,82 +81,58 @@
     return _vcode;
 }
 
-- (UIButton *)loginItem {
+- (WLPasswordImageTextFiled *)password {
     
-    if (!_loginItem) {
+    if (!_password) {
         
-        _loginItem = [UIButton buttonWithType:UIButtonTypeCustom];
+        _password = [[WLPasswordImageTextFiled alloc] initWithFrame:CGRectZero];
         
-        _loginItem.tag = 203;
+        _password.tag = 203;
         
-        [_loginItem setBackgroundImage:[UIImage s_transformFromHexColor:@ZFragmentColor] forState:UIControlStateNormal];
+        _password.normalIcon = @ZPasswordNormalIcon;
         
-        [_loginItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
+        _password.selectedIcon = @ZPasswordSelectIcon;
         
-        [_loginItem setTitle:@"注册/登陆" forState: UIControlStateNormal];
+        _password.leftImageName = @ZPasswordIcon;
         
-        [_loginItem setTitle:@"注册/登陆" forState: UIControlStateHighlighted];
+        _password.placeholder = @"请输入6-18位密码";
         
-        [_loginItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_password set_editType:WLTextFiledEditTypeSecret];
         
-        [_loginItem setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [_password set_maxLength:18];
         
-        _loginItem.layer.cornerRadius = 24;
-        
-        _loginItem.layer.masksToBounds = true;
-        
-        _loginItem.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_password set_bottomLineColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor]];
     }
-    return _loginItem;
+    return _password;
 }
 
-- (UIButton *)backLoginItem {
+- (UIButton *)completeItem {
     
-    if (!_backLoginItem) {
+    if (!_completeItem) {
         
-        _backLoginItem = [UIButton buttonWithType:UIButtonTypeCustom];
+        _completeItem = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        _backLoginItem.tag = 204;
+        _completeItem.tag = 204;
         
-        [_backLoginItem setTitle:@"已有账号,返回登陆" forState: UIControlStateNormal];
+        [_completeItem setBackgroundImage:[UIImage s_transformFromHexColor:@ZFragmentColor] forState:UIControlStateNormal];
         
-        [_backLoginItem setTitle:@"已有账号,返回登陆" forState: UIControlStateHighlighted];
+        [_completeItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
         
-        [_backLoginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateNormal];
+        [_completeItem setTitle:@"注册/登陆" forState: UIControlStateNormal];
         
-        [_backLoginItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
+        [_completeItem setTitle:@"注册/登陆" forState: UIControlStateHighlighted];
         
-        _backLoginItem.layer.cornerRadius = 24;
+        [_completeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
-        _backLoginItem.layer.masksToBounds = true;
+        [_completeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         
-        _backLoginItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@ZFragmentColor].CGColor;
+        _completeItem.layer.cornerRadius = 24;
         
-        _backLoginItem.layer.borderWidth = 1;
+        _completeItem.layer.masksToBounds = true;
         
-        _backLoginItem.titleLabel.font = [UIFont systemFontOfSize:15];
+        _completeItem.titleLabel.font = [UIFont systemFontOfSize:15];
     }
-    return _backLoginItem;
-}
-- (UIButton *)proItem {
-    
-    if (!_proItem) {
-        
-        _proItem = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        _proItem.tag = 205;
-        
-        [_proItem setTitle:@"注册协议" forState: UIControlStateNormal];
-        
-        [_proItem setTitle:@"注册协议" forState: UIControlStateHighlighted];
-        
-        [_proItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateNormal];
-        
-        [_proItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
-        
-        _proItem.titleLabel.font = [UIFont systemFontOfSize:15];
-    }
-    return _proItem;
+    return _completeItem;
 }
 
 - (void)addOwnSubViews {
@@ -179,11 +141,9 @@
     
     [self.view addSubview:self.vcode];
     
-    [self.view addSubview:self.loginItem];
+    [self.view addSubview:self.password];
     
-    [self.view addSubview:self.backLoginItem];
-    
-    [self.view addSubview:self.proItem];
+    [self.view addSubview:self.completeItem];
     
 #if ZLoginFormOne
     
@@ -278,6 +238,7 @@
         
         make.height.mas_equalTo(@48);
     }];
+    
     [self.phone set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
     
     [self.vcode mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -293,29 +254,22 @@
     
     [self.vcode set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
     
-    [self.proItem mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.password mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.mas_equalTo(self.vcode.mas_bottom).offset(10);
+        
+        make.left.mas_equalTo(self.phone.mas_left);
         
         make.right.mas_equalTo(self.phone.mas_right);
         
         make.height.mas_equalTo(self.phone.mas_height);
     }];
     
-    [self.loginItem mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.password set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
+    
+    [self.completeItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.mas_equalTo(self.proItem.mas_bottom).offset(10);
-        
-        make.left.mas_equalTo(self.phone.mas_left);
-        
-        make.right.mas_equalTo(self.phone.mas_right);
-        
-        make.height.mas_equalTo(self.phone.mas_height);
-        
-    }];
-    [self.backLoginItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.mas_equalTo(self.loginItem.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.password.mas_bottom).offset(10);
         
         make.left.mas_equalTo(self.phone.mas_left);
         
@@ -324,6 +278,7 @@
         make.height.mas_equalTo(self.phone.mas_height);
         
     }];
+    
 #elif ZLoginFormTwo
     
 #else
