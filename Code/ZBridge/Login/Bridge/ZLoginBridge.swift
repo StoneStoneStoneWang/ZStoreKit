@@ -20,10 +20,10 @@ public final class ZLoginBridge: ZBaseBridge {
     public var viewModel: ZLoginViewModel!
 }
 
-// MARK: 201 手机号 202 密码 203 登陆按钮 204 快捷登录按钮 205 忘记密码按钮 206 
+// MARK: 201 手机号 202 密码 203 登陆按钮 204 快捷登录按钮 205 忘记密码按钮 206
 extension ZLoginBridge {
     
-    @objc public func configViewModel(_ vc: ZBaseViewController) {
+    @objc public func configViewModel(_ vc: ZBaseViewController ) {
         
         if let phone = vc.view.viewWithTag(201) as? UITextField ,let password = vc.view.viewWithTag(202) as? UITextField ,let loginItem = vc.view.viewWithTag(203) as? UIButton
             , let swiftLoginItem = vc.view.viewWithTag(204) as? UIButton ,let forgetItem = vc.view.viewWithTag(205) as? UIButton , let passwordItem = password.rightView

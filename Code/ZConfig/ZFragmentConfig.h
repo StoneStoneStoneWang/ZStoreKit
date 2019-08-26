@@ -28,9 +28,10 @@
 
 #define ZPasswordIcon "密码"
 
-#define ZPasswordIcon "验证码"
+#define ZVCodeIcon "验证码"
 
 #define ZPasswordNormalIcon "闭眼"
 
 #define ZPasswordSelectIcon "睁眼"
-
+// 是否是强制登陆
+#define ZForceLogin 1
