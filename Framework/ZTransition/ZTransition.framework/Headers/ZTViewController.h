@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong,readonly) UIPercentDrivenInteractiveTransition *interactivePopTransition;
 
-- (BOOL)canPanResponse;
+@property (nonatomic ,assign) BOOL canPanResponse;
 
 @end
 

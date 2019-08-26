@@ -42,6 +42,19 @@
 @end
 @implementation ZRegViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+#if ZLoginFormOne
+    
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor] ];
+#elif ZLoginFormTwo
+    
+#else
+    
+#endif
+}
+
 - (WLLeftImageTextField *)phone {
     
     if (!_phone) {
@@ -230,10 +243,6 @@
 #endif
 - (void)configNaviItem {
     
-    [self.backItem setImage:[UIImage imageNamed:@ZBackIcon] forState:UIControlStateNormal];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backItem];
-    
 #if ZLoginFormOne
     
     [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
@@ -349,6 +358,11 @@
     self.bridge = [ZRegBridge new];
     
     [self.bridge configViewModel:self];
+}
+
+- (BOOL)canPanResponse {
+    
+    return true ;
 }
 
 @end

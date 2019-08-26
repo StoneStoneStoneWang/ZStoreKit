@@ -249,6 +249,13 @@
 #else
     
 #endif
+    
+#if ZForceLogin
+    
+    self.backItem.hidden = true;
+#else
+    
+#endif
 }
 - (void)configOwnSubViews {
     
@@ -332,7 +339,10 @@
     
 #else
     
+    
 #endif
+    
+    
     
 }
 - (void)configOwnProperties {

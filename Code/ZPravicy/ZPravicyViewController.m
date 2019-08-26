@@ -8,7 +8,7 @@
 
 #import "ZPravicyViewController.h"
 @import ZBridge;
-
+@import SToolsKit;
 @interface ZPravicyViewController ()
 
 @property (nonatomic ,strong) ZPrivacyBridge *bridge;
@@ -20,7 +20,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+#if ZLoginFormOne
     
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] ];
+#elif ZLoginFormTwo
+    
+#else
+    
+#endif
 }
 
 - (void)configViewModel {
@@ -34,6 +41,8 @@
     self.title = @"隐私与协议";
 }
 
-- (BOOL)canPanResponse { return true; }
+- (BOOL)canPanResponse {
+    return true;
+}
 
 @end
