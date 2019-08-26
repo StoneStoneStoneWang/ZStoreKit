@@ -28,5 +28,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZBridge/Focus'
   spec.dependency 'ZTable'
   spec.dependency 'SDWebImage'
-  
+  spec.dependency 'Masonry'
 end

@@ -27,4 +27,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZConfig'
   spec.dependency 'ZBridge/Black'
   spec.dependency 'ZTable'
+  spec.dependency 'Masonry'
+  spec.dependency 'SDWebImage'
 end
