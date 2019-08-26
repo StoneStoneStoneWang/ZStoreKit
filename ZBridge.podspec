@@ -157,6 +157,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'WLBaseTableView/ASM'
+      bridge.dependency 'WLBaseTableView/RTV'
     end
   end
   # 我的关注
@@ -167,7 +168,7 @@ Pod::Spec.new do |spec|
       vm.source_files = "Code/ZBridge/Focus/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
-      vm.dependency 'ZBean/Black'
+      vm.dependency 'ZBean/Focus'
       vm.dependency 'ZRealReq'
       vm.dependency 'ZApi'
     end
@@ -179,6 +180,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'WLBaseTableView/ASM'
+      bridge.dependency 'WLBaseTableView/RTV'
     end
   end
   
