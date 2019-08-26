@@ -33,6 +33,7 @@
 @property (nonatomic ,strong) UIView *topView;
 
 @property (nonatomic ,strong) UIImageView *logoImgView;
+
 #elif ZLoginFormTwo
 
 #else

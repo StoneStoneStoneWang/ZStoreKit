@@ -11,6 +11,13 @@ import WLBaseViewModel
 import RxCocoa
 import RxSwift
 import WLBaseResult
+import ZCheck
+import ZApi
+import ZRealReq
+import ObjectMapper
+import ZBean
+import ZCache
+import WLReqKit
 
 public struct ZRegViewModel: WLBaseViewModel {
     
@@ -52,7 +59,7 @@ public struct ZRegViewModel: WLBaseViewModel {
         let pro: Driver<Void>
         
         @available(*, deprecated, message: "Please use smsRelay")
-        let sms: variable<(Bool,String)> = variable<(Bool,String)>((true,"获取验证码"))
+        let sms: Variable<(Bool,String)> = Variable<(Bool,String)>((true,"获取验证码"))
         
         let smsRelay: BehaviorRelay<(Bool,String)> = BehaviorRelay<(Bool,String)>(value: (true,"获取验证码"))
         
@@ -66,18 +73,19 @@ public struct ZRegViewModel: WLBaseViewModel {
         
         let logining: Driver<Void> = input.loginTaps.flatMap { Driver.just($0) }
         
+        
         // 登录完成返回
         let logined: Driver<WLBaseResult> = input.loginTaps.withLatestFrom(usernameAndVcode).flatMapLatest {
             
-            switch swiftLoginCheckResult($0.0, vcode: $0.1) {
+            switch checkUsernameAndVCode($0.0, vcode: $0.1) {
             case .ok:
                 
-                return onUserDictResp(WLUserApi.swiftLogin($0.0, code: $0.1))
-                    .mapObject(type: WLAccountBean.self)
-                    .map({ WLAccountCache.default.saveAccount(acc: $0) }) // 存储account
+                return onUserDictResp(ZUserApi.swiftLogin($0.0, code: $0.1))
+                    .mapObject(type: ZAccountBean.self)
+                    .map({ ZAccountCache.default.saveAccount(acc: $0) }) // 存储account
                     .map({ $0.toJSON()})
-                    .mapObject(type: WLUserBean.self)
-                    .map({ WLUserInfoCache.default.saveUser(data: $0) })
+                    .mapObject(type: ZUserBean.self)
+                    .map({ ZUserInfoCache.default.saveUser(data: $0) })
                     .map({ _ in WLBaseResult.logined })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
                 
@@ -96,12 +104,12 @@ public struct ZRegViewModel: WLBaseViewModel {
             .withLatestFrom(input.username)
             .flatMapLatest({ (username) in
                 
-                switch checkPhoneResult(username) {
+                switch checkUsername(username) {
                 case .ok:
                     //
                     let result: Observable<WLBaseResult> = Observable<WLBaseResult>.create({ (ob) -> Disposable in
                         
-                        onUserVoidResp(WLUserApi.smsCode(username))
+                        onUserVoidResp(ZUserApi.smsCode(username))
                             .subscribe(onNext: { (_) in
                                 
                                 ob.onNext(WLBaseResult.ok("验证码已发送到您的手机，请注意查收"))

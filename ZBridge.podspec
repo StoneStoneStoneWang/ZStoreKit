@@ -69,7 +69,7 @@ Pod::Spec.new do |spec|
     end
   end
   
-  # 协议
+  # 登陆
   spec.subspec 'Login' do |login|
     
     login.subspec 'VM' do |vm|
@@ -85,6 +85,29 @@ Pod::Spec.new do |spec|
     login.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/ZBridge/Login/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Login/VM'
+      bridge.dependency 'ZCocoa/TextField'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZBase'
+    end
+  end
+  
+  # 登陆
+  spec.subspec 'Reg' do |reg|
+    
+    reg.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Reg/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZCheck'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'ZApi'
+    end
+    
+    reg.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Reg/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Reg/VM'
       bridge.dependency 'ZCocoa/TextField'
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
