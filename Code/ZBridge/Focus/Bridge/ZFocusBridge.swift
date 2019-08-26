@@ -69,8 +69,10 @@ extension ZFocusBridge {
                 case let .failed(msg):
                     ZHudUtil.showInfo(msg)
                     vc.loadingStatus = .fail
+        
                 case .empty:
                     vc.loadingStatus = .succ
+                
                 default:
                     break
                 }
@@ -124,9 +126,9 @@ extension ZFocusBridge: UITableViewDelegate {
                         switch result {
                         case .ok:
                             
-                            WLHudUtil.pop()
+                            ZHudUtil.pop()
                             
-                            WLHudUtil.showInfo("移除\(type.users.nickname)成功")
+                            ZHudUtil.showInfo("移除\(type.users.nickname)成功")
                             
                             var value = self.viewModel.output.tableData.value
                             
@@ -142,9 +144,9 @@ extension ZFocusBridge: UITableViewDelegate {
                             
                         case .failed:
                             
-                            WLHudUtil.pop()
+                            ZHudUtil.pop()
                             
-                            WLHudUtil.showInfo("移除\(type.users.nickname)失败")
+                            ZHudUtil.showInfo("移除\(type.users.nickname)失败")
                         default: break;
                             
                         }
@@ -156,7 +158,7 @@ extension ZFocusBridge: UITableViewDelegate {
             
             alert.addAction(confirm)
             
-            self.present(alert, animated: true, completion: nil)
+            self.vc.present(alert, animated: true, completion: nil)
             
         }
         

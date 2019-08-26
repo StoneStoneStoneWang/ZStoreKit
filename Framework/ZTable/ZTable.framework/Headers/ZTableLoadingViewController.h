@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip;
 
+- (void)tableViewEmptyShow;
+
+- (void)tableViewEmptyHidden;
 @end
 
 NS_ASSUME_NONNULL_END

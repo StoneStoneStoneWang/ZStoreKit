@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZTableNoLoadingViewConntroller : ZBaseViewController
+@interface ZTableNoLoadingViewConntroller : ZBaseViewController 
 
 @property (nonatomic ,strong) UITableView *tableView;
 
