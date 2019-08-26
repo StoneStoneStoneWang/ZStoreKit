@@ -31,6 +31,7 @@ public struct ZBlackViewModel: WLBaseViewModel {
         
         let headerRefresh: Driver<Void>
     }
+    
     public struct WLOutput {
         
         let zip: Observable<(ZBlackBean,IndexPath)>

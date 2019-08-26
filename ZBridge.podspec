@@ -114,7 +114,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZBase'
     end
   end
-  # 注册/登陆
+  # 密码
   spec.subspec 'Password' do |password|
     
     password.subspec 'VM' do |vm|
@@ -134,6 +134,51 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZBase'
+    end
+  end
+  
+  # 黑名单
+  spec.subspec 'Black' do |black|
+    
+    black.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Black/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZBean/Black'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'ZApi'
+    end
+    
+    black.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Black/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Black/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'WLBaseTableView/ASM'
+    end
+  end
+  # 我的关注
+  spec.subspec 'Focus' do |focus|
+    
+    focus.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Focus/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZBean/Black'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'ZApi'
+    end
+    
+    focus.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Focus/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Focus/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'WLBaseTableView/ASM'
     end
   end
   

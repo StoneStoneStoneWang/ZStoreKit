@@ -12,6 +12,7 @@ import RxDataSources
 import WLBaseTableView
 import ZBean
 import ZHud
+import ZNoti
 
 @objc (ZFocusBridge)
 public final class ZFocusBridge: ZBaseBridge {
@@ -69,10 +70,12 @@ extension ZFocusBridge {
                 case let .failed(msg):
                     ZHudUtil.showInfo(msg)
                     vc.loadingStatus = .fail
-        
+                    
                 case .empty:
                     vc.loadingStatus = .succ
-                
+                    
+                    vc.tableViewEmptyShow()
+                    
                 default:
                     break
                 }
@@ -138,9 +141,10 @@ extension ZFocusBridge: UITableViewDelegate {
                             
                             if value.isEmpty {
                                 
-                                self.emptyViewShow()
+                                self.vc.tableViewEmptyShow()
                             }
-                            DNotificationConfigration.postNotification(withName: NSNotification.Name(rawValue: DNotificationRemoveFocus), andValue: nil, andFrom: self)
+                            
+                            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiRemoveFocus), andValue: nil, andFrom: self.vc)
                             
                         case .failed:
                             
