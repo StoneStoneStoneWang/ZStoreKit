@@ -63,7 +63,7 @@ Pod::Spec.new do |spec|
     
     pravicy.subspec 'Bridge' do |vm|
       vm.source_files = "Code/ZBridge/Pravicy/Bridge/*.{swift}"
-      vm.dependency 'ZBridge/Privacy/VM'
+      vm.dependency 'ZBridge/Pravicy/VM'
       vm.dependency 'ZCollection'
       vm.dependency 'ZInner'
     end
