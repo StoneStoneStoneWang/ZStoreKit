@@ -51,18 +51,18 @@ Pod::Spec.new do |spec|
     end
   end
   # 协议
-  spec.subspec 'Privacy' do |privacy|
+  spec.subspec 'Pravicy' do |pravicy|
     
-    privacy.subspec 'VM' do |vm|
+    pravicy 'VM' do |vm|
       
-      vm.source_files = "Code/ZBridge/Privacy/VM/*.{swift}"
+      vm.source_files = "Code/ZBridge/Pravicy/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZSign'
     end
     
-    privacy.subspec 'Bridge' do |vm|
-      vm.source_files = "Code/ZBridge/Privacy/Bridge/*.{swift}"
+    pravicy 'Bridge' do |vm|
+      vm.source_files = "Code/ZBridge/Pravicy/Bridge/*.{swift}"
       vm.dependency 'ZBridge/Privacy/VM'
       vm.dependency 'ZCollection'
       vm.dependency 'ZInner'

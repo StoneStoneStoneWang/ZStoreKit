@@ -160,13 +160,22 @@
         
         _proItem.tag = 205;
         
-        [_proItem setTitle:@"注册协议" forState: UIControlStateNormal];
+        NSMutableAttributedString *mutable = [NSMutableAttributedString new];
         
-        [_proItem setTitle:@"注册协议" forState: UIControlStateHighlighted];
+        NSString *displayname = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
         
-        [_proItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateNormal];
+        [mutable setAttributedString: [[NSAttributedString alloc] initWithString:displayname ? displayname : @""
+                                                                      attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
+                                                                                   NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@ZFragmentColor]}]];
+        [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:@" 注册协议" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
+                                                                                                         NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#333333"]}] ];
+        [_proItem setAttributedTitle:mutable forState:UIControlStateNormal];
         
-        [_proItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
+        [mutable setAttributedString: [[NSAttributedString alloc] initWithString:displayname ? displayname : @""
+                                                                      attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
+                                                                                   NSForegroundColorAttributeName: [UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@ZFragmentColor]] }]];
+        [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:@" 注册协议" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
+                                                                                                         NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#333333"]}] ];
         
         _proItem.titleLabel.font = [UIFont systemFontOfSize:15];
     }
@@ -293,6 +302,20 @@
     
     [self.vcode set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
     
+    UIButton *vcodeItem = (UIButton *)self.vcode.rightView;
+    
+    [vcodeItem setTitle:@"获取验证码" forState:UIControlStateNormal];
+    
+    [vcodeItem sizeToFit];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateNormal];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#999999"] forState:UIControlStateSelected];
+    
+    [self.vcode setRightView:vcodeItem];
+    
     [self.proItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.mas_equalTo(self.vcode.mas_bottom).offset(10);
@@ -301,6 +324,8 @@
         
         make.height.mas_equalTo(self.phone.mas_height);
     }];
+    
+    
     
     [self.loginItem mas_makeConstraints:^(MASConstraintMaker *make) {
         

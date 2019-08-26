@@ -14,7 +14,7 @@
 
 @interface ZFindPwdViewController ()
 
-@property (nonatomic ,strong) zfin *bridge;
+@property (nonatomic ,strong) ZFindPwdBridge *bridge;
 
 @property (nonatomic ,strong) WLLeftImageTextField *phone;
 
@@ -118,9 +118,9 @@
         
         [_completeItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
         
-        [_completeItem setTitle:@"注册/登陆" forState: UIControlStateNormal];
+        [_completeItem setTitle:@"完成" forState: UIControlStateNormal];
         
-        [_completeItem setTitle:@"注册/登陆" forState: UIControlStateHighlighted];
+        [_completeItem setTitle:@"完成" forState: UIControlStateHighlighted];
         
         [_completeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
@@ -198,7 +198,7 @@
     
     [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
     
-    self.title = @"注册/登陆";
+    self.title = @"忘记密码";
     
 #elif ZLoginFormTwo
     
@@ -252,6 +252,20 @@
         make.height.mas_equalTo(self.phone.mas_height);
     }];
     
+    UIButton *vcodeItem = (UIButton *)self.vcode.rightView;
+    
+    [vcodeItem setTitle:@"获取验证码" forState:UIControlStateNormal];
+    
+    [vcodeItem sizeToFit];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateNormal];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#999999"] forState:UIControlStateSelected];
+    
+    [self.vcode setRightView:vcodeItem];
+    
     [self.vcode set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
     
     [self.password mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -269,7 +283,7 @@
     
     [self.completeItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.mas_equalTo(self.password.mas_bottom).offset(10);
+        make.top.mas_equalTo(self.password.mas_bottom).offset(30);
         
         make.left.mas_equalTo(self.phone.mas_left);
         
@@ -301,7 +315,7 @@
 }
 - (void)configViewModel {
     
-    self.bridge = [ZRegBridge new];
+    self.bridge = [ZFindPwdBridge new];
     
     [self.bridge configViewModel:self];
 }
