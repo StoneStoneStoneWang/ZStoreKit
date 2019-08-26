@@ -53,7 +53,7 @@ Pod::Spec.new do |spec|
   # 协议
   spec.subspec 'Pravicy' do |pravicy|
     
-    pravicy 'VM' do |vm|
+    pravicy.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Pravicy/VM/*.{swift}"
       vm.dependency 'RxCocoa'
@@ -61,7 +61,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZSign'
     end
     
-    pravicy 'Bridge' do |vm|
+    pravicy.subspec 'Bridge' do |vm|
       vm.source_files = "Code/ZBridge/Pravicy/Bridge/*.{swift}"
       vm.dependency 'ZBridge/Privacy/VM'
       vm.dependency 'ZCollection'
