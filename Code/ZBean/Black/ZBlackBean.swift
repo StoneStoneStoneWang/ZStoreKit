@@ -12,11 +12,11 @@ import RxDataSources
 
 @objc (ZBlackBean)
 public class ZBlackBean: NSObject,Mappable,IdentifiableType {
-    public var identity: String = ""
+    @objc public var identity: String = ""
     
     public typealias Identity = String
     
-    var intime: Int = Int.max
+    @objc public var intime: Int = Int.max
     
     required public init?(map: Map) { }
     
@@ -40,17 +40,17 @@ public class ZBlackBean: NSObject,Mappable,IdentifiableType {
         
         content <- map["content"]
     }
-    var users: ZUserBean!
+     @objc public var users: ZUserBean!
     
-    var tableName: String = ""
+     @objc public var tableName: String = ""
     
-    var oUsEncoded: String = ""
+     @objc public var oUsEncoded: String = ""
     
-    var targetEncoded: String = ""
+     @objc public var targetEncoded: String = ""
     
-    var usEncoded: String = ""
+     @objc public var usEncoded: String = ""
     
-    var content: String = ""
+     @objc public var content: String = ""
     
-    var encoded: String = ""
+     @objc public var encoded: String = ""
 }
