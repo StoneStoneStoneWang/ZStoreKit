@@ -7,12 +7,33 @@
 //
 
 #import "ZBlackViewController.h"
-
+#import "ZBlackTableViewCell.h"
+@import ZBridge;
 @interface ZBlackViewController ()
 
+@property (nonatomic ,strong) ZBlackBridge *bridge;
 @end
 
 @implementation ZBlackViewController
 
+- (void)configOwnSubViews {
+    [super configOwnSubViews];
+    
+    [self.tableView registerClass:[ZBlackTableViewCell class] forCellReuseIdentifier:@"cell"];
+}
+
+- (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+    ZBlackTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    cell.black = data;
+    
+    return cell;
+}
+
+- (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+    return 80;
+}
 
 @end

@@ -7,26 +7,34 @@
 //
 
 #import "ZFocusViewController.h"
-
+#import "ZFocusTableViewCell.h"
+@import ZBridge;
 @interface ZFocusViewController ()
+
+//@property (nonatomic ,strong)
 
 @end
 
 @implementation ZFocusViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void)configOwnSubViews {
+    [super configOwnSubViews];
+    
+    [self.tableView registerClass:[ZFocusTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+    ZFocusTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    cell.focus = data;
+    
+    return cell;
 }
-*/
+
+- (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+    return 80;
+}
 
 @end
