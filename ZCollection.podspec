@@ -2,9 +2,9 @@ Pod::Spec.new do |spec|
   
   spec.name         = "ZCollection"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For container."
+  spec.summary      = "A Lib For colletion vc."
   spec.description  = <<-DESC
-  ZCollection是ocvc容器的封装
+  ZCollection是colletion vc的封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"

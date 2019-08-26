@@ -1,0 +1,6 @@
+framework module ZTable {
+  umbrella header "ZTable.h"
+
+  export *
+  module * { export * }
+}
