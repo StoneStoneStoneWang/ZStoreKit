@@ -28,6 +28,8 @@ FOUNDATION_EXPORT NSString * const ZNotiFindPwdSucc;
 
 FOUNDATION_EXPORT NSString * const ZNotiGotoProtocol;
 
+FOUNDATION_EXPORT NSString * const ZNotiUnLogin;
+
 #pragma mark ---- setting
 
 FOUNDATION_EXPORT NSString * const ZNotiGotoModifyPwd;

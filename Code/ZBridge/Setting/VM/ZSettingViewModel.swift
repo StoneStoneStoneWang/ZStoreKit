@@ -13,26 +13,27 @@ import RxSwift
 import ZCache
 import ZSign
 
-public enum WLSettingType {
+@objc (ZSettingType)
+public enum ZSettingType: Int {
     
-    case pwd // 未登录
+    case pwd  = 0 // 未登录
     
-    case password // 已登录
+    case password = 1// 已登录
     
-    case logout
+    case logout = 2
     
-    case clear
+    case clear = 3
     
-    case push
+    case push = 4
     
-    case space
+    case space = 5
     
-    case black
+    case black = 6
 }
 
-extension WLSettingType {
+extension ZSettingType {
     
-    static var types: [WLSettingType] {
+    static var types: [ZSettingType] {
         
         if ZAccountCache.default.isLogin() {
             
@@ -52,7 +53,7 @@ extension WLSettingType {
         }
     }
     
-    var title: String {
+    public var title: String {
         
         switch self {
             
@@ -91,15 +92,15 @@ public struct ZSettingViewModel: WLBaseViewModel {
     
     public struct WLInput {
         
-        let modelSelect: ControlEvent<WLSettingType>
+        let modelSelect: ControlEvent<ZSettingType>
         
         let itemSelect: ControlEvent<IndexPath>
     }
     public struct WLOutput {
         
-        let zip: Observable<(WLSettingType,IndexPath)>
+        let zip: Observable<(ZSettingType,IndexPath)>
         
-        let tableData: BehaviorRelay<[WLSettingType]> = BehaviorRelay<[WLSettingType]>(value: WLSettingType.types)
+        let tableData: BehaviorRelay<[ZSettingType]> = BehaviorRelay<[ZSettingType]>(value: ZSettingType.types)
     }
     
     init(_ input: WLInput) {

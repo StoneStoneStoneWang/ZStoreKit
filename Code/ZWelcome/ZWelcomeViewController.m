@@ -63,7 +63,7 @@
         
         _pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@ZFragmentColor]];
         
-        _pageControl.numberOfPages = ZWelcome;
+        _pageControl.numberOfPages = ZWelcomeImgs.count;
         
         _pageControl.currentPage = 0;
         
@@ -163,12 +163,12 @@
     
 #if ZWelcomeFormOne
     [bridge configViewModel:self
-                welcomeImgs:self.config.welcomeImgs
+                welcomeImgs:ZWelcomeImgs
               canPageHidden:true];
 #elif ZWelcomeFormTwo
     
     [bridge configViewModel:self
-                welcomeImgs:self.config.welcomeImgs
+                welcomeImgs:ZWelcomeImgs
               canPageHidden:false];
     
 #else
