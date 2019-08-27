@@ -99,9 +99,9 @@
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(@15);
         
-        make.width.height.mas_equalTo(60);
+        make.width.height.mas_equalTo(@60);
         
         make.centerY.equalTo(self);
     }];

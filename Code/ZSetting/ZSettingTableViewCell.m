@@ -54,6 +54,10 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
     
+    self.bottomLineType = ZBottomLineTypeNormal;
+    
+    self.backgroundColor = [UIColor whiteColor];
+    
     if ([title isEqualToString:@"退出登陆"]) {
         
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -69,18 +73,17 @@
     } else if ([title isEqualToString:@""]) {
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        self.bottomLineType = ZBottomLineTypeNone;
+        
+        self.backgroundColor = [UIColor clearColor];
     }
     
     self.titleLabel.text = title;
 }
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        
-        [self commitInit];
-    }
-    return self;
-}
+
 - (void)commitInit {
+    [super commitInit];
     
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
     

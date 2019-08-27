@@ -7,6 +7,7 @@
 //
 
 #import "ZStoreRootManager.h"
+#import "ZNaviConfigImpl.h"
 @import ZNoti;
 @import ZSign;
 @import ZNavi;
@@ -17,6 +18,7 @@
 @import ZPassword;
 @import ZReg;
 @import ZCache;
+@import ZProfile;
 
 @implementation WLMainBean
 
@@ -95,22 +97,21 @@ static ZStoreRootManager *manager = nil;
     
     if (appdelegate) {
         
-        [ZConfigure initWithAppKey:@"" domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeCircle];
+        [ZConfigure initWithAppKey:@"0e37c36a33b547fe9fd9d2a21dfa4479" domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeCircle];
         //
-        [ZNavigationController initWithConfig:nil];
+        [ZNavigationController initWithConfig:[ZNaviConfigImpl new]];
         
         appdelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLogin"]) {
             
-            appdelegate.window.rootViewController = [ZWelcomeViewController createWelcomeWithConfig:nil];
+            appdelegate.window.rootViewController = [ZWelcomeViewController createWelcome];
             
         } else {
             
             [[ZAccountCache shared] wl_queryAccount];
             
-            //            appdelegate.window.rootViewController = [WLMainViewController createCircleTab];
-            
+            appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZProfileViewController new]];
         }
         
         [appdelegate.window makeKeyAndVisible];
@@ -119,6 +120,10 @@ static ZStoreRootManager *manager = nil;
         //
         [ZHudUtil configHud];
     }
+    
+    NSLog(@"%@" ,[ZConfigure fetchAppKey]);
+    
+    [self addNotification];
 }
 
 - (void)addNotification {
@@ -178,11 +183,13 @@ static ZStoreRootManager *manager = nil;
         
         UIViewController *from = userInfo[@"from"];
         
+        ZNavigationController *anvi = [[ZNavigationController alloc] initWithRootViewController:[ZProfileViewController new]];
+        
         //        WLMainViewController *main = [WLMainViewController createCircleTab];
-        //
-        //        main.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        //
-        //        [from presentViewController:main animated:true completion:nil];
+        
+        anvi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        
+        [from presentViewController:anvi animated:true completion:nil];
         
     }
 }

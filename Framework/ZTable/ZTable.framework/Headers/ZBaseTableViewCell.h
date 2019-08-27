@@ -23,10 +23,6 @@ typedef NS_ENUM(NSInteger ,ZBottomLineType) {
 
 @property (nonatomic ,strong ,readonly) UIImageView *bottomView;
 
-+ (instancetype)instance:(ZBottomLineType ) bottomLineType withReuseId:(NSString *)iden;
-
-- (instancetype)initWith:(ZBottomLineType)bottomLineType withReuseId:(NSString *)iden;
-
 @property (nonatomic ,assign) ZBottomLineType bottomLineType;
 
 - (void)commitInit;

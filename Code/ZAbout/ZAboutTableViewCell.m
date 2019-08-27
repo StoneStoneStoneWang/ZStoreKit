@@ -66,6 +66,17 @@
     self.titleLabel.text = about.title;
     
     self.subTitleLabel.text = about.subTitle;
+    
+    self.bottomLineType = ZBottomLineTypeNormal;
+    
+    self.backgroundColor = [UIColor whiteColor];
+    
+    if (about.type == ZAboutTypeSpace) {
+        
+        self.bottomLineType = ZBottomLineTypeNone;
+        
+        self.backgroundColor = [UIColor clearColor];
+    }
 }
 
 - (void)layoutSubviews {

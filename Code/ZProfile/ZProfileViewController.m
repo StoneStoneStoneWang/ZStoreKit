@@ -34,8 +34,6 @@
     
     cell.profile = data;
     
-    cell.bottomLineType = ZBottomLineTypeNormal;
-    
     return cell;
 }
 

@@ -24,6 +24,19 @@
 
 @implementation ZProfileTableViewCell
 
+- (UIImageView *)iconImageView {
+    
+    if (!_iconImageView) {
+        
+        _iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @ZLogoIcon]];
+        
+        _iconImageView.layer.cornerRadius = 30;
+        
+        _iconImageView.layer.masksToBounds = true;
+    }
+    return _iconImageView;
+}
+
 - (UILabel *)titleLabel {
     
     if (!_titleLabel) {
@@ -51,14 +64,14 @@
         
         _subTitleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#333333"];
     }
-    return _titleLabel;
+    return _subTitleLabel;
 }
 - (void)commitInit {
     [super commitInit];
     
     [self.contentView addSubview:self.titleLabel];
     
-    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.subTitleLabel];
     
     [self.contentView addSubview:self.iconImageView];
     
@@ -72,6 +85,10 @@
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
     
     self.subTitleLabel.hidden = true;
+    
+    self.bottomLineType = ZBottomLineTypeNormal;
+    
+    self.backgroundColor = [UIColor whiteColor];
     
     switch (profile.type) {
         case ZProfileTypeAbout:
@@ -108,6 +125,11 @@
         case  ZProfileTypeSpace:
             
             self.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            self.bottomLineType = ZBottomLineTypeNone;
+            
+            self.backgroundColor = [UIColor clearColor];
+            
         default:
             break;
     }
@@ -118,28 +140,29 @@
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(@15);
+        make.left.mas_equalTo(15);
         
         make.width.height.mas_equalTo(20);
         
-        make.centerY.mas_equalTo(self.mas_centerY);
+        make.centerY.equalTo(self);
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
         
-        make.right.mas_equalTo(@-15);
+        make.right.mas_equalTo(-15);
         
-        make.centerY.mas_equalTo(self.mas_centerY);
+        make.centerY.equalTo(self);
     }];
+    
     [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(@15);
+        make.left.mas_equalTo(15);
         
-        make.right.mas_equalTo(@-15);
+        make.right.mas_equalTo(-15);
         
-        make.centerY.mas_equalTo(self.mas_centerY);
+        make.centerY.equalTo(self);
     }];
 }
 @end
