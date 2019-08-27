@@ -14,6 +14,8 @@ import WLToolsKit
 import WLBaseResult
 import WLReqKit
 import ZBean
+import ZRealReq
+import ZApi
 
 struct ZBannerViewModel: WLBaseViewModel {
     
@@ -25,7 +27,7 @@ struct ZBannerViewModel: WLBaseViewModel {
         
         let contentoffSetX: Observable<CGFloat>
         
-        let modelSelect: ControlEvent<WLBannerBean>
+        let modelSelect: ControlEvent<ZCircleBean>
         
         let itemSelect: ControlEvent<IndexPath>
         
@@ -37,11 +39,11 @@ struct ZBannerViewModel: WLBaseViewModel {
     
     struct WLOutput {
         
-        let tableData: BehaviorRelay<[WLBannerBean]>
+        let tableData: BehaviorRelay<[ZCircleBean]>
         
         let timered: Observable<Int>
         
-        let zip: Observable<(WLBannerBean,IndexPath)>
+        let zip: Observable<(ZCircleBean,IndexPath)>
         
     }
     
@@ -49,7 +51,7 @@ struct ZBannerViewModel: WLBaseViewModel {
         
         self.input = input
         
-        let tableData: BehaviorRelay<[WLBannerBean]> = BehaviorRelay<[WLBannerBean]>(value: [])
+        let tableData: BehaviorRelay<[ZCircleBean]> = BehaviorRelay<[ZCircleBean]>(value: [])
         
         let zip = Observable.zip(input.modelSelect,input.itemSelect)
         
@@ -83,8 +85,8 @@ struct ZBannerViewModel: WLBaseViewModel {
     }
     static func fetchBanners() -> Driver<WLBaseResult> {
         
-        return onUserArrayResp(WLUserApi.fetchList("", page: 1))
-            .mapArray(type: WLBannerBean.self)
+        return onUserArrayResp(ZUserApi.fetchList("", page: 1))
+            .mapArray(type: ZCircleBean.self)
             .map({ WLBaseResult.fetchList($0)})
             .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
     }
