@@ -10,17 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ZWelcomeConfig <NSObject>
-
-@property (nonatomic ,copy) NSString *itemColor;
-
-@property (nonatomic ,strong) NSArray *welcomeImgs;
-
-@end
 
 @interface ZWelcomeViewController : ZCollectionNoLoadingViewController
 
-+ (instancetype)createWelcomeWithConfig:(id <ZWelcomeConfig>)config;
++ (instancetype)createWelcome;
 
 @end
 

@@ -8,6 +8,16 @@
 
 #import "ZStoreRootManager.h"
 @import ZNoti;
+@import ZSign;
+@import ZNavi;
+@import ZHud;
+@import ZWelcome;
+//@import ZWechat;
+@import ZPravicy;
+@import ZPassword;
+@import ZReg;
+@import ZCache;
+
 @implementation WLMainBean
 
 + (instancetype)mainBeanWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
@@ -83,6 +93,36 @@ static ZStoreRootManager *manager = nil;
 
 - (void)makeRoot:(UIResponder<UIApplicationDelegate> *)appdelegate {
     
+    if (appdelegate) {
+        
+        [ZConfigure initWithAppKey:@"" domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeCircle];
+        //
+        [ZNavigationController initWithConfig:nil];
+        
+        appdelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLogin"]) {
+            
+            appdelegate.window.rootViewController = [ZWelcomeViewController createWelcomeWithConfig:nil];
+            
+        } else {
+            
+            [[ZAccountCache shared] wl_queryAccount];
+            
+            //            appdelegate.window.rootViewController = [WLMainViewController createCircleTab];
+            
+        }
+        
+        [appdelegate.window makeKeyAndVisible];
+        
+        //        [WXApi registerApp:@SWXKey];
+        //
+        [ZHudUtil configHud];
+    }
+}
+
+- (void)addNotification {
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onskipTap:) name:ZNotiWelcomeSkip object:nil ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoRegTap:) name:ZNotiGotoReg object:nil ];
@@ -127,32 +167,128 @@ static ZStoreRootManager *manager = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCirclePublishSuccTap:) name:ZNotiCirclePublishSucc object:nil ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onStoreBannerTap:) name:ZNotiBannerClick object:nil ];
+}
+
+#pragma mark -- WelcomeSkip
+- (void)onskipTap:(NSNotification *)noti {
     
-    if (appdelegate) {
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
         
-        [DConfigure initWithAppKey:@SAppKey domain:@"https://zhih.ecsoi.com/" smsSign:@"InJulyApp" smsLogin:@"SMS_170330626" smsPwd:@"SMS_170330625" pType:(DConfigureTypeCircle)];
+        UIViewController *from = userInfo[@"from"];
         
-        [WLNaviController wl_setNaviConfigWithConfig:[WLNaviImpl createNaviImpl]];
+        //        WLMainViewController *main = [WLMainViewController createCircleTab];
+        //
+        //        main.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        //
+        //        [from presentViewController:main animated:true completion:nil];
         
-        appdelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLogin"]) {
-            
-            appdelegate.window.rootViewController = [WLWelcomeImplViewController createWelcome];
-            
-        } else {
-            
-            [[WLAccountCache shared] wl_queryAccount];
-            
-            appdelegate.window.rootViewController = [WLMainViewController createCircleTab];
-            
-        }
-        
-        [appdelegate.window makeKeyAndVisible];
-        
-        [WXApi registerApp:@SWXKey];
-        
-        [WLHudUtil configHud];
     }
 }
+#pragma mark -- ZNotiGotoReg
+
+- (void)onLoginSuccTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        //        [from dismissViewControllerAnimated:true completion:nil];
+        
+    }
+}
+- (void)onGotoRegTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZRegViewController *swiftLogin = [ZRegViewController new];
+        
+        [from.navigationController pushViewController:swiftLogin animated:true];
+    }
+}
+
+- (void)onBackLoginTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from.navigationController popViewControllerAnimated:true];
+    }
+}
+
+- (void)onGotoProtocolTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZPravicyViewController *pro = [ZPravicyViewController new];
+        
+        [from.navigationController pushViewController:pro animated:true];
+    }
+}
+
+- (void)onGotoFindPwdTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZFindPwdViewController *findPwd = [ZFindPwdViewController new];
+        
+        [from.navigationController pushViewController:findPwd animated:true];
+    }
+}
+- (void)onGotoModifyPwdTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZModifyViewController *modifyPwd = [ZModifyViewController new];
+        
+        [from.navigationController pushViewController:modifyPwd animated:true];
+    }
+}
+
+- (void)onFindPwdSucc:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from.navigationController popViewControllerAnimated:true];
+    }
+}
+
+- (void)onModifyPwdSucc:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from.navigationController popViewControllerAnimated:true];
+    }
+}
+
 @end

@@ -14,6 +14,8 @@
 
 #pragma mark ---- 欢迎界面 两种样式 选择第一种样式
 
+#define ZWelcomeImgs @[@"画板1",@"画板"]
+
 #define ZWelcomeFormOne 0
 
 #define ZWelcomeFormTwo 1

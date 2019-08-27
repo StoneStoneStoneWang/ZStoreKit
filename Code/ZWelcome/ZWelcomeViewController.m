@@ -12,14 +12,11 @@
 @import SToolsKit;
 @import Masonry;
 
-
 @interface ZWelcomeViewController ()
 
 @property (nonatomic ,strong) UIButton *skipItem;
 
 @property (nonatomic ,strong) UIPageControl *pageControl;
-
-@property (nonatomic ,weak) id<ZWelcomeConfig> config;
 
 @property (nonatomic ,strong) ZWelcomeBridge *bridge;
 
@@ -27,34 +24,11 @@
 
 @implementation ZWelcomeViewController
 
-+ (instancetype)createWelcomeWithConfig:(id<ZWelcomeConfig>)config {
++ (instancetype)createWelcome {
     
-    return [[self alloc] initWithConfig:config];
+    return [[self alloc] init];
 }
-- (instancetype)initWithConfig:(id<ZWelcomeConfig>)config {
-    
-    if (self = [super init]) {
-        
-        self.config = config;
-        
-        self.skipItem.titleLabel.font = [UIFont systemFontOfSize:15];
-        
-        self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:config.itemColor].CGColor;
-        
-        [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:config.itemColor] forState:UIControlStateNormal];
-        
-        [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",config.itemColor]] forState:UIControlStateHighlighted];
-        
-        self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",config.itemColor]];
-        
-        self.pageControl.numberOfPages = config.welcomeImgs.count;
-        
-        self.pageControl.currentPage = 0;
-        
-        self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:config.itemColor];
-    }
-    return self;
-}
+
 - (UIButton *)skipItem {
     
     if (!_skipItem) {
@@ -68,6 +42,14 @@
         _skipItem.layer.masksToBounds = true;
         
         _skipItem.layer.cornerRadius = 5;
+        
+        _skipItem.titleLabel.font = [UIFont systemFontOfSize:15];
+        
+        _skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@ZFragmentColor].CGColor;
+        
+        [_skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateNormal];
+        
+        [_skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@ZFragmentColor]] forState:UIControlStateHighlighted];
     }
     return _skipItem;
 }
@@ -78,6 +60,14 @@
         _pageControl = [[UIPageControl alloc] initWithFrame:CGRectZero];
         
         _pageControl.tag = 102;
+        
+        _pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@ZFragmentColor]];
+        
+        _pageControl.numberOfPages = ZWelcome;
+        
+        _pageControl.currentPage = 0;
+        
+        _pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@ZFragmentColor];
     }
     return _pageControl;
 }
@@ -110,6 +100,7 @@
     [self.view addSubview:self.pageControl];
 }
 - (void)configOwnSubViews {
+    
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.right.top.bottom.mas_equalTo(@0);
