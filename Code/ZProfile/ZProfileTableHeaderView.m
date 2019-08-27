@@ -108,7 +108,7 @@
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerX.equalTo(self);
+        make.centerY.equalTo(self);
         
         make.left.equalTo(self.iconImageView.mas_right).offset(15);
     }];

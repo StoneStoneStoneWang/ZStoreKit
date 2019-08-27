@@ -6,11 +6,11 @@
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 
-@import ZBase;
+@import ZTransition;
 #import "ZTableHeaderView.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZTableNoLoadingViewConntroller : ZBaseViewController 
+@interface ZTableNoLoadingViewConntroller : ZTViewController
 
 @property (nonatomic ,strong) UITableView *tableView;
 

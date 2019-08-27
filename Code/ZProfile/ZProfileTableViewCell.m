@@ -74,8 +74,6 @@
     [self.contentView addSubview:self.subTitleLabel];
     
     [self.contentView addSubview:self.iconImageView];
-    
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void)setProfile:(ZProfileBean *)profile {
@@ -90,6 +88,8 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     switch (profile.type) {
         case ZProfileTypeAbout:
             
@@ -98,9 +98,11 @@
         case  ZProfileTypeFocus:
             
             self.iconImageView.image = [UIImage imageNamed: @FocusIcon];
+            break;
         case  ZProfileTypeOrder:
             
             self.iconImageView.image = [UIImage imageNamed: @OrderIcon];
+            break;
         case ZProfileTypeAddress:
             
             self.iconImageView.image = [UIImage imageNamed: @AddressIcon];
@@ -108,9 +110,11 @@
         case  ZProfileTypePravicy:
             
             self.iconImageView.image = [UIImage imageNamed: @PravicyIcon];
+            break;
         case  ZProfileTypeSetting:
             
             self.iconImageView.image = [UIImage imageNamed: @SettingIcon];
+            break;
         case ZProfileTypeMyCircle:
             
             self.iconImageView.image = [UIImage imageNamed: @CircleIcon];
@@ -122,6 +126,7 @@
             self.subTitleLabel.text = @ZPhoneNum;
             
             self.subTitleLabel.hidden = false;
+            break;
         case  ZProfileTypeSpace:
             
             self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -130,6 +135,8 @@
             
             self.backgroundColor = [UIColor clearColor];
             
+            self.accessoryType = UITableViewCellSeparatorStyleNone;
+            break;
         default:
             break;
     }

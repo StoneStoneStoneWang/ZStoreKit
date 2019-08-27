@@ -19,6 +19,7 @@
 @import ZReg;
 @import ZCache;
 @import ZProfile;
+@import ZAbout;
 
 @implementation WLMainBean
 
@@ -295,6 +296,19 @@ static ZStoreRootManager *manager = nil;
         UIViewController *from = userInfo[@"from"];
         
         [from.navigationController popViewControllerAnimated:true];
+    }
+}
+- (void)onGotoAboutTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZAboutViewController *about = [ZAboutViewController new];
+        
+        [from.navigationController pushViewController:about animated:true];
     }
 }
 

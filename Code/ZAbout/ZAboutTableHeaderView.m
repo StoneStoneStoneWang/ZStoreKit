@@ -51,6 +51,11 @@
 }
 - (void)commitInit {
     
+    [self addSubview:self.iconImageView];
+    
+    [self addSubview:self.titleLabel];
+    
+    self.backgroundColor = [UIColor whiteColor];
     
 }
 

@@ -47,7 +47,7 @@
         
         _subTitleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#333333"];
     }
-    return _titleLabel;
+    return _subTitleLabel;
 }
 - (void)commitInit {
     [super commitInit];
@@ -71,11 +71,15 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     if (about.type == ZAboutTypeSpace) {
         
         self.bottomLineType = ZBottomLineTypeNone;
         
         self.backgroundColor = [UIColor clearColor];
+        
+        self.accessoryType = UITableViewCellAccessoryNone;
     }
 }
 
@@ -84,20 +88,20 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(@15);
+        make.left.mas_equalTo(15);
         
-        make.right.mas_equalTo(@-15);
+        make.right.mas_equalTo(-15);
         
-        make.centerY.mas_equalTo(self.mas_centerY);
+        make.centerY.equalTo(self);
     }];
     
     [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(@15);
+        make.left.mas_equalTo(15);
         
-        make.right.mas_equalTo(@-15);
+        make.right.mas_equalTo(15);
         
-        make.centerY.mas_equalTo(self.mas_centerY);
+        make.centerY.equalTo(self);
     }];
 }
 @end
