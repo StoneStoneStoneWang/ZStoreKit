@@ -7,26 +7,50 @@
 //
 
 #import "ZAboutViewController.h"
+#import "ZAboutTableViewCell.h"
+#import "ZAboutTableHeaderView.h"
+@import ZBridge;
 
 @interface ZAboutViewController ()
+
+@property (nonatomic ,strong) ZAboutBridge *bridge;
+
 
 @end
 
 @implementation ZAboutViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+- (void)configOwnSubViews {
+    [super configOwnSubViews];
+    
+    [self.tableView registerClass:[ZAboutTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    self.headerView = [[ZAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) / 2)];
+    
+    self.tableView.tableHeaderView = self.headerView;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+    ZAboutTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    cell.about = data;
+    
+    cell.bottomLineType = ZBottomLineTypeNormal;
+    
+    return cell;
 }
-*/
 
+- (void)configViewModel {
+    
+    self.bridge = [ZAboutBridge new];
+    
+    [self.bridge createAbout:self];
+}
+
+- (void)configNaviItem {
+    
+    self.title = @"设置";
+}
 @end

@@ -23,7 +23,7 @@ public final class ZAboutBridge: ZBaseBridge {
 
 extension ZAboutBridge {
     
-    @objc public func createProfile(_ vc: ZTableNoLoadingViewConntroller) {
+    @objc public func createAbout(_ vc: ZTableNoLoadingViewConntroller) {
         
         let input = ZAboutViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZAboutType.self),
                                             itemSelect: vc.tableView.rx.itemSelected)

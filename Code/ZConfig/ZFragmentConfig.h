@@ -43,3 +43,24 @@
 #define ZBlackFormOne 1
 
 #define ZFocusFormOne 1
+
+// 个人中心 ----------------------------------
+#pragma mark ---- profile
+
+#define AboutIcon "关于我们"
+
+#define ContactUsIcon "联系我们"
+
+#define FocusIcon "我的关注"
+
+#define PravicyIcon "隐私政策"
+
+#define UserInfoIcon "我的资料"
+
+#define SettingIcon "设置"
+
+#define CircleIcon "我的发布"
+
+#define OrderIcon "我的订单"
+
+#define AddressIcon "我的地址"

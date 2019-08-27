@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@import ZBridge;
+@import ZTable;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZProfileTableViewCell : UITableViewCell
+@interface ZProfileTableViewCell : ZBaseTableViewCell
 
+@property (nonatomic ,strong) ZProfileBean *profile;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -64,7 +64,9 @@
 }
 - (void)setAbout:(ZAboutBean *)about {
     
-    self.titleLabel.text = about.
+    self.titleLabel.text = about.title;
+    
+    self.subTitleLabel.text = about.subTitle;
 }
 
 - (void)layoutSubviews {
