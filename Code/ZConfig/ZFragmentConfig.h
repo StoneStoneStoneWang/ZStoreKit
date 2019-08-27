@@ -68,3 +68,5 @@
 #define OrderIcon "我的订单"
 
 #define AddressIcon "我的地址"
+
+#define ZPhoneNum "+8618612598269"

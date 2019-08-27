@@ -51,6 +51,7 @@
 
 - (void)configNaviItem {
     
-    self.title = @"设置";
+    self.title = @"关于我们";
 }
+
 @end
