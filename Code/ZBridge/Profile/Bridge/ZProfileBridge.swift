@@ -124,6 +124,7 @@ extension ZProfileBridge {
             .rx
             .setDelegate(self)
             .disposed(by: disposed)
+        
     }
 }
 extension ZProfileBridge: UITableViewDelegate {

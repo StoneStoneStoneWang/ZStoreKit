@@ -20,6 +20,7 @@
 @import ZCache;
 @import ZProfile;
 @import ZAbout;
+@import ZSetting;
 
 @implementation WLMainBean
 
@@ -309,6 +310,19 @@ static ZStoreRootManager *manager = nil;
         ZAboutViewController *about = [ZAboutViewController new];
         
         [from.navigationController pushViewController:about animated:true];
+    }
+}
+- (void)onSettingTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZSettingViewController *setting = [ZSettingViewController new];
+        
+        [from.navigationController pushViewController:setting animated:true];
     }
 }
 

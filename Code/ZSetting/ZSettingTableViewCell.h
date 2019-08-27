@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "ZFragmentConfig.h"
 @import ZTable;
+@import ZBridge;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZSettingTableViewCell : ZBaseTableViewCell
 
-@property (nonatomic ,strong) NSString *title;
+@property (nonatomic ,strong) ZSettingBean *setting;
 
 @end
 

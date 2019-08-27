@@ -26,7 +26,7 @@
     
     ZSettingTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    cell.title = data;
+    cell.setting = data;
     
     return cell;
 }

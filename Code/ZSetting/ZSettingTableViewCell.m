@@ -43,8 +43,8 @@
     }
     return _swiItem;
 }
-- (void)setTitle:(NSString *)title {
-    _title = title;
+- (void)setSetting:(ZSettingBean *)setting {
+    _setting = setting;
     
     self.swiItem.hidden = true;
     
@@ -58,29 +58,39 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
-    if ([title isEqualToString:@"退出登陆"]) {
-        
-        self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        
-        self.titleLabel.textColor =  [UIColor s_transformToColorByHexColorStr:@ZFragmentColor];
-        
-    } else if ([title isEqualToString:@"推送设置"]) {
-        
-        self.swiItem.hidden = false;
-        
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-    } else if ([title isEqualToString:@""]) {
-        
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        self.bottomLineType = ZBottomLineTypeNone;
-        
-        self.backgroundColor = [UIColor clearColor];
+    switch (setting.type) {
+        case ZSettingTypeLogout:
+            
+            self.titleLabel.textAlignment = NSTextAlignmentCenter;
+            
+            self.titleLabel.textColor =  [UIColor s_transformToColorByHexColorStr:@ZFragmentColor];
+            break;
+        case ZSettingTypeSpace:
+            
+            self.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            self.bottomLineType = ZBottomLineTypeNone;
+            
+            self.backgroundColor = [UIColor clearColor];
+            
+            self.accessoryType = UITableViewCellAccessoryNone;
+            
+            break;
+        case ZSettingTypePush:
+            
+            self.swiItem.hidden = false;
+            
+            self.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            self.accessoryType = UITableViewCellAccessoryNone;
+            
+        default:
+            break;
     }
     
-    self.titleLabel.text = title;
+    self.titleLabel.text = setting.title;
 }
+
 
 - (void)commitInit {
     [super commitInit];
@@ -90,6 +100,8 @@
     self.backgroundColor = [UIColor whiteColor];
     
     [self.contentView addSubview:self.titleLabel];
+    
+    [self.contentView addSubview:self.swiItem];
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
