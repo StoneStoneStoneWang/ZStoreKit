@@ -38,4 +38,9 @@
     [self.bridge createSetting:self];
 }
 
+- (void)configNaviItem {
+    
+    self.title = @"设置";
+}
+
 @end

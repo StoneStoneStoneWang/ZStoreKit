@@ -36,7 +36,7 @@ extension ZSettingBridge {
         viewModel = ZSettingViewModel(input)
         
         let dataSource = RxTableViewSectionedReloadDataSource<Section>(
-            configureCell: { ds, tv, ip, item in  return vc.configTableViewCell(item.title, for: ip) })
+            configureCell: { ds, tv, ip, item in  return vc.configTableViewCell(ZSettingBean.createSetting(item, title: item.title), for: ip) })
         
         viewModel
             .output

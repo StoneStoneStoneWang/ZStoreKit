@@ -13,6 +13,27 @@ import RxSwift
 import ZCache
 import ZSign
 
+@objc public final class ZSettingBean: NSObject {
+    
+    var type: ZSettingType = .space
+    
+    var title: String = ""
+    
+    @objc public static func createSetting(_ type: ZSettingType ,title: String) -> ZSettingBean {
+        
+        let setting = ZSettingBean()
+        
+        setting.type = type
+        
+        setting.title = title
+        
+        return setting
+    }
+    private override init() {
+        
+    }
+}
+
 @objc (ZSettingType)
 public enum ZSettingType: Int {
     

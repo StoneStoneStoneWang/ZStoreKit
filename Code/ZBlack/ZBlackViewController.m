@@ -35,5 +35,16 @@
     
     return 80;
 }
+- (void)configViewModel {
+    
+    self.bridge = [ZBlackBridge new];
+    
+    [self.bridge createBlack:self];
+}
+
+- (void)configNaviItem {
+    
+    self.title = @"黑名单";
+}
 
 @end

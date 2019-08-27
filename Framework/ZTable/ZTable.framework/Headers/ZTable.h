@@ -19,3 +19,7 @@ FOUNDATION_EXPORT const unsigned char ZTableVersionString[];
 #import <ZTable/ZTableLoadingViewController.h>
 
 #import <ZTable/ZTableNoLoadingViewConntroller.h>
+
+#import <ZTable/ZBaseTableViewCell.h>
+
+#import <ZTable/ZTableHeaderView.h>

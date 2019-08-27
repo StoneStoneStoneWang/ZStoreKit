@@ -7,7 +7,7 @@
 //
 
 @import ZBase;
-
+#import "ZTableHeaderView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZTableNoLoadingViewConntroller : ZBaseViewController 
@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat )caculateForCell:(id )data forIndexPath:(NSIndexPath *)ip;
 
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip;
+
+@property (nonatomic ,strong) ZTableHeaderView *headerView;
 
 @end
 

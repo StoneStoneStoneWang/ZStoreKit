@@ -11,7 +11,7 @@
 @import ZBridge;
 @interface ZFocusViewController ()
 
-//@property (nonatomic ,strong)
+@property (nonatomic ,strong) ZFocusBridge *bridge;
 
 @end
 
@@ -36,5 +36,15 @@
     
     return 80;
 }
+- (void)configViewModel {
+    
+    self.bridge = [ZFocusBridge new];
+    
+    [self.bridge createFocus:self];
+}
 
+- (void)configNaviItem {
+    
+    self.title = @"我的关注";
+}
 @end

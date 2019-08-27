@@ -4,9 +4,17 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/ZBaseTableViewCell.h</key>
+		<data>
+		fSsXPfg0lHY9/s2WqFM988sp5tg=
+		</data>
 		<key>Headers/ZTable.h</key>
 		<data>
-		oaYVQTppSIEvsYZsOnP7CXZ7pEQ=
+		bymEKNjc8z6cw7bE0dNBmkQnRj8=
+		</data>
+		<key>Headers/ZTableHeaderView.h</key>
+		<data>
+		2jzoj+7zAKHqvwj5VjA2qZmtNF8=
 		</data>
 		<key>Headers/ZTableLoadingViewController.h</key>
 		<data>
@@ -14,7 +22,7 @@
 		</data>
 		<key>Headers/ZTableNoLoadingViewConntroller.h</key>
 		<data>
-		vaJ8O2CnjX0/ULhiBpVkxljeQrY=
+		DDF4QloFWRI9PBuCfJm0u02HCzY=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -67,15 +75,37 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/ZBaseTableViewCell.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fSsXPfg0lHY9/s2WqFM988sp5tg=
+			</data>
+			<key>hash2</key>
+			<data>
+			ClaOYdOGEKgLSYZo4wjyUMTkH+93cM1OaIO3HiTe3Rc=
+			</data>
+		</dict>
 		<key>Headers/ZTable.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			oaYVQTppSIEvsYZsOnP7CXZ7pEQ=
+			bymEKNjc8z6cw7bE0dNBmkQnRj8=
 			</data>
 			<key>hash2</key>
 			<data>
-			RD0uTCG/W1NrsUOaPmai0WRk195Z1A+HGFvU7nQgUZg=
+			9HchHsibabt8gdpt9tiYcVVKsVYs0BVS0/ps1vteVGA=
+			</data>
+		</dict>
+		<key>Headers/ZTableHeaderView.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2jzoj+7zAKHqvwj5VjA2qZmtNF8=
+			</data>
+			<key>hash2</key>
+			<data>
+			L7uMj/7CZJGYVV+uKd8yuIOyOsVBvyOQPRpkMwu9FAs=
 			</data>
 		</dict>
 		<key>Headers/ZTableLoadingViewController.h</key>
@@ -93,11 +123,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vaJ8O2CnjX0/ULhiBpVkxljeQrY=
+			DDF4QloFWRI9PBuCfJm0u02HCzY=
 			</data>
 			<key>hash2</key>
 			<data>
-			uNeC+P7j1gu5dB3RxQDW6gwixhniNaWrPjgcQM6NaZI=
+			Wr1zdt86lstrWTWN5ec/g6Rp0D08Ho+FEgDDnXOd+Ic=
 			</data>
 		</dict>
 		<key>MJRefresh.bundle/arrow@2x.png</key>
