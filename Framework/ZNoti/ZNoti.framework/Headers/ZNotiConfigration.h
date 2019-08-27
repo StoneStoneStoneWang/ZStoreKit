@@ -59,6 +59,8 @@ FOUNDATION_EXPORT NSString * const ZNotiMyOrder;
 
 FOUNDATION_EXPORT NSString * const ZNotiAvatar;
 
+FOUNDATION_EXPORT NSString * const ZNotiContactUs;
+
 #pragma mark ---- person
 
 FOUNDATION_EXPORT NSString * const ZNotiAddBlack;

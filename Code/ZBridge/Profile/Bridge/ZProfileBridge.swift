@@ -12,9 +12,35 @@ import RxDataSources
 import WLBaseTableView
 import ZNoti
 import ZCache
-import WLToolsKit
 import ZHud
+import RxCocoa
+import RxSwift
+import ZBean
 
+private var key: Void?
+
+extension ZTableHeaderView {
+    
+    @IBInspectable var user: ZUserBean? {
+        get {
+            return objc_getAssociatedObject(self, &key) as? ZUserBean
+        }
+        set{
+            objc_setAssociatedObject(self, &key,newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+}
+
+extension Reactive where Base: ZTableHeaderView {
+    
+    var user: Binder<ZUserBean?> {
+        
+        return Binder(base) { view, user in
+            
+            view.user = user
+        }
+    }
+}
 
 @objc (ZProfileBridge)
 public final class ZProfileBridge: ZBaseBridge {
@@ -50,11 +76,11 @@ extension ZProfileBridge {
         
         self.dataSource = dataSource
         
-        //        viewModel
-        //            .output
-        //            .userInfo
-        //            .bind(to: profileHeader.rx.user)
-        //            .disposed(by: disposed)
+        viewModel
+            .output
+            .userInfo
+            .bind(to: vc.headerView.rx.user)
+            .disposed(by: disposed)
         
         viewModel
             .output
@@ -68,7 +94,7 @@ extension ZProfileBridge {
                 case .pravicy: fallthrough
                 case .about:
                     
-                    ZNotiConfigration.postNotification(withName: type.notificationName, andValue: nil, andFrom: self)
+                    ZNotiConfigration.postNotification(withName: type.notificationName, andValue: nil, andFrom: vc)
                     
                 case .userInfo:fallthrough
                 case .address: fallthrough
@@ -78,22 +104,15 @@ extension ZProfileBridge {
                     
                     if ZAccountCache.default.isLogin() {
                         
-                        ZNotiConfigration.postNotification(withName: type.notificationName, andValue: nil, andFrom: self)
+                        ZNotiConfigration.postNotification(withName: type.notificationName, andValue: nil, andFrom: vc)
                     } else {
                         
-                        ZNotiConfigration.postNotification(withName: type.notificationName, andValue: nil, andFrom: self)
+                        ZNotiConfigration.postNotification(withName: Notification.Name(ZNotiUnLogin), andValue: nil, andFrom: vc)
                     }
                     
                 case .contactUS:
                     
-                    if !type.subTitle.isEmpty && WLDeviceInfo.wl_device_hasSIM()  {
-                        
-                        WLOpenUrl.openUrl(urlString: "telprompt://\(type.subTitle)")
-                        
-                    } else {
-                        
-                        ZHudUtil.showInfo("请确认使用的是iPhone，切装有手机卡")
-                    }
+                    vc.tableViewSelectData(type, for: ip)
                     
                 default:
                     break
