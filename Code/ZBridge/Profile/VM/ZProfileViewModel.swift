@@ -19,9 +19,9 @@ import ZCache
 
 @objc public final class ZProfileBean: NSObject {
     
-    var type: ZProfileType = .space
+    @objc public var type: ZProfileType = .space
     
-    var title: String = ""
+    @objc public var title: String = ""
     
     @objc public static func createProfile(_ type: ZProfileType ,title: String) -> ZProfileBean {
         

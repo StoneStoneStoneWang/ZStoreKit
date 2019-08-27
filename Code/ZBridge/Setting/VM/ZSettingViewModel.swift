@@ -15,9 +15,9 @@ import ZSign
 
 @objc public final class ZSettingBean: NSObject {
     
-    var type: ZSettingType = .space
+    @objc public var type: ZSettingType = .space
     
-    var title: String = ""
+    @objc public var title: String = ""
     
     @objc public static func createSetting(_ type: ZSettingType ,title: String) -> ZSettingBean {
         

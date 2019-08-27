@@ -13,11 +13,11 @@ import RxSwift
 
 @objc public final class ZAboutBean: NSObject {
     
-    var type: ZAboutType = .space
+    @objc public var type: ZAboutType = .space
     
-    var title: String = ""
+    @objc public var title: String = ""
     
-    var subTitle: String = ""
+    @objc public var subTitle: String = ""
     
     @objc public static func createAbout(_ type: ZAboutType ,title: String ,subTitle: String) -> ZAboutBean {
         
