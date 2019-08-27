@@ -22,11 +22,11 @@ public final class ZSettingBridge: ZBaseBridge {
     
     var viewModel: ZSettingViewModel!
     
-    weak var vc: ZTableLoadingViewController!
+    weak var vc: ZTableNoLoadingViewConntroller!
 }
 extension ZSettingBridge {
     
-    @objc public func createBlack(_ vc: ZTableLoadingViewController) {
+    @objc public func createSetting(_ vc: ZTableNoLoadingViewConntroller) {
         
         self.vc = vc
         
@@ -100,5 +100,4 @@ extension ZSettingBridge: UITableViewDelegate {
         
         return datasource[indexPath].cellHeight
     }
-    
 }
