@@ -2,9 +2,9 @@ Pod::Spec.new do |spec|
   
   spec.name         = "ZSetting"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 我的关注."
+  spec.summary      = "A Lib For 设置."
   spec.description  = <<-DESC
-  ZSetting是我的关注界面
+  ZSetting是设置界面
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
