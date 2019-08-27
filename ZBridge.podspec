@@ -233,4 +233,23 @@ Pod::Spec.new do |spec|
     end
   end
   
+  # 关于我们
+  spec.subspec 'About' do |about|
+    
+    about.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/About/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+    end
+    
+    about.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/About/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/About/VM'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'WLBaseTableView/SM'
+      bridge.dependency 'RxDataSources'
+    end
+  end
+  
 end
