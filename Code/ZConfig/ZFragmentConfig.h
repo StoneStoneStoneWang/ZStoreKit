@@ -47,6 +47,10 @@
 // 个人中心 ----------------------------------
 #pragma mark ---- profile
 
+#define ZProfileFormOne 1
+
+#define ZProfileFormTwo 0
+
 #define AboutIcon "关于我们"
 
 #define ContactUsIcon "联系我们"
