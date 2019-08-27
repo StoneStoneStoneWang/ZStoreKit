@@ -16,6 +16,7 @@ import ZSign
 import ZApi
 import ZRealReq
 import ZCache
+
 @objc public final class ZProfileBean: NSObject {
     
     var type: ZProfileType = .space

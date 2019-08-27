@@ -200,11 +200,37 @@ Pod::Spec.new do |spec|
       bridge.source_files = "Code/ZBridge/Setting/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Setting/VM'
       bridge.dependency 'ZNoti'
-      bridge.dependency 'ZCache'
+      bridge.dependency 'ZCache/Account'
       bridge.dependency 'ZTable'
       bridge.dependency 'WLBaseTableView/SM'
       bridge.dependency 'RxDataSources'
       
     end
   end
+  
+  # 个人中心
+  spec.subspec 'Profile' do |profile|
+    
+    profile.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Profile/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZCache/Account'
+      vm.dependency 'ZSign'
+      vm.dependency 'ZNoti'
+      vm.dependency 'ZCache/User'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZRealReq'
+    end
+    
+    profile.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Profile/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Profile/VM'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'WLBaseTableView/SM'
+      bridge.dependency 'RxDataSources'
+    end
+  end
+  
 end

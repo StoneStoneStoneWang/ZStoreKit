@@ -21,7 +21,7 @@ private var key: Void?
 
 extension ZTableHeaderView {
     
-    @IBInspectable var user: ZUserBean? {
+    @objc public var user: ZUserBean? {
         get {
             return objc_getAssociatedObject(self, &key) as? ZUserBean
         }
