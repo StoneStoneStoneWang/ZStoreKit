@@ -7,28 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZBaseMix.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZBaseViewController : UIViewController
+@interface ZBaseViewController  : UIViewController
 
-- (void)configNaviItem;
+- (void)configNaviItem NS_SWIFT_NAME(s_configNaviItem());
 
-- (void)configOwnProperties;
+- (void)configOwnProperties NS_SWIFT_NAME(s_configOwnProperties());
 
-- (void)addOwnSubViews;
+- (void)addOwnSubViews NS_SWIFT_NAME(s_addOwnSubViews());
 
-- (void)configOwnSubViews;
+- (void)configOwnSubViews NS_SWIFT_NAME(s_configOwnSubViews());
 
-- (void)configLoading;
+- (void)configLoading NS_SWIFT_NAME(s_configLoading());
 
-- (void)configViewModel;
+- (void)configViewModel NS_SWIFT_NAME(s_configViewModel());
 
-- (void)prepareData;
+- (void)prepareData NS_SWIFT_NAME(s_prepareData());
 
-- (void)configAuto;
+- (void)configAuto NS_SWIFT_NAME(s_configAuto());
 
-- (void)addOwnSubViewController;
+- (void)addOwnSubViewController NS_SWIFT_NAME(s_addOwnSubViewController());
 
 @end
 

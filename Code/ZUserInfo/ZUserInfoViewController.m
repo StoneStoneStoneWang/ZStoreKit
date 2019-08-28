@@ -70,7 +70,7 @@
 
 - (void)configNaviItem {
     
-    self.title = @"我的";
+    self.title = @"我的资料";
 }
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
     

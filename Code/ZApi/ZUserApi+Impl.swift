@@ -172,7 +172,7 @@ extension ZUserApi: WLObserverReq {
             
         case .analysis(let appId, lat: let lat, lon: let lon):
             
-            var result = ["loc.appleId":appId ,"loc.latitude": lat,"loc.latitude": lon]
+            var result = ["loc.appleId":appId ,"loc.latitude": lat,"loc.longitude": lon]
             
             if let idfa = UIDevice.current.identifierForVendor{
                 
