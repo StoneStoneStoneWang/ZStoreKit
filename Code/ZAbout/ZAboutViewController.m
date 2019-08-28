@@ -30,10 +30,6 @@
     self.headerView = [[ZAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) / 2)];
     
     self.tableView.tableHeaderView = self.headerView;
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onHeaderViewTap)];
-    
-    [self.headerView addGestureRecognizer:tap];
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
@@ -57,11 +53,6 @@
 - (void)configNaviItem {
     
     self.title = @"关于我们";
-}
-
-- (void)onHeaderViewTap {
-    
-    [ZNotiConfigration postNotificationWithName:ZNotiUserInfo andValue:nil andFrom:self];
 }
 
 - (BOOL)canPanResponse {

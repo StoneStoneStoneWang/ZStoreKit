@@ -124,6 +124,8 @@ static ZStoreRootManager *manager = nil;
         [appdelegate.window makeKeyAndVisible];
         
         [ZHudUtil configHud];
+        
+        [ZWXManager wxRegisterAppKey:@""];
     }
     
     [self addNotification];
@@ -185,6 +187,8 @@ static ZStoreRootManager *manager = nil;
     
     NSDictionary *userInfo = noti.userInfo;
     
+    [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"isFirstLogin"];
+    
     if (userInfo && userInfo[@"from"]) {
         
         UIViewController *from = userInfo[@"from"];
@@ -209,7 +213,7 @@ static ZStoreRootManager *manager = nil;
         
         UIViewController *from = userInfo[@"from"];
         
-        //        [from dismissViewControllerAnimated:true completion:nil];
+        [from dismissViewControllerAnimated:true completion:nil];
         
     }
 }
@@ -316,6 +320,7 @@ static ZStoreRootManager *manager = nil;
         [from.navigationController pushViewController:about animated:true];
     }
 }
+
 - (void)onSettingTap:(NSNotification *)noti {
     
     NSDictionary *userInfo = noti.userInfo;

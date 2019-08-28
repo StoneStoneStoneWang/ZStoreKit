@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WXApi.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-
+@class PayReq;
 
 typedef NS_ENUM(NSInteger ,ZWXActionType) {
     

@@ -16,6 +16,7 @@ import ZHud
 import RxCocoa
 import RxSwift
 import ZBean
+import RxGesture
 
 private var key: Void?
 
@@ -125,6 +126,21 @@ extension ZProfileBridge {
             .setDelegate(self)
             .disposed(by: disposed)
         
+        vc
+            .headerView
+            .rx
+            .tapGesture()
+            .subscribe(onNext: { (_) in
+                
+                if ZAccountCache.default.isLogin() {
+                    
+                    ZNotiConfigration.postNotification(withName: ZProfileType.userInfo.notificationName, andValue: nil, andFrom: vc)
+                } else {
+                    
+                    ZNotiConfigration.postNotification(withName: Notification.Name(ZNotiUnLogin), andValue: nil, andFrom: vc)
+                }
+            })
+            .disposed(by: disposed)
     }
 }
 extension ZProfileBridge: UITableViewDelegate {

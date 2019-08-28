@@ -26,11 +26,13 @@ extension ZSignatureBridge {
     
     @objc public func createSignature(_ vc: ZBaseViewController ) {
         
-        if let completeItem = vc.navigationItem.rightBarButtonItem ,let signaturetv = vc.view.viewWithTag(201) as? UITextView {
+        if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton ,let signaturetv = vc.view.viewWithTag(201) as? UITextView ,let backItem = vc.navigationItem.leftBarButtonItem?.customView as? UIButton {
             
             let inputs = ZSignatureViewModel.WLInput(orignal: signature.asDriver(),
                                                       updated: signaturetv.rx.text.orEmpty.asDriver(),
                                                       completTaps: completeItem.rx.tap.asSignal())
+            
+            signaturetv.text = signature.value
             
             viewModel = ZSignatureViewModel(inputs)
             
@@ -71,6 +73,15 @@ extension ZSignatureBridge {
                     default: break
                         
                     }
+                })
+                .disposed(by: disposed)
+            
+            backItem
+                .rx
+                .tap
+                .subscribe(onNext: { (_) in
+                    
+                    vc.navigationController?.dismiss(animated: true, completion: nil)
                 })
                 .disposed(by: disposed)
         }

@@ -14,14 +14,6 @@ import RxCocoa
 import ZCache
 import RxSwift
 
-//extension Reactive where Base: ZNickNameBridge {
-//
-//    public var complete: Observable<ZUserBean> {
-//
-//        return self.base.userBean.asObservable()
-//    }
-//}
-
 @objc (ZNickNameBridge)
 public final class ZNickNameBridge: ZBaseBridge {
     
@@ -34,11 +26,13 @@ extension ZNickNameBridge {
     
     @objc public func createNickName(_ vc: ZBaseViewController) {
         
-        if let completeItem = vc.navigationItem.rightBarButtonItem ,let name = vc.view.viewWithTag(201) as? UITextField {
+        if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton ,let name = vc.view.viewWithTag(201) as? UITextField ,let backItem = vc.navigationItem.leftBarButtonItem?.customView as? UIButton{
             
             let inputs = ZNickNameViewModel.WLInput(orignal: nickname.asDriver(),
                                                        updated: name.rx.text.orEmpty.asDriver(),
                                                        completTaps: completeItem.rx.tap.asSignal())
+            
+            name.text = nickname.value
             
             viewModel = ZNickNameViewModel(inputs)
             
@@ -79,6 +73,15 @@ extension ZNickNameBridge {
                     default: break
                         
                     }
+                })
+                .disposed(by: disposed)
+            
+            backItem
+                .rx
+                .tap
+                .subscribe(onNext: { (_) in
+                    
+                    vc.navigationController?.dismiss(animated: true, completion: nil)
                 })
                 .disposed(by: disposed)
         }

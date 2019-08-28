@@ -229,6 +229,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
       bridge.dependency 'WLBaseTableView/SM'
       bridge.dependency 'RxDataSources'
+      bridge.dependency 'RxGesture'
     end
   end
   

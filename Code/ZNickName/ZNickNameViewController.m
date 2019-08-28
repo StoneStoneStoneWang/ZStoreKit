@@ -38,6 +38,8 @@
         [_textField set_returnKeyType:UIReturnKeyDone];
         
         _textField.tag = 201;
+        
+        _textField.backgroundColor = [UIColor whiteColor];
     }
     return _textField;
 }
@@ -53,6 +55,8 @@
         [_completeItem setTitle:@"完成" forState:UIControlStateHighlighted];
         
         [_completeItem setTitle:@"完成" forState:UIControlStateSelected];
+        
+        _completeItem.titleLabel.font = [UIFont systemFontOfSize:15];
         
         if ([@ZFragmentColor isEqualToString:@"#ffffff"]) {
             
@@ -90,7 +94,9 @@
     
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.right.top.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
+        
+        make.top.mas_equalTo(KTOPLAYOUTGUARD);
         
         make.height.mas_equalTo(48);
     }];
