@@ -34,4 +34,5 @@ Pod::Spec.new do |spec|
   
   spec.dependency 'ZReq'
   
+  spec.dependency 'ZSign'
 end

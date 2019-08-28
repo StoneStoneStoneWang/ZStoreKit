@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import ZSign
 import RxSwift
 import WLReqKit
 import ZCache
 import ZReq
 import ZUpload
+import ZSign
 
 public func onUserDictResp<T : WLObserverReq>(_ req: T) -> Observable<[String:Any]> {
     
@@ -25,13 +25,12 @@ public func onUserDictResp<T : WLObserverReq>(_ req: T) -> Observable<[String:An
             params.updateValue(ZAccountCache.default.token, forKey: "token")
         }
         
-        ZReqManager.post(withUrl: req.host + req.reqName, andParams: params, andHeader: req.headers, andSucc: { (data) in
+        ZReqHandler.s_postWithUrl(url: req.host + req.reqName, params: params, header: req.headers, succ: { (data) in
             
             observer.onNext(data as! [String:Any])
             
             observer.onCompleted()
-            
-        }, andFail: { (error) in
+        }, fail: { (error) in
             
             let ocError = error as NSError
             
@@ -53,16 +52,16 @@ public func onUserArrayResp<T : WLObserverReq>(_ req: T) -> Observable<[Any]> {
             
             params.updateValue(ZAccountCache.default.token, forKey: "token")
         }
-        ZReqManager.post(withUrl: req.host + req.reqName, andParams: params, andHeader: req.headers, andSucc: { (data) in
-            
+        ZReqHandler.s_postWithUrl(url: req.host + req.reqName, params: params, header: req.headers, succ: { (data) in
+
             observer.onNext(data as! [Any])
-            
+
             observer.onCompleted()
-            
-        }, andFail: { (error) in
-            
+
+        }, fail: { (error) in
+
             let ocError = error as NSError
-            
+
             if ocError.code == 122 || ocError.code == 123 || ocError.code == 124 || ocError.code == 121 { observer.onError(WLBaseError.ServerResponseError(ocError.localizedDescription)) }
             else { observer.onError(WLBaseError.HTTPFailed(error)) }
         })
@@ -70,6 +69,7 @@ public func onUserArrayResp<T : WLObserverReq>(_ req: T) -> Observable<[Any]> {
         return Disposables.create { }
     })
 }
+
 
 // 无返回值的 在data里
 public func onUserVoidResp<T : WLObserverReq>(_ req: T) -> Observable<Void> {
@@ -83,16 +83,16 @@ public func onUserVoidResp<T : WLObserverReq>(_ req: T) -> Observable<Void> {
             params.updateValue(ZAccountCache.default.token, forKey: "token")
         }
         
-        ZReqManager.post(withUrl: req.host + req.reqName, andParams: params, andHeader: req.headers, andSucc: { (data) in
-            
+        ZReqHandler.s_postWithUrl(url: req.host + req.reqName, params: params, header: req.headers, succ: { (data) in
+
             observer.onNext(())
-            
+
             observer.onCompleted()
-            
-        }, andFail: { (error) in
-            
+
+        }, fail: { (error) in
+
             let ocError = error as NSError
-            
+
             if ocError.code == 122 || ocError.code == 123 || ocError.code == 124 || ocError.code == 121 { observer.onError(WLBaseError.ServerResponseError(ocError.localizedDescription)) }
             else { observer.onError(WLBaseError.HTTPFailed(error)) }
         })
@@ -113,17 +113,17 @@ public func onAliDictResp<T : WLObserverReq>(_ req: T) -> Observable<ZALCredenti
         }
         
         ZUploadManager.fetchAliObj(withUrl: req.host + req.reqName , andParams: params, andHeader: req.headers, andSucc: { (credentials) in
-            
+
             observer.onNext(credentials)
-            
+
             observer.onCompleted()
-            
+
         }, andFail: { (error) in
-            
+
             let ocError = error as NSError
-            
+
             if ocError.code == 131 { observer.onError(WLBaseError.ServerResponseError(ocError.localizedDescription)) }
-                
+
             else { observer.onError(WLBaseError.HTTPFailed(error)) }
         })
         
@@ -136,17 +136,17 @@ public func onUploadImgResp(_ data: Data ,file: String ,param: ZALCredentialsBea
     return Observable<String>.create({ (observer) -> Disposable in
         
         ZUploadManager.uploadAvatar(with: data, andFile: file, andUid: ZAccountCache.default.uid, andParams: param, andSucc: { (objKey) in
-            
+
             observer.onNext(objKey)
-            
+
             observer.onCompleted()
-            
+
         }, andFail: { (error) in
-            
+
             let ocError = error as NSError
-            
+
             if ocError.code == 132 { observer.onError(WLBaseError.ServerResponseError(ocError.localizedDescription)) }
-                
+
             else { observer.onError(WLBaseError.HTTPFailed(error)) }
         })
         
@@ -159,17 +159,17 @@ public func onUploadPubImgResp(_ data: Data ,file: String ,param: ZALCredentials
     return Observable<String>.create({ (observer) -> Disposable in
         
         ZUploadManager.uploadImage(with: data, andFile: file, andUid: ZAccountCache.default.uid, andParams: param, andSucc: { (objKey) in
-            
+
             observer.onNext(objKey)
-            
+
             observer.onCompleted()
-            
+
         }, andFail: { (error) in
-            
+
             let ocError = error as NSError
-            
+
             if ocError.code == 132 { observer.onError(WLBaseError.ServerResponseError(ocError.localizedDescription)) }
-                
+
             else { observer.onError(WLBaseError.HTTPFailed(error)) }
         })
         
@@ -181,20 +181,20 @@ public func onUploadVideoResp(_ data: Data ,file: String ,param: ZALCredentialsB
     return Observable<String>.create({ (observer) -> Disposable in
         
         ZUploadManager.uploadVideo(with: data, andFile: file, andUid: ZAccountCache.default.uid, andParams: param, andSucc: { (objKey) in
-            
+
             observer.onNext(objKey)
-            
+
             observer.onCompleted()
-            
+
         }, andFail: { (error) in
-            
+
             let ocError = error as NSError
-            
+
             if ocError.code == 132 { observer.onError(WLBaseError.ServerResponseError(ocError.localizedDescription)) }
-                
+
             else { observer.onError(WLBaseError.HTTPFailed(error)) }
         })
-        
+//
         return Disposables.create { }
     })
 }
