@@ -13,7 +13,7 @@
 @import ZNavi;
 @import ZHud;
 @import ZWelcome;
-//@import ZWechat;
+@import ZLogin;
 @import ZPravicy;
 @import ZPassword;
 @import ZReg;
@@ -21,6 +21,9 @@
 @import ZProfile;
 @import ZAbout;
 @import ZSetting;
+@import ZBlack;
+@import ZFocus;
+#import <JXTAlertManager/JXTAlertController.h>
 
 @implementation WLMainBean
 
@@ -154,6 +157,10 @@ static ZStoreRootManager *manager = nil;
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoUserInfoTap:) name:ZNotiUserInfo object:nil ];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoFocusTap:) name:ZNotiFocus object:nil ];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnLogin:) name:ZNotiUnLogin object:nil ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyCircleTap:) name:ZNotiMyCircle object:nil ];
     
@@ -323,6 +330,75 @@ static ZStoreRootManager *manager = nil;
         ZSettingViewController *setting = [ZSettingViewController new];
         
         [from.navigationController pushViewController:setting animated:true];
+    }
+}
+
+- (void)onGotoBlackTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZBlackViewController *black = [ZBlackViewController new];
+        
+        [from.navigationController pushViewController:black animated:true];
+    }
+}
+- (void)onGotoFocusTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZFocusViewController *focus = [ZFocusViewController new];
+        
+        [from.navigationController pushViewController:focus animated:true];
+    }
+}
+- (void)onGotoUserInfoTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZSettingViewController *setting = [ZSettingViewController new];
+        
+        [from.navigationController pushViewController:setting animated:true];
+    }
+}
+
+- (void)onUnLogin:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from  jxt_showAlertWithTitle:@"您的还未登录" message:@"点击确定前往登录" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+            
+            alertMaker.
+            addActionCancelTitle(@"取消").
+            addActionDefaultTitle(@"前往登陆");
+            
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+            
+            if ([action.title isEqualToString:@"取消"]) {
+                
+            }
+            else if ([action.title isEqualToString:@"前往登陆"]) {
+                
+                ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZLoginViewController new]] ;
+                
+                [from presentViewController:navi animated:true completion:nil];
+            }
+        }];
     }
 }
 

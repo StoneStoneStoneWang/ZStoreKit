@@ -15,5 +15,8 @@
 @implementation ZUserInfoViewController
 
 
-
+- (BOOL)canPanResponse {
+    
+    return true;
+}
 @end

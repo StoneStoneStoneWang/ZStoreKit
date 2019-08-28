@@ -217,7 +217,6 @@ Pod::Spec.new do |spec|
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZCache/Account'
-      vm.dependency 'ZSign'
       vm.dependency 'ZNoti'
       vm.dependency 'ZCache/User'
       vm.dependency 'ZApi'
@@ -249,6 +248,73 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
       bridge.dependency 'WLBaseTableView/SM'
       bridge.dependency 'RxDataSources'
+    end
+  end
+  # 我的资料
+  spec.subspec 'UserInfo' do |userinfo|
+    
+    userinfo.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/UserInfo/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'ZCache/User'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZRealReq'
+    end
+    
+    userinfo.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/UserInfo/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/UserInfo/VM'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'WLBaseTableView/SM'
+      bridge.dependency 'RxDataSources'
+      bridge.dependency 'ZHud'
+    end
+  end
+  
+  # 登陆
+  spec.subspec 'NickName' do |nickName|
+    
+    nickName.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/NickName/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZCache/User'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'ZApi'
+    end
+    
+    nickName.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/NickName/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/NickName/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZBase'
+    end
+  end
+  
+  # 个性签名
+  spec.subspec 'Signature' do |signature|
+    
+    signature.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Signature/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZCache/User'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'ZApi'
+    end
+    
+    signature.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Signature/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Signature/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZBase'
     end
   end
   

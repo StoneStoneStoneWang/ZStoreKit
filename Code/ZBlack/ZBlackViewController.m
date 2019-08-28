@@ -47,4 +47,8 @@
     self.title = @"黑名单";
 }
 
+- (BOOL)canPanResponse {
+    
+    return true;
+}
 @end

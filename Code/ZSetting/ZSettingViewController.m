@@ -42,5 +42,8 @@
     
     self.title = @"设置";
 }
-
+- (BOOL)canPanResponse {
+    
+    return true;
+}
 @end

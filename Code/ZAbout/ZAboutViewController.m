@@ -64,4 +64,8 @@
     [ZNotiConfigration postNotificationWithName:ZNotiUserInfo andValue:nil andFrom:self];
 }
 
+- (BOOL)canPanResponse {
+    
+    return true;
+}
 @end
