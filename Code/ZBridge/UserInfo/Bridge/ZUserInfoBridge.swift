@@ -32,7 +32,7 @@ public final class ZUserInfoBridge: ZBaseBridge {
 
 extension ZUserInfoBridge {
     
-    @objc public func createUserInfo(_ vc: ZTableNoLoadingViewConntroller) {
+    @objc public func createUserInfo(_ vc: ZTableNoLoadingViewConntroller ,succ: @escaping () -> () ) {
         
         let input = ZUserInfoViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZUserInfoBean.self),
                                                itemSelect: vc.tableView.rx.itemSelected)
@@ -80,7 +80,11 @@ extension ZUserInfoBridge {
                 ZHudUtil.pop()
                 switch result {
                     
-                case .ok(_): ZHudUtil.showInfo(type == .header ? "上传头像成功" : "修改\(type.title)成功")
+                case .ok(_):
+                    
+                    succ()
+                    
+                    ZHudUtil.showInfo(type == .header ? "上传头像成功" : "修改\(type.title)成功")
                     
                 case .failed(let msg): ZHudUtil.showInfo(msg)
                 default: break

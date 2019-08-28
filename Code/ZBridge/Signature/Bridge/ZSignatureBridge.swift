@@ -14,6 +14,7 @@ import RxCocoa
 import ZCache
 import RxSwift
 
+
 @objc (ZSignatureBridge)
 public final class ZSignatureBridge: ZBaseBridge {
     
@@ -24,7 +25,7 @@ public final class ZSignatureBridge: ZBaseBridge {
 
 extension ZSignatureBridge {
     
-    @objc public func createSignature(_ vc: ZBaseViewController ) {
+    @objc public func createSignature(_ vc: ZBaseViewController ,succ: @escaping () -> () ) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton ,let signaturetv = vc.view.viewWithTag(201) as? UITextView ,let backItem = vc.navigationItem.leftBarButtonItem?.customView as? UIButton {
             

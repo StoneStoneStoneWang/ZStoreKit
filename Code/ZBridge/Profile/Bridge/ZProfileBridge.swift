@@ -130,6 +130,7 @@ extension ZProfileBridge {
             .headerView
             .rx
             .tapGesture()
+            .when(.recognized)
             .subscribe(onNext: { (_) in
                 
                 if ZAccountCache.default.isLogin() {
