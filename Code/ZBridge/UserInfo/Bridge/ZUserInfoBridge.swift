@@ -80,7 +80,8 @@ extension ZUserInfoBridge {
                 ZHudUtil.pop()
                 switch result {
                     
-                case .ok(let msg): ZHudUtil.showInfo(msg)
+                case .ok(_): ZHudUtil.showInfo(type == .header ? "上传头像成功" : "修改\(type.title)成功")
+                    
                 case .failed(let msg): ZHudUtil.showInfo(msg)
                 default: break
                 }

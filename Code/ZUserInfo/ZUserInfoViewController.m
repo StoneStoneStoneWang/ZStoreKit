@@ -196,6 +196,8 @@
         
         [weakSelf.tableView reloadData];
     }];
+    
+    [picker dismissViewControllerAnimated:true completion:nil];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     

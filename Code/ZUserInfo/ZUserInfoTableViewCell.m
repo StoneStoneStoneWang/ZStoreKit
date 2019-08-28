@@ -119,7 +119,7 @@
             
             [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",userInfo.subtitle]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
             
-            self.subTitleLabel.hidden = false;
+            self.subTitleLabel.hidden = true;
             
             break;
         case ZUserInfoTypePhone:
