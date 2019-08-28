@@ -19,7 +19,7 @@ Pod::Spec.new do |spec|
   
   spec.static_framework = true
   
-  spec.frameworks = 'UIKit', 'Foundation'
+  spec.frameworks = 'UIKit', 'Foundation' ,'CoreServices'
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
@@ -34,4 +34,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZSignature'
   spec.dependency 'WLToolsKit/Image'
   spec.dependency 'JXTAlertManager'
+  spec.dependency 'WLComponentView/Picker'
 end
