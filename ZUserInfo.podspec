@@ -30,5 +30,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'SDWebImage'
-  
+  spec.dependency 'ZNickName'
+  spec.dependency 'ZSignature'
 end
