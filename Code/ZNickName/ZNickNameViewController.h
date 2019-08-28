@@ -8,10 +8,12 @@
 
 #import <ZTransition/ZTransition.h>
 
+typedef void(^ZNickNameSucc)(void);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZNickNameViewController : ZTViewController
 
++ (instancetype)createSignature:(ZNickNameSucc)succ;
 @end
 
 NS_ASSUME_NONNULL_END

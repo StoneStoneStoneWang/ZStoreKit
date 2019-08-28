@@ -23,9 +23,25 @@
 
 @property (nonatomic ,strong) UIButton *backItem;
 
+@property (nonatomic ,strong) ZNickNameSucc succ;
+
 @end
 
 @implementation ZNickNameViewController
+
++ (instancetype)createSignature:(ZNickNameSucc)succ {
+    
+    return [[self alloc] initWithSucc:succ];
+    
+}
+- (instancetype)initWithSucc:(ZNickNameSucc)succ {
+    
+    if (self = [super init]) {
+        
+        self.succ = succ;
+    }
+    return self;
+}
 
 - (WLNickNameTextField *)textField {
     
@@ -117,7 +133,7 @@
     
     self.bridge = [ZNickNameBridge new];
     
-    [self.bridge createNickName:self];
+    [self.bridge createNickName:self succ:self.succ];
 }
 
 @end
