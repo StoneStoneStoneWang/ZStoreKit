@@ -71,5 +71,6 @@ public enum ZUserApi {
     case fetchBanners
     
     case deleteMyCircle(_ encode: String)
+    
+    case analysis(_ appid: String,lat: String,lon: String)
 }
-

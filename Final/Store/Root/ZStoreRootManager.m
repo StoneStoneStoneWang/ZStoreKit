@@ -25,6 +25,7 @@
 @import ZBlack;
 @import ZFocus;
 @import ZUserInfo;
+@import ZWechat;
 
 @implementation WLMainBean
 
@@ -122,12 +123,8 @@ static ZStoreRootManager *manager = nil;
         
         [appdelegate.window makeKeyAndVisible];
         
-        //        [WXApi registerApp:@SWXKey];
-        //
         [ZHudUtil configHud];
     }
-    
-    NSLog(@"%@" ,[ZConfigure fetchAppKey]);
     
     [self addNotification];
 }
@@ -156,32 +153,31 @@ static ZStoreRootManager *manager = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onModifyPwdSucc:) name:ZNotiModifyPwdSucc object:nil ];
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoUserInfoTap:) name:ZNotiUserInfo object:nil ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoFocusTap:) name:ZNotiFocus object:nil ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnLogin:) name:ZNotiUnLogin object:nil ];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyCircleTap:) name:ZNotiMyCircle object:nil ];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyOrderTap:) name:ZNotiMyOrder object:nil ];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyAddressTap:) name:ZNotiMyAddress object:nil ];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyCircleTap:) name:ZNotiMyCircle object:nil ];
+    //
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyOrderTap:) name:ZNotiMyOrder object:nil ];
+    //
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyAddressTap:) name:ZNotiMyAddress object:nil ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoAboutTap:) name:ZNotiAboutUs object:nil ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoProtocolTap:) name:ZNotiPrivacy object:nil ];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleClickTap:) name:ZNotiCircleClick object:nil ];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleClickTap:) name:ZNotiCircleClick object:nil ];
+    //
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleReportTap:) name:ZNotiCircleGotoReport object:nil ];
+    //
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleShareTap:) name:ZNotiCircleShare object:nil ];
+    //
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCirclePublishSuccTap:) name:ZNotiCirclePublishSucc object:nil ];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleReportTap:) name:ZNotiCircleGotoReport object:nil ];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleShareTap:) name:ZNotiCircleShare object:nil ];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCirclePublishSuccTap:) name:ZNotiCirclePublishSucc object:nil ];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onStoreBannerTap:) name:ZNotiBannerClick object:nil ];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onStoreBannerTap:) name:ZNotiBannerClick object:nil ];
 }
 
 #pragma mark -- WelcomeSkip
@@ -368,9 +364,9 @@ static ZStoreRootManager *manager = nil;
         
         UIViewController *from = userInfo[@"from"];
         
-        ZSettingViewController *setting = [ZSettingViewController new];
+        ZUserInfoViewController *userInfo = [ZUserInfoViewController new];
         
-        [from.navigationController pushViewController:setting animated:true];
+        [from.navigationController pushViewController:userInfo animated:true];
     }
 }
 

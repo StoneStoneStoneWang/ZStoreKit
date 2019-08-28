@@ -78,6 +78,8 @@ extension ZUserApi: WLObserverReq {
         case .fetchBanners: return "mob/circleFriends_mobListCircleFriends?"
         
         case .deleteMyCircle: return "mob/circleFriends_mobDelCircleFriends?"
+            
+        case .analysis: return "mob/location_mobAddLocation?"
         }
     }
     
@@ -167,6 +169,17 @@ extension ZUserApi: WLObserverReq {
         case .deleteMyCircle(let encode): return ["cfs.encoded": encode]
             
         case .fetchAreaJson: return [:]
+            
+        case .analysis(let appId, lat: let lat, lon: let lon):
+            
+            var result = ["loc.appleId":appId ,"loc.latitude": lat,"loc.latitude": lon]
+            
+            if let idfa = UIDevice.current.identifierForVendor{
+                
+                result.updateValue(idfa.uuidString, forKey: "loc.idfa")
+            }
+            
+            return result
         }
     }
     

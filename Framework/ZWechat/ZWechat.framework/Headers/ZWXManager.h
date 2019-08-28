@@ -25,7 +25,9 @@ typedef NS_ENUM(NSInteger ,ZWXActionType) {
 
 typedef void(^ZWXApiBlock)(ZWXActionType type,NSString *_Nonnull msg);
 
-@interface ZWXManager : NSObject
+@interface ZWXManager : NSObject 
+
++ (BOOL)wxRegisterAppKey:(NSString *)appKey;
 
 + (void)wxLoginWithApiBlock:(ZWXApiBlock )apiBlock;
 
@@ -37,6 +39,8 @@ typedef void(^ZWXApiBlock)(ZWXActionType type,NSString *_Nonnull msg);
            andWebPageUrl:(NSString * _Nullable)webpageUrl
                 andScene:(int)scene
              andApiBlock:(ZWXApiBlock )apiBlock;
+
++ (BOOL)handleOpenUrl:(NSURL *)url;
 
 @end
 
