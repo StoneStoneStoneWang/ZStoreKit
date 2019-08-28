@@ -32,4 +32,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'SDWebImage'
   spec.dependency 'ZNickName'
   spec.dependency 'ZSignature'
+  spec.dependency 'WLToolsKit/Image'
+  spec.dependency 'JXTAlertManager'
 end

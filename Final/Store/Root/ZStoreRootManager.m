@@ -8,6 +8,7 @@
 
 #import "ZStoreRootManager.h"
 #import "ZNaviConfigImpl.h"
+@import JXTAlertManager;
 @import ZNoti;
 @import ZSign;
 @import ZNavi;
@@ -23,7 +24,7 @@
 @import ZSetting;
 @import ZBlack;
 @import ZFocus;
-#import <JXTAlertManager/JXTAlertController.h>
+@import ZUserInfo;
 
 @implementation WLMainBean
 
