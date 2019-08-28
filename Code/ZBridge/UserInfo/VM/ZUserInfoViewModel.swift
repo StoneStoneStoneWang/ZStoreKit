@@ -19,11 +19,16 @@ import ZBean
 
 @objc public final class ZUserInfoBean: NSObject {
     
-    var type: ZUserInfoType = .header
+    @objc public var type: ZUserInfoType = .header
     
-    var img: UIImage!
+    @objc public var img: UIImage!
     
-    var subtitle: String = ""
+    @objc public var subtitle: String = ""
+    
+    @objc public var title: String {
+        
+        return type.title;
+    }
     
     static var types: [ZUserInfoBean] {
         

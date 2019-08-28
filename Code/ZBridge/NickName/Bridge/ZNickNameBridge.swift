@@ -27,16 +27,14 @@ public final class ZNickNameBridge: ZBaseBridge {
     
     var viewModel: ZNickNameViewModel!
     
-    let nickname: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+    let nickname: BehaviorRelay<String> = BehaviorRelay<String>(value: ZUserInfoCache.default.userBean.nickname)
 }
 
 extension ZNickNameBridge {
     
-    @objc public func createNickName(_ vc: ZBaseViewController,nn: String) {
+    @objc public func createNickName(_ vc: ZBaseViewController) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem ,let name = vc.view.viewWithTag(201) as? UITextField {
-            
-            nickname.accept(nn)
             
             let inputs = ZNickNameViewModel.WLInput(orignal: nickname.asDriver(),
                                                        updated: name.rx.text.orEmpty.asDriver(),

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZUserInfoViewController : ZTableNoLoadingViewConntroller
 
+
 @end
 
 NS_ASSUME_NONNULL_END

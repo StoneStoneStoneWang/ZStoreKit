@@ -19,16 +19,14 @@ public final class ZSignatureBridge: ZBaseBridge {
     
     var viewModel: ZSignatureViewModel!
     
-    let signature: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+    let signature: BehaviorRelay<String> = BehaviorRelay<String>(value: ZUserInfoCache.default.userBean.signature)
 }
 
 extension ZSignatureBridge {
     
-    @objc public func createSignature(_ vc: ZBaseViewController ,sa: String) {
+    @objc public func createSignature(_ vc: ZBaseViewController ) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem ,let signaturetv = vc.view.viewWithTag(201) as? UITextView {
-            
-            signature.accept(sa)
             
             let inputs = ZSignatureViewModel.WLInput(orignal: signature.asDriver(),
                                                       updated: signaturetv.rx.text.orEmpty.asDriver(),

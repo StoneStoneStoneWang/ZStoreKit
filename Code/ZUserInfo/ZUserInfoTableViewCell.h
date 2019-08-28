@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 @import ZBridge;
+@import ZTable;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZUserInfoTableViewCell : UITableViewCell
+@interface ZUserInfoTableViewCell : ZBaseTableViewCell
+
+@property (nonatomic ,strong) ZUserInfoBean *userInfo;
 
 @end
 
