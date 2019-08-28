@@ -24,7 +24,7 @@ public final class ZNickNameBridge: ZBaseBridge {
 
 extension ZNickNameBridge {
     
-    @objc public func createNickName(_ vc: ZBaseViewController) {
+    @objc public func createNickName(_ vc: ZBaseViewController ,succ: @escaping () -> () ) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton ,let name = vc.view.viewWithTag(201) as? UITextField ,let backItem = vc.navigationItem.leftBarButtonItem?.customView as? UIButton{
             
@@ -64,6 +64,8 @@ extension ZNickNameBridge {
                     case let .updateUserInfoSucc(_, msg: msg):
                         
                         ZHudUtil.showInfo(msg)
+                        
+                        succ()
                         
                         vc.dismiss(animated: true, completion: nil)
                         

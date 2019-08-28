@@ -66,6 +66,8 @@ extension ZSignatureBridge {
                         
                         ZHudUtil.showInfo(msg)
                         
+                        succ()
+                        
                         vc.dismiss(animated: true, completion: nil)
                         
                     case let .failed(msg):

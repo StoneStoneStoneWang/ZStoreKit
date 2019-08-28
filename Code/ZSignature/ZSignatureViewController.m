@@ -23,10 +23,25 @@
 
 @property (nonatomic ,strong) UIButton *backItem;
 
+@property (nonatomic ,strong) ZSignatureSucc succ;
+
 @end
 
 @implementation ZSignatureViewController
 
++ (instancetype)createSignature:(ZSignatureSucc)succ {
+    
+    return [[self alloc] initWithSucc:succ];
+    
+}
+- (instancetype)initWithSucc:(ZSignatureSucc)succ {
+    
+    if (self = [super init]) {
+        
+        self.succ = succ;
+    }
+    return self;
+}
 - (UITextView *)signaturetv {
     
     if (!_signaturetv) {
@@ -89,7 +104,6 @@
 - (void)addOwnSubViews {
     
     [self.view addSubview:self.signaturetv];
-    
 }
 - (void)configOwnSubViews {
     
@@ -119,7 +133,7 @@
     
     self.bridge = [ZSignatureBridge new];
     
-    [self.bridge createSignature:self];
+    [self.bridge createSignature:self succ:self.succ ];
 }
 
 @end
