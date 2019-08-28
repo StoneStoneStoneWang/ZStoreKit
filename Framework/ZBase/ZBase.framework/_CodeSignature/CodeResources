@@ -8,6 +8,10 @@
 		<data>
 		vqbRdAOha2IryOiW5HSWeSlSa58=
 		</data>
+		<key>Headers/ZBaseMix.h</key>
+		<data>
+		0HZEVyASzDhH6dxW24k/48EARhw=
+		</data>
 		<key>Headers/ZBaseViewController.h</key>
 		<data>
 		G2xY5Idq8gXfIblh5/w1zeRNRSU=
@@ -32,6 +36,17 @@
 			<key>hash2</key>
 			<data>
 			Ny57giyCS6F6cEhEiTjzGhV5+cg2+saLFyxjZFH8Y2k=
+			</data>
+		</dict>
+		<key>Headers/ZBaseMix.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0HZEVyASzDhH6dxW24k/48EARhw=
+			</data>
+			<key>hash2</key>
+			<data>
+			LHCn2YzQ6Cp5CO9Ed9in+mXwunIEHXHdA5KhFmQEZl8=
 			</data>
 		</dict>
 		<key>Headers/ZBaseViewController.h</key>
