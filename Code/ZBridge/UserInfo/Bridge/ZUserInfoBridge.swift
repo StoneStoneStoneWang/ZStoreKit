@@ -18,6 +18,7 @@ import WLBaseTableView
 import ZRealReq
 import ZUpload
 
+
 public typealias ZUserInfoOperateSucc = () -> ()
 
 @objc (ZUserInfoBridge)
@@ -32,7 +33,7 @@ public final class ZUserInfoBridge: ZBaseBridge {
 
 extension ZUserInfoBridge {
     
-    @objc public func createUserInfo(_ vc: ZTableNoLoadingViewConntroller ,succ: @escaping () -> () ) {
+    @objc public func createUserInfo(_ vc: ZTableNoLoadingViewConntroller) {
         
         let input = ZUserInfoViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZUserInfoBean.self),
                                                itemSelect: vc.tableView.rx.itemSelected)

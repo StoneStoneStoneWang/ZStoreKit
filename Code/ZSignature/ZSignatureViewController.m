@@ -133,7 +133,7 @@
     
     self.bridge = [ZSignatureBridge new];
     
-    [self.bridge createSignature:self succ:self.succ ];
+    [self.bridge createSignature:self succ:self.succ];
 }
 
 @end

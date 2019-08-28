@@ -86,7 +86,13 @@
             break;
         case ZUserInfoTypeSignature:
         {
-            ZSignatureViewController *signature = [ZSignatureViewController new];
+            
+            __weak typeof(self) weakSelf = self;
+            
+            ZSignatureViewController *signature = [ZSignatureViewController createSignature:^{
+                
+                [weakSelf.tableView reloadData];
+            }];
             
             [self presentViewController:[[ZTNavigationController alloc] initWithRootViewController:signature] animated:true completion:nil];
         }
