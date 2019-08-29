@@ -35,5 +35,7 @@ public class ZKeyValueBean: NSObject,Mappable ,IdentifiableType {
     @objc public var value: String = ""
     
     @objc public var img: UIImage?
+    
+    @objc public var place:String = ""
 }
 
