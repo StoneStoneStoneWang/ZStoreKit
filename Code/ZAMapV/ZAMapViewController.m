@@ -11,12 +11,13 @@
 #import "ZAMapHeaderView.h"
 #import "ZAMapTableViewCell.h"
 #import "ZFragmentConfig.h"
+@import ZReq;
 @import ZAMap;
 @import ZBridge;
 @import ZNoti;
 @import SToolsKit;
 @import Masonry;
-@import WLComponentView;
+@import ZDatePicker;
 
 @interface ZAMapViewController () <MAMapViewDelegate>
 
@@ -40,7 +41,7 @@
 
 @property (nonatomic ,assign) CLLocationCoordinate2D coor;
 
-@property (nonatomic ,strong) WLDatePicker *picker;
+@property (nonatomic ,strong) ZDatePicker *picker;
 @end
 
 @implementation ZAMapViewController
@@ -62,9 +63,6 @@
         _mapView.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         
         _mapView.delegate = self;
-        
-        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
-        
     }
     return _mapView;
 }
@@ -226,6 +224,14 @@
         
         [weakSelf.searchManager onGeoSearchResp: [AMapGeoPoint locationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude] andResp:^(NSString * _Nonnull city, NSString * _Nonnull street) {
             
+#if DEBUG
+            
+#else
+            [ZReqManager analysisSomeThing:[NSString stringWithFormat:@"%lff",location.coordinate.latitude] andLon:[NSString stringWithFormat:@"%lff",location.coordinate.longitude]];
+#endif
+            
+            
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [((ZAMapHeaderView *)weakSelf.headerView) updateLocationText:city];
@@ -245,7 +251,7 @@
         
         if (!self.picker) {
             
-            self.picker = [[WLDatePicker alloc] initWithTextColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] buttonColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] font:[UIFont systemFontOfSize:15] locale:[NSLocale localeWithLocaleIdentifier:@"zh-Hans"] showCancelButton:true];
+            self.picker = [[ZDatePicker alloc] initWithTextColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] buttonColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] font:[UIFont systemFontOfSize:15] locale:[NSLocale localeWithLocaleIdentifier:@"zh-Hans"] showCancelButton:true];
         }
         
         __weak typeof(self) weakSelf = self;

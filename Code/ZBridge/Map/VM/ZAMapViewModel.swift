@@ -37,6 +37,8 @@ struct ZAMapViewModel: WLBaseViewModel {
         let forms: [[String: String]]
         
         let location: BehaviorRelay<CLLocation>
+        
+        let locAddress: BehaviorRelay<String>
     }
     struct WLOutput {
         
@@ -86,6 +88,8 @@ struct ZAMapViewModel: WLBaseViewModel {
                 arr += [["lat":"\($0.1.coordinate.latitude)"]]
                 
                 arr += [["lng":"\($0.1.coordinate.longitude)"]]
+                
+                arr += [["address": input.locAddress.value]]
                 
                 return onUserDictResp(ZUserApi.publish(input.tag, content: WLJsonCast.cast(argu: arr)))
                     .mapObject(type: ZCircleBean.self)

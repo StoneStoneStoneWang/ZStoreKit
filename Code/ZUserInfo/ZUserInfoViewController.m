@@ -14,7 +14,7 @@
 #import "ZFragmentConfig.h"
 @import ZBridge;
 @import JXTAlertManager;
-@import WLComponentView;
+@import ZDatePicker;
 @import SToolsKit;
 @import CoreServices;
 @import WLToolsKit;
@@ -23,7 +23,7 @@
 
 @property (nonatomic ,strong) ZUserInfoBridge *bridge;
 
-@property (nonatomic ,strong) WLDatePicker *picker;
+@property (nonatomic ,strong) ZDatePicker *picker;
 
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 
@@ -134,7 +134,7 @@
         {
             if (!self.picker) {
                 
-                self.picker = [[WLDatePicker alloc] initWithTextColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] buttonColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] font:[UIFont systemFontOfSize:15] locale:[NSLocale localeWithLocaleIdentifier:@"zh-Hans"] showCancelButton:true];
+                self.picker = [[ZDatePicker alloc] initWithTextColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] buttonColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] font:[UIFont systemFontOfSize:15] locale:[NSLocale localeWithLocaleIdentifier:@"zh-Hans"] showCancelButton:true];
             }
             
             __weak typeof(self) weakSelf = self;

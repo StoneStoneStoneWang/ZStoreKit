@@ -8,6 +8,7 @@
 
 #import <ZTable/ZTable.h>
 #import "ZFragmentConfig.h"
+@import ZBean;
 NS_ASSUME_NONNULL_BEGIN
 
 #if ZAppFormMap
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZTableListTableViewCell : ZBaseTableViewCell
 
+@property (nonatomic ,strong) ZCircleBean *keyValue;
 
 @end
 #endif

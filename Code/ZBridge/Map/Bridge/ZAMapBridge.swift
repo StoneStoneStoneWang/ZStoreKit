@@ -27,6 +27,8 @@ public final class ZAMapBridge: ZBaseBridge {
     var viewModel: ZAMapViewModel!
     
     var location: BehaviorRelay<CLLocation> = BehaviorRelay<CLLocation>(value: CLLocation(latitude: 39, longitude: 106))
+    
+    var locAddress: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
 }
 
 extension ZAMapBridge {
@@ -40,7 +42,8 @@ extension ZAMapBridge {
                                                completeTaps: completeItem.rx.tap.asSignal(),
                                                tag: tag,
                                                forms: forms,
-                                               location: location)
+                                               location: location,
+                                               locAddress: locAddress)
             
             viewModel = ZAMapViewModel(input)
             
@@ -118,6 +121,12 @@ extension ZAMapBridge: UITableViewDelegate {
         
         self.location.accept(location)
     }
+    
+    @objc public func updateLocationAddress(_ address: String) {
+        
+        self.locAddress.accept(address)
+    }
+    
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         

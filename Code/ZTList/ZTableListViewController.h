@@ -10,9 +10,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if ZAppFormMap
+
+#if ZAppFormMapOne
 @interface ZTableListViewController : ZTableLoadingViewController
 
 
 @end
+#endif
+
+
+#else
+
+
+#endif
 
 NS_ASSUME_NONNULL_END
+
+
+
+
