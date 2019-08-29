@@ -57,6 +57,7 @@ Pod::Spec.new do |spec|
     circle.dependency 'ZBean/KeyValue'
     circle.dependency 'WLToolsKit/JsonCast'
   end
+  
   spec.subspec 'Commodity' do |commodity|
     commodity.source_files = "Code/ZBean/Commodity/*.{swift}"
     commodity.dependency 'ZBean/KeyValue'

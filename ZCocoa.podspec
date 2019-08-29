@@ -32,4 +32,17 @@ Pod::Spec.new do |spec|
     textfield.dependency 'RxCocoa'
   end
   
+  spec.subspec 'TableView' do |tableView|
+    tableView.source_files = "Code/ZCocoa/TableView/*.{swift}"
+    tableView.dependency 'RxCocoa'
+    tableView.dependency 'MJRefresh'
+  end
+  spec.subspec 'SM' do |sm|
+    sm.source_files = "Code/ZCocoa/SM/*.{swift}"
+    sm.dependency 'RxDataSources'
+  end
+  spec.subspec 'ASM' do |asm|
+    asm.source_files = "Code/ZCocoa/ASM/*.{swift}"
+    asm.dependency 'RxDataSources'
+  end
 end

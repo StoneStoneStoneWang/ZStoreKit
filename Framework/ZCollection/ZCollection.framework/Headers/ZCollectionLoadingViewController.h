@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ZCollectionLoadingViewController : ZBaseViewController
+@interface ZCollectionLoadingViewController : ZLoadingViewController
 
 @property (nonatomic ,strong ,readonly) UICollectionView *collectionView;
 

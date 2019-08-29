@@ -7,90 +7,108 @@
 //
 
 import Foundation
-import WLBaseViewModel
-import RxCocoa
-import RxSwift
-import WLReqKit
-import WLToolsKit
-import WLBaseResult
 import ZBean
-import ZRealReq
-import ZApi
+import WLBaseTableView
+import RxDataSources
+import ZTable
+import ZHud
 
-struct WLMAMapViewModel: WLBaseViewModel {
+@objc (ZAMapBridge)
+public final class ZAMapBridge: ZBaseBridge {
     
-    var input: WLInput
+    typealias Section = WLSectionModel<(), ZKeyValueBean>
     
-    var output: WLOutput
+    var dataSource: RxTableViewSectionedReloadDataSource<Section>!
     
-    struct WLInput {
+    var viewModel: ZAMapViewModel!
+}
+
+extension ZAMapBridge {
+    
+    @objc public func createUserInfo(_ vc: ZTableNoLoadingViewConntroller, forms: [[String: String]] ,tag: String ,succ: @escaping () -> ()) {
         
-        let modelSelect: ControlEvent<ZKeyValueBean>
-        
-        let itemSelect: ControlEvent<IndexPath>
-        
-        let completeTaps: Signal<Void>
-        
-        let tag: String
-        
-        let forms: [[String: String]]
-    }
-    struct WLOutput {
-        
-        let zip: Observable<(ZKeyValueBean,IndexPath)>
-        
-        let tableData: BehaviorRelay<[ZKeyValueBean]> = BehaviorRelay<[ZKeyValueBean]>(value: [])
-        
-        let completing: Driver<Void>
-        
-        var completed: Driver<WLBaseResult>
-    }
-    init(_ input: WLInput) {
-        
-        self.input = input
-        
-        let zip = Observable.zip(input.modelSelect,input.itemSelect)
-        
-        let completing: Driver<Void> = input.completeTaps.flatMap { Driver.just($0) }
-        
-        var output = WLOutput(zip: zip, completing: completing, completed: Driver<WLBaseResult>.just(WLBaseResult.empty))
-        
-        output.completed = input
-            .completeTaps
-            .withLatestFrom(output.tableData.asDriver())
-            .flatMapLatest {
-                
-                var arr: [[String: String]] = []
-                
-                for item in $0 {
+        if let completeItem = vc.tableView.tableFooterView?.viewWithTag(301) as? UIButton {
+            
+            let input = ZAMapViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZKeyValueBean.self),
+                                               itemSelect: vc.tableView.rx.itemSelected,
+                                               completeTaps: completeItem.rx.tap.asSignal(),
+                                               tag: tag,
+                                               forms: forms)
+            
+            viewModel = ZAMapViewModel(input)
+            
+            let dataSource = RxTableViewSectionedReloadDataSource<Section>(
+                configureCell: { ds, tv, ip, item in return vc.configTableViewCell(item, for: ip)})
+            
+            viewModel
+                .output
+                .tableData
+                .asDriver()
+                .map({ [Section(model: (), items: $0)]  })
+                .drive(vc.tableView.rx.items(dataSource: dataSource))
+                .disposed(by: disposed)
+            
+            self.dataSource = dataSource
+            
+            viewModel
+                .output
+                .zip
+                .subscribe(onNext: {(type,ip) in
                     
-                    var res: [String: String] = [:]
+                    vc.tableView.deselectRow(at: ip, animated: true)
                     
-                    res.updateValue(item.type, forKey: "type")
+                    vc.tableViewSelectData(type, for: ip)
                     
-                    res.updateValue(item.value, forKey: "value")
+                })
+                .disposed(by: disposed)
+            
+            viewModel
+                .output
+                .completing
+                .drive(onNext: { (result) in
                     
-                    if item.value.isEmpty {
+                    ZHudUtil.show(withStatus: "发布订单中.....")
+                })
+                .disposed(by: disposed)
+            
+            viewModel
+                .output
+                .completed
+                .drive(onNext: { [weak self](result) in
+                    
+                    guard let `self` = self else { return }
+                    ZHudUtil.pop()
+                    
+                    switch result {
+                    case .operation:
                         
-                        return Driver.just(WLBaseResult.failed(item.place))
+                        ZHudUtil.showInfo("发布成功!")
+                        
+                        self.viewModel.clearJson()
+                        
+                    case .failed(let msg):
+                        
+                        ZHudUtil.showInfo(msg)
+                        
+                    default: break
+                        
                     }
-                    
-                    arr += [res]
-                }
-                
-                return onUserDictResp(ZUserApi.publish(input.tag, content: WLJsonCast.cast(argu: arr)))
-                    .mapObject(type: ZCircleBean.self)
-                    .map({ WLBaseResult.operation($0) })
-                    .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
+                })
+                .disposed(by: disposed)
+            vc
+                .tableView
+                .rx
+                .setDelegate(self)
+                .disposed(by: disposed)
         }
+    }
+}
+extension ZAMapBridge: UITableViewDelegate {
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        for item in input.forms {
-
-            let res = ZKeyValueBean(JSON: item)
-
-            output.tableData.accept( output.tableData.value + [res!])
-        }
+        guard let _ = dataSource else { return 0}
         
-        self.output = output
+        return 44
     }
 }
