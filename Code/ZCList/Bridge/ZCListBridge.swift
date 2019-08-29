@@ -17,11 +17,11 @@ import ZNoti
 @objc (ZCListBridge)
 public final class ZCListBridge: ZBaseBridge {
     
-    typealias Section = ZAnimationSetionModel<ZCircleBean>
+    typealias Section = ZAnimationSetionModel<ZCommodityBean>
     
     var dataSource: RxCollectionViewSectionedAnimatedDataSource<Section>!
     
-    var viewModel: ZTListViewModel!
+    var viewModel: ZCListViewModel!
     
     weak var vc: ZCollectionLoadingViewController!
 }
@@ -31,14 +31,14 @@ extension ZCListBridge {
         
         self.vc = vc
         
-        let input = ZTListViewModel.WLInput(isMy: isMy,
-                                            modelSelect: vc.collectionView.rx.modelSelected(ZCircleBean.self),
+        let input = ZCListViewModel.WLInput(isMy: isMy,
+                                            modelSelect: vc.collectionView.rx.modelSelected(ZCommodityBean.self),
                                             itemSelect: vc.collectionView.rx.itemSelected,
                                             headerRefresh: vc.collectionView.mj_header.rx.refreshing.asDriver(),
                                             footerRefresh: vc.collectionView.mj_footer.rx.refreshing.asDriver(),
                                             tag: tag)
         
-        viewModel = ZTListViewModel(input, disposed: disposed)
+        viewModel = ZCListViewModel(input, disposed: disposed)
         
         let dataSource = RxCollectionViewSectionedAnimatedDataSource<Section>(
             animationConfiguration: AnimationConfiguration(insertAnimation: .fade, reloadAnimation: .fade, deleteAnimation: .left),
@@ -103,6 +103,5 @@ extension ZCListBridge {
             .footerHidden
             .bind(to: vc.collectionView.mj_footer.rx.isHidden)
             .disposed(by: disposed)
-        
     }
 }

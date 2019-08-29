@@ -16,6 +16,7 @@ import WLBaseResult
 import ZBean
 import ZRealReq
 import ZApi
+import CoreLocation
 
 struct ZAMapViewModel: WLBaseViewModel {
     
@@ -34,6 +35,8 @@ struct ZAMapViewModel: WLBaseViewModel {
         let tag: String
         
         let forms: [[String: String]]
+        
+        let location: BehaviorRelay<CLLocation>
     }
     struct WLOutput {
         
@@ -55,14 +58,16 @@ struct ZAMapViewModel: WLBaseViewModel {
         
         var output = WLOutput(zip: zip, completing: completing, completed: Driver<WLBaseResult>.just(WLBaseResult.empty))
         
+        let combine = Driver.combineLatest(output.tableData.asDriver(), input.location.asDriver())
+        
         output.completed = input
             .completeTaps
-            .withLatestFrom(output.tableData.asDriver())
+            .withLatestFrom(combine)
             .flatMapLatest {
                 
                 var arr: [[String: String]] = []
                 
-                for item in $0 {
+                for item in $0.0 {
                     
                     var res: [String: String] = [:]
                     
@@ -77,6 +82,10 @@ struct ZAMapViewModel: WLBaseViewModel {
                     
                     arr += [res]
                 }
+                
+                arr += [["lat":"\($0.1.coordinate.latitude)"]]
+                
+                arr += [["lng":"\($0.1.coordinate.longitude)"]]
                 
                 return onUserDictResp(ZUserApi.publish(input.tag, content: WLJsonCast.cast(argu: arr)))
                     .mapObject(type: ZCircleBean.self)

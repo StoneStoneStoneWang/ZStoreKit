@@ -12,6 +12,10 @@ import ZCocoa
 import RxDataSources
 import ZTable
 import ZHud
+import RxCocoa
+import RxSwift
+import CoreLocation
+import ZNoti
 
 @objc (ZAMapBridge)
 public final class ZAMapBridge: ZBaseBridge {
@@ -21,6 +25,8 @@ public final class ZAMapBridge: ZBaseBridge {
     var dataSource: RxTableViewSectionedReloadDataSource<Section>!
     
     var viewModel: ZAMapViewModel!
+    
+    var location: BehaviorRelay<CLLocation> = BehaviorRelay<CLLocation>(value: CLLocation(latitude: 39, longitude: 106))
 }
 
 extension ZAMapBridge {
@@ -33,7 +39,8 @@ extension ZAMapBridge {
                                                itemSelect: vc.tableView.rx.itemSelected,
                                                completeTaps: completeItem.rx.tap.asSignal(),
                                                tag: tag,
-                                               forms: forms)
+                                               forms: forms,
+                                               location: location)
             
             viewModel = ZAMapViewModel(input)
             
@@ -80,11 +87,13 @@ extension ZAMapBridge {
                     ZHudUtil.pop()
                     
                     switch result {
-                    case .operation:
+                    case .operation(let circle):
                         
                         ZHudUtil.showInfo("发布成功!")
                         
                         self.viewModel.clearJson()
+                        
+                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiCirclePublishSucc), andValue: circle.toJSON(), andFrom: vc)
                         
                     case .failed(let msg):
                         
@@ -104,6 +113,11 @@ extension ZAMapBridge {
     }
 }
 extension ZAMapBridge: UITableViewDelegate {
+    
+    @objc public func updateLocation(_ location: CLLocation) {
+        
+        self.location.accept(location)
+    }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
