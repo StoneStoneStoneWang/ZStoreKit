@@ -11,7 +11,7 @@ import ZCollection
 import RxCocoa
 import RxSwift
 import RxDataSources
-import WLBaseTableView
+import ZCocoa
 import WLToolsKit
 import ZCocoa
 import ZNoti

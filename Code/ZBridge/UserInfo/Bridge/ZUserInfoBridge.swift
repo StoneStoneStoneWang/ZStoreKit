@@ -14,7 +14,7 @@ import RxCocoa
 import ZCache
 import RxSwift
 import RxDataSources
-import WLBaseTableView
+import ZCocoa
 import ZRealReq
 import ZUpload
 

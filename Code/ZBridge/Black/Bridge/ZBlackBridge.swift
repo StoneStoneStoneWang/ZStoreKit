@@ -9,7 +9,7 @@
 import Foundation
 import ZTable
 import RxDataSources
-import WLBaseTableView
+import ZCocoa
 import ZBean
 import ZHud
 import ZNoti

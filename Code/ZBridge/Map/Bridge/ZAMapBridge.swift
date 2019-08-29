@@ -8,7 +8,7 @@
 
 import Foundation
 import ZBean
-import WLBaseTableView
+import ZCocoa
 import RxDataSources
 import ZTable
 import ZHud

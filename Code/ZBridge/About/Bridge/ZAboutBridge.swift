@@ -9,12 +9,12 @@
 import Foundation
 import ZTable
 import RxDataSources
-import WLBaseTableView
+import ZCocoa
 
 @objc (ZAboutBridge)
 public final class ZAboutBridge: ZBaseBridge {
     
-    typealias Section = WLSectionModel<(), ZAboutType>
+    typealias Section = SectionModel<(), ZAboutType>
     
     var dataSource: RxTableViewSectionedReloadDataSource<Section>!
     
