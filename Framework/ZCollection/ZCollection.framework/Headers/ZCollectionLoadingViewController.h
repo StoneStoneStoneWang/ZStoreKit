@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)collectionViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip ;
 
+- (void)collectionEmptyShow;
+
+- (void)collectionEmptyHidden;
+
 @end
 
 NS_ASSUME_NONNULL_END
