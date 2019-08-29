@@ -72,7 +72,7 @@ extension ZCListBridge {
                 case .empty:
                     vc.loadingStatus = .succ
                     
-                //                    vc.collectionViewEmptyShow()
+                    vc.collectionEmptyShow()
                 default:
                     break
                 }
@@ -93,7 +93,7 @@ extension ZCListBridge {
             .zip
             .subscribe(onNext: { (type,ip) in
                 
-                ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: isMy ? ZNotiCircleClick : ZNotiMyCircle), andValue: type.toJSON(), andFrom: vc)
+                ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: isMy ? ZNotiCircleItemClick : ZNotiMyCircleItemClick), andValue: type.toJSON(), andFrom: vc)
                 
             })
             .disposed(by: disposed)
@@ -106,13 +106,3 @@ extension ZCListBridge {
         
     }
 }
-
-//extension ZCListBridge: UIcollectionViewDelegate {
-//
-//    public func collectionView(_ collectionView: UIcollectionView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        guard let datasource = dataSource else { return 0}
-//
-//        return vc.caculate(forCell: datasource[indexPath], for: indexPath)
-//    }
-//}
