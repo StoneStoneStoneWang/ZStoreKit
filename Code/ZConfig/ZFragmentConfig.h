@@ -5,6 +5,23 @@
 //  Created by three stone 王 on 2019/8/25.
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
+
+#pragma mark ---- 类型App
+
+#define ZAppFormCircle 0 // 圈子类型
+
+#define ZAppFormStore 0 // 商城类型
+
+#define ZAppFormMap 1 // 地图类型
+
+#define ZAppKey ""
+
+#define ZWXKey ""
+
+#define ZUMKey ""
+
+#define ZWXSecret ""
+
 #pragma mark ---- 主色值
 #define ZFragmentColor "#333333"
 

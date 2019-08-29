@@ -28,6 +28,15 @@ Pod::Spec.new do |spec|
     oss.vendored_frameworks = 'Framework/ZAli/OSS/ZOSS.framework'
     oss.dependency 'AliyunOSSiOS'
   end
+  spec.subspec 'AMap' do |amap|
+    
+    amap.vendored_frameworks = 'Framework/ZAli/AMap/ZAMap.framework'
+    amap.dependency 'AliyunOSSiOS'
+    amap.dependency 'AMapLocation-NO-IDFA'
+    amap.dependency 'AMap2DMap-NO-IDFA'
+    amap.dependency 'AMapSearch-NO-IDFA'
+    amap.dependency 'SToolsKit'
+  end
   
 end
 

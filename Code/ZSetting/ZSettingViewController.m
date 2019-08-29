@@ -9,12 +9,21 @@
 #import "ZSettingViewController.h"
 #import "ZSettingTableViewCell.h"
 @import ZBridge;
+@import SToolsKit;
+
 @interface ZSettingViewController()
 
 @property (nonatomic ,strong) ZSettingBridge *bridge;
 @end
 
 @implementation ZSettingViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor]];
+    
+}
 
 - (void)configOwnSubViews {
     [super configOwnSubViews];

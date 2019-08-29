@@ -24,7 +24,7 @@ extension ZModifyPwdBridge {
     
     @objc public func configViewModel(_ vc: ZBaseViewController) {
         
-        if let oldpassword = vc.view.viewWithTag(201) as? UITextField ,let password = vc.view.viewWithTag(202) as? UITextField ,let passwordAgain = vc.view.viewWithTag(202) as? UITextField ,let completeItem = vc.view.viewWithTag(203) as? UIButton {
+        if let oldpassword = vc.view.viewWithTag(201) as? UITextField ,let password = vc.view.viewWithTag(202) as? UITextField ,let passwordAgain = vc.view.viewWithTag(203) as? UITextField ,let completeItem = vc.view.viewWithTag(204) as? UIButton {
             
             let input = ZModifyPwdViewModel.WLInput(oldpassword: oldpassword.rx.text.orEmpty.asDriver(),
                                                     password: password.rx.text.orEmpty.asDriver() ,

@@ -27,7 +27,7 @@ extension ZLoginBridge {
         
         if let phone = vc.view.viewWithTag(201) as? UITextField ,let password = vc.view.viewWithTag(202) as? UITextField ,let loginItem = vc.view.viewWithTag(203) as? UIButton
             , let swiftLoginItem = vc.view.viewWithTag(204) as? UIButton ,let forgetItem = vc.view.viewWithTag(205) as? UIButton , let passwordItem = password.rightView
-            as? UIButton ,let backItem = vc.navigationItem.leftBarButtonItem {
+            as? UIButton ,let backItem = vc.navigationItem.leftBarButtonItem?.customView as? UIButton {
             
             let input = ZLoginViewModel.WLInput(username: phone.rx.text.orEmpty.asDriver(),
                                                 password: password.rx.text.orEmpty.asDriver() ,

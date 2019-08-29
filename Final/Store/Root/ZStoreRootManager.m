@@ -118,7 +118,13 @@ static ZStoreRootManager *manager = nil;
             
             [[ZAccountCache shared] wl_queryAccount];
             
-            appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZProfileViewController new]];
+            if ([ZAccountCache shared] .isLogin) {
+                
+                appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZProfileViewController new]];
+            } else {
+                
+                appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZLoginViewController new]];
+            }
         }
         
         [appdelegate.window makeKeyAndVisible];
@@ -161,7 +167,9 @@ static ZStoreRootManager *manager = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnLogin:) name:ZNotiUnLogin object:nil ];
     
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyCircleTap:) name:ZNotiMyCircle object:nil ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoModifyPwdTap:) name:ZNotiGotoModifyPwd object:nil ];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLogoutTap:) name:ZNotiLogout object:nil ];
     //
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyOrderTap:) name:ZNotiMyOrder object:nil ];
     //
@@ -211,10 +219,9 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-        UIViewController *from = userInfo[@"from"];
+        ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZProfileViewController new]] ;
         
-        [from dismissViewControllerAnimated:true completion:nil];
-        
+        [UIApplication sharedApplication].delegate.window.rootViewController = navi;
     }
 }
 - (void)onGotoRegTap:(NSNotification *)noti {
@@ -270,6 +277,7 @@ static ZStoreRootManager *manager = nil;
         [from.navigationController pushViewController:findPwd animated:true];
     }
 }
+
 - (void)onGotoModifyPwdTap:(NSNotification *)noti {
     
     NSDictionary *userInfo = noti.userInfo;
@@ -399,6 +407,36 @@ static ZStoreRootManager *manager = nil;
                 ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZLoginViewController new]] ;
                 
                 [from presentViewController:navi animated:true completion:nil];
+            }
+        }];
+    }
+}
+- (void)onLogoutTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from  jxt_showAlertWithTitle:@"退出登录?" message:@"退出登陆不清楚缓存信息" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+            
+            alertMaker.
+            addActionCancelTitle(@"取消").
+            addActionDefaultTitle(@"确定");
+            
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+            
+            if ([action.title isEqualToString:@"取消"]) {
+                
+            }
+            else if ([action.title isEqualToString:@"确定"]) {
+                
+                ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZLoginViewController new]] ;
+                
+                [UIApplication sharedApplication].delegate.window.rootViewController = navi;
+                
+                [[ZAccountCache shared] clearAccount];
             }
         }];
     }

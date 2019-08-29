@@ -21,6 +21,8 @@
     [super configOwnSubViews];
     
     [self.tableView registerClass:[ZFocusTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {

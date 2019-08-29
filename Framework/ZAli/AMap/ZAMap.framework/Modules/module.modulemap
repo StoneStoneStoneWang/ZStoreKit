@@ -1,0 +1,6 @@
+framework module ZAMap {
+  umbrella header "ZAMap.h"
+
+  export *
+  module * { export * }
+}

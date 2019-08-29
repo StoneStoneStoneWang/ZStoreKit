@@ -73,10 +73,11 @@ extension ZSettingBridge {
                     
                     if ZAccountCache.default.isLogin() {
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiUnLogin), andValue: nil, andFrom: vc)
+                        ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiGotoBlack), andValue: nil, andFrom: vc)
+                        
                     } else {
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiGotoBlack), andValue: nil, andFrom: vc)
+                        ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiUnLogin), andValue: nil, andFrom: vc)
                     }
                     
                 default:
