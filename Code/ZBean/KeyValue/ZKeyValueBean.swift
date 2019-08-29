@@ -30,9 +30,10 @@ public class ZKeyValueBean: NSObject,Mappable ,IdentifiableType {
     
     public override init() { }
     
-    var type:String = ""
+    @objc public var type:String = ""
     
-    var value: String = ""
+    @objc public var value: String = ""
     
-    var img: UIImage?
+    @objc public var img: UIImage?
 }
+

@@ -14,8 +14,8 @@ import UIKit
 
 @objc (ZCircleBean)
 public class ZCircleBean: NSObject, Mappable , IdentifiableType {
-   
-    public var identity: String = ""
+    
+    @objc public var identity: String = ""
     
     public typealias Identity = String
     
@@ -46,30 +46,30 @@ public class ZCircleBean: NSObject, Mappable , IdentifiableType {
         encoded  <- map["encoded"]
     }
     
-    var projectId: String = ""
+    @objc public var projectId: String = ""
     
-    var encoded: String = ""
+    @objc public var encoded: String = ""
     
-    var intime: Int = Int.max
+    @objc public var intime: Int = Int.max
     
-    var content: String = ""
+    @objc public var content: String = ""
     
-    var isLaud: Bool = false
+    @objc public var isLaud: Bool = false
     
-    var countLaud: Int = Int.max
+    @objc public var countLaud: Int = Int.max
     
-    var tag: String = ""
+    @objc public var tag: String = ""
     
-    var users: ZUserBean!
+    @objc public var users: ZUserBean!
     
-    var countComment: Int = Int.max
+    @objc public var countComment: Int = Int.max
     
-    var contentMap: [ZKeyValueBean] {
+    @objc public var contentMap: [ZKeyValueBean] {
         
         let res = WLJsonCast.cast(argu: content) as! [[String: String]]
         
         return res.map({ ZKeyValueBean(JSON: $0)! })
     }
     
-    var videoImage: UIImage!
+    @objc public var videoImage: UIImage!
 }
