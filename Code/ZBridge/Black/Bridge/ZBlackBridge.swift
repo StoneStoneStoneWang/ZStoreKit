@@ -17,7 +17,7 @@ import ZNoti
 @objc (ZBlackBridge)
 public final class ZBlackBridge: ZBaseBridge {
     
-    typealias Section = MySection<ZBlackBean>
+    typealias Section = ZAnimationSetionModel<ZBlackBean>
     
     var dataSource: RxTableViewSectionedAnimatedDataSource<Section>!
     

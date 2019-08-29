@@ -17,7 +17,7 @@ import ZNoti
 @objc (ZTListBridge)
 public final class ZTListBridge: ZBaseBridge {
     
-    typealias Section = MySection<ZCircleBean>
+    typealias Section = ZAnimationSetionModel<ZCircleBean>
     
     var dataSource: RxTableViewSectionedAnimatedDataSource<Section>!
     

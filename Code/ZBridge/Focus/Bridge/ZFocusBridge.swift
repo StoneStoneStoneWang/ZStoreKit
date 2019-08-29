@@ -17,7 +17,7 @@ import ZNoti
 @objc (ZFocusBridge)
 public final class ZFocusBridge: ZBaseBridge {
     
-    typealias Section = MySection<ZFocusBean>
+    typealias Section = ZAnimationSetionModel<ZFocusBean>
     
     var dataSource: RxTableViewSectionedAnimatedDataSource<Section>!
     

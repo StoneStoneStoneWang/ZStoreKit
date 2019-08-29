@@ -21,7 +21,7 @@ public final class ZWelcomeBridge: ZBaseBridge {
     
     public var viewModel: ZWelcomViewModel!
     
-    typealias Section = WLSectionModel<(), String>
+    typealias Section = ZSectionModel<(), String>
     
     var dataSource: RxCollectionViewSectionedReloadDataSource<Section>!
 }

@@ -46,7 +46,7 @@ extension Reactive where Base: ZTableHeaderView {
 @objc (ZProfileBridge)
 public final class ZProfileBridge: ZBaseBridge {
     
-    typealias Section = WLSectionModel<(), ZProfileType>
+    typealias Section = ZSectionModel<(), ZProfileType>
     
     var dataSource: RxTableViewSectionedReloadDataSource<Section>!
     

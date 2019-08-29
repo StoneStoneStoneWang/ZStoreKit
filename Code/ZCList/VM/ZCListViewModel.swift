@@ -26,7 +26,7 @@ struct ZCListViewModel: WLBaseViewModel {
         
         let isMy: Bool
         
-        let modelSelect: ControlEvent<ZCircleBean>
+        let modelSelect: ControlEvent<ZCommodityBean>
         
         let itemSelect: ControlEvent<IndexPath>
         
@@ -41,9 +41,9 @@ struct ZCListViewModel: WLBaseViewModel {
     
     struct WLOutput {
         
-        let zip: Observable<(ZCircleBean,IndexPath)>
+        let zip: Observable<(ZCommodityBean,IndexPath)>
         
-        let tableData: BehaviorRelay<[ZCircleBean]> = BehaviorRelay<[ZCircleBean]>(value: [])
+        let tableData: BehaviorRelay<[ZCommodityBean]> = BehaviorRelay<[ZCommodityBean]>(value: [])
         
         let endHeaderRefreshing: Driver<WLBaseResult>
         
@@ -62,7 +62,7 @@ struct ZCListViewModel: WLBaseViewModel {
             .flatMapLatest({_ in
                 
                 return onUserArrayResp(input.isMy ? ZUserApi.fetchMyList(input.tag, page: 1) : ZUserApi.fetchList(input.tag, page: 1))
-                    .mapArray(type: ZCircleBean.self)
+                    .mapArray(type: ZCommodityBean.self)
                     .map({ return $0.count > 0 ? WLBaseResult.fetchList($0) : WLBaseResult.empty })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
             })
@@ -74,7 +74,7 @@ struct ZCListViewModel: WLBaseViewModel {
             .flatMapLatest({_ in
                 
                 return onUserArrayResp(input.isMy ? ZUserApi.fetchMyList(input.tag, page: input.page.value) : ZUserApi.fetchList(input.tag, page: input.page.value))
-                    .mapArray(type: ZCircleBean.self)
+                    .mapArray(type: ZCommodityBean.self)
                     .map({ return $0.count > 0 ? WLBaseResult.fetchList($0) : WLBaseResult.empty })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
             })
@@ -109,7 +109,7 @@ struct ZCListViewModel: WLBaseViewModel {
                         output.footerHidden.accept(true)
                     }
                     
-                    output.tableData.accept(items as! [ZCircleBean])
+                    output.tableData.accept(items as! [ZCommodityBean])
                     
                 case .empty: output.tableData.accept([])
                 default: break
@@ -146,7 +146,7 @@ struct ZCListViewModel: WLBaseViewModel {
                     
                     var values = output.tableData.value
                     
-                    values += items as! [ZCircleBean]
+                    values += items as! [ZCommodityBean]
                     
                     output.tableData.accept(values )
                 default: break

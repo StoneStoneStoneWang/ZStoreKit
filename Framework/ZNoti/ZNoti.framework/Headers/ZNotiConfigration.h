@@ -73,7 +73,9 @@ FOUNDATION_EXPORT NSString * const ZNotiRemoveFocus;
 
 #pragma mark ---- 圈子
 
-FOUNDATION_EXPORT NSString * const ZNotiCircleClick;
+FOUNDATION_EXPORT NSString * const ZNotiCircleItemClick;
+
+FOUNDATION_EXPORT NSString * const ZNotiMyCircleItemClick;
 
 FOUNDATION_EXPORT NSString * const ZNotiCircleShare;
 

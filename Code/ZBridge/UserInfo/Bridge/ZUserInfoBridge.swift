@@ -24,7 +24,7 @@ public typealias ZUserInfoOperateSucc = () -> ()
 @objc (ZUserInfoBridge)
 public final class ZUserInfoBridge: ZBaseBridge {
     
-    typealias Section = WLSectionModel<(), ZUserInfoBean>
+    typealias Section = ZSectionModel<(), ZUserInfoBean>
     
     var dataSource: RxTableViewSectionedReloadDataSource<Section>!
     

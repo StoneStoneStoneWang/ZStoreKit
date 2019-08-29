@@ -16,7 +16,7 @@ import ZCache
 @objc (ZSettingBridge)
 public final class ZSettingBridge: ZBaseBridge {
     
-    typealias Section = WLSectionModel<(), ZSettingType>
+    typealias Section = ZSectionModel<(), ZSettingType>
     
     var dataSource: RxTableViewSectionedReloadDataSource<Section>!
     

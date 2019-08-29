@@ -14,7 +14,7 @@ import ZCocoa
 @objc (ZAboutBridge)
 public final class ZAboutBridge: ZBaseBridge {
     
-    typealias Section = SectionModel<(), ZAboutType>
+    typealias Section = ZSectionModel<(), ZAboutType>
     
     var dataSource: RxTableViewSectionedReloadDataSource<Section>!
     

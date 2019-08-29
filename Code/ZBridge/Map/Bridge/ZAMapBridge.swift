@@ -16,7 +16,7 @@ import ZHud
 @objc (ZAMapBridge)
 public final class ZAMapBridge: ZBaseBridge {
     
-    typealias Section = WLSectionModel<(), ZKeyValueBean>
+    typealias Section = ZSectionModel<(), ZKeyValueBean>
     
     var dataSource: RxTableViewSectionedReloadDataSource<Section>!
     
