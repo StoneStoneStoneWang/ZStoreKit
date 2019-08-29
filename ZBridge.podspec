@@ -344,11 +344,11 @@ Pod::Spec.new do |spec|
   end
   
   # 列表
-  spec.subspec 'ZTList' do |tList|
+  spec.subspec 'TList' do |tList|
     
     tList.subspec 'VM' do |vm|
       
-      vm.source_files = "Code/ZBridge/ZTList/VM/*.{swift}"
+      vm.source_files = "Code/ZBridge/TList/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZRealReq'
@@ -358,8 +358,8 @@ Pod::Spec.new do |spec|
     end
     
     tList.subspec 'Bridge' do |bridge|
-      bridge.source_files = "Code/ZBridge/ZTList/Bridge/*.{swift}"
-      bridge.dependency 'ZBridge/ZTList/VM'
+      bridge.source_files = "Code/ZBridge/TList/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/TList/VM'
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
@@ -368,11 +368,11 @@ Pod::Spec.new do |spec|
   end
   
   # 列表
-  spec.subspec 'ZCList' do |cList|
+  spec.subspec 'CList' do |cList|
     
     cList.subspec 'VM' do |vm|
       
-      vm.source_files = "Code/ZBridge/ZCList/VM/*.{swift}"
+      vm.source_files = "Code/ZBridge/CList/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZRealReq'
@@ -382,8 +382,8 @@ Pod::Spec.new do |spec|
     end
     
     cList.subspec 'Bridge' do |bridge|
-      bridge.source_files = "Code/ZBridge/ZCList/Bridge/*.{swift}"
-      bridge.dependency 'ZBridge/ZTList/VM'
+      bridge.source_files = "Code/ZBridge/CList/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/CList/VM'
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZCollection'

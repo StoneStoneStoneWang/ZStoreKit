@@ -11,6 +11,7 @@
 
 @interface ZTableListViewController ()
 
+//@property (nonatomic ,strong) 
 @end
 
 @implementation ZTableListViewController
