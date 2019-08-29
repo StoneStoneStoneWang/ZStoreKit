@@ -1,11 +1,11 @@
 
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZAli"
+  spec.name         = "ZDatePicker"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 阿里封装."
+  spec.summary      = "A Lib For 时间选择器封装."
   spec.description  = <<-DESC
-  ZAli一个阿里的封装
+  ZDatePicker一个时间选择器封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -24,20 +24,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.subspec 'OSS' do |oss|
-    oss.vendored_frameworks = 'Framework/ZAli/OSS/ZOSS.framework'
-    oss.dependency 'AliyunOSSiOS'
-  end
-  spec.subspec 'AMap' do |amap|
-    
-    amap.vendored_frameworks = 'Framework/ZAli/AMap/ZAMap.framework'
-    amap.dependency 'AliyunOSSiOS'
-    amap.dependency 'AMapLocation-NO-IDFA'
-    amap.dependency 'AMap2DMap-NO-IDFA'
-    amap.dependency 'AMapSearch-NO-IDFA'
-    amap.dependency 'SToolsKit'
-  end
-  
+  spec.source_files = "Code/ZPicker/*.{swift}"
+  spec.dependency 'AliyunOSSiOS'
+
 end
 
 

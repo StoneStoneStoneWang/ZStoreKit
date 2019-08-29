@@ -318,6 +318,7 @@
     self.bridge = [ZFindPwdBridge new];
     
     [self.bridge configViewModel:self];
+    
 }
 
 - (BOOL)canPanResponse {

@@ -26,6 +26,8 @@ public class ZKeyValueBean: NSObject,Mappable ,IdentifiableType {
         type <- map["type"]
         
         value <- map["value"]
+        
+        place <- map["place"]
     }
     
     public override init() { }

@@ -14,6 +14,32 @@
 
 #define ZAppFormMap 1 // 地图类型
 
+#define ZAppFormMapOne 1
+
+#define ZAppFormMapTwo 0
+
+#if ZAppFormMapOne
+
+#define ZKeyValues @[\
+@{@"type": @"时间",@"value": @"",@"place": @"请选择上门维修时间"} ,\
+@{@"type": @"手机号",@"value": @"",@"place": @"输入联系人手机号"} ,\
+@{@"type": @"门牌号",@"value": @"",@"place": @"输入门牌号"} ,\
+@{@"type": @"备注",@"value": @"",@"place": @"请输入备注信息"} ,\
+]
+
+#define ZLocationIcon "定位"
+
+#define ZAnnotationIcon "大头针"
+
+#define ZLightCircle "光圈"
+
+#elif ZAppFormMapTwo
+
+
+#endif
+
+
+
 #define ZAppKey ""
 
 #define ZWXKey ""
