@@ -33,6 +33,8 @@
 
 #define ZLightCircle "光圈"
 
+#define ZNabla "倒三角"
+
 #elif ZAppFormMapTwo
 
 
