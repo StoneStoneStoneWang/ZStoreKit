@@ -30,6 +30,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'Masonry'
   spec.dependency 'ZAli/AMap'
   spec.dependency 'ZDatePicker'
-  spec.dependency 'WLComponentView/TextField'
+  spec.dependency 'ZTextField'
   spec.dependency 'SDWebImage'
 end
+
