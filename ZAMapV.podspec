@@ -23,7 +23,7 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZAMapVV/*.{h,m}"
+  spec.source_files = "Code/ZAMapV/*.{h,m}"
   spec.dependency 'ZConfig'
   spec.dependency 'ZBridge/ZAMap'
   spec.dependency 'ZTable'

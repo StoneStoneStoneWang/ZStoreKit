@@ -11,8 +11,8 @@
 #import "ZAMapHeaderView.h"
 #import "ZAMapTableViewCell.h"
 #import "ZFragmentConfig.h"
+#import <ZAMap/ZAMap.h>
 @import ZReq;
-@import ZAMap;
 @import ZBridge;
 @import ZNoti;
 @import SToolsKit;

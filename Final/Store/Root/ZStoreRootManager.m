@@ -26,7 +26,8 @@
 @import ZFocus;
 @import ZUserInfo;
 @import ZWechat;
-@import ZAMap;
+@import ZAMapV;
+#import
 @implementation WLMainBean
 
 + (instancetype)mainBeanWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
