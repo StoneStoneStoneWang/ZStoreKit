@@ -417,5 +417,9 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (BOOL)canPanResponse {
+    return true;
+}
+
 @end
 

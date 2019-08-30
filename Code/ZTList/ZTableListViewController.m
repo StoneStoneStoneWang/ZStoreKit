@@ -69,6 +69,9 @@
     [self.bridge createFocus:self isMy:false tag:self.tag];
 }
 
+- (BOOL)canPanResponse {
+    return true;
+}
 @end
 
 #endif

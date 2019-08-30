@@ -30,6 +30,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'Masonry'
   spec.dependency 'ZAli/AMap'
   spec.dependency 'ZDatePicker'
-  spec.dependency 'ZTextFeild'
+  spec.dependency 'ZTextField'
   
 end
