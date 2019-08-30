@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZAMapVV/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/ZAMapV'
+  spec.dependency 'ZBridge/ZAMap'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'ZAli/AMap'
