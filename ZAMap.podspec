@@ -31,4 +31,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZAli/AMap'
   spec.dependency 'ZDatePicker'
   spec.dependency 'WLComponentView/TextField'
+  
 end
