@@ -7,7 +7,7 @@
 //
 
 #import <ZTable/ZTable.h>
-
+#import "ZFragmentConfig.h"
 NS_ASSUME_NONNULL_BEGIN
 
 #if ZAppFormMap
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 #if ZAppFormMapOne
 @interface ZTableListViewController : ZTableLoadingViewController
 
++ (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag;
 
 @end
 #endif
