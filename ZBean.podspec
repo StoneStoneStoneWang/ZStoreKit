@@ -63,6 +63,10 @@ Pod::Spec.new do |spec|
     commodity.dependency 'ZBean/KeyValue'
     commodity.dependency 'WLToolsKit/JsonCast'
   end
+  spec.subspec 'Comment' do |comment|
+    comment.source_files = "Code/ZBean/Comment/*.{swift}"
+    comment.dependency 'ZBean/User'
+  end
   
   spec.subspec 'Area' do |area|
     area.source_files = "Code/ZBean/Area/*.{swift}"
