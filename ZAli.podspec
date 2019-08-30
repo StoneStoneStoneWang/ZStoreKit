@@ -24,21 +24,25 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-spec.subspec 'OSS' do |oss|
-oss.vendored_frameworks = 'Framework/ZAli/OSS/ZOSS.framework'
-oss.dependency 'AliyunOSSiOS'
-end
-spec.subspec 'AMap' do |amap|
-
-amap.vendored_frameworks = 'Framework/ZAli/AMap/ZAMap.framework'
-amap.dependency 'AliyunOSSiOS'
-amap.dependency 'AMapLocation-NO-IDFA'
-amap.dependency 'AMap2DMap-NO-IDFA'
-amap.dependency 'AMapSearch-NO-IDFA'
-amap.dependency 'SToolsKit'
-end
-
-
+  spec.subspec 'OSS' do |oss|
+    oss.vendored_frameworks = 'Framework/ZAli/OSS/ZOSS.framework'
+    oss.dependency 'AliyunOSSiOS'
+  end
+  spec.subspec 'AMap' do |amap|
+    
+    amap.vendored_frameworks = 'Framework/ZAli/AMap/ZAMap.framework'
+    amap.dependency 'AliyunOSSiOS'
+    amap.dependency 'AMapLocation-NO-IDFA'
+    amap.dependency 'AMap2DMap-NO-IDFA'
+    amap.dependency 'AMapSearch-NO-IDFA'
+    amap.dependency 'SToolsKit'
+    
+    amap.pod_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
+    
+    amap.user_target_xcconfig   = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
+  end
+  
+  
 end
 
 

@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZAMap"
+  spec.name         = "ZAMapV"
   spec.version      = "0.0.1"
   spec.summary      = "A Lib For 地图."
   spec.description  = <<-DESC
-  ZAMap是地图
+  ZAMapV是地图
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -23,9 +23,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZAMapV/*.{h,m}"
+  spec.source_files = "Code/ZAMapVV/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/ZAMap'
+  spec.dependency 'ZBridge/ZAMapV'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'ZAli/AMap'
