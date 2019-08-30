@@ -10,7 +10,6 @@
 @import SToolsKit;
 @import Masonry;
 @import SDWebImage;
-#if ZAppFormMap 
 
 #if ZAppFormMapOne
 
@@ -262,11 +261,6 @@
 
 
 @end
-#endif
-
-#else
-
-
 #endif
 
 

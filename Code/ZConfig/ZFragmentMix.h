@@ -7,10 +7,13 @@
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 
+#import "ZFragmentConfig.h"
 
 #if DEBUG
 
 #else
+
+#if ZAppFormMapOne
 
 #define ZAMapBunddleView n5kbxJhhFETy
 
@@ -25,6 +28,8 @@
 #define ZBlackTableViewCell JIx7oS9yAqr
 
 #define welcomeDelegate V59fgg5ZyFrJ
+
+#endif
 
 #define ZFocusTableViewCell UJYbPjSJyX
 

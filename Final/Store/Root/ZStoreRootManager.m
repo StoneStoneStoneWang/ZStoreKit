@@ -8,6 +8,8 @@
 
 #import "ZStoreRootManager.h"
 #import "ZNaviConfigImpl.h"
+#import "ZFragmentConfig.h"
+
 @import JXTAlertManager;
 @import ZNoti;
 @import ZSign;
@@ -26,8 +28,10 @@
 @import ZFocus;
 @import ZUserInfo;
 @import ZWechat;
-@import ZAMapV;
-#import
+@import ZAMap;
+
+#import <ZAMapV/ZAMapViewController.h>
+
 @implementation WLMainBean
 
 + (instancetype)mainBeanWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
@@ -106,6 +110,11 @@ static ZStoreRootManager *manager = nil;
     if (appdelegate) {
         
         [ZConfigure initWithAppKey:@"0e37c36a33b547fe9fd9d2a21dfa4479" domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeCircle];
+        
+#if ZAppFormMapOne
+        
+        [[ZAMapUtil shared] registerApiKey:@"5deb6638fec2c948724920c41a0a6bc0"];
+#endif
         //
         [ZNavigationController initWithConfig:[ZNaviConfigImpl new]];
         
@@ -118,14 +127,15 @@ static ZStoreRootManager *manager = nil;
         } else {
             
             [[ZAccountCache shared] wl_queryAccount];
-            
+#if ZAppFormMapOne
             if ([ZAccountCache shared] .isLogin) {
                 
-                appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZProfileViewController new]];
+                appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZAMapViewController new]];
             } else {
                 
                 appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZLoginViewController new]];
             }
+#endif
         }
         
         [appdelegate.window makeKeyAndVisible];
@@ -199,17 +209,15 @@ static ZStoreRootManager *manager = nil;
     [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"isFirstLogin"];
     
     if (userInfo && userInfo[@"from"]) {
-        
+#if ZAppFormMapOne
         UIViewController *from = userInfo[@"from"];
         
-        ZNavigationController *anvi = [[ZNavigationController alloc] initWithRootViewController:[ZProfileViewController new]];
-        
-        //        WLMainViewController *main = [WLMainViewController createCircleTab];
-        
+        ZNavigationController *anvi = [[ZNavigationController alloc] initWithRootViewController:[ZLoginViewController
+                                                                                                 new]];
         anvi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         
         [from presentViewController:anvi animated:true completion:nil];
-        
+#endif
     }
 }
 #pragma mark -- ZNotiGotoReg
@@ -220,11 +228,12 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-        ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZProfileViewController new]] ;
+        ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZAMapViewController new]] ;
         
         [UIApplication sharedApplication].delegate.window.rootViewController = navi;
     }
 }
+
 - (void)onGotoRegTap:(NSNotification *)noti {
     
     NSDictionary *userInfo = noti.userInfo;
@@ -349,25 +358,28 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-        
+#if ZAppFormMapOne
         UIViewController *from = userInfo[@"from"];
         
         ZBlackViewController *black = [ZBlackViewController new];
         
         [from.navigationController pushViewController:black animated:true];
+#endif
     }
 }
+
 - (void)onGotoFocusTap:(NSNotification *)noti {
     
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-        
+#if ZAppFormMapOne
         UIViewController *from = userInfo[@"from"];
         
         ZFocusViewController *focus = [ZFocusViewController new];
         
         [from.navigationController pushViewController:focus animated:true];
+#endif
     }
 }
 - (void)onGotoUserInfoTap:(NSNotification *)noti {
@@ -390,6 +402,11 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
+#if ZAppFormMapOne
+        
+        
+#else
+        
         UIViewController *from = userInfo[@"from"];
         
         [from  jxt_showAlertWithTitle:@"您的还未登录" message:@"点击确定前往登录" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
@@ -410,6 +427,7 @@ static ZStoreRootManager *manager = nil;
                 [from presentViewController:navi animated:true completion:nil];
             }
         }];
+#endif
     }
 }
 - (void)onLogoutTap:(NSNotification *)noti {

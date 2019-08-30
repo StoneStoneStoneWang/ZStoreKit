@@ -8,7 +8,6 @@
 
 #import "ZTableListViewController.h"
 #import "ZTableListTableViewCell.h"
-#if ZAppFormMap
 
 #if ZAppFormMapOne
 
@@ -73,12 +72,6 @@
     return true;
 }
 @end
-
-#endif
-
-
-#else
-
 
 #endif
 

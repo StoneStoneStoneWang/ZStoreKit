@@ -11,8 +11,6 @@
 @import ZBean;
 NS_ASSUME_NONNULL_BEGIN
 
-#if ZAppFormMap
-
 #if ZAppFormMapOne
 
 @interface ZTableListTableViewCell : ZBaseTableViewCell
@@ -22,15 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 #endif
 
-#else
-
-
-#endif
-
-//@interface ZTableListTableViewCell : ZBaseTableViewCell
-//
-//
-//@end
 
 
 

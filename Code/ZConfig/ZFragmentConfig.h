@@ -37,7 +37,10 @@
 
 #define ZCompleteItemTitle "保洁预约"
 
+#define ZAliMapKey ""
+
 #elif ZAppFormMapTwo
+
 
 #endif
 
