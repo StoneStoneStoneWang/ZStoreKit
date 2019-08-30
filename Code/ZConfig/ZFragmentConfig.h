@@ -35,6 +35,8 @@
 
 #define ZNabla "倒三角"
 
+#define ZCompleteItemTitle "保洁预约"
+
 #elif ZAppFormMapTwo
 
 

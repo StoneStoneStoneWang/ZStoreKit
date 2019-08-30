@@ -89,9 +89,9 @@
         
         [_completeItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
         
-        [_completeItem setTitle:@"发布" forState: UIControlStateNormal];
+        [_completeItem setTitle:@ZCompleteItemTitle forState: UIControlStateNormal];
         
-        [_completeItem setTitle:@"发布" forState: UIControlStateHighlighted];
+        [_completeItem setTitle:@ZCompleteItemTitle forState: UIControlStateHighlighted];
         
         [_completeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         

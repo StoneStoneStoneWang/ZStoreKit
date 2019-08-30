@@ -8,7 +8,7 @@
 
 #import "ZNickNameViewController.h"
 #import "ZFragmentConfig.h"
-@import WLComponentView;
+@import ZTextField;
 @import ZBridge;
 @import Masonry;
 @import SToolsKit;

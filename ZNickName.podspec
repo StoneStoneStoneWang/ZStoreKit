@@ -24,7 +24,7 @@ Pod::Spec.new do |spec|
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
   spec.source_files = "Code/ZNickName/*.{h,m}"
-  spec.dependency 'WLComponentView/TextFeild/NickName'
+  spec.dependency 'ZTextFeild'
   spec.dependency 'ZConfig'
   spec.dependency 'ZBridge/NickName'
   spec.dependency 'Masonry'

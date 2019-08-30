@@ -7,7 +7,7 @@
 //
 
 #import "ZAMapTableViewCell.h"
-@import WLComponentView;
+@import ZTextField;
 @import Masonry;
 
 @interface ZAMapTableViewCell () <UITextFieldDelegate>
