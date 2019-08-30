@@ -34,5 +34,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZSignature'
   spec.dependency 'WLToolsKit/Image'
   spec.dependency 'JXTAlertManager'
-  spec.dependency 'WLComponentView/Picker'
+  spec.dependency 'ZDatePicker'
 end
