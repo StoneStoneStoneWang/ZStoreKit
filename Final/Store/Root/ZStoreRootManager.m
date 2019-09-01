@@ -25,13 +25,20 @@
 @import ZAbout;
 @import ZSetting;
 @import ZBlack;
-@import ZFocus;
+
 @import ZUserInfo;
 @import ZWechat;
+
+@import SToolsKit;
+#if ZAppFormMapOne
+#import "ZHomeViewController.h"
+
 @import ZAMap;
+@import LGSideMenuController;
 
-#import <ZAMapV/ZAMapViewController.h>
+@import ZFocus;
 
+#endif
 @implementation WLMainBean
 
 + (instancetype)mainBeanWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
@@ -127,10 +134,25 @@ static ZStoreRootManager *manager = nil;
         } else {
             
             [[ZAccountCache shared] wl_queryAccount];
+            
 #if ZAppFormMapOne
+            
             if ([ZAccountCache shared] .isLogin) {
                 
-                appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZAMapViewController new]];
+                ZProfileViewController *drawer = [ZProfileViewController new];
+                
+                ZTNavigationController *center = [[ZTNavigationController alloc] initWithRootViewController:[ZHomeViewController new]];
+                
+                LGSideMenuController * sideMenu = [LGSideMenuController sideMenuControllerWithRootViewController:center leftViewController:drawer rightViewController:nil];
+                
+                sideMenu.leftViewWidth = KSSCREEN_WIDTH - 100;
+                
+                sideMenu.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+                
+                sideMenu.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders;
+                
+                appdelegate.window.rootViewController = sideMenu;
+                
             } else {
                 
                 appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZLoginViewController new]];
@@ -181,6 +203,7 @@ static ZStoreRootManager *manager = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoModifyPwdTap:) name:ZNotiGotoModifyPwd object:nil ];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLogoutTap:) name:ZNotiLogout object:nil ];
+    
     //
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyOrderTap:) name:ZNotiMyOrder object:nil ];
     //
@@ -188,7 +211,7 @@ static ZStoreRootManager *manager = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoAboutTap:) name:ZNotiAboutUs object:nil ];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoProtocolTap:) name:ZNotiPrivacy object:nil ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoPrivacyTap:) name:ZNotiPrivacy object:nil ];
     
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleClickTap:) name:ZNotiCircleClick object:nil ];
     //
@@ -228,9 +251,23 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-        ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZAMapViewController new]] ;
+#if ZAppFormMapOne
         
-        [UIApplication sharedApplication].delegate.window.rootViewController = navi;
+        ZProfileViewController *drawer = [ZProfileViewController new];
+        
+        ZTNavigationController *center = [[ZTNavigationController alloc] initWithRootViewController:[ZHomeViewController new]];
+        
+        LGSideMenuController * sideMenu = [LGSideMenuController sideMenuControllerWithRootViewController:center leftViewController:drawer rightViewController:nil];
+        
+        sideMenu.leftViewWidth = KSSCREEN_WIDTH - 100;;
+        
+        sideMenu.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+        
+        sideMenu.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders;
+        
+        [UIApplication sharedApplication].delegate.window.rootViewController = sideMenu;
+        
+#endif
     }
 }
 
@@ -266,13 +303,42 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
+#if ZAppFormMapOne
+        
         UIViewController *from = userInfo[@"from"];
+        
+        [from.sideMenuController hideLeftViewAnimated];
         
         ZPravicyViewController *pro = [ZPravicyViewController new];
         
         [from.navigationController pushViewController:pro animated:true];
+        
+#endif
     }
 }
+- (void)onGotoPrivacyTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if (userInfo && userInfo[@"from"]) {
+        
+#if ZAppFormMapOne
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from.sideMenuController hideLeftViewAnimated];
+        
+        ZPravicyViewController *pro = [ZPravicyViewController new];
+        
+        UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
+        
+        [navi pushViewController:pro animated:true];
+        
+#endif
+    }
+}
+
+
 
 - (void)onGotoFindPwdTap:(NSNotification *)noti {
     
@@ -330,12 +396,19 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
+#if ZAppFormMapOne
         
         UIViewController *from = userInfo[@"from"];
         
+        [from.sideMenuController hideLeftViewAnimated];
+        
         ZAboutViewController *about = [ZAboutViewController new];
         
-        [from.navigationController pushViewController:about animated:true];
+        UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
+        
+        [navi pushViewController:about animated:true];
+        
+#endif
     }
 }
 
@@ -345,11 +418,19 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
+#if ZAppFormMapOne
+        
         UIViewController *from = userInfo[@"from"];
+        
+        [from.sideMenuController hideLeftViewAnimated];
         
         ZSettingViewController *setting = [ZSettingViewController new];
         
-        [from.navigationController pushViewController:setting animated:true];
+        UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
+        
+        [navi pushViewController:setting animated:true];
+        
+#endif
     }
 }
 
@@ -374,7 +455,10 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
 #if ZAppFormMapOne
+        
         UIViewController *from = userInfo[@"from"];
+        
+        [from.sideMenuController hideLeftViewAnimated];
         
         ZFocusViewController *focus = [ZFocusViewController new];
         
@@ -387,12 +471,19 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
+#if ZAppFormMapOne
         
         UIViewController *from = userInfo[@"from"];
         
-        ZUserInfoViewController *userInfo = [ZUserInfoViewController new];
+        [from.sideMenuController hideLeftViewAnimated];
         
-        [from.navigationController pushViewController:userInfo animated:true];
+        ZUserInfoViewController *userInfoVC = [ZUserInfoViewController new];
+        
+        UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
+        
+        [navi pushViewController:userInfoVC animated:true];
+        
+#endif
     }
 }
 
@@ -430,6 +521,7 @@ static ZStoreRootManager *manager = nil;
 #endif
     }
 }
+
 - (void)onLogoutTap:(NSNotification *)noti {
     
     NSDictionary *userInfo = noti.userInfo;

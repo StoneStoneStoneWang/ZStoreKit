@@ -8,20 +8,14 @@
 
 #pragma mark ---- 类型App
 
-#define ZAppFormCircle 0 // 圈子类型
+#define ZAppFormGlobalOne 1 // 地图类型 含有抽屉
 
-#define ZAppFormStore 0 // 商城类型
+#define ZAppFormGlobalTwo 0
 
-#define ZAppFormMap 1 // 地图类型
-
-#define ZAppFormMapOne 1
-
-#define ZAppFormMapTwo 0
-
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
 
 #define ZKeyValues @[\
-@{@"type": @"时间",@"value": @"",@"place": @"请选择上门维修时间"} ,\
+@{@"type": @"时间",@"value": @"",@"place": @"请选择上门服务时间"} ,\
 @{@"type": @"手机号",@"value": @"",@"place": @"输入联系人手机号"} ,\
 @{@"type": @"详细地址",@"value": @"",@"place": @"输入门牌号"} ,\
 @{@"type": @"备注",@"value": @"",@"place": @"请输入备注信息"} ,\
@@ -37,21 +31,22 @@
 
 #define ZCompleteItemTitle "保洁预约"
 
-#define ZAliMapKey ""
+#define ZAliMapKey "1d08f272709f1dc107f6a08a734d3ef6"
 
-#elif ZAppFormMapTwo
+#define
+
+#elif ZAppFormGlobalTwo
 
 
 #endif
 
+#define ZAppKey "a795caab302149079f8966efc01fc74b"
 
-#define ZAppKey ""
+#define ZWXKey "wx6daf9371d9e7472a"
 
-#define ZWXKey ""
+#define ZUMKey "5d6b44c34ca357a97900029b"
 
-#define ZUMKey ""
-
-#define ZWXSecret ""
+#define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
 
 #pragma mark ---- 主色值
 #define ZFragmentColor "#333333"
