@@ -115,6 +115,7 @@ extension ZAMapBridge {
         }
     }
 }
+
 extension ZAMapBridge: UITableViewDelegate {
     
     @objc public func updateLocation(_ location: CLLocation) {

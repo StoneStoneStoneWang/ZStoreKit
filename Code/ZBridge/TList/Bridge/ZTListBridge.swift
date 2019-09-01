@@ -32,11 +32,11 @@ extension ZTListBridge {
         self.vc = vc
         
         let input = ZTListViewModel.WLInput(isMy: isMy,
-                                              modelSelect: vc.tableView.rx.modelSelected(ZCircleBean.self),
-                                              itemSelect: vc.tableView.rx.itemSelected,
-                                              headerRefresh: vc.tableView.mj_header.rx.refreshing.asDriver(),
-                                              footerRefresh: vc.tableView.mj_footer.rx.refreshing.asDriver(),
-                                              tag: tag)
+                                            modelSelect: vc.tableView.rx.modelSelected(ZCircleBean.self),
+                                            itemSelect: vc.tableView.rx.itemSelected,
+                                            headerRefresh: vc.tableView.mj_header.rx.refreshing.asDriver(),
+                                            footerRefresh: vc.tableView.mj_footer.rx.refreshing.asDriver(),
+                                            tag: tag)
         
         viewModel = ZTListViewModel(input, disposed: disposed)
         
@@ -187,5 +187,136 @@ extension ZTListBridge: UITableViewDelegate {
         }
         
         return [delete]
+    }
+}
+extension ZTListBridge {
+    
+    @objc public func addBlack(_ OUsEncoded: String,targetEncoded: String ,content: String ,succ: @escaping () -> () ) {
+        
+        ZHudUtil.show(withStatus: "添加黑名单中...")
+        
+        ZTListViewModel
+            .addBlack(OUsEncoded, targetEncoded: targetEncoded, content: content)
+            .drive(onNext: { (result) in
+                
+                ZHudUtil.pop()
+                
+                switch result {
+                case .ok(let msg):
+                    
+                    succ()
+                    
+                    ZHudUtil.showInfo(msg)
+                case .failed(let msg):
+                    
+                    ZHudUtil.showInfo(msg)
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposed)
+    }
+    @objc public func focus(_ uid: String ,encode: String ,isFocus: Bool ,succ: @escaping () -> () ) {
+        
+        ZHudUtil.show(withStatus: isFocus ? "取消关注中..." : "关注中...")
+        
+        ZTListViewModel
+            .focus(uid, encode: encode)
+            .drive(onNext: { (result) in
+                
+                ZHudUtil.pop()
+                
+                switch result {
+                case .ok(let msg):
+                    
+                    succ()
+                    
+                    ZHudUtil.showInfo(msg)
+                case .failed(let msg):
+                    
+                    ZHudUtil.showInfo(msg)
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposed)
+        
+    }
+    
+    @objc public func operation(_ encoded: String ,isLike: Bool ,status: String ,aMsg: String,succ: @escaping () -> () ) {
+        
+        ZHudUtil.show(withStatus: status)
+        
+        ZTListViewModel
+            .like(encoded, isLike: isLike)
+            .drive(onNext: { (result) in
+                
+                ZHudUtil.pop()
+                
+                switch result {
+                case .ok(_):
+                    
+                    succ()
+                    
+                    ZHudUtil.showInfo(aMsg)
+                case .failed(let msg):
+                    
+                    ZHudUtil.showInfo(msg)
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposed)
+    }
+    
+    @objc public func like(_ encoded: String ,isLike: Bool ,succ: @escaping () -> () ) {
+        
+        ZHudUtil.show(withStatus: isLike ? "取消点赞中..." : "点赞中...")
+        
+        ZTListViewModel
+            .like(encoded, isLike: isLike)
+            .drive(onNext: { (result) in
+                
+                ZHudUtil.pop()
+                
+                switch result {
+                case .ok(let msg):
+                    
+                    succ()
+                    
+                    ZHudUtil.showInfo(msg)
+                case .failed(let msg):
+                    
+                    ZHudUtil.showInfo(msg)
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposed)
+    }
+    
+    @objc public func removeMyCircle(_ encoded: String ,succ: @escaping () -> () )  {
+        
+        ZHudUtil.show(withStatus: "移除内容中...")
+        
+        ZTListViewModel.removeMyCircle(encoded)
+            .drive(onNext: { (result) in
+                
+                ZHudUtil.pop()
+                
+                switch result {
+                case .ok(let msg):
+                    
+                    succ()
+                    
+                    ZHudUtil.showInfo(msg)
+                case .failed(let msg):
+                    
+                    ZHudUtil.showInfo(msg)
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposed)
     }
 }

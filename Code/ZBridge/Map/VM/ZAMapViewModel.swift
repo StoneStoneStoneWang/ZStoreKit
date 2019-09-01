@@ -73,9 +73,7 @@ struct ZAMapViewModel: WLBaseViewModel {
                     
                     var res: [String: String] = [:]
                     
-                    res.updateValue(item.type, forKey: "type")
-                    
-                    res.updateValue(item.value, forKey: "value")
+                    res.updateValue("txt", forKey: "\(item.type):\(item.value)")
                     
                     if item.value.isEmpty {
                         
@@ -85,11 +83,11 @@ struct ZAMapViewModel: WLBaseViewModel {
                     arr += [res]
                 }
                 
-                arr += [["lat":"\($0.1.coordinate.latitude)"]]
+                arr += [["txt":"lat:\($0.1.coordinate.latitude)"]]
                 
-                arr += [["lng":"\($0.1.coordinate.longitude)"]]
+                arr += [["txt":"lng:\($0.1.coordinate.longitude)"]]
                 
-                arr += [["address": input.locAddress.value]]
+                arr += [["txt": "address:\(input.locAddress.value)"]]
                 
                 return onUserDictResp(ZUserApi.publish(input.tag, content: WLJsonCast.cast(argu: arr)))
                     .mapObject(type: ZCircleBean.self)
