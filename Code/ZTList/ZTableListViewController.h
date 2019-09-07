@@ -8,6 +8,7 @@
 
 #import <ZTable/ZTable.h>
 #import "ZFragmentConfig.h"
+#import "ZFragmentMix.h"
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -17,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag;
 
 @end
+
 #endif
 
 

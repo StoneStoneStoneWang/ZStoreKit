@@ -33,8 +33,6 @@
 
 #define ZAliMapKey "1d08f272709f1dc107f6a08a734d3ef6"
 
-#define
-
 #elif ZAppFormGlobalTwo
 
 

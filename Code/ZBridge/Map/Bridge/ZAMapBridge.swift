@@ -16,6 +16,7 @@ import RxCocoa
 import RxSwift
 import CoreLocation
 import ZNoti
+import ZCache
 
 @objc (ZAMapBridge)
 public final class ZAMapBridge: ZBaseBridge {
@@ -77,7 +78,13 @@ extension ZAMapBridge {
                 .completing
                 .drive(onNext: { (result) in
                     
-                    ZHudUtil.show(withStatus: "发布订单中.....")
+                    if ZAccountCache.default.isLogin() {
+                        
+                        ZHudUtil.show(withStatus: "发布订单中.....")
+                    } else {
+                        
+                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: circle.toJSON(), andFrom: vc)
+                    }
                 })
                 .disposed(by: disposed)
             
