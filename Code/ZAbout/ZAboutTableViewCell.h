@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZFragmentMix.h"
 @import ZBridge;
 @import ZTable;
 NS_ASSUME_NONNULL_BEGIN

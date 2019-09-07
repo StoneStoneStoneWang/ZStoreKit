@@ -340,6 +340,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZCache'
     end
   end
   

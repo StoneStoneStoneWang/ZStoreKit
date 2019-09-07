@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZFragmentConfig.h"
+#import "ZFragmentMix.h"
 @import ZBean;
 NS_ASSUME_NONNULL_BEGIN
 

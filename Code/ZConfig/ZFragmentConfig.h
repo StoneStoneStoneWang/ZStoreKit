@@ -35,7 +35,6 @@
 
 #elif ZAppFormGlobalTwo
 
-
 #endif
 
 #define ZAppKey "a795caab302149079f8966efc01fc74b"
@@ -47,7 +46,7 @@
 #define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
 
 #pragma mark ---- 主色值
-#define ZFragmentColor "#333333"
+#define ZFragmentColor "#50C9C3"
 
 #define ZBackIcon "返回"
 
@@ -110,4 +109,4 @@
 
 #define AddressIcon "我的地址"
 
-#define ZPhoneNum "+8618612598269"
+#define ZPhoneNum "+0314-8032560"
