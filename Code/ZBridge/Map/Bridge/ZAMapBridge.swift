@@ -83,7 +83,7 @@ extension ZAMapBridge {
                         ZHudUtil.show(withStatus: "发布订单中.....")
                     } else {
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: circle.toJSON(), andFrom: vc)
+                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
                     }
                 })
                 .disposed(by: disposed)
