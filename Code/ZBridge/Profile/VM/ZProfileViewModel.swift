@@ -60,8 +60,6 @@ public enum ZProfileType : Int{
     case order
     
     case address
-    
-    case goldCleaner
 }
 
 extension ZProfileType {
@@ -73,7 +71,7 @@ extension ZProfileType {
             return [.space,userInfo,.order,.address,.space,.contactUS,.pravicy,.about,.space,.setting]
         } else if ZConfigure.fetchPType() == .map {
             
-            return [.space,userInfo,.order,.goldCleaner,.focus,.space,.contactUS,.pravicy,.about,.space,.setting]
+            return [.space,userInfo,.order,.focus,.space,.contactUS,.pravicy,.about,.space,.setting]
             
         } else {
             
@@ -119,8 +117,6 @@ extension ZProfileType {
         case .address: return "我的地址"
             
         case .order: return "我的订单"
-            
-        case .goldCleaner: return "金牌保洁"
             
         default: return ""
             
