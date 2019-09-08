@@ -17,6 +17,7 @@ import ZBean
 import ZRealReq
 import ZApi
 import CoreLocation
+import ZCache
 
 struct ZAMapViewModel: WLBaseViewModel {
     
@@ -67,32 +68,38 @@ struct ZAMapViewModel: WLBaseViewModel {
             .withLatestFrom(combine)
             .flatMapLatest {
                 
-                var arr: [[String: String]] = []
-                
-                for item in $0.0 {
+                if ZAccountCache.default.isLogin() {
                     
-                    var res: [String: String] = [:]
+                    var arr: [[String: String]] = []
                     
-                    res.updateValue("txt", forKey: "\(item.type):\(item.value)")
-                    
-                    if item.value.isEmpty {
+                    for item in $0.0 {
                         
-                        return Driver.just(WLBaseResult.failed(item.place))
+                        var res: [String: String] = [:]
+                        
+                        res.updateValue("txt", forKey: "\(item.type):\(item.value)")
+                        
+                        if item.value.isEmpty {
+                            
+                            return Driver.just(WLBaseResult.failed(item.place))
+                        }
+                        
+                        arr += [res]
                     }
                     
-                    arr += [res]
+                    arr += [["txt":"lat:\($0.1.coordinate.latitude)"]]
+                    
+                    arr += [["txt":"lng:\($0.1.coordinate.longitude)"]]
+                    
+                    arr += [["txt": "address:\(input.locAddress.value)"]]
+                    
+                    return onUserDictResp(ZUserApi.publish(input.tag, content: WLJsonCast.cast(argu: arr)))
+                        .mapObject(type: ZCircleBean.self)
+                        .map({ WLBaseResult.operation($0) })
+                        .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
+                } else {
+                    
+                    return Driver.just(WLBaseResult.empty)
                 }
-                
-                arr += [["txt":"lat:\($0.1.coordinate.latitude)"]]
-                
-                arr += [["txt":"lng:\($0.1.coordinate.longitude)"]]
-                
-                arr += [["txt": "address:\(input.locAddress.value)"]]
-                
-                return onUserDictResp(ZUserApi.publish(input.tag, content: WLJsonCast.cast(argu: arr)))
-                    .mapObject(type: ZCircleBean.self)
-                    .map({ WLBaseResult.operation($0) })
-                    .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
         }
         
         for item in input.forms {

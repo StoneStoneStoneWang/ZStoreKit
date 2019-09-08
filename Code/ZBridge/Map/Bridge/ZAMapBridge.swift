@@ -78,13 +78,7 @@ extension ZAMapBridge {
                 .completing
                 .drive(onNext: { (result) in
                     
-                    if ZAccountCache.default.isLogin() {
-                        
-                        ZHudUtil.show(withStatus: "发布订单中.....")
-                    } else {
-                        
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
-                    }
+                    ZHudUtil.show(withStatus: "发布订单中.....")
                 })
                 .disposed(by: disposed)
             
@@ -109,6 +103,9 @@ extension ZAMapBridge {
                         
                         ZHudUtil.showInfo(msg)
                         
+                    case .empty:
+                        
+                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
                     default: break
                         
                     }

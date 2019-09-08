@@ -13,24 +13,12 @@
 
 @synthesize backgroundColor;
 
-- (UIColor *)backgroundColor {
-    
-    return [UIColor s_transformToColorByHexColorStr:@ZFragmentColor];
-}
+- (UIColor *)backgroundColor { return [UIColor s_transformToColorByHexColorStr:@ZFragmentColor]; }
 @synthesize backImage;
-- (NSString *)backImage {
-    
-    return @"返回";
-}
+- (NSString *)backImage { return @ZBackIcon; }
 @synthesize fontSize;
 
-- (CGFloat)fontSize {
-    
-    return 20.0f;
-}
+- (CGFloat)fontSize { return 20.0f; }
 @synthesize titleColor;
-- (UIColor *)titleColor {
-    
-    return [UIColor s_transformToColorByHexColorStr:@"#ffffff"];
-}
+- (UIColor *)titleColor { return [UIColor s_transformToColorByHexColorStr:@"#ffffff"]; }
 @end

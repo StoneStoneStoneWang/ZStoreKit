@@ -8,7 +8,7 @@
 
 #import "ZFragmentConfig.h"
 
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
 
 #import <ZAMapV/ZAMapViewController.h>
 

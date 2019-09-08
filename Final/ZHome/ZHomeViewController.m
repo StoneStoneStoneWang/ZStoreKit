@@ -8,7 +8,7 @@
 
 #import "ZHomeViewController.h"
 
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
 
 @import SToolsKit;
 @import LGSideMenuController;

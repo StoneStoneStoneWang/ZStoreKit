@@ -76,7 +76,7 @@
 
 #define ZPasswordSelectIcon "睁眼"
 // 是否是强制登陆
-#define ZForceLogin 1
+#define ZForceLogin 0
 
 #pragma mark ---- 我的关注、黑名单
 

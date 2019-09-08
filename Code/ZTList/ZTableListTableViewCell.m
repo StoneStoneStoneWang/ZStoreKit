@@ -162,20 +162,19 @@
 - (void)setKeyValue:(ZCircleBean *)keyValue {
     _keyValue = keyValue;
     
-    NSString *time = nil;
-    
     for (ZKeyValueBean *k in keyValue.contentMap) {
-        
-        if ([k.type containsString:@"时间"]) {
+
+        if ([k.value containsString:@"时间"]) {
             
-            self.timeLabel.text = time;
-        } else if ([k.type containsString:@"address"]) {
+            self.timeLabel.text = [k.value componentsSeparatedByString:@":"].lastObject;
             
-            self.titleLabel.text = k.value;
+        } else if ([k.value containsString:@"address"]) {
             
-        } else if ([k.type containsString:@"详细地址"]) {
+            self.titleLabel.text = [k.value componentsSeparatedByString:@":"].lastObject;
             
-            self.subTitleLabel.text = k.value;
+        } else if ([k.value containsString:@"详细地址"]) {
+            
+            self.subTitleLabel.text = [k.value componentsSeparatedByString:@":"].lastObject;
         }
     }
     
@@ -258,7 +257,6 @@
     }];
     
 }
-
 
 @end
 #endif

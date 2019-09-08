@@ -30,7 +30,7 @@
 @import ZWechat;
 
 @import SToolsKit;
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
 #import "ZHomeViewController.h"
 
 @import ZAMap;
@@ -79,34 +79,34 @@ static ZStoreRootManager *manager = nil;
     return manager;
 }
 
-- (NSArray *)tabs {
-    if (!_tabs) {
-        
-        WLMainBean *m1 = [WLMainBean mainBeanWithType:WLMainTypeHome andTitle:@"溢米商城" andTag:@"" andNormalIcon:@"首页未" andSelectedIcon:@"首页选中"];
-        
-        WLMainBean *m2 = [WLMainBean mainBeanWithType:WLMainTypeCart andTitle:@"购物车" andTag:@"购物车" andNormalIcon:@"购物车未" andSelectedIcon:@"购物车选中"];
-        
-        WLMainBean *m3 = [WLMainBean mainBeanWithType:WLMainTypeProfile andTitle:@"个人中心" andTag:@"" andNormalIcon:@"个人中心未" andSelectedIcon:@"个人中心选中"];
-        
-        WLMainBean *m4 = [WLMainBean mainBeanWithType:WLMainTypeStore andTitle:@"商城" andTag:@"" andNormalIcon:@"商城未" andSelectedIcon:@"商城选中"];
-        
-        _tabs = @[m1,m4,m2,m3];
-    }
-    
-    return _tabs;
-}
-
-- (NSMutableArray *)catas {
-    if (!_catas) {
-        
-        _catas = [@[@{@"title": @"鱼食",@"isSelected":@(true),@"tag":@"鱼食"},
-                    @{@"title": @"观赏鱼",@"isSelected":@(false),@"tag":@"观赏鱼"},
-                    @{@"title": @"热带鱼",@"isSelected":@(false),@"tag":@"热带鱼"},
-                    @{@"title": @"鱼具(养)",@"isSelected":@(false),@"tag":@"鱼具(养)"},
-                    @{@"title": @"渔具(钓)",@"isSelected":@(false),@"tag":@"渔具(钓)"}] mutableCopy];
-    }
-    return _catas;
-}
+//- (NSArray *)tabs {
+//    if (!_tabs) {
+//
+//        WLMainBean *m1 = [WLMainBean mainBeanWithType:WLMainTypeHome andTitle:@"溢米商城" andTag:@"" andNormalIcon:@"首页未" andSelectedIcon:@"首页选中"];
+//
+//        WLMainBean *m2 = [WLMainBean mainBeanWithType:WLMainTypeCart andTitle:@"购物车" andTag:@"购物车" andNormalIcon:@"购物车未" andSelectedIcon:@"购物车选中"];
+//
+//        WLMainBean *m3 = [WLMainBean mainBeanWithType:WLMainTypeProfile andTitle:@"个人中心" andTag:@"" andNormalIcon:@"个人中心未" andSelectedIcon:@"个人中心选中"];
+//
+//        WLMainBean *m4 = [WLMainBean mainBeanWithType:WLMainTypeStore andTitle:@"商城" andTag:@"" andNormalIcon:@"商城未" andSelectedIcon:@"商城选中"];
+//
+//        _tabs = @[m1,m4,m2,m3];
+//    }
+//
+//    return _tabs;
+//}
+//
+//- (NSMutableArray *)catas {
+//    if (!_catas) {
+//
+//        _catas = [@[@{@"title": @"鱼食",@"isSelected":@(true),@"tag":@"鱼食"},
+//                    @{@"title": @"观赏鱼",@"isSelected":@(false),@"tag":@"观赏鱼"},
+//                    @{@"title": @"热带鱼",@"isSelected":@(false),@"tag":@"热带鱼"},
+//                    @{@"title": @"鱼具(养)",@"isSelected":@(false),@"tag":@"鱼具(养)"},
+//                    @{@"title": @"渔具(钓)",@"isSelected":@(false),@"tag":@"渔具(钓)"}] mutableCopy];
+//    }
+//    return _catas;
+//}
 
 @end
 
@@ -116,9 +116,9 @@ static ZStoreRootManager *manager = nil;
     
     if (appdelegate) {
         
-        [ZConfigure initWithAppKey:@"0e37c36a33b547fe9fd9d2a21dfa4479" domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeCircle];
+        [ZConfigure initWithAppKey:@"0e37c36a33b547fe9fd9d2a21dfa4479" domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeMap];
         
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         
         [[ZAMapUtil shared] registerApiKey:@"5deb6638fec2c948724920c41a0a6bc0"];
 #endif
@@ -135,28 +135,21 @@ static ZStoreRootManager *manager = nil;
             
             [[ZAccountCache shared] wl_queryAccount];
             
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
             
-            if ([ZAccountCache shared] .isLogin) {
-                
-                ZProfileViewController *drawer = [ZProfileViewController new];
-                
-                ZTNavigationController *center = [[ZTNavigationController alloc] initWithRootViewController:[ZHomeViewController new]];
-                
-                LGSideMenuController * sideMenu = [LGSideMenuController sideMenuControllerWithRootViewController:center leftViewController:drawer rightViewController:nil];
-                
-                sideMenu.leftViewWidth = KSSCREEN_WIDTH - 100;
-                
-                sideMenu.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
-                
-                sideMenu.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders;
-                
-                appdelegate.window.rootViewController = sideMenu;
-                
-            } else {
-                
-                appdelegate.window.rootViewController = [[ZNavigationController alloc] initWithRootViewController:[ZLoginViewController new]];
-            }
+            ZProfileViewController *drawer = [ZProfileViewController new];
+            
+            ZTNavigationController *center = [[ZTNavigationController alloc] initWithRootViewController:[ZHomeViewController new]];
+            
+            LGSideMenuController * sideMenu = [LGSideMenuController sideMenuControllerWithRootViewController:center leftViewController:drawer rightViewController:nil];
+            
+            sideMenu.leftViewWidth = KSSCREEN_WIDTH - 100;
+            
+            sideMenu.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+            
+            sideMenu.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders;
+            
+            appdelegate.window.rootViewController = sideMenu;
 #endif
         }
         
@@ -232,14 +225,20 @@ static ZStoreRootManager *manager = nil;
     [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"isFirstLogin"];
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormMapOne
-        UIViewController *from = userInfo[@"from"];
+#if ZAppFormGlobalOne
+        ZProfileViewController *drawer = [ZProfileViewController new];
         
-        ZNavigationController *anvi = [[ZNavigationController alloc] initWithRootViewController:[ZLoginViewController
-                                                                                                 new]];
-        anvi.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        ZTNavigationController *center = [[ZTNavigationController alloc] initWithRootViewController:[ZHomeViewController new]];
         
-        [from presentViewController:anvi animated:true completion:nil];
+        LGSideMenuController * sideMenu = [LGSideMenuController sideMenuControllerWithRootViewController:center leftViewController:drawer rightViewController:nil];
+        
+        sideMenu.leftViewWidth = KSSCREEN_WIDTH - 100;
+        
+        sideMenu.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+        
+        sideMenu.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders;
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = sideMenu;
 #endif
     }
 }
@@ -251,21 +250,11 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         
-        ZProfileViewController *drawer = [ZProfileViewController new];
+        UIViewController *from = userInfo[@"from"];
         
-        ZTNavigationController *center = [[ZTNavigationController alloc] initWithRootViewController:[ZHomeViewController new]];
-        
-        LGSideMenuController * sideMenu = [LGSideMenuController sideMenuControllerWithRootViewController:center leftViewController:drawer rightViewController:nil];
-        
-        sideMenu.leftViewWidth = KSSCREEN_WIDTH - 100;;
-        
-        sideMenu.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
-        
-        sideMenu.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders;
-        
-        [UIApplication sharedApplication].delegate.window.rootViewController = sideMenu;
+        [from dismissViewControllerAnimated:true completion:nil];
         
 #endif
     }
@@ -303,7 +292,7 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
         
@@ -322,7 +311,7 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
         
@@ -396,7 +385,7 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
         
@@ -418,7 +407,7 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
         
@@ -439,7 +428,7 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         UIViewController *from = userInfo[@"from"];
         
         ZBlackViewController *black = [ZBlackViewController new];
@@ -454,7 +443,7 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
         
@@ -471,7 +460,7 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
         
@@ -493,10 +482,7 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-#if ZAppFormMapOne
-        
-        
-#else
+#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
         
@@ -518,6 +504,9 @@ static ZStoreRootManager *manager = nil;
                 [from presentViewController:navi animated:true completion:nil];
             }
         }];
+#else
+        
+       
 #endif
     }
 }

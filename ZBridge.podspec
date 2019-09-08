@@ -331,6 +331,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZApi'
       vm.dependency 'ZBean/KeyValue'
       vm.frameworks = 'UIKit', 'Foundation' ,'CoreLocation'
+      vm.dependency 'ZCache'
     end
     
     amap.subspec 'Bridge' do |bridge|
@@ -340,7 +341,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/SM'
-      bridge.dependency 'ZCache'
+      
     end
   end
   
