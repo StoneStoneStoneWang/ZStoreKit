@@ -99,7 +99,7 @@
 
 #define PravicyIcon "隐私政策"
 
-#define UserInfoIcon "我的资料"
+#define UserInfoIcon "用户资料"
 
 #define SettingIcon "设置"
 
