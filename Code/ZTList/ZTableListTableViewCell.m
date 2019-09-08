@@ -44,7 +44,7 @@
         
         _iconImageView.contentMode = UIViewContentModeCenter;
         
-        _iconImageView.layer.cornerRadius = 5;
+        _iconImageView.layer.cornerRadius = 15;
         
         _iconImageView.layer.masksToBounds = true;
     }
@@ -86,11 +86,13 @@
         
         _titleLabel = [UILabel new];
         
-        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _titleLabel.font = [UIFont systemFontOfSize:14];
         
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         
         _titleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#333333"];
+        
+        _titleLabel.numberOfLines = 2;
     }
     return _titleLabel;
 }
@@ -134,12 +136,16 @@
         
         _aContentView.layer.cornerRadius = 5;
         
-        _contactItem.layer.masksToBounds = true;
+        _aContentView.layer.masksToBounds = true;
+        
+        _aContentView.backgroundColor = [UIColor whiteColor];
     }
     return _aContentView;
 }
 - (void)commitInit {
     [super commitInit];
+    
+    [self.contentView addSubview:self.aContentView];
     
     [self.aContentView addSubview:self.iconImageView];
     
@@ -153,32 +159,35 @@
     
     [self.aContentView addSubview:self.contactItem];
     
-    [self.accessoryView addSubview:self.subTitleLabel];
+    [self.aContentView addSubview:self.subTitleLabel];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
 }
 
 - (void)setKeyValue:(ZCircleBean *)keyValue {
     _keyValue = keyValue;
     
+    self.bottomLineType = ZBottomLineTypeNone;
+    
     for (ZKeyValueBean *k in keyValue.contentMap) {
-
+        
+        NSLog(@"%@ ====%@ ",k.type,k.value);
+        
         if ([k.value containsString:@"时间"]) {
             
-            self.timeLabel.text = [k.value componentsSeparatedByString:@":"].lastObject;
+            self.timeLabel.text = [[k.value componentsSeparatedByString:@" "].firstObject componentsSeparatedByString:@":"].lastObject;
             
         } else if ([k.value containsString:@"address"]) {
             
-            self.titleLabel.text = [k.value componentsSeparatedByString:@":"].lastObject;
+            self.titleLabel.text = [NSString stringWithFormat:@"服务地址: %@",[k.value componentsSeparatedByString:@":"].lastObject];
             
         } else if ([k.value containsString:@"详细地址"]) {
             
-            self.subTitleLabel.text = [k.value componentsSeparatedByString:@":"].lastObject;
+            self.subTitleLabel.text = [NSString stringWithFormat:@"详细地址: %@",[k.value componentsSeparatedByString:@":"].lastObject];
         }
     }
     
-    self.nameLabel.text = [NSString stringWithFormat:@"%@: %@",keyValue.users.nickname,keyValue.users.phone];
+    self.nameLabel.text = keyValue.users.nickname;
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",keyValue.users.headImg]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
     
@@ -198,55 +207,13 @@
         make.bottom.mas_equalTo(-5);
     }];
     
-    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(15);
-        
-        make.height.mas_equalTo(25);
-        
-        make.top.equalTo(self.aContentView);
-    }];
-    
-    [self.moreItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.mas_equalTo(-15);
-        
-        make.height.mas_equalTo(25);
-        
-        make.centerY.equalTo(self.timeLabel);
-    }];
-    
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(15);
-        
-        make.height.mas_equalTo(20);
-        
-        make.right.mas_equalTo(-15);
-        
-        make.top.equalTo(self.timeLabel);
-        
-    }];
-    
-    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(15);
-        
-        make.height.mas_equalTo(20);
-        
-        make.right.mas_equalTo(-15);
-        
-        make.top.equalTo(self.titleLabel);
-        
-    }];
-    
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.mas_equalTo(15);
         
-        make.height.width.mas_equalTo(40);
+        make.height.width.mas_equalTo(30);
         
-        make.top.equalTo(self.subTitleLabel).offset(15);
+        make.top.mas_equalTo(15);
     }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -254,6 +221,41 @@
         make.left.equalTo(self.iconImageView.mas_right).offset(15);
         
         make.centerY.equalTo(self.iconImageView);
+    }];
+    
+    
+    [self.moreItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.mas_equalTo(-15);
+        
+        make.centerY.equalTo(self.iconImageView);
+    }];
+    //
+    
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(self.moreItem.mas_left).offset(-15);
+        
+        make.centerY.equalTo(self.iconImageView);
+    }];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(15);
+        
+        make.right.mas_equalTo(-15);
+        
+        make.top.equalTo(self.iconImageView.mas_bottom).offset(15);
+    }];
+    
+    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(15);
+        
+        make.right.mas_equalTo(-15);
+        
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
+        
     }];
     
 }

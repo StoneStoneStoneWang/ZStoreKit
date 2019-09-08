@@ -12,6 +12,7 @@
 #if ZAppFormGlobalOne
 
 @import ZBridge;
+@import SToolsKit;
 
 @interface ZTableListViewController ()
 
@@ -24,6 +25,13 @@
 @end
 
 @implementation ZTableListViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor]];
+    
+}
 
 + (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag {
     
@@ -65,9 +73,16 @@
     
     self.bridge = [ZTListBridge new];
     
-    [self.bridge createFocus:self isMy:false tag:self.tag];
+    [self.bridge createTList:self isMy:self.isMy tag:self.tag];
+    
+    [self.tableView.mj_header beginRefreshing];
 }
 
+- (void)onReloadItemClick {
+    [super onReloadItemClick];
+    
+    [self.tableView.mj_header beginRefreshing];
+}
 - (BOOL)canPanResponse {
     return true;
 }

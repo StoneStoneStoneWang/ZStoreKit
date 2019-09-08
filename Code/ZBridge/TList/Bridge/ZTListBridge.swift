@@ -27,7 +27,7 @@ public final class ZTListBridge: ZBaseBridge {
 }
 extension ZTListBridge {
     
-    @objc public func createFocus(_ vc: ZTableLoadingViewController ,isMy: Bool ,tag: String) {
+    @objc public func createTList(_ vc: ZTableLoadingViewController ,isMy: Bool ,tag: String) {
         
         self.vc = vc
         

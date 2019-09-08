@@ -86,7 +86,12 @@
     switch (userInfo.type) {
         case ZUserInfoTypeName:
         {
-            ZNickNameViewController *nickname = [ZNickNameViewController new];
+            __weak typeof(self) weakSelf = self;
+            
+            ZNickNameViewController *nickname = [ZNickNameViewController createNickname:^{
+                
+                [weakSelf.tableView reloadData];
+            }];
             
             [self presentViewController:[[ZTNavigationController alloc] initWithRootViewController:nickname] animated:true completion:nil];
         }

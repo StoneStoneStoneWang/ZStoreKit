@@ -20,8 +20,6 @@
     [super viewWillAppear:animated];
     
     [self.navigationController.navigationBar s_setBackgroundColor:[UIColor clearColor]];
-    
-    
 }
 
 - (void)configNaviItem {

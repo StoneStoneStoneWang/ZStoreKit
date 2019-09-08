@@ -37,6 +37,7 @@
 @import LGSideMenuController;
 
 @import ZFocus;
+@import ZTList;
 
 #endif
 @implementation WLMainBean
@@ -116,11 +117,11 @@ static ZStoreRootManager *manager = nil;
     
     if (appdelegate) {
         
-        [ZConfigure initWithAppKey:@"0e37c36a33b547fe9fd9d2a21dfa4479" domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeMap];
+        [ZConfigure initWithAppKey:@ZAppKey domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeMap];
         
 #if ZAppFormGlobalOne
         
-        [[ZAMapUtil shared] registerApiKey:@"5deb6638fec2c948724920c41a0a6bc0"];
+        [[ZAMapUtil shared] registerApiKey:@ZAliMapKey];
 #endif
         //
         [ZNavigationController initWithConfig:[ZNaviConfigImpl new]];
@@ -157,7 +158,7 @@ static ZStoreRootManager *manager = nil;
         
         [ZHudUtil configHud];
         
-        [ZWXManager wxRegisterAppKey:@""];
+        [ZWXManager wxRegisterAppKey:@ZWXKey];
     }
     
     [self addNotification];
@@ -198,7 +199,7 @@ static ZStoreRootManager *manager = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLogoutTap:) name:ZNotiLogout object:nil ];
     
     //
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyOrderTap:) name:ZNotiMyOrder object:nil ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyOrderTap:) name:ZNotiMyOrder object:nil ];
     //
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoMyAddressTap:) name:ZNotiMyAddress object:nil ];
     
@@ -510,7 +511,7 @@ static ZStoreRootManager *manager = nil;
         }];
 #else
         
-       
+        
 #endif
     }
 }
@@ -546,4 +547,27 @@ static ZStoreRootManager *manager = nil;
     }
 }
 
+- (void)onGotoMyOrderTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"isFirstLogin"];
+    
+    if (userInfo && userInfo[@"from"]) {
+#if ZAppFormGlobalOne
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from.sideMenuController hideLeftViewAnimated];
+        
+        ZTableListViewController *order = [ZTableListViewController createTableList:true andTag:@""];
+        
+        UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
+        
+        [navi pushViewController:order animated:true];
+        
+#endif
+    }
+    
+}
 @end

@@ -29,7 +29,7 @@
 
 @implementation ZNickNameViewController
 
-+ (instancetype)createSignature:(ZNickNameSucc)succ {
++ (instancetype)createNickname:(ZNickNameSucc)succ {
     
     return [[self alloc] initWithSucc:succ];
     
