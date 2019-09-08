@@ -31,13 +31,13 @@
 
 #define ZCompleteItemTitle "保洁预约"
 
-#define ZAliMapKey "1d08f272709f1dc107f6a08a734d3ef6"
+#define ZAliMapKey "5deb6638fec2c948724920c41a0a6bc0"
 
 #elif ZAppFormGlobalTwo
 
 #endif
 
-#define ZAppKey "a795caab302149079f8966efc01fc74b"
+#define ZAppKey "cc8050936ebe4cb3b6ffc7ea808b3c96"
 
 #define ZWXKey "wx6daf9371d9e7472a"
 
@@ -110,3 +110,15 @@
 #define AddressIcon "我的地址"
 
 #define ZPhoneNum "+0314-8032560"
+
+#define ZReportKeyValues @[\
+@{@"type": @"1",@"title": @"干活不用心",@"isSelected": @true} ,\
+@{@"type": @"2",@"title": @"二次收费",@"isSelected": @false} ,\
+@{@"type": @"3",@"title": @"色情暴力",@"isSelected": @false} ,\
+@{@"type": @"4",@"title": @"违规操作",@"isSelected": @false} ,\
+@{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
+]
+
+#define ZNormalIcon "未选中"
+
+#define ZSelectedIcon "选中"

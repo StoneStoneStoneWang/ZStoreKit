@@ -76,7 +76,7 @@ extension ZUserApi: WLObserverReq {
         case .fetchAreaJson: return "mob/addr_mobAddrJsonFile?"
             
         case .fetchBanners: return "mob/circleFriends_mobListCircleFriends?"
-        
+            
         case .deleteMyCircle: return "mob/circleFriends_mobDelCircleFriends?"
             
         case .analysis: return "mob/location_mobAddLocation?"
@@ -166,7 +166,7 @@ extension ZUserApi: WLObserverReq {
             
             return result
             
-        case .deleteMyCircle(let encode): return ["cfs.encoded": encode]
+        case .deleteMyCircle(let encode): return ["cfs.encoded": encode,"cfs.projectId":ZConfigure.fetchAppKey()]
             
         case .fetchAreaJson: return [:]
             

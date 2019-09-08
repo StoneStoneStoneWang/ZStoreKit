@@ -117,7 +117,7 @@ static ZStoreRootManager *manager = nil;
     
     if (appdelegate) {
         
-        [ZConfigure initWithAppKey:@ZAppKey domain:@"https://zhih.ecsoi.com/" pType:ZConfigureTypeMap];
+        [ZConfigure initWithAppKey:@ZAppKey domain:@"http://zhihw.ecsoi.com/" pType:ZConfigureTypeMap];
         
 #if ZAppFormGlobalOne
         
