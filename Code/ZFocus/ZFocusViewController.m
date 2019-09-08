@@ -9,6 +9,8 @@
 #import "ZFocusViewController.h"
 #import "ZFocusTableViewCell.h"
 @import ZBridge;
+@import SToolsKit;
+
 @interface ZFocusViewController ()
 
 @property (nonatomic ,strong) ZFocusBridge *bridge;
@@ -17,6 +19,12 @@
 
 @implementation ZFocusViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor]];
+    
+}
 - (void)configOwnSubViews {
     [super configOwnSubViews];
     

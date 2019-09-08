@@ -449,9 +449,12 @@ static ZStoreRootManager *manager = nil;
         
         [from.sideMenuController hideLeftViewAnimated];
         
+        UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
+        
         ZFocusViewController *focus = [ZFocusViewController new];
         
-        [from.navigationController pushViewController:focus animated:true];
+        [navi pushViewController:focus animated:true];
+        
 #endif
     }
 }

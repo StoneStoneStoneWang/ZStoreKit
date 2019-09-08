@@ -36,6 +36,7 @@
     self.headerView = [[ZAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) / 2)];
     
     self.tableView.tableHeaderView = self.headerView;
+    
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
