@@ -122,9 +122,13 @@
     
     self.title = @"修改昵称";
     
+    [self.completeItem sizeToFit];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.completeItem];
     
     [self.backItem setImage:[UIImage imageNamed:@ZBackIcon] forState:UIControlStateNormal];
+    
+    [self.backItem sizeToFit];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backItem];
     
