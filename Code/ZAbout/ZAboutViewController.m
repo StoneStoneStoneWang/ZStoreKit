@@ -11,6 +11,7 @@
 #import "ZAboutTableHeaderView.h"
 @import ZBridge;
 @import ZNoti;
+@import SToolsKit;
 
 @interface ZAboutViewController ()
 
@@ -21,7 +22,12 @@
 
 @implementation ZAboutViewController
 
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor]];
+    
+}
 - (void)configOwnSubViews {
     [super configOwnSubViews];
     

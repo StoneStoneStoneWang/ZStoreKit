@@ -94,6 +94,7 @@
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",focus.users.headImg]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
 }
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     

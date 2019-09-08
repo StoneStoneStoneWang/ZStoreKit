@@ -21,6 +21,8 @@
 - (void)configOwnSubViews {
     [super configOwnSubViews];
     
+#if ZAppFormGlobalOne
+    
     [self.tableView registerClass:[ZProfileTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds) - 100, 100)];
@@ -28,6 +30,8 @@
     self.tableView.tableHeaderView = self.headerView;
     
     self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds) - 100, CGRectGetHeight(self.view.bounds));
+    
+#endif
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {

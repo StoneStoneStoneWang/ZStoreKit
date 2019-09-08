@@ -63,6 +63,8 @@
         _mapView.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         
         _mapView.delegate = self;
+        
+        _mapView.respLeft = 50;
     }
     return _mapView;
 }

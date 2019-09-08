@@ -31,6 +31,13 @@
 
 @implementation ZUserInfoViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor]];
+    
+}
+
 - (UIImagePickerController *)imagePicker {
     
     if (!_imagePicker) {

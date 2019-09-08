@@ -49,8 +49,6 @@
     
     self.title = @"我的关注";
 }
-- (BOOL)canPanResponse {
-    
-    return true;
-}
+- (BOOL)canPanResponse { return true; }
+
 @end
