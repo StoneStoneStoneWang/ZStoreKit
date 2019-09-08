@@ -11,7 +11,7 @@
 @import Masonry;
 @import SDWebImage;
 
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
 
 @interface ZTableListTableViewCell ()
 

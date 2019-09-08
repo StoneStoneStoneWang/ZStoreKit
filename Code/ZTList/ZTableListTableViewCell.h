@@ -13,7 +13,7 @@
 @import ZBean;
 NS_ASSUME_NONNULL_BEGIN
 
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
 
 @interface ZTableListTableViewCell : ZBaseTableViewCell
 

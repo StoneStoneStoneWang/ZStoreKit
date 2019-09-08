@@ -9,7 +9,7 @@
 #import "ZTableListViewController.h"
 #import "ZTableListTableViewCell.h"
 
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
 
 @import ZBridge;
 

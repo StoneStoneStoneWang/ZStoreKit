@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-#if ZAppFormMapOne
+#if ZAppFormGlobalOne
 @interface ZTableListViewController : ZTableLoadingViewController
 
 + (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag;
