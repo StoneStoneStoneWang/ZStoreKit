@@ -28,11 +28,8 @@
     
     if (!_iconImageView) {
         
-        _iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @ZLogoIcon]];
+        _iconImageView = [[UIImageView alloc] init];
         
-        _iconImageView.layer.cornerRadius = 30;
-        
-        _iconImageView.layer.masksToBounds = true;
     }
     return _iconImageView;
 }
@@ -121,9 +118,15 @@
             break;
         case ZProfileTypeContactUS:
             
-            self.iconImageView.image = [UIImage imageNamed: @CircleIcon];
+            self.iconImageView.image = [UIImage imageNamed: @ContactUsIcon];
             
             self.subTitleLabel.text = @ZPhoneNum;
+            
+            self.subTitleLabel.hidden = false;
+            break;
+        case ZProfileTypeUserInfo:
+            
+            self.iconImageView.image = [UIImage imageNamed: @UserInfoIcon];
             
             self.subTitleLabel.hidden = false;
             break;

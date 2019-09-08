@@ -46,6 +46,12 @@
 
 @implementation ZAMapViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
+    
+}
 - (ZAMapView *)mapView {
     
     if (!_mapView) {
@@ -264,7 +270,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-//    [self addObserver:self forKeyPath:@"locationManager.authStatus" options:(NSKeyValueObservingOptionNew) context:nil];
+    //    [self addObserver:self forKeyPath:@"locationManager.authStatus" options:(NSKeyValueObservingOptionNew) context:nil];
     if ([keyPath isEqualToString:@"locationManager.authStatus"]) {
         
         NSLog(@"%@",change);

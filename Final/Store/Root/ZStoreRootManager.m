@@ -380,6 +380,7 @@ static ZStoreRootManager *manager = nil;
         [from.navigationController popViewControllerAnimated:true];
     }
 }
+
 - (void)onGotoAboutTap:(NSNotification *)noti {
     
     NSDictionary *userInfo = noti.userInfo;
