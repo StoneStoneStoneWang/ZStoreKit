@@ -38,7 +38,8 @@
 
 @import ZFocus;
 @import ZTList;
-
+@import ZReport;
+@import 
 #endif
 @implementation WLMainBean
 
