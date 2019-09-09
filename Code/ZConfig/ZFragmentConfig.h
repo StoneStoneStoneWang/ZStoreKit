@@ -131,4 +131,5 @@
 
 #define ZPhoneNum "+0314-8032560"
 
+#define ZMoreIcon "更多"
 

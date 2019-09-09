@@ -67,8 +67,9 @@
 
 - (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    return 5 + 25 + 20 + 20 + 15 + 40 + 5 + 5;
+    return 150;
 }
+
 - (void)configViewModel {
     
     self.bridge = [ZTListBridge new];

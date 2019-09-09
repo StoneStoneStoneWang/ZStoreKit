@@ -7,11 +7,15 @@
 //
 
 #import <ZTable/ZTable.h>
+#import "ZFragmentConfig.h"
+#import "ZFragmentMix.h"
+@import ZBean;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZGoldCleanerTableViewCell : ZBaseTableViewCell
 
+@property (nonatomic ,strong) ZCircleBean *keyValue;
 @end
 
 NS_ASSUME_NONNULL_END

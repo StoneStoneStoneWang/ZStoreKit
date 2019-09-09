@@ -115,6 +115,10 @@
     if (!_moreItem) {
         
         _moreItem = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [_moreItem setImage:[UIImage imageNamed:@ZMoreIcon] forState:UIControlStateNormal];
+        
+        [_moreItem setImage:[UIImage imageNamed:@ZMoreIcon] forState:UIControlStateSelected];
     }
     return _moreItem;
 }

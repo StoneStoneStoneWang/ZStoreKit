@@ -9,17 +9,14 @@
 #import "ZGoldCleanerViewController.h"
 #import "ZGoldCleanerTableViewCell.h"
 #if ZAppFormGlobalOne
-
+@import JXTAlertManager;
+@import ZNoti;
 @import ZBridge;
 @import SToolsKit;
 
 @interface ZGoldCleanerViewController ()
 
 @property (nonatomic ,strong) ZTListBridge *bridge;
-
-@property (nonatomic ,assign) BOOL isMy;
-
-@property (nonatomic ,strong) NSString *tag;
 
 @end
 
@@ -47,7 +44,7 @@
     
     ZGoldCleanerTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-//    cell.keyValue = data;
+    cell.keyValue = data;
     
     cell.bottomLineType = ZBottomLineTypeNormal;
     
@@ -56,13 +53,13 @@
 
 - (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    return 5 + 25 + 20 + 20 + 15 + 40 + 5 + 5;
+    return 70;
 }
 - (void)configViewModel {
     
     self.bridge = [ZTListBridge new];
     
-    [self.bridge createTList:self isMy:false tag:self.tag];
+    [self.bridge createTList:self isMy:false tag:@""];
     
     [self.tableView.mj_header beginRefreshing];
 }
@@ -77,7 +74,36 @@
 }
 - (void)configNaviItem {
     
-    self.title = @"我的订单";
+    self.title = @"金牌保洁";
+}
+
+- (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+    [self jxt_showActionSheetWithTitle:@"操作" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+        
+        alertMaker.
+        addActionCancelTitle(@"取消").
+        addActionDefaultTitle(@"举报").
+        addActionDefaultTitle(@"拨打电话");
+        
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+        
+        if ([action.title isEqualToString:@"取消"]) {
+            
+        }
+        else if ([action.title isEqualToString:@"举报"]) {
+            
+            [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:data andFrom:self];
+            
+        } else if ([action.title isEqualToString:@"拨打电话"]) {
+            
+            ZCircleBean *circle = (ZCircleBean *)data;
+            
+            NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",[circle.contentMap.firstObject.value componentsSeparatedByString:@":"].lastObject];
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        }
+    }];
 }
 @end
 
