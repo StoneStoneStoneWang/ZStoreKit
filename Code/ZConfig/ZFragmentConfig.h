@@ -51,6 +51,8 @@
 4.双方遵守遵守契约精神,契约精神是对双方最有效的约束,不局限于书面合同、口头约定\n \
 5.最终解释权归本公司所有,我们的目的是中国最大的线上保洁公司。"
 
+#define ZGoldCleanerTag "金牌月嫂"
+
 #elif ZAppFormGlobalTwo
 
 #endif
