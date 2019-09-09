@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZTList"
+  spec.name         = "ZReport"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 列表."
+  spec.summary      = "A Lib For 地图."
   spec.description  = <<-DESC
-  ZTList是地图
+  ZReport是地图
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -23,11 +23,10 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZTList/*.{h,m}"
+  spec.source_files = "Code/ZReport/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/TList'
+  spec.dependency 'ZBridge/Report'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
-  spec.dependency 'SDWebImage'
 end
 

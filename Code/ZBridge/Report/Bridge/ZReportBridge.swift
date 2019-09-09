@@ -33,6 +33,8 @@ extension ZReportBridge {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
+            self.vc = vc
+            
             let input = ZReportViewModel.WLInput(reports: reports,
                                                  modelSelect: vc.tableView.rx.modelSelected(ZReportBean.self),
                                                  itemSelect: vc.tableView.rx.itemSelected,
@@ -70,9 +72,9 @@ extension ZReportBridge {
                     
                     _ = values.map({ $0.isSelected = false })
                     
-                    values[ip.section].isSelected = true
+                    values[ip.row].isSelected = true
                     
-                    vc.tableView.reloadData()
+                    self.viewModel.output.tableData.accept(values)
                 })
                 .disposed(by: disposed)
             
@@ -86,7 +88,7 @@ extension ZReportBridge {
                 .tableView
                 .rx
                 .itemAccessoryButtonTapped
-                .subscribe(onNext: { (ip) in
+                .subscribe(onNext: { [unowned self] (ip) in
                     
                     self.selectedReport.accept("\(ip.section + 1)")
                     
@@ -94,9 +96,9 @@ extension ZReportBridge {
                     
                     _ = values.map({ $0.isSelected = false })
                     
-                    values[ip.section].isSelected = true
+                    values[ip.row].isSelected = true
                     
-                    vc.tableView.reloadData()
+                    self.viewModel.output.tableData.accept(values)
                 })
                 .disposed(by: disposed)
             

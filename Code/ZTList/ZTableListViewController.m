@@ -86,6 +86,10 @@
 - (BOOL)canPanResponse {
     return true;
 }
+- (void)configNaviItem {
+    
+    self.title = @"我的订单";
+}
 @end
 
 #endif

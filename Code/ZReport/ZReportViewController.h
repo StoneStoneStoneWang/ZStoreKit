@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZReportViewController : ZTableNoLoadingViewConntroller
 
++ (instancetype)createReportWithUid:(NSString *)uid andEncode:(NSString *)encode;
+
 @end
 
 NS_ASSUME_NONNULL_END
