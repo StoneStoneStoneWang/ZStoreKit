@@ -10,9 +10,7 @@ import Foundation
 import ZTable
 import RxDataSources
 import ZCocoa
-import ZBean
 import ZHud
-import ZNoti
 import RxCocoa
 import RxSwift
 
@@ -31,7 +29,7 @@ public final class ZReportBridge: ZBaseBridge {
 }
 extension ZReportBridge {
     
-    @objc public func createTList(_ vc: ZTableNoLoadingViewConntroller ,reports: [[String: Any]],uid: String,encoded: String ,textView: UITextView) {
+    @objc public func createReport(_ vc: ZTableNoLoadingViewConntroller ,reports: [[String: Any]],uid: String,encoded: String ,textView: UITextView) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
@@ -64,8 +62,17 @@ extension ZReportBridge {
                 .zip
                 .subscribe(onNext: { [unowned self] (type,ip) in
                     
+                    vc.view.endEditing(true)
+                    
                     self.selectedReport.accept(type.type)
                     
+                    let values = self.viewModel.output.tableData.value
+                    
+                    _ = values.map({ $0.isSelected = false })
+                    
+                    values[ip.section].isSelected = true
+                    
+                    vc.tableView.reloadData()
                 })
                 .disposed(by: disposed)
             
@@ -75,6 +82,74 @@ extension ZReportBridge {
                 .setDelegate(self)
                 .disposed(by: disposed)
             
+            vc
+                .tableView
+                .rx
+                .itemAccessoryButtonTapped
+                .subscribe(onNext: { (ip) in
+                    
+                    self.selectedReport.accept("\(ip.section + 1)")
+                    
+                    let values = self.viewModel.output.tableData.value
+                    
+                    _ = values.map({ $0.isSelected = false })
+                    
+                    values[ip.section].isSelected = true
+                    
+                    vc.tableView.reloadData()
+                })
+                .disposed(by: disposed)
+            
+            // MARK: 举报点击中序列
+            viewModel
+                .output
+                .completing
+                .drive(onNext: { _ in
+                    
+                    vc.view.endEditing(true)
+                    
+                    ZHudUtil.show(withStatus: "举报提交中...")
+                    
+                })
+                .disposed(by: disposed)
+            
+            // MARK: 举报事件返回序列
+            viewModel
+                .output
+                .completed
+                .drive(onNext: {
+                    
+                    ZHudUtil.pop()
+                    
+                    switch $0 {
+                        
+                    case let .failed(msg): ZHudUtil.showInfo(msg)
+                        
+                    case .ok:
+                        
+                        let alert = UIAlertController(title: "举报成功", message: "您的举报非常成功,我们会尽快调查.", preferredStyle: .alert)
+                        
+                        
+                        let cancel = UIAlertAction(title: "取消", style: .cancel) { (a) in
+                            
+                            
+                        }
+                        
+                        let confirm = UIAlertAction(title: "确认", style: .default) { (a) in
+                            
+                            vc.navigationController?.popViewController(animated: true)
+                        }
+                        
+                        alert.addAction(cancel)
+                        
+                        alert.addAction(confirm)
+                        
+                        vc.present(alert, animated: true, completion: nil)
+                        
+                    default: break
+                    }
+                })
+                .disposed(by: disposed)
         }
         
     }

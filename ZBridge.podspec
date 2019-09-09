@@ -393,4 +393,26 @@ Pod::Spec.new do |spec|
     end
   end
   
+  # 个人中心
+  spec.subspec 'Report' do |report|
+    
+    report.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Report/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ObjectMapper'
+      vm.dependency 'RxDataSources'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZRealReq'
+    end
+    
+    report.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Report/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Report/VM'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'RxDataSources'
+    end
+  end
 end

@@ -22,7 +22,6 @@
 
 @property (nonatomic ,strong) UITableViewCell *cell;
 
-
 @end
 @implementation ZProfileTableHeaderView
 

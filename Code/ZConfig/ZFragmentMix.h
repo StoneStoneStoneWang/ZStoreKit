@@ -57,4 +57,8 @@
 
 #define icon Pq7sAOlW5mv3
 
+#define ZReportHeaderView ZReportHeaderView1111
+
+#define ZReportTableViewCell ZReportTableViewCell111
+
 #endif

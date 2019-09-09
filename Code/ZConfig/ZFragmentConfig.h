@@ -33,6 +33,24 @@
 
 #define ZAliMapKey "5deb6638fec2c948724920c41a0a6bc0"
 
+#define ZReportKeyValues @[\
+@{@"type": @"1",@"title": @"干活不用心",@"isSelected": @true} ,\
+@{@"type": @"2",@"title": @"二次收费",@"isSelected": @false} ,\
+@{@"type": @"3",@"title": @"色情暴力",@"isSelected": @false} ,\
+@{@"type": @"4",@"title": @"违规操作",@"isSelected": @false} ,\
+@{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
+]
+
+#define ZNormalIcon "未选中"
+
+#define ZSelectedIcon "选中"
+
+#define ZReportHeaderText "1.保洁人员是我们公司内部员工,我们竭诚为您服务\n \
+2.您的举报十分关键,我们会根据您的举报,调查我们的保洁人员,如果属实我们会对保洁人员职业道德培训和思想教育培训,严重者开除处理、移交公安机关\n \
+3.经过我们的调查,如果您的举报为虚假、恶意举报,我们将会把您拉入黑名单并向公安机关报案,严重者向法院提起诉讼。\n \
+4.双方遵守遵守契约精神,契约精神是对双方最有效的约束,不局限于书面合同、口头约定\n \
+5.最终解释权归本公司所有,我们的目的是中国最大的线上保洁公司。"
+
 #elif ZAppFormGlobalTwo
 
 #endif
@@ -111,14 +129,4 @@
 
 #define ZPhoneNum "+0314-8032560"
 
-#define ZReportKeyValues @[\
-@{@"type": @"1",@"title": @"干活不用心",@"isSelected": @true} ,\
-@{@"type": @"2",@"title": @"二次收费",@"isSelected": @false} ,\
-@{@"type": @"3",@"title": @"色情暴力",@"isSelected": @false} ,\
-@{@"type": @"4",@"title": @"违规操作",@"isSelected": @false} ,\
-@{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
-]
 
-#define ZNormalIcon "未选中"
-
-#define ZSelectedIcon "选中"
