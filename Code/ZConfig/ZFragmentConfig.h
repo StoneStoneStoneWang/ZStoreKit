@@ -31,7 +31,7 @@
 
 #define ZCompleteItemTitle "保洁预约"
 
-#define ZAliMapKey "5deb6638fec2c948724920c41a0a6bc0"
+#define ZAliMapKey "1d08f272709f1dc107f6a08a734d3ef6"
 
 #define ZReportKeyValues @[\
 @{@"type": @"1",@"title": @"干活不用心",@"isSelected": @true} ,\
@@ -74,7 +74,7 @@
 
 #pragma mark ---- 欢迎界面 两种样式 选择第一种样式
 
-#define ZWelcomeImgs @[@"画板1",@"画板"]
+#define ZWelcomeImgs @[@"引导1",@"引导2"]
 
 #define ZWelcomeFormOne 0
 
