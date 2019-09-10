@@ -66,8 +66,9 @@
     return _timeLabel;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         [self commitInit];
     }
@@ -88,7 +89,7 @@
 - (void)setFocus:(ZFocusBean *)focus {
     _focus = focus;
     
-    self.timeLabel.text = [[NSString stringWithFormat:@"%ld",focus.intime] s_convertToDate:SDateTypeDateStyle];
+    self.timeLabel.text = [[NSString stringWithFormat:@"%ld",focus.intime / 1000] s_convertToDate:SDateTypeDateStyle];
     
     self.nameLabel.text = focus.users.nickname;
     

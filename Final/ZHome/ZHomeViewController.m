@@ -12,7 +12,7 @@
 
 @import SToolsKit;
 @import LGSideMenuController;
-
+@import ZGoldCleaner;
 
 @implementation ZHomeViewController
 
@@ -37,7 +37,9 @@
 }
 - (void)showList {
     
+    ZGoldCleanerViewController *vc = [ZGoldCleanerViewController createGoldCleaner];
     
+    [self.navigationController pushViewController:vc animated:true];
 }
 @end
 

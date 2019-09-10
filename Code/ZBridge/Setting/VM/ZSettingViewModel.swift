@@ -66,7 +66,7 @@ extension ZSettingType {
                 return [.space,.password,.space,.clear,.push,.space,.logout]
             } else {
                 
-                return [.space,.password,.space,.clear,.push,.space,.logout]
+                return [.space,.password,.black,.space,.clear,.push,.space,.logout]
             }
         } else {
             

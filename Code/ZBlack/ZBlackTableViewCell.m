@@ -66,14 +66,15 @@
     }
     return _timeLabel;
 }
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         [self commitInit];
     }
     return self;
 }
+
 - (void)commitInit {
     
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
@@ -90,7 +91,7 @@
 - (void)setBlack:(ZBlackBean *)black {
     _black = black;
     
-    self.timeLabel.text = [[NSString stringWithFormat:@"%ld",black.intime] s_convertToDate:SDateTypeDateStyle];
+    self.timeLabel.text = [[NSString stringWithFormat:@"%ld",black.intime / 1000] s_convertToDate:SDateTypeDateStyle];
     
     self.nameLabel.text = black.users.nickname;
     
@@ -100,28 +101,30 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    CGFloat w = CGRectGetHeight(self.bounds) - 30;
+    
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.top.mas_equalTo(@15);
+        make.left.top.mas_equalTo(15);
         
-        make.bottom.mas_equalTo(@-15);
+        make.bottom.mas_equalTo(-15);
         
-        make.width.mas_equalTo(@(CGRectGetHeight(self.bounds) - 30));
+        make.width.mas_equalTo(w);
     }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
+        make.left.equalTo(self.iconImageView.mas_right).offset(15);
         
-        make.bottom.mas_equalTo(self.iconImageView.mas_centerY).offset(-3);
+        make.bottom.equalTo(self.iconImageView.mas_centerY).offset(-3);
         
     }];
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
+        make.left.equalTo(self.iconImageView.mas_right).offset(15);
         
-        make.top.mas_equalTo(self.iconImageView.mas_centerY).offset(3);
+        make.top.equalTo(self.iconImageView.mas_centerY).offset(3);
     }];
 }
 @end

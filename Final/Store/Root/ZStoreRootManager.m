@@ -9,7 +9,7 @@
 #import "ZStoreRootManager.h"
 #import "ZNaviConfigImpl.h"
 #import "ZFragmentConfig.h"
-
+#import "ZHomeViewController.h"
 @import JXTAlertManager;
 @import ZNoti;
 @import ZSign;
@@ -31,39 +31,46 @@
 
 @import SToolsKit;
 #if ZAppFormGlobalOne
-#import "ZHomeViewController.h"
 
+@import ZReport;
 @import ZAMap;
 @import LGSideMenuController;
 
 @import ZFocus;
 @import ZTList;
 @import ZReport;
-@import 
+@import ZGoldCleaner;
+
 #endif
-@implementation WLMainBean
 
-+ (instancetype)mainBeanWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
-    
-    return [[self alloc] initWithType:type andTitle:title andTag:tag andNormalIcon:normalIcon andSelectedIcon:selectedIcon];
-}
+//@implementation WLMainBean
+//
+//+ (instancetype)mainBeanWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
+//
+//    return [[self alloc] initWithType:type andTitle:title andTag:tag andNormalIcon:normalIcon andSelectedIcon:selectedIcon];
+//}
+//
+//- (instancetype)initWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
+//
+//    if (self = [super init]) {
+//
+//        self.type = type;
+//
+//        self.title = title;
+//
+//        self.tag = tag;
+//
+//        self.normalIcon = normalIcon;
+//
+//        self.selectedIcon = selectedIcon;
+//    }
+//    return self;
+//}
+//
+//@end
+@interface ZStoreRootManager ()
 
-- (instancetype)initWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
-    
-    if (self = [super init]) {
-        
-        self.type = type;
-        
-        self.title = title;
-        
-        self.tag = tag;
-        
-        self.normalIcon = normalIcon;
-        
-        self.selectedIcon = selectedIcon;
-    }
-    return self;
-}
+@property (nonatomic ,strong) ZTListBridge *listBridge;
 
 @end
 
@@ -71,6 +78,14 @@ static ZStoreRootManager *manager = nil;
 
 @implementation ZStoreRootManager
 
+- (ZTListBridge *)listBridge {
+    
+    if (!_listBridge) {
+        
+        _listBridge = [ZTListBridge new];
+    }
+    return _listBridge;
+}
 + (instancetype)shared {
     
     static dispatch_once_t onceToken;
@@ -78,6 +93,7 @@ static ZStoreRootManager *manager = nil;
         
         manager = [self new];
     });
+    
     return manager;
 }
 
@@ -208,9 +224,9 @@ static ZStoreRootManager *manager = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotoPrivacyTap:) name:ZNotiPrivacy object:nil ];
     
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleClickTap:) name:ZNotiCircleClick object:nil ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleClickTap:) name:ZNotiCircleItemClick object:nil ];
     //
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleReportTap:) name:ZNotiCircleGotoReport object:nil ];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleReportTap:) name:ZNotiCircleGotoReport object:nil ];
     //
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCircleShareTap:) name:ZNotiCircleShare object:nil ];
     //
@@ -540,7 +556,7 @@ static ZStoreRootManager *manager = nil;
                 
                 ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZLoginViewController new]] ;
                 
-                [UIApplication sharedApplication].delegate.window.rootViewController = navi;
+                [from presentViewController:navi animated:true completion:nil];
                 
                 [[ZAccountCache shared] clearAccount];
             }
@@ -566,6 +582,111 @@ static ZStoreRootManager *manager = nil;
         UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
         
         [navi pushViewController:order animated:true];
+        
+#endif
+    }
+    
+}
+- (void)onCircleClickTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"isFirstLogin"];
+    
+    if (userInfo && userInfo[@"from"]) {
+#if ZAppFormGlobalOne
+        
+        NSDictionary *circleJson = userInfo[@"value"];
+        
+        NSString *content = circleJson[@"content"];
+        
+        NSArray *contentJson = [NSJSONSerialization JSONObjectWithData:[content dataUsingEncoding:NSUTF8StringEncoding] options:(NSJSONReadingAllowFragments) error:nil];
+        
+        NSString *uid = circleJson[@"users"][@"encoded"];
+        
+        NSString *encoded = circleJson[@"encoded"];
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from jxt_showActionSheetWithTitle:@"操作" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+            
+            alertMaker.
+            addActionCancelTitle(@"取消").
+            addActionDefaultTitle(@"举报").
+            addActionDefaultTitle(@"关注").
+            addActionDestructiveTitle(@"黑名单(慎重选择)").
+            addActionDefaultTitle(@"拨打电话");
+            
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+            
+            if ([action.title isEqualToString:@"取消"]) {
+                
+            }
+            else if ([action.title isEqualToString:@"举报"]) {
+                
+                [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:circleJson andFrom:from];
+                
+            } else if ([action.title isEqualToString:@"拨打电话"]) {
+                
+                NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",[contentJson.lastObject[@"value"] componentsSeparatedByString:@":"].lastObject];
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            } else if ([action.title isEqualToString:@"关注"]) {
+                
+                if ([ZAccountCache shared].isLogin) {
+                    
+                    [self.listBridge focus:uid encode:encoded isFocus:true succ:^{
+                        
+                        
+                    }];
+                } else {
+                    
+                    [ZNotiConfigration postNotificationWithName:ZNotiUnLogin andValue:nil andFrom:from];
+                    
+                }
+                
+                
+            } else if ([action.title isEqualToString:@"黑名单(慎重选择)"]) {
+                
+                if ([ZAccountCache shared].isLogin) {
+                    
+                    [self.listBridge addBlack:uid targetEncoded:encoded content:@"" succ:^{
+                        
+                        
+                    }];
+                } else {
+                    
+                    [ZNotiConfigration postNotificationWithName:ZNotiUnLogin andValue:nil andFrom:from];
+                    
+                }
+                
+            }
+        }];
+        
+#endif
+    }
+    
+}
+- (void)onCircleReportTap:(NSNotification *)noti {
+    
+    NSDictionary *userInfo = noti.userInfo;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"isFirstLogin"];
+    
+    if (userInfo && userInfo[@"from"]) {
+#if ZAppFormGlobalOne
+        
+        NSDictionary *circleJson = userInfo[@"value"];
+        
+        NSString *uid = circleJson[@"users"][@"encoded"];
+        
+        NSString *encoded = circleJson[@"encoded"];
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZReportViewController *report = [ZReportViewController createReportWithUid:uid andEncode:encoded];
+        
+        [from.navigationController pushViewController:report animated:true];
         
 #endif
     }

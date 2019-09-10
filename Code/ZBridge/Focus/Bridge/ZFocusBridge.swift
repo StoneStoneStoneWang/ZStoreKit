@@ -111,7 +111,7 @@ extension ZFocusBridge: UITableViewDelegate {
             
             let type = self.dataSource[ip]
             
-            let alert = UIAlertController(title: "关注信息", message: "是否取消\(type.users.nickname)拉黑？", preferredStyle: .alert)
+            let alert = UIAlertController(title: "关注信息", message: "是否取消\(type.users.nickname)关注？", preferredStyle: .alert)
             
             let cancel = UIAlertAction(title: "取消", style: .cancel) { (a) in }
             
