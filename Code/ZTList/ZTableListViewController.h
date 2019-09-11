@@ -19,6 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#elif ZAppFormGlobalTwo
+
+@interface ZTableListViewController : ZTableLoadingViewController
+
++ (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag;
+
+@end
+
 #endif
 
 

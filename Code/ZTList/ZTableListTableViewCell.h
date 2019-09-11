@@ -20,6 +20,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong) ZCircleBean *keyValue;
 
 @end
+
+#elif ZAppFormGlobalTwo
+
+@interface ZTableListTableViewCell : ZBaseTableViewCell
+
+@property (nonatomic ,strong) ZCircleBean *keyValue;
+
+@end
+
 #endif
 
 

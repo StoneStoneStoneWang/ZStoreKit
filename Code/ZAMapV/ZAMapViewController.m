@@ -365,8 +365,12 @@
         
     }];
     
-#elif ZAppFormMapTwo
+#elif ZAppFormGlobalTwo
     
+    [self.bridge createUserInfo:self forms:ZKeyValues tag:@"" succ:^{
+        
+        
+    }];
     
 #endif
     

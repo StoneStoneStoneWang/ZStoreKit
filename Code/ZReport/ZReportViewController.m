@@ -125,7 +125,8 @@
     [self.bridge createReport:self
 #if ZAppFormGlobalOne
                       reports:ZReportKeyValues
-     
+#elif ZAppFormGlobalTwo
+                      reports:ZReportKeyValues
 #endif
                           uid:self.uid
                       encoded:self.encode

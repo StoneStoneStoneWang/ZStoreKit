@@ -41,6 +41,14 @@
 @{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
 ]
 
+#define ZEvaluateKeyValues @[\
+@{@"type": @"1",@"title": @"非常满意",@"isSelected": @true} ,\
+@{@"type": @"2",@"title": @"一般",@"isSelected": @false} ,\
+@{@"type": @"3",@"title": @"不满意",@"isSelected": @false} ,\
+@{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
+]
+
+
 #define ZNormalIcon "未选中"
 
 #define ZSelectedIcon "选中"
@@ -79,6 +87,13 @@
 @{@"type": @"2",@"title": @"二次收费",@"isSelected": @false} ,\
 @{@"type": @"3",@"title": @"色情暴力",@"isSelected": @false} ,\
 @{@"type": @"4",@"title": @"损坏财物",@"isSelected": @false} ,\
+@{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
+]
+
+#define ZEvaluateKeyValues @[\
+@{@"type": @"1",@"title": @"非常满意",@"isSelected": @true} ,\
+@{@"type": @"2",@"title": @"一般",@"isSelected": @false} ,\
+@{@"type": @"3",@"title": @"不满意",@"isSelected": @false} ,\
 @{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
 ]
 

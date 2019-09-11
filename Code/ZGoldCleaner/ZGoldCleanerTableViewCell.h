@@ -13,9 +13,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if ZAppFormGlobalOne
+
 @interface ZGoldCleanerTableViewCell : ZBaseTableViewCell
 
 @property (nonatomic ,strong) ZCircleBean *keyValue;
 @end
 
+#elif ZAppFormGlobalTwo
+
+@interface ZGoldCleanerTableViewCell : ZBaseTableViewCell
+
+@property (nonatomic ,strong) ZCircleBean *keyValue;
+
+@end
+
+#endif
 NS_ASSUME_NONNULL_END
