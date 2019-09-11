@@ -27,7 +27,7 @@ public final class ZEvaluateBridge: ZBaseBridge {
 }
 extension ZEvaluateBridge {
     
-    @objc public func createReport(_ vc: ZTableNoLoadingViewConntroller ,evaluations: [[String: Any]],uid: String,encoded: String ,textView: UITextView) {
+    @objc public func createEvaluate(_ vc: ZTableNoLoadingViewConntroller ,evaluations: [[String: Any]],encoded: String ) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
