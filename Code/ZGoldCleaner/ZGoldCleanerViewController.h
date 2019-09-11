@@ -20,6 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#elif ZAppFormGlobalTwo
+
+@interface ZGoldCleanerViewController : ZTableLoadingViewController
+
++ (instancetype)createGoldCleaner;
+
+@end
+
 #endif
 
 NS_ASSUME_NONNULL_END

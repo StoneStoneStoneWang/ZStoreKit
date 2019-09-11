@@ -134,6 +134,7 @@
 
 @property (nonatomic ,strong) UILabel *nameLabel;
 
+@property (nonatomic ,strong) UIButton *evaluteItem;
 
 @end
 
@@ -147,7 +148,7 @@
         
         _iconImageView.contentMode = UIViewContentModeCenter;
         
-        _iconImageView.layer.cornerRadius = 15;
+        _iconImageView.layer.cornerRadius = 5;
         
         _iconImageView.layer.masksToBounds = true;
     }
@@ -179,6 +180,29 @@
     return _titleLabel;
 }
 
+- (UIButton *)evaluteItem {
+    
+    if (!_evaluteItem) {
+        
+        _evaluteItem = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [_evaluteItem setTitle:@"去评价" forState:UIControlStateNormal];
+        
+        [_evaluteItem setTitle:@"去评价" forState:UIControlStateHighlighted];
+        
+        [_evaluteItem setTitle:@"已评价" forState:UIControlStateDisabled];
+        
+        _evaluteItem.titleLabel.font = [UIFont systemFontOfSize:13];
+        
+        [_evaluteItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#999999"] forState:UIControlStateDisabled];
+        
+        [_evaluteItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateNormal];
+        
+        [_evaluteItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateHighlighted];
+        
+    }
+    return _evaluteItem;
+}
 - (void)commitInit {
     [super commitInit];
     
@@ -204,9 +228,10 @@
     
     [mutable setAttributedString: [[NSAttributedString alloc] initWithString:@"已认证" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14] ,NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@ZFragmentColor]}]];
     
-    [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"好评: %ld",keyValue.countComment] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14] ,NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#666666"]}]];
-    
     self.titleLabel.attributedText = mutable;
+    
+    self.evaluteItem.enabled = !keyValue.isLaud;
+    
 }
 
 - (void)layoutSubviews {
@@ -228,9 +253,22 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
+        make.left.mas_equalTo(15);
+        
+        make.bottom.mas_equalTo(-5);
+        
+        make.height.mas_equalTo(@30);
+        
+    }];
+    
+    [self.evaluteItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        
         make.right.mas_equalTo(-15);
         
-        make.centerY.equalTo(self.iconImageView);
+        make.centerY.equalTo(self.titleLabel);
+        
+        make.height.mas_equalTo(@30);
+        
     }];
     
 }
