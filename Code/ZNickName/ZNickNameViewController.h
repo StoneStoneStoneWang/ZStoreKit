@@ -7,7 +7,7 @@
 //
 
 #import <ZTransition/ZTransition.h>
-
+#import "ZFragmentMix.h"
 typedef void(^ZNickNameSucc)(void);
 NS_ASSUME_NONNULL_BEGIN
 

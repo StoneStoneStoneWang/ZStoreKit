@@ -89,7 +89,7 @@
 }
 
 - (void)setBlack:(ZBlackBean *)black {
-    _black = black;
+//    _black = black;
     
     self.timeLabel.text = [[NSString stringWithFormat:@"%ld",black.intime / 1000] s_convertToDate:SDateTypeDateStyle];
     

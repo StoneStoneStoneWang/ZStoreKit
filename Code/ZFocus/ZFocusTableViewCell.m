@@ -87,7 +87,7 @@
     [self.contentView addSubview:self.timeLabel];
 }
 - (void)setFocus:(ZFocusBean *)focus {
-    _focus = focus;
+//    _focus = focus;
     
     self.timeLabel.text = [[NSString stringWithFormat:@"%ld",focus.intime / 1000] s_convertToDate:SDateTypeDateStyle];
     

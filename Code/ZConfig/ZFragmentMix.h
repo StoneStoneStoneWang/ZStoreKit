@@ -15,50 +15,68 @@
 
 #if ZAppFormGlobalOne
 
-#define ZAMapBunddleView n5kbxJhhFETy
+#define ZAMapBunddleView SEtBCOWUd_
 
-#define ZAMapHeaderView UfcBXh3P8p
+#define ZAMapHeaderView dB6CyhbHiMOm
 
-#define ZAMapTableViewCell Cp9ftyFhoL
+#define ZAMapTableViewCell ek_2lYcY0p
 
-#define ZTableListTableViewCell euXjorbjAU
+#define ZGoldCleanerTableViewCell ZGoldCleanerTableViewCell111
 
-#define ZWelcomeCollectionViewCell Hw0Exgi3mc
+#define ZGoldCleanerTableViewCell ZGoldCleanerTableViewCell111
 
-#define ZBlackTableViewCell JIx7oS9yAqr
+#elif ZAppFormGlobalTwo
 
-#define welcomeDelegate V59fgg5ZyFrJ
+#define ZAMapBunddleView SEtBCOWUd_
+
+#define ZAMapHeaderView dB6CyhbHiMOm
+
+#define ZAMapTableViewCell ek_2lYcY0p
+
+#define ZGoldCleanerTableViewCell ZGoldCleanerTableViewCell111
+
+#define ZGoldCleanerTableViewCell ZGoldCleanerTableViewCell111
 
 #endif
 
-#define ZFocusTableViewCell UJYbPjSJyX
+#define ZTableListTableViewCell QZTl93U6ZeQ
 
-#define ZSettingTableViewCell wkSXmDO_CVz
+#define ZFocusTableViewCell LUSVDYUvq1
 
-#define ZAboutTableViewCell L_fUugiXWnJ
+#define ZSettingTableViewCell xGRC0cH4l6Bw
 
-#define ZUserInfoTableViewCell f2xbv20aXrRP
+#define ZAboutTableViewCell xWX0YDUGNg
 
-#define ZProfileTableViewCell CI4fcnE4K6Cz
+#define ZUserInfoTableViewCell WwFffVESKjk
 
-#define ZNickNameSucc j0lFA3qErZST
+#define ZProfileTableViewCell D4P0OT37OXr2
 
-#define ZSignatureSucc ZQgzwzOYeQ4
+#define ZNickNameSucc vMbUPU4zYQ8M
 
-#define userInfo WBRP_IhfzDUx
+#define ZSignatureSucc JFmEttRuIT
 
-#define about v7NrnzxlwfD
+#define about rB9b6ykS4v2
 
-#define setting j6Kx8ul4t7xc
+#define setting GepCOY1UmX
 
-#define focus y7EvOmSFGC
+#define black k7OmcYMIIfqe
 
-#define black MYPULM8u7R8T
+#define icon RusnugAXGUQ
 
-#define icon Pq7sAOlW5mv3
+#define ZReportHeaderView z5rRunhiRBas
 
-#define ZReportHeaderView ZReportHeaderView1111
+#define ZReportTableViewCell UK4LkvVk9s4b
 
-#define ZReportTableViewCell ZReportTableViewCell111
+#define ZBlackTableViewCell WbP_UODp1l
+
+#define ZWelcomeCollectionViewCell J03EA9zeRdq
+
+#define ZNickNameViewController ZNickNameViewController111
+
+#define ZSignatureViewController ZSignatureViewController111
+
+#define ZAboutTableHeaderView ZAboutTableHeaderView111
+
+#define ZPravicyViewController ZPravicyViewController111
 
 #endif

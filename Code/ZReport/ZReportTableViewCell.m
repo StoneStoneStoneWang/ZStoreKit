@@ -51,7 +51,7 @@
     return _selectItem;
 }
 - (void)setReportBean:(ZReportBean *)reportBean {
-    _reportBean = reportBean;
+//    _reportBean = reportBean;
     
     self.selectItem.selected = reportBean.isSelected;
     

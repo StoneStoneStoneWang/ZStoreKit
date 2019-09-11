@@ -169,7 +169,7 @@
 }
 
 - (void)setKeyValue:(ZCircleBean *)keyValue {
-    _keyValue = keyValue;
+//    _keyValue = keyValue;
     
     self.bottomLineType = ZBottomLineTypeNone;
     

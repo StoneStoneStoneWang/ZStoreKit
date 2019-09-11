@@ -215,8 +215,8 @@
     }];
     
     switch (self.locationManager.authStatus) {
-        case kCLAuthorizationStatusAuthorizedAlways:
-        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            case kCLAuthorizationStatusAuthorizedAlways:
+            case kCLAuthorizationStatusAuthorizedWhenInUse:
             
         {
             [self.mapView addAnnotation:self.shareAnnotation];
@@ -250,6 +250,8 @@
                         [((ZAMapHeaderView *)weakSelf.headerView) updateLocationText:city];
                         
                         [weakSelf.bundleView updateLocationText:city];
+                        
+                        [weakSelf.bridge updateLocationAddress:city];
                     });
                     
                 }];
@@ -308,6 +310,8 @@
                     [((ZAMapHeaderView *)weakSelf.headerView) updateLocationText:city];
                     
                     [weakSelf.bundleView updateLocationText:city];
+                    
+                    [weakSelf.bridge updateLocationAddress:city];
                 });
                 
             }];
@@ -452,6 +456,8 @@
         [((ZAMapHeaderView *)weakSelf.headerView) updateLocationText:city];
         
         [weakSelf.bundleView updateLocationText:city];
+        
+        [weakSelf.bridge updateLocationAddress:city];
     }];
 }
 - (void)mapView:(MAMapView *)mapView didAddAnnotationViews:(NSArray *)views {

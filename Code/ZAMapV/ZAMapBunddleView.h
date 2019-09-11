@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZFragmentMix.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZAMapBunddleView : UIView

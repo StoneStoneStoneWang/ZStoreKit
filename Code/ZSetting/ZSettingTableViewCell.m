@@ -44,7 +44,7 @@
     return _swiItem;
 }
 - (void)setSetting:(ZSettingBean *)setting {
-    _setting = setting;
+//    _setting = setting;
     
     self.swiItem.hidden = true;
     

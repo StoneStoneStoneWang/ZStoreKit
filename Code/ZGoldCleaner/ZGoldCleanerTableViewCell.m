@@ -117,8 +117,6 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(15);
-        
         make.right.mas_equalTo(-15);
         
         make.centerY.equalTo(self.iconImageView);
