@@ -120,7 +120,7 @@
 #define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
 
 #pragma mark ---- 主色值
-#define ZFragmentColor "#50C9C3"
+#define ZFragmentColor "#D90DE8"
 
 #define ZBackIcon "返回"
 
