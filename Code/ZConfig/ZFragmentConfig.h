@@ -120,7 +120,7 @@
 #define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
 
 #pragma mark ---- 主色值
-#define ZFragmentColor "#D90DE8"
+#define ZFragmentColor "#FF9A9E"
 
 #define ZBackIcon "返回"
 
@@ -128,7 +128,7 @@
 
 #pragma mark ---- 欢迎界面 两种样式 选择第一种样式
 
-#define ZWelcomeImgs @[@"引导1",@"引导2"]
+#define ZWelcomeImgs @[@"画板1",@"画板2"]
 
 #define ZWelcomeFormOne 0
 
