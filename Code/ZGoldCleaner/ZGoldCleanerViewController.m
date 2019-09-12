@@ -114,7 +114,7 @@
 @import ZBridge;
 @import SToolsKit;
 @import ZHud;
-@interface ZGoldCleanerViewController ()
+@interface ZGoldCleanerViewController () <ZGoldCleanerTableViewCellDelegate>
 
 @property (nonatomic ,strong) ZTListBridge *bridge;
 
@@ -186,7 +186,6 @@
         alertMaker.
         addActionCancelTitle(@"取消").
         addActionDefaultTitle(@"举报").
-        addActionDefaultTitle(@"评价").
         addActionDefaultTitle(@"拨打电话");
         
     } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
@@ -205,17 +204,19 @@
             NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",[circle.contentMap.firstObject.value componentsSeparatedByString:@":"].lastObject];
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-        } else if ([action.title isEqualToString:@"评价"]) {
-            
-            if (circle.isLaud) {
-                
-                [ZHudUtil showInfo:@"您已经点评了!"];
-            } else {
-                
-                [ZNotiConfigration postNotificationWithName:ZNotiCircleImageClick andValue:data andFrom:self];
-            }
         }
     }];
+}
+
+- (void)onEnvaluateItemClick:(ZCircleBean *)keyValue {
+    
+    if (keyValue.isLaud) {
+        
+        [ZHudUtil showInfo:@"您已经点评了!"];
+    } else {
+        
+        [ZNotiConfigration postNotificationWithName:ZNotiGoToEvaluate andValue:keyValue.encoded andFrom:self];
+    }
 }
 @end
 

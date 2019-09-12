@@ -21,10 +21,17 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 #elif ZAppFormGlobalTwo
+@protocol ZGoldCleanerTableViewCellDelegate <NSObject>
+
+- (void)onEnvaluateItemClick:(ZCircleBean *)keyValue;
+
+@end
 
 @interface ZGoldCleanerTableViewCell : ZBaseTableViewCell
 
 @property (nonatomic ,strong) ZCircleBean *keyValue;
+
+@property (nonatomic ,weak) id <ZGoldCleanerTableViewCellDelegate> delegate;
 
 @end
 

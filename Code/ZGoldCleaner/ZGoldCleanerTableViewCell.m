@@ -75,6 +75,8 @@
     
     [self.contentView addSubview:self.titleLabel];
     
+    [self.contentView addSubview: self.evaluateItem];
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -213,8 +215,17 @@
     [self.contentView addSubview:self.titleLabel];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    [self.evaluteItem addTarget:self action:@selector(onEvaluateClick) forControlEvents:UIControlEventTouchUpInside];
 }
-
+- (void)onEvaluateClick {
+    
+    if ([self.delegate respondsToSelector:@selector(onEnvaluateItemClick:)]) {
+        
+        [self.delegate onEnvaluateItemClick:self.keyValue ];
+    }
+    
+}
 - (void)setKeyValue:(ZCircleBean *)keyValue {
     _keyValue = keyValue;
     
