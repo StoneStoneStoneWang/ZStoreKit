@@ -214,6 +214,8 @@
     
     [self.contentView addSubview:self.titleLabel];
     
+    [self.contentView addSubview:self.evaluteItem];
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [self.evaluteItem addTarget:self action:@selector(onEvaluateClick) forControlEvents:UIControlEventTouchUpInside];
