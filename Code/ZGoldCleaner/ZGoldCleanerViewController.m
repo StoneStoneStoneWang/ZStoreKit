@@ -148,6 +148,8 @@
     
     cell.bottomLineType = ZBottomLineTypeNormal;
     
+    cell.delegate = self;
+    
     return cell;
 }
 
