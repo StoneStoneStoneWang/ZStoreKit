@@ -8,7 +8,7 @@
 
 @import ZInner;
 #import "ZFragmentConfig.h"
-
+#import "ZFragmentMix.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @interface ZPravicyViewController : ZInnerViewController
