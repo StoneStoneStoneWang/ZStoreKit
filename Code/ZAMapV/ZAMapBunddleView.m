@@ -46,7 +46,13 @@
     
     if (!_iconImageView) {
         
+#if ZAppFormGlobalOne || ZAppFormGlobalTwo
+        
         _iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@ZNabla]];
+        
+#else
+        _iconImageView = [ UIImageView new];
+#endif
         
     }
     return _iconImageView;

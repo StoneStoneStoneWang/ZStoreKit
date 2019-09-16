@@ -33,7 +33,7 @@ public final class ZCommentBean: NSObject,Mappable,IdentifiableType {
         identity  <- map["encoded"]
     }
     
-    @objc public var intime: String = ""
+    @objc public var intime: Int = Int.max
     
     @objc public var content: String = ""
     

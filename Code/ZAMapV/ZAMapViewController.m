@@ -96,11 +96,11 @@
         [_completeItem setBackgroundImage:[UIImage s_transformFromHexColor:@ZFragmentColor] forState:UIControlStateNormal];
         
         [_completeItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@ZFragmentColor]] forState:UIControlStateHighlighted];
-        
+#if ZAppFormGlobalOne || ZAppFormGlobalTwo
         [_completeItem setTitle:@ZCompleteItemTitle forState: UIControlStateNormal];
         
         [_completeItem setTitle:@ZCompleteItemTitle forState: UIControlStateHighlighted];
-        
+#endif
         [_completeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         [_completeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
@@ -163,8 +163,10 @@
 - (UIImageView *)shareAnnotationView {
     
     if (!_shareAnnotationView) {
-        
+#if ZAppFormGlobalOne || ZAppFormGlobalTwo
         _shareAnnotationView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@ZAnnotationIcon]];
+        
+#endif
     }
     return _shareAnnotationView;
 }
@@ -215,8 +217,8 @@
     }];
     
     switch (self.locationManager.authStatus) {
-            case kCLAuthorizationStatusAuthorizedAlways:
-            case kCLAuthorizationStatusAuthorizedWhenInUse:
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
             
         {
             [self.mapView addAnnotation:self.shareAnnotation];
@@ -475,9 +477,9 @@
         if ([userLocalView isKindOfClass:[MAUserLocation class]]) {
             
             MAUserLocationRepresentation *rep = [[MAUserLocationRepresentation alloc] init];
-            
+#if ZAppFormGlobalOne || ZAppFormGlobalTwo
             rep.image = [UIImage imageNamed:@ZLightCircle];
-            
+#endif 
             rep.showsAccuracyRing = true;
             
             [mapView updateUserLocationRepresentation:rep ];

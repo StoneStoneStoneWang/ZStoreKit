@@ -79,6 +79,8 @@ FOUNDATION_EXPORT NSString * const ZNotiRemoveFocus;
 
 FOUNDATION_EXPORT NSString * const ZNotiCircleItemClick;
 
+FOUNDATION_EXPORT NSString * const ZNotiMoreItemClick;
+
 FOUNDATION_EXPORT NSString * const ZNotiMyCircleItemClick;
 
 FOUNDATION_EXPORT NSString * const ZNotiCircleShare;

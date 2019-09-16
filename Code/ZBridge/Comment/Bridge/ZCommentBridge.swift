@@ -26,7 +26,7 @@ public final class ZCommentBridge: ZBaseBridge {
 }
 extension ZCommentBridge {
     
-    @objc public func createTList(_ vc: ZTableLoadingViewController,encode: String) {
+    @objc public func createComment(_ vc: ZTableLoadingViewController,encode: String) {
         
         self.vc = vc
         

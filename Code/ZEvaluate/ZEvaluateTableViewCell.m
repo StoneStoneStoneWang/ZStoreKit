@@ -41,9 +41,13 @@
         
         _selectItem = [UIButton buttonWithType:UIButtonTypeCustom];
         
+#if ZAppFormGlobalTwo
+        
         [_selectItem setImage:[UIImage imageNamed:@ZNormalIcon] forState:UIControlStateNormal];
         
         [_selectItem setImage:[UIImage imageNamed:@ZSelectedIcon] forState:UIControlStateSelected];
+        
+#endif
         
         [_selectItem sizeToFit];
         

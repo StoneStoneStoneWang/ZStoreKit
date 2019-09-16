@@ -26,8 +26,14 @@
     
     if (!_iconImageView) {
         
-        _iconImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@ZLocationIcon]];
+#if ZAppFormGlobalOne || ZAppFormGlobalTwo
         
+        _iconImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@ZLocationIcon]];
+#else
+        
+        _iconImageView = [UIImageView new];
+        
+#endif
         _iconImageView.contentMode = UIViewContentModeCenter;
     }
     return _iconImageView;

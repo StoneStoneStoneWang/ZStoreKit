@@ -73,7 +73,7 @@
     [super configOwnSubViews];
     
     [self.tableView registerClass:[ZEvaluateTableViewCell class] forCellReuseIdentifier:@"cell"];
-
+    
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
@@ -89,7 +89,10 @@
     
     self.bridge = [ZEvaluateBridge new];
     
+#if ZAppFormGlobalTwo
     [self.bridge createEvaluate:self evaluations:ZEvaluateKeyValues encoded:self.encode ];
+    
+#endif 
 }
 
 - (void)configNaviItem {

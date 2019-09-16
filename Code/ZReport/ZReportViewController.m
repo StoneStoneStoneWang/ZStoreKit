@@ -122,15 +122,16 @@
 - (void)configViewModel {
     
     self.bridge = [ZReportBridge new];
+    
+#if ZAppFormGlobalOne || ZAppFormGlobalTwo
     [self.bridge createReport:self
-#if ZAppFormGlobalOne
                       reports:ZReportKeyValues
-#elif ZAppFormGlobalTwo
-                      reports:ZReportKeyValues
-#endif
+     
                           uid:self.uid
                       encoded:self.encode
                      textView:self.textView];
+    
+#endif
 }
 
 - (void)configNaviItem {

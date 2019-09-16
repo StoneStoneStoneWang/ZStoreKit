@@ -10,7 +10,9 @@
 
 #define ZAppFormGlobalOne 0 // 地图类型 含有抽屉
 
-#define ZAppFormGlobalTwo 1 // 地图类型 不含抽屉
+#define ZAppFormGlobalTwo 0 // 地图类型 不含抽屉
+
+#define ZAppFormGlobalThree 1 // 朋友圈类型
 
 #if ZAppFormGlobalOne
 
@@ -47,11 +49,6 @@
 @{@"type": @"3",@"title": @"不满意",@"isSelected": @false} ,\
 @{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
 ]
-
-
-#define ZNormalIcon "未选中"
-
-#define ZSelectedIcon "选中"
 
 #define ZReportHeaderText "1.保洁人员是我们公司内部员工,我们竭诚为您服务\n \
 2.您的举报十分关键,我们会根据您的举报,调查我们的保洁人员,如果属实我们会对保洁人员职业道德培训和思想教育培训,严重者开除处理、移交公安机关\n \
@@ -97,9 +94,6 @@
 @{@"type": @"5",@"title": @"其他",@"isSelected": @false} ,\
 ]
 
-#define ZNormalIcon "未选中"
-
-#define ZSelectedIcon "选中"
 #define ZReportHeaderText "七小福保洁竭诚为您服务\n \
 1.保洁人员是我们公司内部员工,我们竭诚为您服务\n \
 2.您的举报十分关键,我们会根据您的举报,调查我们的保洁人员,如果属实我们会对保洁人员职业道德培训和思想教育培训,严重者开除处理、移交公安机关\n \
@@ -187,3 +181,6 @@
 
 #define ZMoreIcon "更多"
 
+#define ZNormalIcon "未选中"
+
+#define ZSelectedIcon "选中"
