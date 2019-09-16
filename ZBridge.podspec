@@ -438,4 +438,28 @@ Pod::Spec.new do |spec|
       bridge.dependency 'RxDataSources'
     end
   end
+  
+  # 列表
+  spec.subspec 'Comment' do |comment|
+    
+    comment.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Comment/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZBean/Comment'
+    end
+    
+    comment.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Comment/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Comment/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'ZCocoa/ASM'
+    end
+  end
 end
