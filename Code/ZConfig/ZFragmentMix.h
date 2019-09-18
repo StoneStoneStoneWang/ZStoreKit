@@ -55,14 +55,6 @@
 
 #define ZSignatureSucc JFmEttRuIT
 
-#define about rB9b6ykS4v2
-
-#define setting GepCOY1UmX
-
-#define black k7OmcYMIIfqe
-
-#define icon RusnugAXGUQ
-
 #define ZReportHeaderView z5rRunhiRBas
 
 #define ZReportTableViewCell UK4LkvVk9s4b
@@ -78,5 +70,11 @@
 #define ZAboutTableHeaderView ZAboutTableHeaderView111
 
 #define ZPravicyViewController ZPravicyViewController111
+
+#define ZFuncItemView ZFuncItemView111
+
+#define ZCircleImageTableViewCell ZCircleImageTableViewCell111
+
+#define ZCircleVideoTableViewCell ZCircleVideoTableViewCell111
 
 #endif

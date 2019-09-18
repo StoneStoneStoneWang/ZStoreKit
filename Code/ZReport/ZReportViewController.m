@@ -95,9 +95,15 @@
     
     [self.tableView registerClass:[ZReportTableViewCell class] forCellReuseIdentifier:@"cell"];
     
+#if ZAppFormGlobalOne || ZAppFormGlobalTwo
+    
     self.headerView = [[ZReportHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 200)];
     
     self.tableView.tableHeaderView = self.headerView;
+#elif ZAppFormGlobalThree
+    
+    
+#endif
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 150)];
     
@@ -123,7 +129,7 @@
     
     self.bridge = [ZReportBridge new];
     
-#if ZAppFormGlobalOne || ZAppFormGlobalTwo
+#if ZAppFormGlobalOne || ZAppFormGlobalTwo || ZAppFormGlobalThree
     [self.bridge createReport:self
                       reports:ZReportKeyValues
      

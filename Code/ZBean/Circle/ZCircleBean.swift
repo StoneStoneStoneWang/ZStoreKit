@@ -44,6 +44,8 @@ public class ZCircleBean: NSObject, Mappable , IdentifiableType {
         projectId  <- map["projectId"]
         
         encoded  <- map["encoded"]
+        
+        isattention  <- map["isattention"]
     }
     
     @objc public var projectId: String = ""
@@ -63,6 +65,8 @@ public class ZCircleBean: NSObject, Mappable , IdentifiableType {
     @objc public var users: ZUserBean!
     
     @objc public var countComment: Int = Int.max
+    
+    @objc public var isattention: Bool = false
     
     @objc public var contentMap: [ZKeyValueBean] {
         

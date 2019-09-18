@@ -36,6 +36,13 @@
 #if ZAppFormGlobalOne
         
         _textLabel.text = @ZReportHeaderText;
+        
+#elif ZAppFormGlobalTwo
+        _textLabel.text = @ZReportHeaderText;
+        
+#elif ZAppFormGlobalThree
+        
+        
 #endif
     }
     return _textLabel;

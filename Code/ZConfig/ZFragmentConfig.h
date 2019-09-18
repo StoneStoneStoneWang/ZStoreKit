@@ -14,6 +14,8 @@
 
 #define ZAppFormGlobalThree 1 // 朋友圈类型
 
+#define ZCircleFormOne 1  // 朋友圈类型 1 图片比例 4 / 3 左边
+
 #if ZAppFormGlobalOne
 
 #define ZKeyValues @[\
@@ -103,9 +105,20 @@
 
 #define ZGoldCleanerTag "金牌保洁"
 
+#elif ZAppFormGlobalThree
+
+#define ZReportKeyValues @[\
+@{@"type": @"1",@"title": @"标题夸张",@"isSelected": @true} ,\
+@{@"type": @"2",@"title": @"低俗色情",@"isSelected": @false} ,\
+@{@"type": @"3",@"title": @"广告软文",@"isSelected": @false} ,\
+@{@"type": @"4",@"title": @"内容不实",@"isSelected": @false} ,\
+@{@"type": @"5",@"title": @"涉嫌违法犯罪",@"isSelected": @false} ,\
+@{@"type": @"6",@"title": @"其他问题",@"isSelected": @false} ,\
+]
+
 #endif
 
-#define ZAppKey "7a855e35140e4a2f8591dbcaeadc32b1"
+#define ZAppKey "b4d1d0b481cd474aa137520f2ae60c97"
 
 #define ZWXKey "wx6daf9371d9e7472a"
 
@@ -184,3 +197,11 @@
 #define ZNormalIcon "未选中"
 
 #define ZSelectedIcon "选中"
+
+#define ZWatchIcon "观看"
+
+#define ZCommentIcon "评论"
+
+#define ZFunNormalIcon "点赞未"
+
+#define ZFunSelectedIcon "点赞选"

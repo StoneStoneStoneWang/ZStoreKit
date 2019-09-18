@@ -231,7 +231,7 @@
     
     self.bridge = [ZCommentBridge new];
     
-    [self.bridge createTList:self encode:self.encode];
+    [self.bridge createComment:self encode:self.encode];
     
     [self.tableView.mj_header beginRefreshing];
     
