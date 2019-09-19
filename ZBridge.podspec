@@ -500,14 +500,14 @@ Pod::Spec.new do |spec|
   # 列表
   spec.subspec 'Publish' do |publish|
     
-    content.subspec 'VM' do |vm|
+    publish.subspec 'VM' do |vm|
       vm.source_files = "Code/ZBridge/Publish/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZBean/Circle'
     end
     
-    content.subspec 'Bridge' do |bridge|
+    publish.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/ZBridge/Publish/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Publish/VM'
       bridge.dependency 'ZHud'
