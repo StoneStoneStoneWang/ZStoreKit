@@ -462,4 +462,60 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZCocoa/ASM'
     end
   end
+  # 列表
+  spec.subspec 'Content' do |content|
+    
+    content.subspec 'VM' do |vm|
+      vm.source_files = "Code/ZBridge/Content/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZBean/Circle'
+    end
+    
+    content.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Content/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Content/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'ZCocoa/ASM'
+    end
+  end
+  # 个性签名
+  spec.subspec 'TextEdit' do |textEdit|
+    
+    textEdit.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/TextEdit/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+    end
+    
+    textEdit.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/TextEdit/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/TextEdit/VM'
+      bridge.dependency 'ZBase'
+    end
+  end
+  # 列表
+  spec.subspec 'Publish' do |publish|
+    
+    content.subspec 'VM' do |vm|
+      vm.source_files = "Code/ZBridge/Publish/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZBean/Circle'
+    end
+    
+    content.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Publish/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Publish/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZRealReq'
+    end
+  end
+  
 end

@@ -12,7 +12,7 @@
 
 @interface ZVideoViewController ()
 
-@property (nonatomic ,strong)
+//@property (nonatomic ,strong)
 @end
 
 @implementation ZVideoViewController
