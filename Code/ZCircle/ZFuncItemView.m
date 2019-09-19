@@ -9,6 +9,7 @@
 #import "ZFuncItemView.h"
 @import SToolsKit;
 @import Masonry;
+@import ZNoti;
 @interface ZFuncItemView ()
 
 @property (nonatomic ,strong) UIButton *watchItem;
@@ -29,7 +30,7 @@
         
         _watchItem = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [_watchItem setImage:[UIImage imageNamed:@ZWatchIcon] forState:UIControlStateNormal];
+//        [_watchItem setImage:[UIImage imageNamed:@ZWatchIcon] forState:UIControlStateNormal];
         
         _watchItem.titleLabel.font = [UIFont systemFontOfSize:11];
         
@@ -54,7 +55,7 @@
         
         [_funItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] forState:UIControlStateNormal];
         
-        [_funItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@ZFragmentColor] forState:UIControlStateSelected];
+        [_funItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] forState:UIControlStateSelected];
     }
     return _funItem;
 }
@@ -103,14 +104,53 @@
     [self addSubview: self.funItem];
     
     [self addSubview:self.moreItem];
+    
+    [self.watchItem addTarget:self action:@selector(onWatchItemClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.commentItem addTarget:self action:@selector(onCommentItemClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.funItem addTarget:self action:@selector(onFunItemClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.moreItem addTarget:self action:@selector(onMoreItemClick) forControlEvents:UIControlEventTouchUpInside];
 }
+- (void)onWatchItemClick {
+    
+    if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onFuncItemClick:)]) {
+        
+        [self.mDelegate onFuncItemClick:ZFuncItemTypeWatch];
+    }
+}
+
+- (void)onFunItemClick {
+    
+    if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onFuncItemClick:)]) {
+        
+        [self.mDelegate onFuncItemClick:ZFuncItemTypeFun];
+    }
+}
+- (void)onCommentItemClick {
+    
+    if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onFuncItemClick:)]) {
+        
+        [self.mDelegate onFuncItemClick:ZFuncItemTypeComment];
+    }
+}
+
+- (void)onMoreItemClick {
+    
+    if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onFuncItemClick:)]) {
+        
+        [self.mDelegate onFuncItemClick:ZFuncItemTypeMore];
+    }
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
     [self.watchItem mas_makeConstraints:^(MASConstraintMaker *make) {
-    
+        
         make.left.centerY.equalTo(self);
-    
+        
         make.width.mas_equalTo(35);
     }];
     
@@ -141,12 +181,14 @@
         make.left.equalTo(self.funItem.mas_right);
     }];
 }
+
 - (void)setCircleBean:(ZCircleBean *)circleBean {
     
-    [self.watchItem setTitle:[NSString stringWithFormat:@"%ld",circleBean.countLaud] forState:UIControlStateNormal];
+    [self.funItem setTitle:[NSString stringWithFormat:@" %ld",circleBean.countLaud] forState:UIControlStateNormal];
     
-    [self.commentItem setTitle:[NSString stringWithFormat:@"%ld",circleBean.countComment] forState:UIControlStateNormal];
+    [self.commentItem setTitle:[NSString stringWithFormat:@" %ld",circleBean.countComment] forState:UIControlStateNormal];
     
     self.funItem.selected = circleBean.isLaud;
 }
+
 @end

@@ -10,8 +10,10 @@
 #import "ZCircleTableViewCell.h"
 @import ZBridge;
 @import SToolsKit;
+@import JXTAlertManager;
+@import ZNoti;
 
-@interface ZCircleViewController ()
+@interface ZCircleViewController () <ZCircleTableViewCellDelegate>
 
 @property (nonatomic ,strong) ZTListBridge *bridge;
 
@@ -76,6 +78,8 @@
         
         cell.bottomLineType = ZBottomLineTypeNormal;
         
+        cell.mDelegate = self;
+        
         return cell;
     } else {
         
@@ -84,6 +88,8 @@
         cell.circleBean = data;
         
         cell.bottomLineType = ZBottomLineTypeNormal;
+        
+        cell.mDelegate = self;
         
         return cell;
     }
@@ -116,11 +122,78 @@
     
     if (self.isMy) {
         
-        self.title = @"我的订单";
+        self.title = @"我的发布";
         
     } else {
         
         self.title = self.tag;
+    }
+}
+- (void)onFuncItemClick:(ZFuncItemType)itemType forCircleBean:(ZCircleBean *)circleBean {
+    
+    if (itemType == ZFuncItemTypeFun) {
+        
+        [self jxt_showAlertWithTitle:circleBean.isLaud ? @"是否取消点赞" : @"是否点赞" message:nil appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+            
+            alertMaker.
+            addActionCancelTitle(@"取消").
+            addActionDefaultTitle(circleBean.isLaud ? @"取消点赞" : @"点赞");
+            
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+            
+            if ([action.title isEqualToString:@"取消"]) {
+                
+            }
+            else if ([action.title isEqualToString:@"点赞"] || [action.title isEqualToString:@"取消点赞"]) {
+                
+                [self.bridge like:circleBean.encoded isLike:circleBean.isLaud succ:^{
+                    
+                    
+                }];
+            }
+            
+        }];
+    } else if (itemType == ZFuncItemTypeMore){
+        
+        [self jxt_showActionSheetWithTitle:@"操作" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+            
+            alertMaker.
+            addActionCancelTitle(@"取消").
+            addActionDefaultTitle(@"举报").
+            addActionDefaultTitle(circleBean.isattention ? @"取消关注" : @"关注").
+            addActionDestructiveTitle(@"黑名单(慎重选择)");
+            
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+            
+            if ([action.title isEqualToString:@"取消"]) {
+                
+            }
+            else if ([action.title isEqualToString:@"举报"]) {
+                
+                [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:[self.bridge converToJson:circleBean] andFrom:self];
+                
+            } else if ([action.title isEqualToString:@"关注"] || [action.title isEqualToString:@"取消关注"]) {
+                
+                [self.bridge focus:circleBean.users.encoded encode:circleBean.encoded isFocus:circleBean.isattention succ:^{
+                   
+                    
+                }];
+                
+            } else if ([action.title isEqualToString:@"黑名单(慎重选择)"]) {
+                
+                [self.bridge addBlack:circleBean.users.encoded targetEncoded:circleBean.encoded content:@"" succ:^{
+                    
+                }];
+                
+            }
+        }];
+    } else if (itemType == ZFuncItemTypeComment){
+        
+        [ZNotiConfigration postNotificationWithName:ZNotiCircleItemClick andValue:[self.bridge converToJson:circleBean] andFrom:self];
+        
+    } else if (itemType == ZFuncItemTypeWatch){
+        
+        [ZNotiConfigration postNotificationWithName:ZNotiCircleItemClick andValue:[self.bridge converToJson:circleBean] andFrom:self];
     }
 }
 @end

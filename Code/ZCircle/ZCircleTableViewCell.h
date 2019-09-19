@@ -9,11 +9,21 @@
 #import <ZTable/ZTable.h>
 #import "ZFragmentMix.h"
 #import "ZFragmentConfig.h"
+#import "ZFuncItemView.h"
 NS_ASSUME_NONNULL_BEGIN
 @import ZBean;
+
+@protocol ZCircleTableViewCellDelegate <NSObject>
+
+- (void)onFuncItemClick:(ZFuncItemType )itemType forCircleBean:(ZCircleBean *)circleBean;
+
+@end
+
 @interface ZCircleTableViewCell : ZBaseTableViewCell
 
 @property (nonatomic ,strong) ZCircleBean *circleBean;
+
+@property (nonatomic ,weak) id <ZCircleTableViewCellDelegate> mDelegate;
 
 @end
 

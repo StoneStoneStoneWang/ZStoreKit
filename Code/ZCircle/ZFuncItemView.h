@@ -12,9 +12,28 @@
 @import ZBean;
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger ,ZFuncItemType) {
+    
+    ZFuncItemTypeWatch,
+    
+    ZFuncItemTypeComment,
+    
+    ZFuncItemTypeFun ,
+    
+    ZFuncItemTypeMore
+};
+
+@protocol ZFuncItemViewDelegate <NSObject>
+
+- (void)onFuncItemClick:(ZFuncItemType )itemType;
+
+@end
+
 @interface ZFuncItemView : UIView
 
 - (void)setCircleBean:(ZCircleBean *)circleBean;
+
+@property (nonatomic ,weak) id <ZFuncItemViewDelegate> mDelegate;
 
 @end
 

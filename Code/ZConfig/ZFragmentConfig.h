@@ -202,6 +202,6 @@
 
 #define ZCommentIcon "评论"
 
-#define ZFunNormalIcon "点赞未"
+#define ZFunNormalIcon "点赞未选中"
 
-#define ZFunSelectedIcon "点赞选"
+#define ZFunSelectedIcon "点赞选中"

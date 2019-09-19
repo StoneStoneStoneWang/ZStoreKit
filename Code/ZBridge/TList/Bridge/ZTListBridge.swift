@@ -13,6 +13,7 @@ import ZCocoa
 import ZBean
 import ZHud
 import ZNoti
+import ZCache
 
 @objc (ZTListBridge)
 public final class ZTListBridge: ZBaseBridge {
@@ -193,6 +194,13 @@ extension ZTListBridge {
     
     @objc public func addBlack(_ OUsEncoded: String,targetEncoded: String ,content: String ,succ: @escaping () -> () ) {
         
+        if !ZAccountCache.default.isLogin() {
+            
+            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
+            
+            return
+        }
+        
         ZHudUtil.show(withStatus: "添加黑名单中...")
         
         ZTListViewModel
@@ -206,6 +214,8 @@ extension ZTListBridge {
                     
                     succ()
                     
+                    self.vc.tableView.mj_header.beginRefreshing()
+                    
                     ZHudUtil.showInfo(msg)
                 case .failed(let msg):
                     
@@ -218,6 +228,13 @@ extension ZTListBridge {
     }
     @objc public func focus(_ uid: String ,encode: String ,isFocus: Bool ,succ: @escaping () -> () ) {
         
+        if !ZAccountCache.default.isLogin() {
+            
+            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
+            
+            return
+        }
+        
         ZHudUtil.show(withStatus: isFocus ? "取消关注中..." : "关注中...")
         
         ZTListViewModel
@@ -227,11 +244,22 @@ extension ZTListBridge {
                 ZHudUtil.pop()
                 
                 switch result {
-                case .ok(let msg):
+                case .ok:
+                    
+                    var values = self.viewModel.output.tableData.value
+                    
+                    if let index = values.firstIndex(where: { $0.encoded == encode }) {
+                        
+                        let circle = values[index]
+                        
+                        circle.isattention = !circle.isattention
+                        
+                        self.viewModel.output.tableData.accept(values)
+                    }
                     
                     succ()
                     
-                    ZHudUtil.showInfo(msg)
+                    ZHudUtil.showInfo(isFocus ? "取消关注成功" : "关注成功")
                 case .failed(let msg):
                     
                     ZHudUtil.showInfo(msg)
@@ -243,44 +271,44 @@ extension ZTListBridge {
         
     }
     
-    @objc public func operation(_ encoded: String ,isLike: Bool ,status: String ,aMsg: String,succ: @escaping () -> () ) {
+    @objc public func converToJson(_ circle: ZCircleBean) -> [String: Any] {
         
-        ZHudUtil.show(withStatus: status)
-        
-        ZTListViewModel
-            .like(encoded, isLike: isLike)
-            .drive(onNext: { (result) in
-                
-                ZHudUtil.pop()
-                
-                switch result {
-                case .ok(_):
-                    
-                    succ()
-                    
-                    ZHudUtil.showInfo(aMsg)
-                case .failed(let msg):
-                    
-                    ZHudUtil.showInfo(msg)
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposed)
+        return circle.toJSON()
     }
     
-    @objc public func like(_ encoded: String ,isLike: Bool ,succ: @escaping () -> () ) {
+    @objc public func like(_ encoded: String,isLike: Bool ,succ: @escaping () -> () ) {
+        
+        if !ZAccountCache.default.isLogin() {
+            
+            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
+            
+            return
+        }
         
         ZHudUtil.show(withStatus: isLike ? "取消点赞中..." : "点赞中...")
         
         ZTListViewModel
-            .like(encoded, isLike: isLike)
-            .drive(onNext: { (result) in
+            .like(encoded, isLike: !isLike)
+            .drive(onNext: { [unowned self] (result) in
                 
                 ZHudUtil.pop()
                 
                 switch result {
                 case .ok(let msg):
+                    
+                    var values = self.viewModel.output.tableData.value
+                    
+                    if let index = values.firstIndex(where: { $0.encoded == encoded }) {
+                        
+                        let circle = values[index]
+                        
+                        circle.isLaud = !circle.isLaud
+                        
+                        if isLike { circle.countLaud -= 1 }
+                        else { circle.countLaud += 1}
+                        
+                        self.viewModel.output.tableData.accept(values)
+                    }
                     
                     succ()
                     

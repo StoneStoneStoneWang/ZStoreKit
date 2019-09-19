@@ -27,7 +27,7 @@
     return _textField;
 }
 - (void)setKeyValue:(ZKeyValueBean *)keyValue {
-//    _keyValue = keyValue;
+    _keyValue = keyValue;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
