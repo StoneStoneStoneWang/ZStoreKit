@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   
   spec.vendored_frameworks = 'Framework/ZPlayer/ZPlayer.framework'
   
-  spec.resource_bundles    = {'ZPlayer' => 'Framework/ZPlayer.bundle'}
+  spec.resource_bundles    = {'ZPlayer' => 'Framework/ZPlayer/ZPlayer.bundle'}
   
   spec.dependency 'MobileVLCKit'
   
