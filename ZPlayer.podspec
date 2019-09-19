@@ -24,9 +24,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'Framework/ZPlayer.framework'
+  spec.vendored_frameworks = 'Framework/ZPlayer/ZPlayer.framework'
   
-  spec.resource_bundles    = {'WLVideoPlayer' => 'Framework/WLVideoPlayer.bundle'}
+  spec.resource_bundles    = {'WLVideoPlayer' => 'Framework/ZPlayer.bundle'}
   
   spec.dependency 'MobileVLCKit'
   
