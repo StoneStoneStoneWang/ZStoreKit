@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZVideoViewController : ZBaseViewController
 
++ (instancetype)createVideoWithEncode:(NSString *)encode;
+
 @end
 
 NS_ASSUME_NONNULL_END
