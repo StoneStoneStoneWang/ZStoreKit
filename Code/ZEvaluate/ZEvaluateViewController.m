@@ -108,4 +108,8 @@
     
     return 48;
 }
+- (BOOL)canPanResponse {
+    
+    return true;
+}
 @end

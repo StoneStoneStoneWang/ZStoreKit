@@ -10,9 +10,11 @@
 #import "ZFragmentMix.h"
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^ZCommentOperation)(void);
+
 @interface ZCommentViewController : ZTableLoadingViewController
 
-+ (instancetype)createCommentWithEncode:(NSString *)encode ;
++ (instancetype)createCommentWithEncode:(NSString *)encode andOp:(ZCommentOperation) op;
 
 @property (nonatomic ,strong ,readonly) UIView *bottomBar;
 

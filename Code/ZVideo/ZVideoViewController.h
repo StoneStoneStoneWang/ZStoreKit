@@ -6,13 +6,16 @@
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 
-#import <ZBase/ZBase.h>
 
+#import <ZTransition/ZTransition.h>
 NS_ASSUME_NONNULL_BEGIN
+@import ZBean;
 
-@interface ZVideoViewController : ZBaseViewController
+typedef void(^ZVideoOperation)(void);
 
-+ (instancetype)createVideoWithEncode:(NSString *)encode;
+@interface ZVideoViewController : ZTViewController
+
++ (instancetype)createVideoWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andOp:(ZVideoOperation )op;
 
 @end
 

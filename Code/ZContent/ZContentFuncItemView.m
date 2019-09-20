@@ -1,16 +1,16 @@
 //
-//  ZFuncItemView.m
+//  ZContentFuncItemView.m
 //  ZFragment
 //
-//  Created by three stone 王 on 2019/9/18.
+//  Created by three stone 王 on 2019/9/20.
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 
-#import "ZFuncItemView.h"
+#import "ZContentFuncItemView.h"
 @import SToolsKit;
 @import Masonry;
 @import ZNoti;
-@interface ZFuncItemView ()
+@interface ZContentFuncItemView ()
 
 @property (nonatomic ,strong) UIButton *watchItem;
 
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation ZFuncItemView
+@implementation ZContentFuncItemView
 
 - (UIButton *)watchItem {
     
@@ -114,12 +114,14 @@
     [self.funItem addTarget:self action:@selector(onFunItemClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self.moreItem addTarget:self action:@selector(onMoreItemClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.backgroundColor = [UIColor whiteColor];
 }
 - (void)onWatchItemClick {
     
     if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onFuncItemClick:)]) {
         
-        [self.mDelegate onFuncItemClick:ZFuncItemTypeWatch];
+        [self.mDelegate onFuncItemClick:ZContentFuncItemTypeWatch];
     }
 }
 
@@ -127,14 +129,14 @@
     
     if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onFuncItemClick:)]) {
         
-        [self.mDelegate onFuncItemClick:ZFuncItemTypeFun];
+        [self.mDelegate onFuncItemClick:ZContentFuncItemTypeFun];
     }
 }
 - (void)onCommentItemClick {
     
     if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onFuncItemClick:)]) {
         
-        [self.mDelegate onFuncItemClick:ZFuncItemTypeComment];
+        [self.mDelegate onFuncItemClick:ZContentFuncItemTypeComment];
     }
 }
 
@@ -142,46 +144,88 @@
     
     if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onFuncItemClick:)]) {
         
-        [self.mDelegate onFuncItemClick:ZFuncItemTypeMore];
+        [self.mDelegate onFuncItemClick:ZContentFuncItemTypeMore];
     }
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [self.watchItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.centerY.equalTo(self);
-        
-        make.width.mas_equalTo(35);
-    }];
+    CGFloat width = CGRectGetWidth(self.bounds) / 4;
     
-    [self.commentItem mas_makeConstraints:^(MASConstraintMaker *make) {
+    if (KISIPHONEX_UP) {
         
-        make.centerY.equalTo(self);
+        [self.watchItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+        }];
         
-        make.width.mas_equalTo(35);
+        [self.commentItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.watchItem.mas_right);
+        }];
         
-        make.left.equalTo(self.watchItem.mas_right);
-    }];
+        [self.funItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.commentItem.mas_right);
+        }];
+        
+        [self.moreItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.funItem.mas_right);
+        }];
+    } else {
+        
+        [self.watchItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+        }];
+        
+        [self.commentItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.watchItem.mas_right);
+        }];
+        
+        [self.funItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.commentItem.mas_right);
+        }];
+        
+        [self.moreItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.funItem.mas_right);
+        }];
+    }
     
-    [self.funItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(self);
-        
-        make.width.mas_equalTo(35);
-        
-        make.left.equalTo(self.commentItem.mas_right);
-    }];
     
-    [self.moreItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(self);
-        
-        make.width.mas_equalTo(35);
-        
-        make.left.equalTo(self.funItem.mas_right);
-    }];
 }
 
 - (void)setCircleBean:(ZCircleBean *)circleBean {

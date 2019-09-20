@@ -135,6 +135,7 @@
     }
     return _avatarImageView;
 }
+
 - (void)setCircleBean:(ZCircleBean *)circleBean {
     
     self.someCircle = circleBean;
@@ -202,8 +203,6 @@
         make.right.mas_equalTo(-15);
     }];
     
-    
-    
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.iconImageView);
@@ -226,15 +225,15 @@
     }];
     
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-
+        
         make.left.equalTo(self.avatarImageView.mas_right).offset(10);
-
+        
         make.centerY.equalTo(self.avatarImageView.mas_centerY);
-
+        
         make.height.mas_equalTo(30);
-
+        
         make.right.equalTo(self.funcView.mas_left);
-
+        
     }];
     
 }
@@ -476,7 +475,7 @@
     }];
     
     [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-       
+        
         make.right.equalTo(self.iconImageView.mas_right).offset(-10);
         
         make.height.mas_equalTo(18);

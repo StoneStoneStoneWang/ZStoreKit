@@ -70,8 +70,6 @@ extension ZCommentBridge {
                 case .empty:
                     vc.loadingStatus = .succ
                     
-                    vc.tableViewEmptyShow()
-                    
                 default:
                     break
                 }
@@ -143,6 +141,8 @@ extension ZCommentBridge {
                         
                         self.viewModel.output.tableData.accept(value)
                     }
+                    
+                    succ()
                     
                     self.vc.tableView.scrollsToTop = true
                     

@@ -30,6 +30,7 @@
 
 @property (nonatomic ,strong) UIButton *coverItem;
 
+@property (nonatomic ,copy) ZCommentOperation op;
 @end
 
 @implementation ZCommentViewController
@@ -41,15 +42,17 @@
     
 }
 
-+ (instancetype)createCommentWithEncode:(NSString *)encode {
++ (instancetype)createCommentWithEncode:(NSString *)encode andOp:(nonnull ZCommentOperation)op{
     
-    return [[self alloc] initWithEncode:encode];
+    return [[self alloc] initWithEncode:encode andOp:op];
 }
-- (instancetype)initWithEncode:(NSString *)endcode {
+- (instancetype)initWithEncode:(NSString *)endcode andOp:(nonnull ZCommentOperation)op{
     
     if (self = [super init]) {
         
         self.encode = endcode;
+        
+        self.op = op;
     }
     return self;
 }
@@ -183,6 +186,8 @@
         
         ZCommentContentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"content"];
         
+        cell.comment = data;
+        
         cell.bottomLineType = ZBottomLineTypeNormal;
         
         return cell;
@@ -270,6 +275,8 @@
     [self.bridge addComment:self.encode content:self.editTF.text succ:^{
         
         [weakSelf.editTF resignFirstResponder];
+        
+        weakSelf.op();
     }];
 }
 

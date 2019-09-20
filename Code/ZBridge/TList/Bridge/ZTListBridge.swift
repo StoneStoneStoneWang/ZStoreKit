@@ -96,7 +96,7 @@ extension ZTListBridge {
             .zip
             .subscribe(onNext: { (type,ip) in
                 
-                ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: isMy ? ZNotiMyCircleItemClick : ZNotiCircleItemClick), andValue: type.toJSON(), andFrom: vc)
+                ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: isMy ? ZNotiMyCircleItemClick : ZNotiCircleItemClick), andValue: type, andFrom: vc)
                 
             })
             .disposed(by: disposed)

@@ -323,6 +323,8 @@
     [self.contentView addSubview:self.moreItem];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    self.backgroundColor = [UIColor whiteColor];
 }
 - (void)setComment:(ZCommentBean *)comment {
     
