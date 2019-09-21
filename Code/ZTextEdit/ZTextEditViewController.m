@@ -19,7 +19,7 @@
 
 @property (nonatomic ,strong) UIButton *completeItem;
 
-@property (nonatomic ,strong) ZSignatureBridge *bridge;
+@property (nonatomic ,strong) ZTextEditBridge *bridge;
 
 @property (nonatomic ,strong) UIButton *backItem;
 
@@ -120,7 +120,7 @@
 
 - (void)configNaviItem {
     
-    self.title = @"修改个性签名";
+    self.title = @"编辑文案";
     
     [self.completeItem sizeToFit];
     
@@ -135,9 +135,9 @@
 
 - (void)configViewModel {
     
-    self.bridge = [ZSignatureBridge new];
+    self.bridge = [ZTextEditBridge new];
     
-    [self.bridge createSignature:self succ:self.succ];
+    [self.bridge createTextEdit:self succ:self.succ];
 }
 
 @end

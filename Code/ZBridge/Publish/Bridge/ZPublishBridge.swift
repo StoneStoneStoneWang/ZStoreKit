@@ -87,6 +87,21 @@ extension ZPublishBridge {
             
             value.remove(at: idx)
         }
+        
+        viewModel.input.tableData.accept(value)
+    }
+    
+    @objc public func addContent(_ keyValue: ZKeyValueBean) {
+        
+        var value = viewModel.input.tableData.value
+        
+        value += [keyValue]
+        
+        viewModel.input.tableData.accept(value)
+    }
+    @objc public func replaceContent(_ keyValue: ZKeyValueBean) {
+        
+        vc.tableView.reloadData()
     }
 }
 
