@@ -26,5 +26,6 @@ Pod::Spec.new do |spec|
   spec.source_files = "Code/ZTextEdit/*.{h,m}"
   spec.dependency 'ZConfig'
   spec.dependency 'ZTtransition'
+  spec.dependency 'ZBridge/TextEdit'
 end
 
