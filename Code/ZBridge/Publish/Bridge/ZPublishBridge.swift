@@ -15,6 +15,11 @@ import RxCocoa
 import RxSwift
 import ZBean
 import ZNoti
+import ZRealReq
+import ZUpload
+import AVFoundation
+
+public typealias ZPublishOperateSucc = (_ value: String) -> ()
 
 @objc (ZPublishBridge)
 public final class ZPublishBridge: ZBaseBridge {
@@ -30,7 +35,7 @@ public final class ZPublishBridge: ZBaseBridge {
 
 extension ZPublishBridge {
     
-    @objc public func createPublish(_ vc: ZTableNoLoadingViewConntroller ,type: ZPublishType,pTag: String,tf: UITextField ,textItem: UIButton ,imageItem: UIButton ,videoItem: UIButton) {
+    @objc public func createPublish(_ vc: ZTableNoLoadingViewConntroller ,type: ZPublishType,pTag: String,tf: UITextField ) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
@@ -40,10 +45,7 @@ extension ZPublishBridge {
                                                   title: tf.rx.text.orEmpty.asDriver(),
                                                   modelSelect: vc.tableView.rx.modelSelected(ZKeyValueBean.self),
                                                   itemSelect: vc.tableView.rx.itemSelected,
-                                                  completeTaps: completeItem.rx.tap.asSignal(),
-                                                  textTaps: textItem.rx.tap.asSignal(),
-                                                  imageTaps: imageItem.rx.tap.asSignal(),
-                                                  videoTaps: videoItem.rx.tap.asSignal())
+                                                  completeTaps: completeItem.rx.tap.asSignal())
             
             viewModel = ZPublishViewModel(input, type: type)
             
@@ -102,6 +104,163 @@ extension ZPublishBridge {
     @objc public func replaceContent(_ keyValue: ZKeyValueBean) {
         
         vc.tableView.reloadData()
+    }
+    
+    @objc public func updateImage(_ data: Data ,succ: @escaping ZPublishOperateSucc) {
+        
+        ZHudUtil.show(withStatus: "上传图片中...")
+        
+        ZUserInfoViewModel
+            .fetchAliToken()
+            .drive(onNext: { (result) in
+                
+                switch result {
+                case .fetchSomeObject(let obj):
+                    
+                    DispatchQueue.global().async {
+                        
+                        onUploadImgResp(data, file: "circle", param: obj as! ZALCredentialsBean)
+                            .subscribe(onNext: { [weak self] (value) in
+                                
+                                guard let `self` = self else { return }
+                                
+                                DispatchQueue.main.async {
+                                    
+                                    succ(value)
+                                    
+                                    ZHudUtil.pop()
+                                    ZHudUtil.showInfo("上传图片成功")
+                                }
+                                
+                                }, onError: { (error) in
+                                    
+                                    ZHudUtil.pop()
+                                    
+                                    ZHudUtil.showInfo("上传图片失败")
+                            })
+                            .disposed(by: self.disposed)
+                    }
+                    
+                case let .failed(msg):
+                    
+                    ZHudUtil.pop()
+                    
+                    ZHudUtil.showInfo(msg)
+                    
+                default: break
+                    
+                }
+            })
+            .disposed(by: disposed)
+    }
+    @objc public func updateVideo(_ data: Data ,succ: @escaping ZPublishOperateSucc) {
+        
+        ZHudUtil.show(withStatus: "上传视频中...")
+        
+        ZUserInfoViewModel
+            .fetchAliToken()
+            .drive(onNext: { (result) in
+                
+                switch result {
+                case .fetchSomeObject(let obj):
+                    
+                    DispatchQueue.global().async {
+                        
+                        onUploadVideoResp(data, file: "circle", param: obj as! ZALCredentialsBean)
+                            .subscribe(onNext: { (value) in
+                                
+                                ZHudUtil.pop()
+                                
+                                ZHudUtil.showInfo("上传视频成功")
+                                
+                                DispatchQueue.main.async {
+                                    
+                                    succ(value)
+                                }
+                                
+                            }, onError: { (error) in
+                                
+                                ZHudUtil.pop()
+                                
+                                ZHudUtil.showInfo("上传视频失败")
+                                
+                            })
+                            .disposed(by: self.disposed)
+                    }
+                    
+                case let .failed(msg):
+                    
+                    ZHudUtil.pop()
+                    
+                    ZHudUtil.showInfo(msg)
+                    
+                default: break
+                    
+                }
+            })
+            .disposed(by: disposed)
+    }
+    @objc public static func movFileTransformToMp4WithSourceUrl(sourceUrl: URL) -> URL? {
+        //以当前时间来为文件命名
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMddHHmmss"
+        let fileName = formatter.string(from: date) + ".mp4"
+        
+        //保存址沙盒路径
+        let docPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as NSString
+        let videoSandBoxPath = (docPath as String) + "/ablumVideo" + fileName
+        
+        print(videoSandBoxPath)
+        
+        //转码配置
+        let avAsset = AVURLAsset(url: sourceUrl, options: nil)
+        
+        //取视频的时间并处理，用于上传
+        let time = avAsset.duration
+        let number = Float(CMTimeGetSeconds(time)) - Float(Int(CMTimeGetSeconds(time)))
+        let totalSecond = number > 0.5 ? Int(CMTimeGetSeconds(time)) + 1 : Int(CMTimeGetSeconds(time))
+        let photoId = String(totalSecond)
+        
+        let exportSession = AVAssetExportSession(asset: avAsset, presetName: AVAssetExportPresetMediumQuality)
+        exportSession?.shouldOptimizeForNetworkUse = true
+        exportSession?.outputURL = URL(fileURLWithPath: videoSandBoxPath)
+        exportSession?.outputFileType = AVFileType.mp4 //控制转码的格式
+        
+        let wait = DispatchSemaphore(value: 0)
+        
+        exportSession?.exportAsynchronously(completionHandler: {
+            if exportSession?.status == AVAssetExportSession.Status.failed {
+                print("转码失败")
+            }
+            if exportSession?.status == AVAssetExportSession.Status.completed {
+                print("转码成功")
+            }
+            
+            wait.signal()
+        })
+        
+        let timeout = wait.wait(timeout: DispatchTime.distantFuture)
+        
+        if timeout == .timedOut  {
+            
+            debugPrint("超时")
+        }
+        
+        wait.suspend()
+        
+        return URL(fileURLWithPath: videoSandBoxPath)
+    }
+    
+    @objc public static func getVideoCropPicture(videoUrl: URL) -> UIImage {
+        let avAsset = AVAsset(url: videoUrl)
+        let generator = AVAssetImageGenerator(asset: avAsset)
+        generator.appliesPreferredTrackTransform = true
+        let time = CMTimeMakeWithSeconds(0.0, preferredTimescale: 600)
+        var actualTime: CMTime = CMTimeMake(value: 0, timescale: 0)
+        let imageP = try? generator.copyCGImage(at: time, actualTime: &actualTime)
+        let image = UIImage.init(cgImage: imageP!)
+        return image
     }
 }
 

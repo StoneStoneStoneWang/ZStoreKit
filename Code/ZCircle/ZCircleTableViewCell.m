@@ -235,7 +235,6 @@
         make.right.equalTo(self.funcView.mas_left);
         
     }];
-    
 }
 
 - (void)onFuncItemClick:(ZFuncItemType)itemType {

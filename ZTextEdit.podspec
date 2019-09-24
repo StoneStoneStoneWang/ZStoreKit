@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZPublish"
+  spec.name         = "ZTextEdit"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 发布."
+  spec.summary      = "A Lib For 文本编辑"
   spec.description  = <<-DESC
-  ZPublish是发布
+  ZTextEdit是地图
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -19,17 +19,12 @@ Pod::Spec.new do |spec|
   
   spec.static_framework = true
   
-  spec.frameworks = 'UIKit', 'Foundation' ,'AVFoundation' ,'CoreServices'
+  spec.frameworks = 'UIKit', 'Foundation'
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZPublish/*.{h,m}"
+  spec.source_files = "Code/ZTextEdit/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'Masonry'
-  spec.dependency 'JXTAlertManager'
-  spec.dependency 'SDWebImage'
-  spec.dependency 'ZBridge/Publish'
-  spec.dependency 'ZTextEdit'
-  spec.dependency 'WLToolsKit/Image'
+  spec.dependency 'ZTtransition'
 end
 

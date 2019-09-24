@@ -22,7 +22,6 @@
 
 @end
 
-
 @implementation ZContentTextTableViewCell
 
 - (UILabel *)titleLabel {
@@ -91,7 +90,7 @@
         
         _iconImageView.layer.masksToBounds = true;
         
-        _iconImageView.contentMode = UIViewContentModeScaleToFill;
+        _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _iconImageView;
 }

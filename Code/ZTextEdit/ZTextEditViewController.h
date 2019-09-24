@@ -8,7 +8,7 @@
 
 #import <ZTransition/ZTransition.h>
 #import "ZFragmentMix.h"
-typedef void(^ZTextEditSucc)(void);
+typedef void(^ZTextEditSucc)(NSString * _Nonnull text);
 
 NS_ASSUME_NONNULL_BEGIN
 

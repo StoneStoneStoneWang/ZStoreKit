@@ -137,7 +137,10 @@
     
     self.bridge = [ZTextEditBridge new];
     
-    [self.bridge createTextEdit:self succ:self.succ];
+    [self.bridge createTextEdit:self succ:^(NSString * _Nonnull text) {
+        
+        self.succ(text);
+    }];
 }
 
 @end

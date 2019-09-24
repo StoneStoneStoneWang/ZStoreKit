@@ -7,10 +7,22 @@
 //
 
 #import <ZTable/ZTable.h>
-
+@import ZBean;
+#import "ZFragmentMix.h"
+#import "ZFragmentConfig.h"
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ZPublishTableViewCellDelegate <NSObject>
+
+- (void)onDeleteItemClick:(ZKeyValueBean *)keyValue;
+
+@end
+
 @interface ZPublishTableViewCell : ZBaseTableViewCell
+
+@property (nonatomic ,strong) ZKeyValueBean *keyValue;
+
+@property (nonatomic ,weak) id <ZPublishTableViewCellDelegate> mDelegate;
 
 @end
 
@@ -21,7 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ZPublishImageTableViewCell : ZPublishTableViewCell
 
 @end
+@interface ZKeyValueBean (cate)
 
+@property (nonatomic ,strong) NSURL *videoUrl;
+
+@end
 @interface ZPublishVideoTableViewCell : ZPublishTableViewCell
 
 
