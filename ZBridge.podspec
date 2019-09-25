@@ -517,5 +517,28 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZRealReq'
     end
   end
+  # 列表
+  spec.subspec 'Banner' do |banner|
+    
+    banner.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Banner/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZBean/Circle'
+    end
+    
+    banner.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Banner/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Banner/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZCollection'
+      bridge.dependency 'ZCocoa/ASM'
+    end
+  end
   
 end
