@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZCircle/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/ZTList'
+  spec.dependency 'ZBridge/TList'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'JXTAlertManager'
