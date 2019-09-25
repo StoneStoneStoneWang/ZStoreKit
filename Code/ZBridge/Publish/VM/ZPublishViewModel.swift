@@ -1,6 +1,6 @@
 //
 //  ZPublishViewModel.swift
-//  
+//
 //
 //  Created by three stone 王 on 2019/9/19.
 //
@@ -43,12 +43,6 @@ public final class ZPublishViewModel: WLBaseViewModel {
         
         let completeTaps: Signal<Void>
         
-        let textTaps: Signal<Void>
-        
-        let imageTaps: Signal<Void>
-        
-        let videoTaps: Signal<Void>
-        
         let tableData: BehaviorRelay<[ZKeyValueBean]> = BehaviorRelay<[ZKeyValueBean]>(value: [])
     }
     
@@ -59,14 +53,6 @@ public final class ZPublishViewModel: WLBaseViewModel {
         let completing: Driver<Void>
         /* 完成结果 */
         let completed: Driver<WLBaseResult>
-        
-        /* 选择文案 序列*/
-        let textTaped: Driver<Void>
-        /* 完成 序列*/
-        let imageTaped: Driver<Void>
-        
-        /* 完成 序列*/
-        let videoTaped: Driver<Void>
     }
     
     public init(_ input: WLInput ,type: ZPublishType) {
@@ -118,13 +104,7 @@ public final class ZPublishViewModel: WLBaseViewModel {
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
         }
         
-        let textTaped = input.textTaps.flatMap { Driver.just($0) }
-        
-        let imageTaped = input.imageTaps.flatMap { Driver.just($0) }
-        
-        let videoTaped = input.videoTaps.flatMap { Driver.just($0) }
-        
-        self.output = WLOutput(zip: zip, completing: completing, completed: completed, textTaped: textTaped, imageTaped: imageTaped, videoTaped: videoTaped)
+        self.output = WLOutput(zip: zip, completing: completing, completed: completed)
     }
 }
 
