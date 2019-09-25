@@ -1,0 +1,40 @@
+//
+//  ZBannerCollectionViewCell.h
+//  ZFragment
+//
+//  Created by three stone 王 on 2019/9/25.
+//  Copyright © 2019 three stone 王. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@import ZBean;
+#import "ZFragmentMix.h"
+#import "ZFragmentConfig.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface ZBannerCollectionViewCell : UICollectionViewCell
+
+
+@property (nonatomic ,strong) ZKeyValueBean *keyValue;
+
+- (void)commitInit;
+
+@end
+
+@interface ZKeyValueBean (video)
+
+@property (nonatomic ,strong) NSURL *videoUrl;
+
+@end
+
+@interface ZBannerImageCollectionViewCell : ZBannerCollectionViewCell
+
+@end
+
+@interface ZBannerVideoCollectionViewCell : ZBannerCollectionViewCell
+
+
+@end
+
+NS_ASSUME_NONNULL_END

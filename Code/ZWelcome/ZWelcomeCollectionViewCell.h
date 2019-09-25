@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZFragmentMix.h"
+#import "ZFragmentConfig.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZWelcomeCollectionViewCell : UICollectionViewCell
