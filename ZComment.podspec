@@ -29,6 +29,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'JXTAlertManager'
+  spec.dependency 'SDWebImage'
   spec.dependency 'ZCache'
   spec.dependency 'ZNoti'
 end
