@@ -27,5 +27,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZConfig'
   spec.dependency 'ZTransition'
   spec.dependency 'ZBridge/TextEdit'
+  spec.dependency 'Masonry'
 end
 
