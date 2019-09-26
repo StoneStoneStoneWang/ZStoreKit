@@ -22,12 +22,15 @@
     }
     return self;
 }
-- (void)setKeyValue:(ZKeyValueBean *)keyValue {
-    _keyValue = keyValue;
+- (void)setCircleBean:(ZCircleBean *)circleBean {
+    _circleBean = circleBean;
     
 }
 
-- (void)commitInit { }
+- (void)commitInit {
+    
+    self.backgroundColor = [UIColor whiteColor];
+}
 @end
 @interface ZBannerImageCollectionViewCell ()
 
@@ -50,15 +53,26 @@
         
         _iconImageView.layer.masksToBounds = true;
         
-        _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _iconImageView;
 }
-
-- (void)setKeyValue:(ZKeyValueBean *)keyValue {
-    [super setKeyValue:keyValue];
+- (void)setCircleBean:(ZCircleBean *)circleBean {
+    [super setCircleBean:circleBean];
     
-    self.iconImageView.image = keyValue.img;
+    ZKeyValueBean *image = nil;
+    
+    for (ZKeyValueBean *keyValue in circleBean.contentMap) {
+        
+        if ([keyValue.type isEqualToString:@"image"]) {
+            
+            image = keyValue;
+            
+            break;
+        }
+    }
+    
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,m_fill,w_1600,h_800",image.value]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
     
 }
 - (void)commitInit {
@@ -72,33 +86,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(15);
-        
-        make.right.mas_equalTo(-15);
-        
-        make.top.mas_equalTo(5);
-        
-        make.bottom.mas_equalTo(-5);
-    }];
-}
-
-@end
-
-#import <objc/runtime.h>
-static const char * RY_CLICKKEY = "ry_clickkey";
-
-@implementation ZKeyValueBean (video)
-
-- (void)setVideoUrl:(NSURL *)videoUrl {
-    
-    objc_setAssociatedObject(self, RY_CLICKKEY, videoUrl, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
-- (NSURL *)videoUrl {
-    
-    return objc_getAssociatedObject(self, RY_CLICKKEY);
+    self.iconImageView.frame = self.bounds;
 }
 
 @end
@@ -124,7 +112,7 @@ static const char * RY_CLICKKEY = "ry_clickkey";
         
         _iconImageView.layer.masksToBounds = true;
         
-        _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _iconImageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _iconImageView;
 }
@@ -152,15 +140,33 @@ static const char * RY_CLICKKEY = "ry_clickkey";
     }
     return _subTitleLabel;
 }
-- (void)setKeyValue:(ZKeyValueBean *)keyValue {
-    [super setKeyValue:keyValue];
+- (void)setCircleBean:(ZCircleBean *)circleBean {
+    [super setCircleBean:circleBean];
     
-    self.iconImageView.image = keyValue.img;
+    ZKeyValueBean *video = nil;
     
-    self.subTitleLabel.text = [ZBannerVideoCollectionViewCell getVideoTimeByUrlString:keyValue.videoUrl];
+    for (ZKeyValueBean *keyValue in circleBean.contentMap) {
+        
+        if ([keyValue.type isEqualToString:@"video"]) {
+            
+            video = keyValue;
+            
+            break;
+        }
+    }
+#if ZBannerFormOne
+    
+   [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=video/snapshot,t_7000,f_jpg,w_1600,h_800,m_fast",video.value]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
+#elif ZBannerFormTwo
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=video/snapshot,t_7000,f_jpg,w_1400,h_600,m_fast",video.value]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
+#else
+    
+#endif //
+    
+    
+    self.subTitleLabel.text = [ZBannerVideoCollectionViewCell getVideoTimeByUrlString:[NSURL URLWithString:video.value]];
     
 }
-
 + (NSString *)getVideoTimeByUrlString:(NSURL *)videoUrl {
     
     AVURLAsset *avUrl = [AVURLAsset assetWithURL:videoUrl];
@@ -185,16 +191,7 @@ static const char * RY_CLICKKEY = "ry_clickkey";
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.mas_equalTo(15);
-        
-        make.right.mas_equalTo(-15);
-        
-        make.top.mas_equalTo(5);
-        
-        make.bottom.mas_equalTo(-5);
-    }];
+    self.iconImageView.frame = self.bounds;
     
     [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         

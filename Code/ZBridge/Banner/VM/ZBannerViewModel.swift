@@ -54,6 +54,7 @@ struct ZBannerViewModel: WLBaseViewModel {
         
         let zip: Observable<(ZCircleBean,IndexPath)>
         
+        let currentPage: BehaviorRelay<Int> = BehaviorRelay<Int>(value: 0)
     }
     
     init(_ input: WLInput ,disposed: DisposeBag) {
@@ -63,17 +64,6 @@ struct ZBannerViewModel: WLBaseViewModel {
         let tableData: BehaviorRelay<[ZCircleBean]> = BehaviorRelay<[ZCircleBean]>(value: [])
         
         let zip = Observable.zip(input.modelSelect,input.itemSelect)
-        
-        input
-            .contentoffSetX
-            .subscribe(onNext: { (x) in
-                
-                let width = input.style == .one ? (WL_SCREEN_WIDTH - 60 ) : WL_SCREEN_WIDTH
-                
-                input.currentPage.accept(Int(x / width) )
-                
-            })
-            .disposed(by: disposed)
         
         let timered: Observable<Int> = Observable<Int>
             .create({ (ob) -> Disposable in
@@ -90,7 +80,24 @@ struct ZBannerViewModel: WLBaseViewModel {
                 return Disposables.create { _ = input.timer.takeLast(tableData.value.count) }
             })
         
-        self.output = WLOutput(tableData: tableData, timered: timered, zip: zip)
+        let output = WLOutput(tableData: tableData, timered: timered, zip: zip)
+        
+        self.output = output
+        
+        input
+            .contentoffSetX
+            .subscribe(onNext: { (x) in
+                
+                let width = input.style == .one ?  WL_SCREEN_WIDTH : (WL_SCREEN_WIDTH - 60 )
+                
+                input.currentPage.accept(Int(x / width) )
+                
+                output.currentPage.accept(Int(x / width) / 4)
+                
+                printLog(message: output.currentPage.value)
+            })
+            .disposed(by: disposed)
+        
     }
     static func fetchBanners() -> Driver<WLBaseResult> {
         

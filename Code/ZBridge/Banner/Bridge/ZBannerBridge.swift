@@ -36,15 +36,17 @@ extension ZBannerBridge {
     
     @objc public func createBanner(_ vc: ZCollectionNoLoadingViewController ,canPageHidden: Bool ,style: ZBannerStyle) {
         
-        if let skipItem = vc.view.viewWithTag(101) as? UIButton  ,let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
+        if let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
             
             self.vc = vc
             
+            self.style = style
+            
             let input = ZBannerViewModel.WLInput(contentoffSetX: vc.collectionView.rx.contentOffset.map({ $0.x }),
-                                                  modelSelect: vc.collectionView.rx.modelSelected(ZCircleBean.self),
-                                                  itemSelect: vc.collectionView.rx.itemSelected,
-                                                  currentPage: BehaviorRelay<Int>(value: 0),
-                                                  style: style)
+                                                 modelSelect: vc.collectionView.rx.modelSelected(ZCircleBean.self),
+                                                 itemSelect: vc.collectionView.rx.itemSelected,
+                                                 currentPage: BehaviorRelay<Int>(value: 0),
+                                                 style: style)
             
             viewModel = ZBannerViewModel(input, disposed: disposed)
             
@@ -57,7 +59,7 @@ extension ZBannerBridge {
                         
                         var mutable: [ZCircleBean] = []
                         
-                        if list.count > 8 {
+                        if list.count > 7 {
                             
                             let temp = list as! [ZCircleBean]
                             
@@ -104,7 +106,7 @@ extension ZBannerBridge {
             viewModel
                 .output
                 .zip
-                .subscribe(onNext: { [weak self] (banner,ip) in
+                .subscribe(onNext: { (banner,ip) in
                     
                     ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiBannerClick), andValue: banner, andFrom: vc)
                 })
@@ -123,6 +125,8 @@ extension ZBannerBridge {
                 })
                 .disposed(by: disposed)
             
+            viewModel.output.currentPage.bind(to: pageControl.rx.currentPage).disposed(by: disposed)
+            
             vc.collectionView.rx.setDelegate(self).disposed(by: disposed)
         }
     }
@@ -133,7 +137,7 @@ extension ZBannerBridge: UICollectionViewDelegate {
         
         DispatchQueue.main.async {
             
-            let width = self.style == .one ? (WL_SCREEN_WIDTH - 60 ) : WL_SCREEN_WIDTH
+            let width = self.style == .one ? WL_SCREEN_WIDTH : (WL_SCREEN_WIDTH - 60 )
             
             let floatx = scrollView.contentOffset.x / width
             

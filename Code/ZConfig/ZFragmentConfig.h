@@ -141,6 +141,10 @@
 
 #define ZWelcomeFormTwo 1
 
+#define ZBannerFormOne 0
+
+#define ZBannerFormTwo 1
+
 #pragma mark ---- 登陆、注册、密码、协议、图片等
 
 #define ZLoginFormOne 1
@@ -205,3 +209,5 @@
 #define ZFunNormalIcon "点赞未选中"
 
 #define ZFunSelectedIcon "点赞选中"
+
+#define ZDeleteIcon "删除"

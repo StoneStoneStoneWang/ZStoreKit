@@ -6,11 +6,13 @@
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 
-#import <ZCollection/ZCollection.h>
+@import ZCollection;
+#import "ZFragmentConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZBannerViewController : ZCollectionNoLoadingViewController
+
 
 @end
 

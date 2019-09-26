@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZCircle"
+  spec.name         = "ZBanner"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 圈子."
+  spec.summary      = "A Lib For 轮播."
   spec.description  = <<-DESC
-  ZCircle是圈子
+  ZBanner是轮播
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -23,12 +23,11 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZCircle/*.{h,m}"
+  spec.source_files = "Code/ZBanner/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/TList'
-  spec.dependency 'ZTable'
+  spec.dependency 'ZBridge/Banner'
+  spec.dependency 'ZCollection'
   spec.dependency 'Masonry'
-  spec.dependency 'JXTAlertManager'
   spec.dependency 'SDWebImage'
 end
 

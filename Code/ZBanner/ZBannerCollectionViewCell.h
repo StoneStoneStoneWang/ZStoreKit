@@ -15,16 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZBannerCollectionViewCell : UICollectionViewCell
 
-
-@property (nonatomic ,strong) ZKeyValueBean *keyValue;
+@property (nonatomic ,strong) ZCircleBean *circleBean;
 
 - (void)commitInit;
-
-@end
-
-@interface ZKeyValueBean (video)
-
-@property (nonatomic ,strong) NSURL *videoUrl;
 
 @end
 
