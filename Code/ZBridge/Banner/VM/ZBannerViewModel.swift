@@ -92,9 +92,7 @@ struct ZBannerViewModel: WLBaseViewModel {
                 
                 input.currentPage.accept(Int(x / width) )
                 
-                output.currentPage.accept(Int(x / width) / 4)
-                
-                printLog(message: output.currentPage.value)
+                output.currentPage.accept(Int(x / width) % 4)
             })
             .disposed(by: disposed)
         
