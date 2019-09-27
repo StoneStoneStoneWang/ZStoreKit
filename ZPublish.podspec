@@ -30,6 +30,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'SDWebImage'
   spec.dependency 'ZBridge/Publish'
   spec.dependency 'ZTextEdit'
+  spec.dependency 'ZTextField'
   spec.dependency 'WLToolsKit/Image'
 end
 
