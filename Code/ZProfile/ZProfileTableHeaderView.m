@@ -37,6 +37,7 @@
     }
     return _cell;
 }
+
 - (UIImageView *)iconImageView {
     
     if (!_iconImageView) {

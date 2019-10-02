@@ -40,34 +40,19 @@
 @import ZTList;
 @import ZReport;
 @import ZGoldCleaner;
+#elif ZAppFormGlobalTwo
 
+@import ZReport;
+@import ZAMap;
+
+@import ZFocus;
+@import ZTList;
+@import ZReport;
+@import ZGoldCleaner;
+@import ZEvaluate;
+#import "ZMainViewController.h"
 #endif
 
-//@implementation WLMainBean
-//
-//+ (instancetype)mainBeanWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
-//
-//    return [[self alloc] initWithType:type andTitle:title andTag:tag andNormalIcon:normalIcon andSelectedIcon:selectedIcon];
-//}
-//
-//- (instancetype)initWithType:(WLMainType )type andTitle:(NSString *)title andTag:(NSString *)tag andNormalIcon:(NSString *)normalIcon andSelectedIcon:(NSString *)selectedIcon {
-//
-//    if (self = [super init]) {
-//
-//        self.type = type;
-//
-//        self.title = title;
-//
-//        self.tag = tag;
-//
-//        self.normalIcon = normalIcon;
-//
-//        self.selectedIcon = selectedIcon;
-//    }
-//    return self;
-//}
-//
-//@end
 @interface ZStoreRootManager ()
 
 @property (nonatomic ,strong) ZTListBridge *listBridge;
@@ -139,6 +124,10 @@ static ZStoreRootManager *manager = nil;
 #if ZAppFormGlobalOne
         
         [[ZAMapUtil shared] registerApiKey:@ZAliMapKey];
+        
+#elif ZAppFormGlobalTwo
+        
+        [[ZAMapUtil shared] registerApiKey:@ZAliMapKey];
 #endif
         //
         [ZNavigationController initWithConfig:[ZNaviConfigImpl new]];
@@ -168,6 +157,11 @@ static ZStoreRootManager *manager = nil;
             sideMenu.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders;
             
             appdelegate.window.rootViewController = sideMenu;
+            
+#elif ZAppFormGlobalTwo
+            ZMainViewController *main = [ZMainViewController new];
+            
+            appdelegate.window.rootViewController = main;
 #endif
         }
         
@@ -257,6 +251,13 @@ static ZStoreRootManager *manager = nil;
         sideMenu.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders;
         
         [UIApplication sharedApplication].keyWindow.rootViewController = sideMenu;
+        
+#elif ZAppFormGlobalTwo
+        
+        ZMainViewController *main = [ZMainViewController new];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = main;
+        
 #endif
     }
 }
@@ -268,12 +269,14 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
+        UIViewController *from = userInfo[@"from"];
 #if ZAppFormGlobalOne
         
-        UIViewController *from = userInfo[@"from"];
         
         [from dismissViewControllerAnimated:true completion:nil];
         
+#elif ZAppFormGlobalTwo
+        [from dismissViewControllerAnimated:true completion:nil];
 #endif
     }
 }
@@ -310,17 +313,12 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-#if ZAppFormGlobalOne
-        
         UIViewController *from = userInfo[@"from"];
-        
-        [from.sideMenuController hideLeftViewAnimated];
         
         ZPravicyViewController *pro = [ZPravicyViewController new];
         
         [from.navigationController pushViewController:pro animated:true];
         
-#endif
     }
 }
 - (void)onGotoPrivacyTap:(NSNotification *)noti {
@@ -329,9 +327,9 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-#if ZAppFormGlobalOne
-        
         UIViewController *from = userInfo[@"from"];
+        
+#if ZAppFormGlobalOne
         
         [from.sideMenuController hideLeftViewAnimated];
         
@@ -340,7 +338,11 @@ static ZStoreRootManager *manager = nil;
         UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
         
         [navi pushViewController:pro animated:true];
+#elif ZAppFormGlobalTwo
         
+        ZPravicyViewController *pro = [ZPravicyViewController new];
+        
+        [from.navigationController pushViewController:pro animated:true];
 #endif
     }
 }
@@ -404,9 +406,8 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormGlobalOne
-        
         UIViewController *from = userInfo[@"from"];
+#if ZAppFormGlobalOne
         
         [from.sideMenuController hideLeftViewAnimated];
         
@@ -415,7 +416,11 @@ static ZStoreRootManager *manager = nil;
         UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
         
         [navi pushViewController:about animated:true];
+#elif ZAppFormGlobalTwo
         
+        ZAboutViewController *about = [ZAboutViewController new];
+        
+        [from.navigationController pushViewController:about animated:true];
 #endif
     }
 }
@@ -425,10 +430,8 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-        
-#if ZAppFormGlobalOne
-        
         UIViewController *from = userInfo[@"from"];
+#if ZAppFormGlobalOne
         
         [from.sideMenuController hideLeftViewAnimated];
         
@@ -437,7 +440,11 @@ static ZStoreRootManager *manager = nil;
         UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
         
         [navi pushViewController:setting animated:true];
+#elif ZAppFormGlobalTwo
         
+        ZSettingViewController *setting = [ZSettingViewController new];
+        
+        [from.navigationController pushViewController:setting animated:true];
 #endif
     }
 }
@@ -453,6 +460,14 @@ static ZStoreRootManager *manager = nil;
         ZBlackViewController *black = [ZBlackViewController new];
         
         [from.navigationController pushViewController:black animated:true];
+        
+#elif ZAppFormGlobalTwo
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZBlackViewController *black = [ZBlackViewController new];
+        
+        [from.navigationController pushViewController:black animated:true];
 #endif
     }
 }
@@ -462,9 +477,9 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
+#if ZAppFormGlobalOne
         
         [from.sideMenuController hideLeftViewAnimated];
         
@@ -473,7 +488,11 @@ static ZStoreRootManager *manager = nil;
         ZFocusViewController *focus = [ZFocusViewController new];
         
         [navi pushViewController:focus animated:true];
+#elif ZAppFormGlobalTwo
         
+        ZFocusViewController *focus = [ZFocusViewController new];
+        
+        [from.navigationController pushViewController:focus animated:true];
 #endif
     }
 }
@@ -482,9 +501,9 @@ static ZStoreRootManager *manager = nil;
     NSDictionary *userInfo = noti.userInfo;
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
+#if ZAppFormGlobalOne
         
         [from.sideMenuController hideLeftViewAnimated];
         
@@ -493,7 +512,11 @@ static ZStoreRootManager *manager = nil;
         UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
         
         [navi pushViewController:userInfoVC animated:true];
+#elif ZAppFormGlobalTwo
         
+        ZUserInfoViewController *userInfoVC = [ZUserInfoViewController new];
+        
+        [from.navigationController pushViewController:userInfoVC animated:true];
 #endif
     }
 }
@@ -504,9 +527,9 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
         
-#if ZAppFormGlobalOne
-        
         UIViewController *from = userInfo[@"from"];
+        
+#if ZAppFormGlobalOne
         
         [from  jxt_showAlertWithTitle:@"您的还未登录" message:@"点击确定前往登录" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
             
@@ -526,7 +549,26 @@ static ZStoreRootManager *manager = nil;
                 [from presentViewController:navi animated:true completion:nil];
             }
         }];
-#else
+#elif ZAppFormGlobalTwo
+        
+        [from  jxt_showAlertWithTitle:@"您的还未登录" message:@"点击确定前往登录" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+            
+            alertMaker.
+            addActionCancelTitle(@"取消").
+            addActionDefaultTitle(@"前往登陆");
+            
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+            
+            if ([action.title isEqualToString:@"取消"]) {
+                
+            }
+            else if ([action.title isEqualToString:@"前往登陆"]) {
+                
+                ZTNavigationController *navi = [[ZTNavigationController alloc] initWithRootViewController:[ZLoginViewController new]] ;
+                
+                [from presentViewController:navi animated:true completion:nil];
+            }
+        }];
         
         
 #endif
@@ -571,9 +613,10 @@ static ZStoreRootManager *manager = nil;
     [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"isFirstLogin"];
     
     if (userInfo && userInfo[@"from"]) {
-#if ZAppFormGlobalOne
         
         UIViewController *from = userInfo[@"from"];
+#if ZAppFormGlobalOne
+        
         
         [from.sideMenuController hideLeftViewAnimated];
         
@@ -582,7 +625,11 @@ static ZStoreRootManager *manager = nil;
         UINavigationController *navi = (UINavigationController *)from.sideMenuController.rootViewController;
         
         [navi pushViewController:order animated:true];
+#elif ZAppFormGlobalTwo
         
+        ZTableListViewController *order = [ZTableListViewController createTableList:true andTag:@""];
+        
+        [from.navigationController pushViewController:order animated:true];
 #endif
     }
     
@@ -595,6 +642,74 @@ static ZStoreRootManager *manager = nil;
     
     if (userInfo && userInfo[@"from"]) {
 #if ZAppFormGlobalOne
+        
+        NSDictionary *circleJson = userInfo[@"value"];
+        
+        NSString *content = circleJson[@"content"];
+        
+        NSArray *contentJson = [NSJSONSerialization JSONObjectWithData:[content dataUsingEncoding:NSUTF8StringEncoding] options:(NSJSONReadingAllowFragments) error:nil];
+        
+        NSString *uid = circleJson[@"users"][@"encoded"];
+        
+        NSString *encoded = circleJson[@"encoded"];
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        [from jxt_showActionSheetWithTitle:@"操作" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+            
+            alertMaker.
+            addActionCancelTitle(@"取消").
+            addActionDefaultTitle(@"举报").
+            addActionDefaultTitle(@"关注").
+            addActionDestructiveTitle(@"黑名单(慎重选择)").
+            addActionDefaultTitle(@"拨打电话");
+            
+        } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+            
+            if ([action.title isEqualToString:@"取消"]) {
+                
+            }
+            else if ([action.title isEqualToString:@"举报"]) {
+                
+                [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:circleJson andFrom:from];
+                
+            } else if ([action.title isEqualToString:@"拨打电话"]) {
+                
+                NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",[contentJson.lastObject[@"value"] componentsSeparatedByString:@":"].lastObject];
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+            } else if ([action.title isEqualToString:@"关注"]) {
+                
+                if ([ZAccountCache shared].isLogin) {
+                    
+                    [self.listBridge focus:uid encode:encoded isFocus:true succ:^{
+                        
+                        
+                    }];
+                } else {
+                    
+                    [ZNotiConfigration postNotificationWithName:ZNotiUnLogin andValue:nil andFrom:from];
+                    
+                }
+                
+                
+            } else if ([action.title isEqualToString:@"黑名单(慎重选择)"]) {
+                
+                if ([ZAccountCache shared].isLogin) {
+                    
+                    [self.listBridge addBlack:uid targetEncoded:encoded content:@"" succ:^{
+                        
+                        
+                    }];
+                } else {
+                    
+                    [ZNotiConfigration postNotificationWithName:ZNotiUnLogin andValue:nil andFrom:from];
+                    
+                }
+                
+            }
+        }];
+#elif ZAppFormGlobalTwo
         
         NSDictionary *circleJson = userInfo[@"value"];
         
@@ -688,6 +803,19 @@ static ZStoreRootManager *manager = nil;
         
         [from.navigationController pushViewController:report animated:true];
         
+#elif ZAppFormGlobalTwo
+        
+        NSDictionary *circleJson = userInfo[@"value"];
+        
+        NSString *uid = circleJson[@"users"][@"encoded"];
+        
+        NSString *encoded = circleJson[@"encoded"];
+        
+        UIViewController *from = userInfo[@"from"];
+        
+        ZReportViewController *report = [ZReportViewController createReportWithUid:uid andEncode:encoded];
+        
+        [from.navigationController pushViewController:report animated:true];
 #endif
     }
     

@@ -73,4 +73,7 @@ public enum ZUserApi {
     case deleteMyCircle(_ encode: String)
     
     case analysis(_ appid: String,lat: String,lon: String)
+    
+    case fetchTags
+    
 }

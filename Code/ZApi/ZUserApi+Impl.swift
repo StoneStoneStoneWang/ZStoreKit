@@ -80,6 +80,8 @@ extension ZUserApi: WLObserverReq {
         case .deleteMyCircle: return "mob/circleFriends_mobDelCircleFriends?"
             
         case .analysis: return "mob/location_mobAddLocation?"
+            
+        case .fetchTags: return "mob/circleFriends_mobListTag?"
         }
     }
     
@@ -180,7 +182,10 @@ extension ZUserApi: WLObserverReq {
             }
             
             return result
+            
+        case .fetchTags: return [:]
         }
+        
     }
     
     public var headers: Dictionary<String, String> {
