@@ -154,6 +154,13 @@
     }
     
     self.title = title;
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWith:[UIImage imageNamed:@ZMoreIcon] andTarget:self andSelector:@selector(onMoreItemClick)];
+    
+}
+- (void)onMoreItemClick {
+    
+    [self onFuncItemClick:ZContentFuncItemTypeMore];
 }
 - (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
