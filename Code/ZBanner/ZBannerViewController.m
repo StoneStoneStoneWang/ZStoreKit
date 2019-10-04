@@ -181,7 +181,7 @@
 }
 - (void)configOwnSubViews {
     
-   
+    
     
     [self.collectionView registerClass:[ZBannerImageCollectionViewCell class] forCellWithReuseIdentifier:@"image"];
     
@@ -193,7 +193,7 @@
         
         make.left.right.mas_equalTo(0);
         
-        make.top.mas_equalTo(KTOPLAYOUTGUARD);
+        make.top.mas_equalTo(0);
         
         make.height.mas_equalTo(KSSCREEN_WIDTH / 2);
     }];
@@ -206,7 +206,7 @@
         
         make.height.mas_equalTo(20);
         
-        make.top.mas_equalTo(KSSCREEN_WIDTH / 2 - 30 + KTOPLAYOUTGUARD);
+        make.top.mas_equalTo(KSSCREEN_WIDTH / 2 - 30 );
     }];
 #elif ZBannerFormTwo
     
@@ -214,7 +214,7 @@
         
         make.left.right.mas_equalTo(0);
         
-        make.top.mas_equalTo(KTOPLAYOUTGUARD);
+        make.top.mas_equalTo(0);
         
         make.height.mas_equalTo( (KSSCREEN_WIDTH - 100 ) / 2);
     }];
@@ -227,7 +227,7 @@
         
         make.height.mas_equalTo(20);
         
-        make.top.mas_equalTo(KSSCREEN_WIDTH / 2 - 80 + KTOPLAYOUTGUARD);
+        make.top.mas_equalTo(KSSCREEN_WIDTH / 2 - 80 );
     }];
 #else
     

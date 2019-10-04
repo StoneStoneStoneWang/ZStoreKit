@@ -11,9 +11,17 @@
 @import ZBean;
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ZCommentTableViewCellDelegate <NSObject>
+
+- (void)onMoreItemClick:(ZCommentBean *)comment;
+
+@end
+
 @interface ZCommentTableViewCell : ZBaseTableViewCell
 
 @property (nonatomic ,strong) ZCommentBean *comment;
+
+@property (nonatomic ,weak) id <ZCommentTableViewCellDelegate>mDelegate;
 
 @end
 

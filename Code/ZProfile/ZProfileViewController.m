@@ -39,7 +39,7 @@
     
     self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
     
-#eiif ZAppFormGlobalThree
+#elif ZAppFormGlobalThree
     
     self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 100)];
     

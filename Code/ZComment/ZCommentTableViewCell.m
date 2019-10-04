@@ -232,6 +232,8 @@
 
 @property (nonatomic ,strong) UIButton *moreItem;
 
+@property (nonatomic ,strong) ZCommentBean *commentBean;
+
 @end
 
 @implementation ZCommentContentTableViewCell
@@ -325,8 +327,12 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.backgroundColor = [UIColor whiteColor];
+    
+    [self.moreItem addTarget:self action:@selector(onMoreItemClick) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)setComment:(ZCommentBean *)comment {
+    
+    self.commentBean = comment;
     
     self.nameLabel.text = comment.users.nickname;
     
@@ -335,6 +341,13 @@
     self.timeLabel.text = [[NSString stringWithFormat:@"%ld",comment.intime / 1000] s_convertToDate:SDateTypeDateStyle];
     
     self.titleLabel.text = comment.content;
+}
+- (void)onMoreItemClick {
+    
+    if (self.mDelegate && [self.mDelegate respondsToSelector:@selector(onMoreItemClick:)]) {
+        
+        [self.mDelegate onMoreItemClick:self.commentBean];
+    }
 }
 
 - (void)layoutSubviews {

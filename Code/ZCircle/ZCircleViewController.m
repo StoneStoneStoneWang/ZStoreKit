@@ -167,7 +167,6 @@
         }];
     } else if (itemType == ZFuncItemTypeMore){
         
-        
         [self jxt_showActionSheetWithTitle:@"操作" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
             
             alertMaker.
@@ -184,7 +183,7 @@
             }
             else if ([action.title isEqualToString:@"举报"]) {
                 
-                [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:[self.bridge converToJson:circleBean] andFrom:self];
+                [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:circleBean andFrom:self];
                 
             } else if ([action.title isEqualToString:@"关注"] || [action.title isEqualToString:@"取消关注"]) {
                 
@@ -208,11 +207,11 @@
         }];
     } else if (itemType == ZFuncItemTypeComment){
         
-        [ZNotiConfigration postNotificationWithName:ZNotiCircleItemClick andValue:[self.bridge converToJson:circleBean] andFrom:self];
+        [ZNotiConfigration postNotificationWithName:ZNotiCircleItemClick andValue:circleBean andFrom:self];
         
     } else if (itemType == ZFuncItemTypeWatch){
         
-        [ZNotiConfigration postNotificationWithName:ZNotiCircleItemClick andValue:[self.bridge converToJson:circleBean] andFrom:self];
+        [ZNotiConfigration postNotificationWithName:ZNotiCircleItemClick andValue:circleBean andFrom:self];
     }
 }
 

@@ -16,7 +16,7 @@
 @import ZNoti;
 
 #define BottomBar_Height KTABBAR_HEIGHT
-@interface ZCommentViewController () <UITextFieldDelegate>
+@interface ZCommentViewController () <UITextFieldDelegate ,ZCommentTableViewCellDelegate>
 
 @property (nonatomic ,strong) ZCommentBridge *bridge;
 
@@ -31,6 +31,7 @@
 @property (nonatomic ,strong) UIButton *coverItem;
 
 @property (nonatomic ,copy) ZCommentOperation op;
+
 @end
 
 @implementation ZCommentViewController
@@ -189,6 +190,8 @@
         cell.comment = data;
         
         cell.bottomLineType = ZBottomLineTypeNormal;
+        
+        cell.mDelegate = self;
         
         return cell;
     }
@@ -354,4 +357,24 @@
     return true;
 }
 
+- (void)onMoreItemClick:(ZCommentBean *)comment {
+    
+    [self jxt_showActionSheetWithTitle:@"操作" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+        
+        alertMaker.
+        addActionCancelTitle(@"取消").
+        addActionDefaultTitle(@"举报");
+        
+    } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
+        
+        if ([action.title isEqualToString:@"取消"]) {
+            
+        }
+        else if ([action.title isEqualToString:@"举报"]) {
+            
+            [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:comment andFrom:self];
+            
+        }
+    }];
+}
 @end
