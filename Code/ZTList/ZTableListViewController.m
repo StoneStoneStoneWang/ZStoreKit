@@ -65,7 +65,7 @@
 
 - (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    return 150;
+    return 160;
 }
 
 - (void)configViewModel {

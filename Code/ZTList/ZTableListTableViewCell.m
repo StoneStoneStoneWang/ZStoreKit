@@ -25,6 +25,8 @@
 
 @property (nonatomic ,strong) UILabel *remarkLabel;
 
+@property (nonatomic ,strong) UILabel *phoneLabel;
+
 @property (nonatomic ,strong) UIButton *contactItem;
 
 @property (nonatomic ,strong) UILabel *timeLabel;
@@ -146,6 +148,22 @@
     }
     return _aContentView;
 }
+- (UILabel *)phoneLabel {
+    
+    if (!_phoneLabel) {
+        
+        _phoneLabel = [UILabel new];
+        
+        _phoneLabel.font = [UIFont systemFontOfSize:13];
+        
+        _phoneLabel.textAlignment = NSTextAlignmentLeft;
+        
+        _phoneLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#999999"];
+        
+    }
+    return _phoneLabel;
+}
+
 - (UILabel *)remarkLabel {
     
     if (!_remarkLabel) {
@@ -174,6 +192,8 @@
     
     [self.aContentView addSubview:self.titleLabel];
     
+    [self.aContentView addSubview:self.phoneLabel];
+    
     [self.aContentView addSubview:self.moreItem];
     
     [self.aContentView addSubview:self.contactItem];
@@ -197,8 +217,6 @@
             
         } else if ([k.value containsString:@"address"]) {
             
-            NSLog(@"====%@ ",[k.value componentsSeparatedByString:@":"].lastObject);
-            
             self.titleLabel.text = [NSString stringWithFormat:@"服务地址: %@",[k.value componentsSeparatedByString:@":"].lastObject];
             
         } else if ([k.value containsString:@"详细地址"]) {
@@ -206,9 +224,10 @@
             self.subTitleLabel.text = [NSString stringWithFormat:@"详细地址: %@",[k.value componentsSeparatedByString:@":"].lastObject];
         } else if ([k.value containsString:@"备注"]) {
             
-            
-            
             self.remarkLabel.text = [NSString stringWithFormat:@"备注: %@",[k.value componentsSeparatedByString:@":"].lastObject];
+        } else if ([k.value containsString:@"手机"]) {
+            
+            self.phoneLabel.text = [NSString stringWithFormat:@"联系电话: %@",[k.value componentsSeparatedByString:@":"].lastObject];
         }
     }
     
@@ -272,13 +291,23 @@
         make.top.equalTo(self.iconImageView.mas_bottom).offset(15);
     }];
     
-    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.mas_equalTo(15);
         
         make.right.mas_equalTo(-15);
         
         make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
+        
+    }];
+    
+    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(15);
+        
+        make.right.mas_equalTo(-15);
+        
+        make.top.equalTo(self.phoneLabel.mas_bottom).offset(5);
         
     }];
     

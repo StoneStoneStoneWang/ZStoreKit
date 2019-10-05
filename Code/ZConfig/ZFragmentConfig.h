@@ -118,7 +118,7 @@
 
 #endif
 
-#define ZAppKey "b4d1d0b481cd474aa137520f2ae60c97"
+#define ZAppKey "cc8050936ebe4cb3b6ffc7ea808b3c96"
 
 #define ZWXKey "wx6daf9371d9e7472a"
 
@@ -127,7 +127,7 @@
 #define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
 
 #pragma mark ---- 主色值
-#define ZFragmentColor "#FF9A9E"
+#define ZFragmentColor "#50c9c3"
 
 #define ZBackIcon "返回"
 
