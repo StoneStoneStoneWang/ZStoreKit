@@ -21,7 +21,6 @@
 
 @property (nonatomic ,strong) UILabel *nameLabel;
 
-
 @end
 
 @implementation ZGoldCleanerTableViewCell
@@ -34,7 +33,7 @@
         
         _iconImageView.contentMode = UIViewContentModeCenter;
         
-        _iconImageView.layer.cornerRadius = 15;
+        _iconImageView.layer.cornerRadius = 20;
         
         _iconImageView.layer.masksToBounds = true;
     }
@@ -74,8 +73,6 @@
     [self.contentView addSubview:self.nameLabel];
     
     [self.contentView addSubview:self.titleLabel];
-    
-    [self.contentView addSubview: self.evaluateItem];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }

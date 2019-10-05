@@ -15,53 +15,37 @@
 
 #if ZAppFormGlobalOne
 
-#define ZAMapBunddleView O5pFNa0VCo1
+#define ZAMapBunddleView n5kbxJhhFETy
 
-#define ZAMapHeaderView tKRyB7pyxfwF
+#define ZAMapHeaderView UfcBXh3P8p
 
-#define ZAMapTableViewCell p9iB2gDUVdm
+#define ZAMapTableViewCell Cp9ftyFhoL
 
-#define ZGoldCleanerTableViewCell NoFYALmd_2V
+#define ZTableListTableViewCell euXjorbjAU
 
-#define ZGoldCleanerTableViewCell NoFYALmd_2V
+#define ZWelcomeCollectionViewCell Hw0Exgi3mc
 
-#define ZTableListTableViewCell IZWuYyw_6Ua
+#define ZBlackTableViewCell JIx7oS9yAqr
 
-#define ZFocusTableViewCell C0IwI66Rsg
+#define welcomeDelegate V59fgg5ZyFrJ
 
-#define ZSettingTableViewCell ANEB21VFrF4
+#define ZFocusTableViewCell UJYbPjSJyX
 
-#define ZAboutTableViewCell UBozSwuJiqxm
+#define ZSettingTableViewCell wkSXmDO_CVz
 
-#define ZUserInfoTableViewCell joT_zxchUivi
+#define ZAboutTableViewCell L_fUugiXWnJ
 
-#define ZProfileTableViewCell YE15jfWSuk
+#define ZUserInfoTableViewCell f2xbv20aXrRP
 
-#define ZNickNameSucc cTRKrAFCLZP8
+#define ZProfileTableViewCell CI4fcnE4K6Cz
 
-#define ZSignatureSucc cEXgFPRTHb
+#define ZNickNameSucc j0lFA3qErZST
 
-#define ZReportHeaderView Ih8Rlqx1pO2Q
+#define ZSignatureSucc ZQgzwzOYeQ4
 
-#define ZReportTableViewCell oe_87cjNOGhY
+#define ZReportHeaderView ZReportHeaderView1111
 
-#define ZBlackTableViewCell ajfO0xFA_Z
-
-#define ZWelcomeCollectionViewCell JUwoOPzL49
-
-#define ZNickNameViewController isduUMwnJJSC
-
-#define ZSignatureViewController elj6mXau3dz
-
-#define ZAboutTableHeaderView hSzO1JBImgF
-
-#define ZPravicyViewController ESb96X_TPYP
-
-#define ZFuncItemView BTDaYXjumQZh
-
-#define ZCircleImageTableViewCell wEiPqIMIv86V
-
-#define ZCircleVideoTableViewCell KiPdTILfgQ
+#define ZReportTableViewCell ZReportTableViewCell111
 
 #elif ZAppFormGlobalTwo
 

@@ -146,6 +146,21 @@
     }
     return _aContentView;
 }
+- (UILabel *)remarkLabel {
+    
+    if (!_remarkLabel) {
+        
+        _remarkLabel = [UILabel new];
+        
+        _remarkLabel.font = [UIFont systemFontOfSize:13];
+        
+        _remarkLabel.textAlignment = NSTextAlignmentLeft;
+        
+        _remarkLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#999999"];
+        
+    }
+    return _remarkLabel;
+}
 - (void)commitInit {
     [super commitInit];
     
@@ -165,17 +180,16 @@
     
     [self.aContentView addSubview:self.subTitleLabel];
     
+    [self.aContentView addSubview:self.remarkLabel];
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setKeyValue:(ZCircleBean *)keyValue {
-    //    _keyValue = keyValue;
     
     self.bottomLineType = ZBottomLineTypeNone;
     
     for (ZKeyValueBean *k in keyValue.contentMap) {
-        
-        NSLog(@"%@ ====%@ ",k.type,k.value);
         
         if ([k.value containsString:@"时间"]) {
             
@@ -183,11 +197,18 @@
             
         } else if ([k.value containsString:@"address"]) {
             
+            NSLog(@"====%@ ",[k.value componentsSeparatedByString:@":"].lastObject);
+            
             self.titleLabel.text = [NSString stringWithFormat:@"服务地址: %@",[k.value componentsSeparatedByString:@":"].lastObject];
             
         } else if ([k.value containsString:@"详细地址"]) {
             
             self.subTitleLabel.text = [NSString stringWithFormat:@"详细地址: %@",[k.value componentsSeparatedByString:@":"].lastObject];
+        } else if ([k.value containsString:@"备注"]) {
+            
+            
+            
+            self.remarkLabel.text = [NSString stringWithFormat:@"备注: %@",[k.value componentsSeparatedByString:@":"].lastObject];
         }
     }
     
@@ -227,7 +248,6 @@
         make.centerY.equalTo(self.iconImageView);
     }];
     
-    
     [self.moreItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.mas_equalTo(-15);
@@ -262,6 +282,15 @@
         
     }];
     
+    [self.remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(15);
+        
+        make.right.mas_equalTo(-15);
+        
+        make.top.equalTo(self.subTitleLabel.mas_bottom).offset(5);
+        
+    }];
 }
 
 @end
