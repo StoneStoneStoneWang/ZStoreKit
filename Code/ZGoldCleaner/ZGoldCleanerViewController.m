@@ -11,12 +11,11 @@
 #if ZAppFormGlobalOne
 @import JXTAlertManager;
 @import ZNoti;
-@import ZBridge;
 @import SToolsKit;
 
 @interface ZGoldCleanerViewController ()
 
-@property (nonatomic ,strong) ZTListBridge *bridge;
+@property (nonatomic ,strong ,readwrite) ZTListBridge *bridge;
 
 @end
 
@@ -111,12 +110,11 @@
 
 @import JXTAlertManager;
 @import ZNoti;
-@import ZBridge;
 @import SToolsKit;
 @import ZHud;
 @interface ZGoldCleanerViewController () <ZGoldCleanerTableViewCellDelegate>
 
-@property (nonatomic ,strong) ZTListBridge *bridge;
+@property (nonatomic ,strong ,readwrite) ZTListBridge *bridge;
 
 @end
 

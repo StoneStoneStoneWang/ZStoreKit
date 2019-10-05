@@ -13,16 +13,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #if ZAppFormGlobalOne
-
+@import ZBridge;
 @interface ZGoldCleanerViewController : ZTableLoadingViewController
 
 + (instancetype)createGoldCleaner;
 
+@property (nonatomic ,strong ,readonly) ZTListBridge *bridge;
+
 @end
 
 #elif ZAppFormGlobalTwo
-
+@import ZBridge;
 @interface ZGoldCleanerViewController : ZTableLoadingViewController
+
+@property (nonatomic ,strong ,readonly) ZTListBridge *bridge;
 
 + (instancetype)createGoldCleaner;
 
