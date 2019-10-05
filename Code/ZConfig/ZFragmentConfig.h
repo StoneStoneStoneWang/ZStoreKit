@@ -211,3 +211,5 @@
 #define ZFunSelectedIcon "点赞选中"
 
 #define ZDeleteIcon "删除"
+
+#define ZPublishIcon "发布"
