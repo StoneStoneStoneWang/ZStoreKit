@@ -83,6 +83,33 @@ struct ZAMapViewModel: WLBaseViewModel {
                         if item.value.isEmpty {
                             
                             return Driver.just(WLBaseResult.failed(item.place))
+                        } else {
+                            
+                            if item.type.contains("手机号") {
+                                
+                                if String.validPhone(phone: item.value) {
+                                    
+                                    return Driver.just(WLBaseResult.failed("请输入正确手机号"))
+                                }
+                            } else if item.type.contains("备注") {
+                                
+                                if item.value.wl_isEmpty {
+                                    
+                                    return Driver.just(WLBaseResult.failed("请输入备注"))
+                                }
+                            } else if item.type.contains("详细地址") {
+                                
+                                if item.value.wl_isEmpty {
+                                    
+                                    return Driver.just(WLBaseResult.failed("请输入详细地址"))
+                                }
+                            } else if item.type.contains("时间") {
+                                
+                                if item.value.wl_isEmpty {
+                                    
+                                    return Driver.just(WLBaseResult.failed("请选择服务时间"))
+                                }
+                            }
                         }
                         
                         arr += [res]
@@ -91,6 +118,11 @@ struct ZAMapViewModel: WLBaseViewModel {
                     arr += [["type":"txt","value":"lat:\($0.1.coordinate.latitude)"]]
                     
                     arr += [["type":"txt","value":"lng:\($0.1.coordinate.longitude)"]]
+                    
+                    if input.locAddress.value.wl_isEmpty {
+                        
+                        return Driver.just(WLBaseResult.failed("请手动滑动地图,选择地址"))
+                    }
                     
                     arr += [["type":"txt","value": "address:\(input.locAddress.value)"]]
                     
