@@ -20,22 +20,22 @@
 @import AVFoundation;
 
 @interface ZPublishViewController () <UIImagePickerControllerDelegate ,UINavigationControllerDelegate ,ZPublishTableViewCellDelegate>
-    
-    @property (nonatomic ,strong) ZPublishFooterView *footerView;
-    
-    @property (nonatomic ,strong) ZPublishBridge *bridge;
-    
-    @property (nonatomic ,strong) UIButton *completeItem;
-    
-    @property (nonatomic ,strong) UIImagePickerController *imagePicker;
-    
-    @property (nonatomic ,strong) NSIndexPath *selectedIp;
-    
-    @property (nonatomic ,strong) ZKeyValueBean *selectedKv;
-    @end
+
+@property (nonatomic ,strong) ZPublishFooterView *footerView;
+
+@property (nonatomic ,strong) ZPublishBridge *bridge;
+
+@property (nonatomic ,strong) UIButton *completeItem;
+
+@property (nonatomic ,strong) UIImagePickerController *imagePicker;
+
+@property (nonatomic ,strong) NSIndexPath *selectedIp;
+
+@property (nonatomic ,strong) ZKeyValueBean *selectedKv;
+@end
 
 @implementation ZPublishViewController
-    
+
 - (UIButton *)completeItem {
     
     if (!_completeItem) {
@@ -69,7 +69,7 @@
     }
     return _completeItem;
 }
-    
+
 - (UIImagePickerController *)imagePicker {
     
     if (!_imagePicker) {
@@ -84,7 +84,7 @@
     }
     return _imagePicker;
 }
-    
+
 - (void)configOwnSubViews {
     [super configOwnSubViews];
     
@@ -188,7 +188,7 @@
         }
     }];
 }
-    
+
 - (void)onVideoItemClick {
     
     __weak typeof(self) weakSelf = self;
@@ -226,7 +226,7 @@
         }
     }];
 }
-    
+
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
     ZKeyValueBean *keyValue = (ZKeyValueBean *)data;
@@ -260,7 +260,7 @@
         return cell;
     }
 }
-    
+
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
     
     ZKeyValueBean *keyValue = (ZKeyValueBean *)data;
@@ -340,7 +340,7 @@
         }];
     }
 }
-    
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     
     __weak typeof(self) weakSelf = self;
@@ -415,12 +415,12 @@
     
     [picker dismissViewControllerAnimated:true completion:nil];
 }
-    
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:true completion:nil];
 }
-    
+
 - (BOOL)canPanResponse {
     
     return true ;
@@ -446,20 +446,20 @@
     }
 }
 + (UIImage *)firstFrameWithVideoURL:(NSURL *)url size:(CGSize)size
+{
+    // 获取视频第一帧
+    NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
+    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
+    AVAssetImageGenerator *generator = [AVAssetImageGenerator assetImageGeneratorWithAsset:urlAsset];
+    generator.appliesPreferredTrackTransform = YES;
+    generator.maximumSize = CGSizeMake(size.width, size.height);
+    NSError *error = nil;
+    CGImageRef img = [generator copyCGImageAtTime:CMTimeMake(0, 10) actualTime:NULL error:&error];
     {
-        // 获取视频第一帧
-        NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
-        AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
-        AVAssetImageGenerator *generator = [AVAssetImageGenerator assetImageGeneratorWithAsset:urlAsset];
-        generator.appliesPreferredTrackTransform = YES;
-        generator.maximumSize = CGSizeMake(size.width, size.height);
-        NSError *error = nil;
-        CGImageRef img = [generator copyCGImageAtTime:CMTimeMake(0, 10) actualTime:NULL error:&error];
-        {
-            return [UIImage imageWithCGImage:img];
-        }
-        return nil;
+        return [UIImage imageWithCGImage:img];
     }
+    return nil;
+}
 - (void)configNaviItem {
     
     [self.completeItem sizeToFit];
@@ -468,5 +468,5 @@
     
     self.title = @"发布话题";
 }
-    
-    @end
+
+@end

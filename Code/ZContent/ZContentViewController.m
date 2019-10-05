@@ -284,5 +284,8 @@
         [self.navigationController pushViewController:comment animated:true];
     }
 }
-
+- (BOOL)canPanResponse {
+    
+    return true;
+}
 @end

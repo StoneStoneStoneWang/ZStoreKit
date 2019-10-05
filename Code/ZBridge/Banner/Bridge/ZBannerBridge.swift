@@ -27,14 +27,14 @@ public final class ZBannerBridge: ZBaseBridge {
     
     var dataSource: RxCollectionViewSectionedReloadDataSource<Section>!
     
-    var vc: ZCollectionNoLoadingViewController!
+    var vc: ZCollectionLoadingViewController!
     
     var style: ZBannerStyle = .one
 }
 // MARK: skip item 101 pagecontrol 102
 extension ZBannerBridge {
     
-    @objc public func createBanner(_ vc: ZCollectionNoLoadingViewController ,canPageHidden: Bool ,style: ZBannerStyle) {
+    @objc public func createBanner(_ vc: ZCollectionLoadingViewController ,canPageHidden: Bool ,style: ZBannerStyle) {
         
         if let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
             
@@ -80,8 +80,12 @@ extension ZBannerBridge {
                             }
                         }
                         
+                        vc.loadingStatus = .succ
+                        
                         self.viewModel.output.tableData.accept(mutable)
                     case .failed(let msg):
+                        
+                         vc.loadingStatus = .fail
                         
                         ZHudUtil.showInfo(msg)
                     default: break

@@ -78,6 +78,42 @@ extension ZPublishBridge {
                 .setDelegate(self)
                 .disposed(by: disposed)
             
+            viewModel
+                .output
+                .completing
+                .drive(onNext: { _ in
+                    
+                    vc.view.endEditing(true)
+                    
+                    ZHudUtil.show(withStatus: "您发布的内容会在我们的系统1小时内审核，发布中...")
+                    
+                })
+                .disposed(by: disposed)
+            
+            // MARK: 登录事件返回序列
+            viewModel
+                .output
+                .completed
+                .drive(onNext: {
+                    
+                    ZHudUtil.pop()
+                    
+                    switch $0 {
+                        
+                    case let .failed(msg): ZHudUtil.showInfo(msg)
+                        
+                    case let .operation(obj):
+                        
+                        ZHudUtil.showInfo("发布成功")
+                        
+                        ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiCirclePublishSucc), andValue: ["tag": pTag,"circle": obj], andFrom: vc)
+                        
+                        vc.dismiss(animated: true, completion: nil)
+                        
+                    default: break
+                    }
+                })
+                .disposed(by: disposed)
         }
     }
     
