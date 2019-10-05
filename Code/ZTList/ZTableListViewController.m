@@ -65,6 +65,29 @@
 
 - (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
+    ZCircleBean *circle = (ZCircleBean *)data;
+    
+    ZKeyValueBean *address = nil;
+    
+    for (ZKeyValueBean *k in circle.contentMap) {
+        
+        if ([k.value containsString:@"address"]) {
+            
+            address = k;
+            
+            break;
+        }
+    }
+    
+    CGFloat contnetHeight = [address.value boundingRectWithSize:CGSizeMake(KSSCREEN_WIDTH - 30, 999) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:15]} context:nil].size.height;
+    
+    CGFloat single = [@"您好" boundingRectWithSize:CGSizeMake(KSSCREEN_WIDTH - 30, 999) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:15]} context:nil].size.height;
+    
+    if (contnetHeight > single) {
+        
+        return 180;
+    }
+    
     return 160;
 }
 
