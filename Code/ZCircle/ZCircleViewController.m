@@ -8,7 +8,6 @@
 
 #import "ZCircleViewController.h"
 #import "ZCircleTableViewCell.h"
-@import ZBridge;
 @import SToolsKit;
 @import JXTAlertManager;
 @import ZNoti;
@@ -16,7 +15,7 @@
 
 @interface ZCircleViewController () <ZCircleTableViewCellDelegate>
 
-@property (nonatomic ,strong) ZTListBridge *bridge;
+@property (nonatomic ,strong ,readwrite) ZTListBridge *bridge;
 
 @property (nonatomic ,assign) BOOL isMy;
 

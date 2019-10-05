@@ -13,15 +13,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #if ZAppFormGlobalOne
+@import ZBridge;
 @interface ZTableListViewController : ZTableLoadingViewController
+
+@property (nonatomic ,strong ,readonly) ZTListBridge *bridge;
 
 + (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag;
 
 @end
 
 #elif ZAppFormGlobalTwo
-
+@import ZBridge;
 @interface ZTableListViewController : ZTableLoadingViewController
+
+@property (nonatomic ,strong ,readonly) ZTListBridge *bridge;
 
 + (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag;
 

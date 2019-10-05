@@ -11,10 +11,13 @@
 #import "ZFragmentMix.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@import ZBridge;
 
 @interface ZCircleViewController : ZTableLoadingViewController
 
 + (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag;
+
+@property (nonatomic ,strong ,readonly) ZTListBridge *bridge;
 
 @end
 

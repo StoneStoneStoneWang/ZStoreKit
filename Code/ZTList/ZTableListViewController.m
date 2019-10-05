@@ -14,7 +14,7 @@
 
 @interface ZTableListViewController ()
 
-@property (nonatomic ,strong) ZTListBridge *bridge;
+@property (nonatomic ,strong ,readwrite) ZTListBridge *bridge;
 
 @property (nonatomic ,assign) BOOL isMy;
 
@@ -118,7 +118,7 @@
 
 @interface ZTableListViewController ()
 
-@property (nonatomic ,strong) ZTListBridge *bridge;
+@property (nonatomic ,strong ,readwrite) ZTListBridge *bridge;
 
 @property (nonatomic ,assign) BOOL isMy;
 
@@ -193,6 +193,7 @@
     
     self.title = @"我的订单";
 }
+
 @end
 
 #endif
