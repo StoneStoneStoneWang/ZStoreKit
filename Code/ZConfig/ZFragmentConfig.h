@@ -118,16 +118,8 @@
 
 #endif
 
-#define ZAppKey "cc8050936ebe4cb3b6ffc7ea808b3c96"
-
-#define ZWXKey "wx6daf9371d9e7472a"
-
-#define ZUMKey "5d6b44c34ca357a97900029b"
-
-#define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
-
 #pragma mark ---- 主色值
-#define ZFragmentColor "#50c9c3"
+#define ZFragmentColor "#FF9A9E"
 
 #define ZBackIcon "返回"
 
@@ -140,10 +132,6 @@
 #define ZWelcomeFormOne 0
 
 #define ZWelcomeFormTwo 1
-
-#define ZBannerFormOne 0
-
-#define ZBannerFormTwo 1
 
 #pragma mark ---- 登陆、注册、密码、协议、图片等
 
@@ -197,19 +185,3 @@
 #define ZPhoneNum "+0314-8081025"
 
 #define ZMoreIcon "更多"
-
-#define ZNormalIcon "未选中"
-
-#define ZSelectedIcon "选中"
-
-#define ZWatchIcon "观看"
-
-#define ZCommentIcon "评论"
-
-#define ZFunNormalIcon "点赞未选中"
-
-#define ZFunSelectedIcon "点赞选中"
-
-#define ZDeleteIcon "删除"
-
-#define ZPublishIcon "发布"
