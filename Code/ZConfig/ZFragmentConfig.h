@@ -118,6 +118,14 @@
 
 #endif
 
+#define ZAppKey "7a855e35140e4a2f8591dbcaeadc32b1"
+
+#define ZWXKey "wx6daf9371d9e7472a"
+
+#define ZUMKey "5d6b44c34ca357a97900029b"
+
+#define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
+
 #pragma mark ---- 主色值
 #define ZFragmentColor "#FF9A9E"
 
