@@ -27,7 +27,7 @@ typedef void(^ZWXApiBlock)(ZWXActionType type,NSString *_Nonnull msg);
 
 @interface ZWXManager : NSObject 
 
-+ (BOOL)wxRegisterAppKey:(NSString *)appKey;
++ (BOOL)wxRegisterAppKey:(NSString *)appKey universalLink:(NSString *)universalLink;
 
 + (void)wxLoginWithApiBlock:(ZWXApiBlock )apiBlock;
 
