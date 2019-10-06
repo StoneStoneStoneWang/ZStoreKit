@@ -87,7 +87,7 @@ struct ZAMapViewModel: WLBaseViewModel {
                             
                             if item.type.contains("手机号") {
                                 
-                                if String.validPhone(phone: item.value) {
+                                if !String.validPhone(phone: item.value) {
                                     
                                     return Driver.just(WLBaseResult.failed("请输入正确手机号"))
                                 }

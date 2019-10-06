@@ -75,6 +75,8 @@
     [self.contentView addSubview:self.titleLabel];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setKeyValue:(ZCircleBean *)keyValue {
@@ -225,6 +227,8 @@
     [self.contentView addSubview:self.evaluteItem];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    self.backgroundColor = [UIColor whiteColor];
     
     [self.evaluteItem addTarget:self action:@selector(onEvaluateClick) forControlEvents:UIControlEventTouchUpInside];
 }

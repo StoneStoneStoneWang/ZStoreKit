@@ -86,11 +86,15 @@
         
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",user.headImg]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
         
+        self.iconImageView.contentMode = UIViewContentModeCenter;
+        
     } else {
         
         self.iconImageView.image = [UIImage imageNamed:@ZLogoIcon];
         
         self.nameLabel.text = @"未登录";
+        
+        self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
 }
 
