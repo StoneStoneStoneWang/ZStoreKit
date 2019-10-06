@@ -8,9 +8,9 @@
 
 #pragma mark ---- 类型App
 
-#define ZAppFormGlobalOne 1 // 地图类型 含有抽屉
+#define ZAppFormGlobalOne 0 // 地图类型 含有抽屉
 
-#define ZAppFormGlobalTwo 0 // 地图类型 不含抽屉
+#define ZAppFormGlobalTwo 1 // 地图类型 不含抽屉
 
 #define ZAppFormGlobalThree 0 // 朋友圈类型
 
@@ -185,3 +185,7 @@
 #define ZPhoneNum "+0314-8081025"
 
 #define ZMoreIcon "更多"
+
+#define ZNormalIcon "未选中"
+
+#define ZSelectedIcon "选中"
