@@ -16,9 +16,12 @@
 
 @property (nonatomic ,strong) ZEvaluateBridge *bridge;
 
-@property (nonatomic ,copy) NSString *encode;
+@property (nonatomic ,strong) ZCircleBean *circleBean;
 
 @property (nonatomic ,strong) UIButton *completeItem;
+
+@property (nonatomic ,strong) ZEvaluateSucc op;
+
 @end
 
 @implementation ZEvaluateViewController
@@ -56,16 +59,18 @@
     }
     return _completeItem;
 }
-+ (instancetype)createEvaluateWithEncode:(NSString *)encode {
++ (instancetype)createEvaluateWithCircleBean:(ZCircleBean *)circleBean andOp:(nonnull ZEvaluateSucc)op{
     
-    return [[self alloc] initWithEncode:encode];
+    return [[self alloc] initWithCircleBean:circleBean andOp:op];
 }
 
-- (instancetype)initWithEncode:(NSString *)encode {
+- (instancetype)initWithCircleBean:(ZCircleBean *)circleBean andOp:(nonnull ZEvaluateSucc)op {
     
     if (self = [super init]) {
         
-        self.encode = encode;
+        self.circleBean = circleBean;
+        
+        self.op = op;
     }
     return self;
 }
@@ -90,7 +95,15 @@
     self.bridge = [ZEvaluateBridge new];
     
 #if ZAppFormGlobalTwo
-    [self.bridge createEvaluate:self evaluations:ZEvaluateKeyValues encoded:self.encode ];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge createEvaluate:self evaluations:ZEvaluateKeyValues encoded:self.circleBean.encoded succ:^{
+        
+        weakSelf.circleBean.isattention = true;
+        
+        weakSelf.op();
+    }];
     
 #endif 
 }

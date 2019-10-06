@@ -79,10 +79,21 @@
 
 - (void)setKeyValue:(ZCircleBean *)keyValue {
     
+    ZKeyValueBean *title = nil;
+    
+    for (ZKeyValueBean *kv in keyValue.contentMap) {
+        
+        if ([kv.type isEqualToString:@"title"]) {
+            
+            title = kv;
+            
+            break;
+        }
+    }
     
     self.bottomLineType = ZBottomLineTypeNone;
     
-    self.nameLabel.text = keyValue.users.nickname;
+    self.nameLabel.text = title.value;
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",keyValue.users.headImg]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
     
@@ -90,9 +101,9 @@
     
     [mutable setAttributedString: [[NSAttributedString alloc] initWithString:@"已认证" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14] ,NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@ZFragmentColor]}]];
     
-    [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"好评: %ld",keyValue.countComment] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14] ,NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#666666"]}]];
-    
     self.titleLabel.attributedText = mutable;
+    
+    self.evaluteItem.enabled = !keyValue.isLaud;
 }
 
 - (void)layoutSubviews {
@@ -227,10 +238,21 @@
 }
 - (void)setKeyValue:(ZCircleBean *)keyValue {
     
+    ZKeyValueBean *title = nil;
+    
+    for (ZKeyValueBean *kv in keyValue.contentMap) {
+        
+        if ([kv.type isEqualToString:@"title"]) {
+            
+            title = kv;
+            
+            break;
+        }
+    }
     
     self.bottomLineType = ZBottomLineTypeNone;
     
-    self.nameLabel.text = keyValue.users.nickname;
+    self.nameLabel.text = title.value;
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",keyValue.users.headImg]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
     

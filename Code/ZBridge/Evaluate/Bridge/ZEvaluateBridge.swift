@@ -27,7 +27,7 @@ public final class ZEvaluateBridge: ZBaseBridge {
 }
 extension ZEvaluateBridge {
     
-    @objc public func createEvaluate(_ vc: ZTableNoLoadingViewConntroller ,evaluations: [[String: Any]],encoded: String ) {
+    @objc public func createEvaluate(_ vc: ZTableNoLoadingViewConntroller ,evaluations: [[String: Any]],encoded: String ,succ: @escaping () -> ()) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
@@ -128,6 +128,8 @@ extension ZEvaluateBridge {
                         }
                         
                         let confirm = UIAlertAction(title: "确认", style: .default) { (a) in
+                            
+                            succ()
                             
                             vc.navigationController?.popViewController(animated: true)
                         }

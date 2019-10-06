@@ -339,6 +339,8 @@
 
 @property (nonatomic ,strong) UILabel *remarkLabel;
 
+@property (nonatomic ,strong) UILabel *phoneLabel;
+
 @property (nonatomic ,strong) UIButton *contactItem;
 
 @property (nonatomic ,strong) UILabel *timeLabel;
@@ -393,21 +395,7 @@
     }
     return _timeLabel;
 }
-- (UILabel *)remarkLabel {
-    
-    if (!_remarkLabel) {
-        
-        _remarkLabel = [UILabel new];
-        
-        _remarkLabel.font = [UIFont systemFontOfSize:13];
-        
-        _remarkLabel.textAlignment = NSTextAlignmentLeft;
-        
-        _remarkLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#999999"];
-        
-    }
-    return _remarkLabel;
-}
+
 - (UILabel *)titleLabel {
     
     if (!_titleLabel) {
@@ -474,6 +462,37 @@
     }
     return _aContentView;
 }
+- (UILabel *)phoneLabel {
+    
+    if (!_phoneLabel) {
+        
+        _phoneLabel = [UILabel new];
+        
+        _phoneLabel.font = [UIFont systemFontOfSize:13];
+        
+        _phoneLabel.textAlignment = NSTextAlignmentLeft;
+        
+        _phoneLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#999999"];
+        
+    }
+    return _phoneLabel;
+}
+
+- (UILabel *)remarkLabel {
+    
+    if (!_remarkLabel) {
+        
+        _remarkLabel = [UILabel new];
+        
+        _remarkLabel.font = [UIFont systemFontOfSize:13];
+        
+        _remarkLabel.textAlignment = NSTextAlignmentLeft;
+        
+        _remarkLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#999999"];
+        
+    }
+    return _remarkLabel;
+}
 - (void)commitInit {
     [super commitInit];
     
@@ -487,19 +506,20 @@
     
     [self.aContentView addSubview:self.titleLabel];
     
+    [self.aContentView addSubview:self.phoneLabel];
+    
     [self.aContentView addSubview:self.moreItem];
     
     [self.aContentView addSubview:self.contactItem];
     
     [self.aContentView addSubview:self.subTitleLabel];
     
-    [self.aContentView addSubview:self.remarkLabel ];
+    [self.aContentView addSubview:self.remarkLabel];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setKeyValue:(ZCircleBean *)keyValue {
-    //    _keyValue = keyValue;
     
     self.bottomLineType = ZBottomLineTypeNone;
     
@@ -518,7 +538,10 @@
             self.subTitleLabel.text = [NSString stringWithFormat:@"详细地址: %@",[k.value componentsSeparatedByString:@":"].lastObject];
         } else if ([k.value containsString:@"备注"]) {
             
-            self.remarkLabel.text = k.value;
+            self.remarkLabel.text = [NSString stringWithFormat:@"备注: %@",[k.value componentsSeparatedByString:@":"].lastObject];
+        } else if ([k.value containsString:@"手机"]) {
+            
+            self.phoneLabel.text = [NSString stringWithFormat:@"联系电话: %@",[k.value componentsSeparatedByString:@":"].lastObject];
         }
     }
     
@@ -558,7 +581,6 @@
         make.centerY.equalTo(self.iconImageView);
     }];
     
-    
     [self.moreItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.mas_equalTo(-15);
@@ -583,13 +605,23 @@
         make.top.equalTo(self.iconImageView.mas_bottom).offset(15);
     }];
     
-    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.mas_equalTo(15);
         
         make.right.mas_equalTo(-15);
         
         make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
+        
+    }];
+    
+    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(15);
+        
+        make.right.mas_equalTo(-15);
+        
+        make.top.equalTo(self.phoneLabel.mas_bottom).offset(5);
         
     }];
     
@@ -602,7 +634,6 @@
         make.top.equalTo(self.subTitleLabel.mas_bottom).offset(5);
         
     }];
-    
 }
 
 @end

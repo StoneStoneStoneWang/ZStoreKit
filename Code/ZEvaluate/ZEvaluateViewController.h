@@ -9,10 +9,12 @@
 #import <ZTable/ZTable.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@import ZBean;
 
+typedef void(^ZEvaluateSucc)(void);
 @interface ZEvaluateViewController : ZTableNoLoadingViewConntroller
 
-+ (instancetype)createEvaluateWithEncode:(NSString *)encode;
++ (instancetype)createEvaluateWithCircleBean:(ZCircleBean *)circleBean andOp:(ZEvaluateSucc )op;
 
 @end
 
