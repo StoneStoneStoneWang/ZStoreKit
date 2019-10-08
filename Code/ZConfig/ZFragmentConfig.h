@@ -25,6 +25,10 @@
 
 #define ZCircleFormOne 1  // 朋友圈类型 1 图片比例 4 / 3 左边
 
+#define ZBannerFormOne 1
+
+#define ZBannerFormTwo 0
+
 #pragma mark ----- ZAppFormGlobalOne
 
 #if ZAppFormGlobalOne
@@ -438,3 +442,12 @@
 #define ZNormalIcon "未选中"
 
 #define ZSelectedIcon "选中"
+
+#define ZDeleteIcon "删除"
+
+#define ZFunNormalIcon "未点赞"
+
+#define ZFunSelectedIcon "点赞"
+
+#define ZCommentIcon "评论"
+
