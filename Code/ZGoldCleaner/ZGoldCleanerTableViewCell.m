@@ -21,6 +21,10 @@
 
 @property (nonatomic ,strong) UILabel *nameLabel;
 
+@property (nonatomic ,strong) UILabel *iconLabel;
+
+@property (nonatomic ,strong) UILabel *phoneLabel;
+
 @end
 
 @implementation ZGoldCleanerTableViewCell
@@ -50,7 +54,6 @@
         _nameLabel.textAlignment = NSTextAlignmentLeft;
         
         _nameLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#333333"];
-        
     }
     return _nameLabel;
 }
@@ -64,7 +67,42 @@
     }
     return _titleLabel;
 }
-
+- (UILabel *)iconLabel {
+    
+    if (!_iconLabel) {
+        
+        _iconLabel = [UILabel new];
+        
+        _iconLabel.layer.cornerRadius = 20;
+        
+        _iconLabel.layer.masksToBounds = true;
+        
+        _iconLabel.font = [UIFont systemFontOfSize:20];
+        
+        _iconLabel.textColor = [UIColor whiteColor];
+        
+        _iconLabel.backgroundColor = [UIColor s_transformToColorByHexColorStr:@"e1e1e1"];
+        
+        _iconLabel.textAlignment = NSTextAlignmentCenter;
+        
+    }
+    return _iconLabel;
+}
+- (UILabel *)phoneLabel {
+    
+    if (!_phoneLabel) {
+        
+        _phoneLabel = [UILabel new];
+        
+        _phoneLabel.font = [UIFont systemFontOfSize:15];
+        
+        _phoneLabel.textAlignment = NSTextAlignmentLeft;
+        
+        _phoneLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#666666"];
+        
+    }
+    return _phoneLabel;
+}
 - (void)commitInit {
     [super commitInit];
     
@@ -73,6 +111,10 @@
     [self.contentView addSubview:self.nameLabel];
     
     [self.contentView addSubview:self.titleLabel];
+    
+    [self.contentView addSubview:self.iconLabel];
+    
+    [self.contentView addSubview:self.phoneLabel];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -97,6 +139,11 @@
     
     self.nameLabel.text = title.value;
     
+    if (title.value.length > 1) {
+        
+        self.iconLabel.text = [title.value substringToIndex:1];
+    }
+    
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",keyValue.users.headImg]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
     
     NSMutableAttributedString *mutable = [NSMutableAttributedString new];
@@ -105,7 +152,14 @@
     
     self.titleLabel.attributedText = mutable;
     
-    self.evaluteItem.enabled = !keyValue.isLaud;
+    if (![keyValue.users.nickname s_validPhone]) {
+        
+        NSString *result = keyValue.users.nickname;
+        
+        result = [result stringByReplacingCharactersInRange:NSMakeRange(4, 4) withString:@"****"];
+        
+        self.phoneLabel.text = result;
+    }
 }
 
 - (void)layoutSubviews {
@@ -118,11 +172,25 @@
         make.height.width.mas_equalTo(40);
     }];
     
+    [self.iconLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.top.mas_equalTo(15);
+        
+        make.height.width.mas_equalTo(40);
+    }];
+    
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.iconImageView.mas_right).offset(15);
         
-        make.centerY.equalTo(self.iconImageView);
+        make.bottom.equalTo(self.iconImageView.mas_centerY).offset(-1);
+    }];
+    
+    [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.iconImageView.mas_right).offset(15);
+        
+        make.top.equalTo(self.iconImageView.mas_centerY).offset(1);
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -148,6 +216,9 @@
 
 @property (nonatomic ,strong) UIButton *evaluteItem;
 
+@property (nonatomic ,strong) UILabel *phoneLabel;
+
+@property (nonatomic ,strong) UILabel *iconLabel;
 @end
 
 @implementation ZGoldCleanerTableViewCell
@@ -166,6 +237,27 @@
     }
     return _iconImageView;
 }
+- (UILabel *)iconLabel {
+    
+    if (!_iconLabel) {
+        
+        _iconLabel = [UILabel new];
+        
+        _iconLabel.layer.cornerRadius = 5;
+        
+        _iconLabel.layer.masksToBounds = true;
+        
+        _iconLabel.font = [UIFont systemFontOfSize:20];
+        
+        _iconLabel.textColor = [UIColor whiteColor];
+        
+        _iconLabel.backgroundColor = [UIColor s_transformToColorByHexColorStr:@"e1e1e1"];
+        
+        _iconLabel.textAlignment = NSTextAlignmentCenter;
+        
+    }
+    return _iconLabel;
+}
 - (UILabel *)nameLabel {
     
     if (!_nameLabel) {
@@ -180,6 +272,21 @@
         
     }
     return _nameLabel;
+}
+- (UILabel *)phoneLabel {
+    
+    if (!_phoneLabel) {
+        
+        _phoneLabel = [UILabel new];
+        
+        _phoneLabel.font = [UIFont systemFontOfSize:15];
+        
+        _phoneLabel.textAlignment = NSTextAlignmentLeft;
+        
+        _phoneLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#666666"];
+        
+    }
+    return _phoneLabel;
 }
 - (UILabel *)titleLabel {
     
@@ -220,11 +327,15 @@
     
     [self.contentView addSubview:self.iconImageView];
     
+    [self.contentView addSubview:self.iconLabel];
+    
     [self.contentView addSubview:self.nameLabel];
     
     [self.contentView addSubview:self.titleLabel];
     
     [self.contentView addSubview:self.evaluteItem];
+    
+    [self.contentView addSubview:self.phoneLabel];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -258,6 +369,11 @@
     
     self.nameLabel.text = title.value;
     
+    if (title.value.length > 1) {
+        
+        self.iconLabel.text = [title.value substringToIndex:1];
+    }
+    
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",keyValue.users.headImg]] placeholderImage:[UIImage imageNamed:@ZLogoIcon] options:SDWebImageRefreshCached];
     
     NSMutableAttributedString *mutable = [NSMutableAttributedString new];
@@ -267,6 +383,15 @@
     self.titleLabel.attributedText = mutable;
     
     self.evaluteItem.enabled = !keyValue.isLaud;
+    
+    if (![keyValue.users.nickname s_validPhone]) {
+        
+        NSString *result = keyValue.users.nickname;
+        
+        result = [result stringByReplacingCharactersInRange:NSMakeRange(4, 4) withString:@"****"];
+        
+        self.phoneLabel.text = result;
+    }
     
 }
 
@@ -280,11 +405,25 @@
         make.height.width.mas_equalTo(40);
     }];
     
+    [self.iconLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.top.mas_equalTo(15);
+        
+        make.height.width.mas_equalTo(40);
+    }];
+    
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.iconImageView.mas_right).offset(15);
         
-        make.centerY.equalTo(self.iconImageView);
+        make.bottom.equalTo(self.iconImageView.mas_centerY).offset(-1);
+    }];
+    
+    [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.iconImageView.mas_right).offset(15);
+        
+        make.top.equalTo(self.iconImageView.mas_centerY).offset(1);
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -306,6 +445,7 @@
         make.height.mas_equalTo(@30);
         
     }];
+    
     
 }
 

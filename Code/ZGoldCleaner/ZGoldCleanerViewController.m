@@ -58,7 +58,7 @@
     
     self.bridge = [ZTListBridge new];
     
-    [self.bridge createTList:self isMy:false tag:@""];
+    [self.bridge createTList:self isMy:false tag:@ZGoldCleanerTag];
     
     [self.tableView.mj_header beginRefreshing];
 }
@@ -155,11 +155,12 @@
     
     return 90;
 }
+
 - (void)configViewModel {
     
     self.bridge = [ZTListBridge new];
     
-    [self.bridge createTList:self isMy:false tag:@""];
+    [self.bridge createTList:self isMy:false tag:@ZGoldCleanerTag];
     
     [self.tableView.mj_header beginRefreshing];
 }
