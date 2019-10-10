@@ -96,12 +96,24 @@ struct ZAMapViewModel: WLBaseViewModel {
                                 if item.value.wl_isEmpty {
                                     
                                     return Driver.just(WLBaseResult.failed("请输入备注"))
+                                } else {
+                                    
+                                    if ZAMapViewModel.isPurnInt(string: item.value) {
+                                        
+                                        return Driver.just(WLBaseResult.failed("请输入备注,备注不能为纯数字"))
+                                    }
                                 }
                             } else if item.type.contains("详细地址") {
                                 
                                 if item.value.wl_isEmpty {
                                     
                                     return Driver.just(WLBaseResult.failed("请输入详细地址"))
+                                } else {
+                                    
+                                    if ZAMapViewModel.isPurnInt(string: item.value) {
+                                        
+                                        return Driver.just(WLBaseResult.failed("请输入正确的详细地址,详细地址不能为纯数字"))
+                                    }
                                 }
                             } else if item.type.contains("时间") {
                                 
@@ -156,5 +168,15 @@ struct ZAMapViewModel: WLBaseViewModel {
         }
         
         output.tableData.accept(mutable)
+    }
+    
+    static func isPurnInt(string: String) -> Bool {
+        
+        let scan: Scanner = Scanner(string: string)
+        
+        var val:Int = 0
+        
+        return scan.scanInt(&val) && scan.isAtEnd
+        
     }
 }

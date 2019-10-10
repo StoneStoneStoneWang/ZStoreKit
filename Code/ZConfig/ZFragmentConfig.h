@@ -8,11 +8,11 @@
 
 #pragma mark ---- 类型App
 // 保洁之家
-#define ZAppFormGlobalOne 0 // 地图类型 含有抽屉
+#define ZAppFormGlobalOne 1 // 地图类型 含有抽屉
 // 七小福
 #define ZAppFormGlobalTwo 0 // 地图类型 不含抽屉
 // 顺欣家政
-#define ZAppFormGlobalThree 1 // 地图类型 含有抽屉
+#define ZAppFormGlobalThree 0 // 地图类型 含有抽屉
 
 #define ZAppFormGlobalFour 0 //
 
