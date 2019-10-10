@@ -8,11 +8,11 @@
 
 #pragma mark ---- 类型App
 
-#define ZAppFormGlobalOne 1 // 地图类型 含有抽屉
+#define ZAppFormGlobalOne 0 // 地图类型 含有抽屉
 
 #define ZAppFormGlobalTwo 0 // 地图类型 不含抽屉
 
-#define ZAppFormGlobalThree 0 // 朋友圈类型
+#define ZAppFormGlobalThree 1 // 朋友圈类型
 
 #define ZCircleFormOne 1  // 朋友圈类型 1 图片比例 4 / 3 左边
 
