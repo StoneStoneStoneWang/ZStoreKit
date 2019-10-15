@@ -41,7 +41,7 @@
     
 #elif ZAppFormGlobalThree
     
-    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 100)];
+    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 120)];
     
     self.tableView.tableHeaderView = self.headerView;
     

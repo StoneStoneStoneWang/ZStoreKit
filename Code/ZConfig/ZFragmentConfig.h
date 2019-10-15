@@ -137,6 +137,8 @@
 
 #define ZWelcomeImgs @[@"引导1",@"引导2"]
 
+#define ZOrderKeyValues @[@"已发布",@"已接单",@"进行中",@"已完成"]
+
 #define ZWelcomeFormOne 0
 
 #define ZWelcomeFormTwo 1

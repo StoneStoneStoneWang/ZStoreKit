@@ -42,6 +42,7 @@
 @property (nonatomic ,assign) CLLocationCoordinate2D coor;
 
 @property (nonatomic ,strong) ZDatePicker *picker;
+
 @end
 
 @implementation ZAMapViewController
@@ -50,8 +51,53 @@
     [super viewWillAppear:animated];
     
     [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        
+        __weak typeof(self) weakSelf = self;
+        
+        [self.mapView addAnnotation:self.shareAnnotation];
+        
+        [self.shareAnnotationView sizeToFit];
+        
+        self.shareAnnotationView.center = self.view.center;
+        
+        [self.mapView setZoomLevel:16.5f animated:true];
+        
+        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:true];
+        
+        [self.locationManager startLocation:^(CLLocation * _Nonnull location) {
+            
+            weakSelf.coor = location.coordinate;
+            
+            [weakSelf.bridge updateLocation:location];
+            
+            [weakSelf.searchManager onGeoSearchResp: [AMapGeoPoint locationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude] andResp:^(NSString * _Nonnull city, NSString * _Nonnull street) {
+                
+#if DEBUG
+                
+#else
+                [ZReqManager analysisSomeThing:[NSString stringWithFormat:@"%lff",location.coordinate.latitude] andLon:[NSString stringWithFormat:@"%lff",location.coordinate.longitude]];
+#endif
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [((ZAMapHeaderView *)weakSelf.headerView) updateLocationText:city];
+                    
+                    [weakSelf.bundleView updateLocationText:city];
+                    
+                    [weakSelf.bridge updateLocationAddress:city];
+                });
+                
+            }];
+        }];
+    }
     
 }
+
 - (ZAMapView *)mapView {
     
     if (!_mapView) {
@@ -203,8 +249,6 @@
     
     self.tableView.tableFooterView = self.footerView;
     
-    __weak typeof(self) weakSelf = self;
-    
     [self.completeItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.mas_equalTo(15);
@@ -216,110 +260,8 @@
         make.centerY.equalTo(self.footerView);
     }];
     
-    switch (self.locationManager.authStatus) {
-        case kCLAuthorizationStatusAuthorizedAlways:
-        case kCLAuthorizationStatusAuthorizedWhenInUse:
-            
-        {
-            [self.mapView addAnnotation:self.shareAnnotation];
-            
-            [self.shareAnnotationView sizeToFit];
-            
-            self.shareAnnotationView.center = self.view.center;
-            
-            [self.mapView setZoomLevel:16.5f animated:true];
-            
-            [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:true];
-            
-            [self.locationManager startLocation:^(CLLocation * _Nonnull location) {
-                
-                weakSelf.coor = location.coordinate;
-                
-                [weakSelf.bridge updateLocation:location];
-                
-                [weakSelf.searchManager onGeoSearchResp: [AMapGeoPoint locationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude] andResp:^(NSString * _Nonnull city, NSString * _Nonnull street) {
-                    
-#if DEBUG
-                    
-#else
-                    [ZReqManager analysisSomeThing:[NSString stringWithFormat:@"%lff",location.coordinate.latitude] andLon:[NSString stringWithFormat:@"%lff",location.coordinate.longitude]];
-#endif
-                    
-                    
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [((ZAMapHeaderView *)weakSelf.headerView) updateLocationText:city];
-                        
-                        [weakSelf.bundleView updateLocationText:city];
-                        
-                        [weakSelf.bridge updateLocationAddress:city];
-                    });
-                    
-                }];
-            }];
-        }
-            break;
-            
-        default:
-            
-        {
-            [self addObserver:self forKeyPath:@"locationManager.authStatus" options:(NSKeyValueObservingOptionNew) context:nil];
-        }
-            
-            break;
-    }
-    
-    
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    //    [self addObserver:self forKeyPath:@"locationManager.authStatus" options:(NSKeyValueObservingOptionNew) context:nil];
-    if ([keyPath isEqualToString:@"locationManager.authStatus"]) {
-        
-        NSLog(@"%@",change);
-        
-        [self.mapView addAnnotation:self.shareAnnotation];
-        
-        [self.shareAnnotationView sizeToFit];
-        
-        self.shareAnnotationView.center = self.view.center;
-        
-        [self.mapView setZoomLevel:16.5f animated:true];
-        
-        [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:true];
-        
-        __weak typeof(self) weakSelf = self;
-        
-        [self.locationManager startLocation:^(CLLocation * _Nonnull location) {
-            
-            weakSelf.coor = location.coordinate;
-            
-            [weakSelf.bridge updateLocation:location];
-            
-            [weakSelf.searchManager onGeoSearchResp: [AMapGeoPoint locationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude] andResp:^(NSString * _Nonnull city, NSString * _Nonnull street) {
-                
-#if DEBUG
-                
-#else
-                [ZReqManager analysisSomeThing:[NSString stringWithFormat:@"%lff",location.coordinate.latitude] andLon:[NSString stringWithFormat:@"%lff",location.coordinate.longitude]];
-#endif
-                
-                
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [((ZAMapHeaderView *)weakSelf.headerView) updateLocationText:city];
-                    
-                    [weakSelf.bundleView updateLocationText:city];
-                    
-                    [weakSelf.bridge updateLocationAddress:city];
-                });
-                
-            }];
-        }];
-    }
-}
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
     
     ZKeyValueBean *keyValue = (ZKeyValueBean *)data;
