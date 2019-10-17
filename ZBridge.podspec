@@ -540,5 +540,44 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZCocoa/ASM'
     end
   end
-  
+  # 列表
+  spec.subspec 'Handle' do |handle|
+    
+    handle.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Handle/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZCache'
+      vm.frameworks = 'UIKit', 'Foundation' ,'CoreLocation'
+    end
+    
+    handle.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Handle/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Handle/VM'
+      bridge.dependency 'ZCollection'
+    end
+  end
+  # 列表
+  spec.subspec 'Handler' do |handler|
+    
+    handler.subspec 'VM' do |vm|
+      vm.source_files = "Code/ZBridge/Handler/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZBean/Circle'
+    end
+    
+    handler.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Handler/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Handler/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZCollection'
+      bridge.dependency 'ZCocoa/ASM'
+    end
+  end
 end
