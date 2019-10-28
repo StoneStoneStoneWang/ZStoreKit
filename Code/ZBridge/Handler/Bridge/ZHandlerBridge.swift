@@ -16,6 +16,7 @@ import RxSwift
 import ZBean
 import ZNoti
 import ZRealReq
+import CoreLocation
 
 public typealias ZHandlerOperateSucc = (_ value: String) -> ()
 
@@ -29,11 +30,15 @@ public final class ZHandlerBridge: ZBaseBridge {
     var viewModel: ZHandlerViewModel!
     
     weak var vc: ZCollectionNoLoadingViewController!
+    
+    var location: BehaviorRelay<CLLocation> = BehaviorRelay<CLLocation>(value: CLLocation(latitude: 39, longitude: 106))
+    
+    var locAddress: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
 }
 
 extension ZHandlerBridge {
     
-    @objc public func createHandler(_ vc: ZCollectionNoLoadingViewController,pTag: String,tf: UITextField ) {
+    @objc public func createHandler(_ vc: ZCollectionNoLoadingViewController,pTag: String,keyValues: [[String: Any]]) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
@@ -42,7 +47,10 @@ extension ZHandlerBridge {
             let input = ZHandlerViewModel.WLInput(tag: pTag,
                                                   modelSelect: vc.collectionView.rx.modelSelected(ZKeyValueBean.self),
                                                   itemSelect: vc.collectionView.rx.itemSelected,
-                                                  completeTaps: completeItem.rx.tap.asSignal())
+                                                  completeTaps: completeItem.rx.tap.asSignal(),
+                                                  keyValues: keyValues,
+                                                  location: location,
+                                                  locAddress: locAddress)
             
             viewModel = ZHandlerViewModel(input)
             
@@ -110,7 +118,16 @@ extension ZHandlerBridge {
     
     @objc public func replaceContent(_ keyValue: ZKeyValueBean) {
         
-//        vc.tableView.reloadData()
+        vc.collectionView.reloadData()
     }
     
+    @objc public func updateLocation(_ location: CLLocation) {
+        
+        self.location.accept(location)
+    }
+    
+    @objc public func updateLocationAddress(_ address: String) {
+        
+        self.locAddress.accept(address)
+    }
 }

@@ -24,22 +24,30 @@ public final class ZHandleBridge: ZBaseBridge {
 
 extension ZHandleBridge {
     
-    @objc public func createHandle(_ vc: ZTViewController,succ: @escaping (Bool,CLLocation?,String?) -> ()) {
+    @objc public func createHandle(_ vc: ZTViewController,completeItem: UIButton,succ: @escaping (Bool,CLLocation?,String?) -> ()) {
         
-        if let completeItem = vc.view.viewWithTag(301) as? UIButton {
-            
-            let input = ZHandleViewModel.WLInput(completeTaps: completeItem.rx.tap.asSignal(),
-                                               location: location,
-                                               locAddress: locAddress)
-            
-            viewModel = ZHandleViewModel(input)
-            
-            viewModel
-                .output
-                .completed
-                .drive(onNext: { succ($0.0,$0.1,$0.2) })
-                .disposed(by: disposed)
-            
-        }
+        let input = ZHandleViewModel.WLInput(completeTaps: completeItem.rx.tap.asSignal(),
+                                             location: location,
+                                             locAddress: locAddress)
+        
+        viewModel = ZHandleViewModel(input)
+        
+        viewModel
+            .output
+            .completed
+            .drive(onNext: { succ($0.0,$0.1,$0.2) })
+            .disposed(by: disposed)
+        
+    }
+    
+    @objc public func updateLocation(_ location: CLLocation) {
+        
+        self.location.accept(location)
+    }
+    
+    @objc public func updateLocationAddress(_ address: String) {
+        
+        self.locAddress.accept(address)
     }
 }
+

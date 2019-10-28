@@ -139,6 +139,17 @@
 
 #define ZOrderKeyValues @[@"已发布",@"已接单",@"进行中",@"已完成"]
 
+#define ZPubKeyValues @[\
+@{@"type": @"头/二胎",@"value": @"",@"place": @"请选择头/二胎"} ,\
+@{@"type": @"服务时间",@"value": @"",@"place": @"请选择服务时间"} ,\
+@{@"type": @"详细地址",@"value": @"",@"place": @"请输入详细地址"} ,\
+@{@"type": @"联系人",@"value": @"",@"place": @"请输入联系人"} ,\
+@{@"type": @"联系电话",@"value": @"",@"place": @"请输入联系电话"} ,\
+@{@"type": @"推荐人",@"value": @"",@"place": @"请输入推荐人(选填)"} ,\
+@{@"type": @"推荐人电话",@"value": @"",@"place": @"请输入推荐人电话(选填)"} ,\
+@{@"type": @"备注",@"value": @"",@"place": @"请输入备注信息"} ,\
+]
+
 #define ZWelcomeFormOne 0
 
 #define ZWelcomeFormTwo 1
@@ -215,3 +226,5 @@
 #define ZDeleteIcon "删除"
 
 #define ZPublishIcon "发布"
+
+#define ZGoldIcon "保洁预约"
