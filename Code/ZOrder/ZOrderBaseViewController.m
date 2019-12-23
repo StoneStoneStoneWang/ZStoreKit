@@ -36,12 +36,51 @@
 
 @end
 
-@implementation ZOrderBaseCollectionViewCell
+@interface ZOrderBaseCollectionViewCell()
 
+@property (nonatomic ,strong) UILabel *titleLabel;
 
 @end
 
+@implementation ZOrderBaseCollectionViewCell
+
+- (UILabel *)titleLabel {
+    
+    if (!_titleLabel) {
+        
+        _titleLabel = [UILabel new];
+        
+        _titleLabel.font = [UIFont systemFontOfSize:12];
+    }
+    return _titleLabel;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    
+    if (self = [super initWithFrame:frame]) {
+        
+        [self commitInit];
+    }
+    return self;
+}
+- (void)commitInit {
+    
+    [self.contentView addSubview:self.titleLabel];
+}
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.titleLabel.frame = self.bounds;
+}
+
+- (void)setTitle:(NSString *)title {
+    
+    self.titleLabel.text = title;
+}
+@end
+
 @implementation ZOrderBaseCollectionView
+
 
 
 @end
@@ -80,11 +119,15 @@
     
     [self.collectionView registerClass:[ZOrderBaseCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
 }
+
+
 - (UICollectionViewCell *)configCollectionViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
     ZOrderBaseCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:ip];
     
     cell.backgroundColor = [UIColor redColor];
+    
+    [cell setTitle:ZOrderKeyValues[ip.row]];
     
     return cell;
 }

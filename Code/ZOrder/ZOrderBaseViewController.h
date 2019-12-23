@@ -13,11 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZOrderBaseCollectionViewCell : UICollectionViewCell
 
+- (void)setTitle:(NSString *)title;
+
 @end
 
 @interface ZOrderBaseCollectionView : UICollectionView
 
 @end
+
 @interface ZOrderBaseViewController : ZCollectionNoLoadingViewController
 
 + (instancetype)createOrderBase;

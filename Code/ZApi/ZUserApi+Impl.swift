@@ -82,6 +82,8 @@ extension ZUserApi: WLObserverReq {
         case .analysis: return "mob/location_mobAddLocation?"
             
         case .fetchTags: return "mob/circleFriends_mobListTag?"
+            
+        case .updateCircle: return "mob/circleFriends_mobUpdateCircleFriends?"
         }
     }
     
@@ -184,6 +186,10 @@ extension ZUserApi: WLObserverReq {
             return result
             
         case .fetchTags: return [:]
+            
+        case .updateCircle(let tag, content: let content, encode: let encode):
+            
+            return ["cfs.tag":tag,"cfs.projectId":ZConfigure.fetchAppKey(),"cfs.content":content,"cfs.encoded": encode]
         }
         
     }
