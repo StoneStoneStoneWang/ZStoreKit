@@ -181,8 +181,6 @@
 }
 - (void)configOwnSubViews {
     
-    
-    
     [self.collectionView registerClass:[ZBannerImageCollectionViewCell class] forCellWithReuseIdentifier:@"image"];
     
     [self.collectionView registerClass:[ZBannerVideoCollectionViewCell class] forCellWithReuseIdentifier:@"video"];
