@@ -35,8 +35,8 @@ extension ZTListBridge {
         let input = ZTListViewModel.WLInput(isMy: isMy,
                                             modelSelect: vc.tableView.rx.modelSelected(ZCircleBean.self),
                                             itemSelect: vc.tableView.rx.itemSelected,
-                                            headerRefresh: vc.tableView.mj_header.rx.refreshing.asDriver(),
-                                            footerRefresh: vc.tableView.mj_footer.rx.refreshing.asDriver(),
+                                            headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver(),
+                                            footerRefresh: vc.tableView.mj_footer!.rx.refreshing.asDriver(),
                                             tag: tag)
         
         viewModel = ZTListViewModel(input, disposed: disposed)
@@ -59,7 +59,7 @@ extension ZTListBridge {
         
         endHeaderRefreshing
             .map({ _ in return true })
-            .drive(vc.tableView.mj_header.rx.endRefreshing)
+            .drive(vc.tableView.mj_header!.rx.endRefreshing)
             .disposed(by: disposed)
         
         endHeaderRefreshing
@@ -86,7 +86,7 @@ extension ZTListBridge {
         
         endFooterRefreshing
             .map({ _ in return true })
-            .drive(vc.tableView.mj_footer.rx.endRefreshing)
+            .drive(vc.tableView.mj_footer!.rx.endRefreshing)
             .disposed(by: disposed)
         
         self.dataSource = dataSource
@@ -104,7 +104,7 @@ extension ZTListBridge {
         viewModel
             .output
             .footerHidden
-            .bind(to: vc.tableView.mj_footer.rx.isHidden)
+            .bind(to: vc.tableView.mj_footer!.rx.isHidden)
             .disposed(by: disposed)
         
         vc
@@ -214,7 +214,7 @@ extension ZTListBridge {
                     
                     succ()
                     
-                    self.vc.tableView.mj_header.beginRefreshing()
+                    self.vc.tableView.mj_header!.beginRefreshing()
                     
                     ZHudUtil.showInfo(msg)
                 case .failed(let msg):

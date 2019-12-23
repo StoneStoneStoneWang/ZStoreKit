@@ -32,8 +32,8 @@ extension ZCommentBridge {
         
         let input = ZCommentViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZCommentBean.self),
                                               itemSelect: vc.tableView.rx.itemSelected,
-                                              headerRefresh: vc.tableView.mj_header.rx.refreshing.asDriver(),
-                                              footerRefresh: vc.tableView.mj_footer.rx.refreshing.asDriver(),
+                                              headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver(),
+                                              footerRefresh: vc.tableView.mj_footer!.rx.refreshing.asDriver(),
                                               encoded: encode)
         
         viewModel = ZCommentViewModel(input, disposed: disposed)
@@ -55,7 +55,7 @@ extension ZCommentBridge {
         
         endHeaderRefreshing
             .map({ _ in return true })
-            .drive(vc.tableView.mj_header.rx.endRefreshing)
+            .drive(vc.tableView.mj_header!.rx.endRefreshing)
             .disposed(by: disposed)
         
         endHeaderRefreshing
@@ -80,7 +80,7 @@ extension ZCommentBridge {
         
         endFooterRefreshing
             .map({ _ in return true })
-            .drive(vc.tableView.mj_footer.rx.endRefreshing)
+            .drive(vc.tableView.mj_footer!.rx.endRefreshing)
             .disposed(by: disposed)
         
         self.dataSource = dataSource
@@ -98,7 +98,7 @@ extension ZCommentBridge {
         viewModel
             .output
             .footerHidden
-            .bind(to: vc.tableView.mj_footer.rx.isHidden)
+            .bind(to: vc.tableView.mj_footer!.rx.isHidden)
             .disposed(by: disposed)
         
         vc
@@ -133,7 +133,7 @@ extension ZCommentBridge {
                         
                     } else if value.last!.type == .failed {
                         
-                        self.vc.tableView.mj_header.beginRefreshing()
+                        self.vc.tableView.mj_header!.beginRefreshing()
                         
                     } else {
                         

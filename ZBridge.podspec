@@ -580,4 +580,23 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZCocoa/ASM'
     end
   end
+  
+  # 列表
+  spec.subspec 'Order' do |order|
+    
+    order.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Order/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+    end
+    
+    order.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Order/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Order/VM'
+      bridge.dependency 'ZCollection'
+      bridge.dependency 'ZCocoa'
+      bridge.dependency 'RxDataSources'
+    end
+  end
 end

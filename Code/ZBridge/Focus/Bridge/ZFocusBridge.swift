@@ -31,11 +31,11 @@ extension ZFocusBridge {
         
         self.vc = vc
         
-        vc.tableView.mj_footer.isHidden = true
+        vc.tableView.mj_footer!.isHidden = true
         
         let input = ZFocusViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZFocusBean.self),
                                             itemSelect: vc.tableView.rx.itemSelected,
-                                            headerRefresh: vc.tableView.mj_header.rx.refreshing.asDriver())
+                                            headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver())
         
         viewModel = ZFocusViewModel(input, disposed: disposed)
         
@@ -59,7 +59,7 @@ extension ZFocusBridge {
         
         endHeaderRefreshing
             .map({ _ in return true })
-            .drive(vc.tableView.mj_header.rx.endRefreshing)
+            .drive(vc.tableView.mj_header!.rx.endRefreshing)
             .disposed(by: disposed)
         
         endHeaderRefreshing

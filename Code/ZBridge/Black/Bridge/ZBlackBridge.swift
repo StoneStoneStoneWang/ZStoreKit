@@ -31,11 +31,11 @@ extension ZBlackBridge {
         
         self.vc = vc
         
-        vc.tableView.mj_footer.isHidden = true
+        vc.tableView.mj_footer?.isHidden = true
         
         let input = ZBlackViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZBlackBean.self),
                                             itemSelect: vc.tableView.rx.itemSelected,
-                                            headerRefresh: vc.tableView.mj_header.rx.refreshing.asDriver())
+                                            headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver())
         
         viewModel = ZBlackViewModel(input, disposed: disposed)
         
@@ -59,7 +59,7 @@ extension ZBlackBridge {
         
         endHeaderRefreshing
             .map({ _ in return true })
-            .drive(vc.tableView.mj_header.rx.endRefreshing)
+            .drive(vc.tableView.mj_header!.rx.endRefreshing)
             .disposed(by: disposed)
         
         endHeaderRefreshing

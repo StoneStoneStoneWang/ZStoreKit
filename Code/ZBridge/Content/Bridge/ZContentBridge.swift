@@ -106,7 +106,7 @@ extension ZContentBridge: UITableViewDelegate {
                     
                     succ()
                     
-                    self.vc.tableView.mj_header.beginRefreshing()
+                    self.vc.tableView.mj_header?.beginRefreshing()
                     
                     ZHudUtil.showInfo(msg)
                 case .failed(let msg):

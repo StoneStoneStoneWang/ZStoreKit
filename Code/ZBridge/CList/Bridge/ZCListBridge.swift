@@ -35,8 +35,8 @@ extension ZCListBridge {
         let input = ZCListViewModel.WLInput(isMy: isMy,
                                             modelSelect: vc.collectionView.rx.modelSelected(ZCommodityBean.self),
                                             itemSelect: vc.collectionView.rx.itemSelected,
-                                            headerRefresh: vc.collectionView.mj_header.rx.refreshing.asDriver(),
-                                            footerRefresh: vc.collectionView.mj_footer.rx.refreshing.asDriver(),
+                                            headerRefresh: vc.collectionView.mj_header!.rx.refreshing.asDriver(),
+                                            footerRefresh: vc.collectionView.mj_footer!.rx.refreshing.asDriver(),
                                             tag: tag)
         
         viewModel = ZCListViewModel(input, disposed: disposed)
@@ -58,7 +58,7 @@ extension ZCListBridge {
         
         endHeaderRefreshing
             .map({ _ in return true })
-            .drive(vc.collectionView.mj_header.rx.endRefreshing)
+            .drive(vc.collectionView.mj_header!.rx.endRefreshing)
             .disposed(by: disposed)
         
         endHeaderRefreshing
@@ -84,7 +84,7 @@ extension ZCListBridge {
         
         endFooterRefreshing
             .map({ _ in return true })
-            .drive(vc.collectionView.mj_footer.rx.endRefreshing)
+            .drive(vc.collectionView.mj_footer!.rx.endRefreshing)
             .disposed(by: disposed)
         
         self.dataSource = dataSource
@@ -102,7 +102,7 @@ extension ZCListBridge {
         viewModel
             .output
             .footerHidden
-            .bind(to: vc.collectionView.mj_footer.rx.isHidden)
+            .bind(to: vc.collectionView.mj_footer!.rx.isHidden)
             .disposed(by: disposed)
     }
 }
