@@ -22,13 +22,14 @@ public final class ZOrderBaseBridge: ZBaseBridge {
     
     var dataSource: RxCollectionViewSectionedReloadDataSource<Section>!
     
-    var vc: ZCollectionLoadingViewController!
+    var vc: ZCollectionNoLoadingViewController!
     
     var style: ZBannerStyle = .one
 }
+
 extension ZOrderBaseBridge {
     
-    @objc public func createOrderBase(_ vc: ZCollectionLoadingViewController ,tableData: [String]) {
+    @objc public func createOrderBase(_ vc: ZCollectionNoLoadingViewController ,tableData: [String]) {
         
         self.vc = vc
         

@@ -7,16 +7,32 @@
 //
 
 #import "ZOrderViewController.h"
-
+#include <stdlib.h>
 
 
 
 @interface ZOrderViewController ()
 
-
+@property (nonatomic ,strong) NSString *aTag;
 @end
 
 @implementation ZOrderViewController
 
++ (instancetype)createOrder:(NSString *)tag {
+    
+    return [[self alloc] initWithATag:tag];
+}
+- (instancetype)initWithATag:(NSString *)tag {
+    
+    if (self = [super init]) {
+        
+        self.aTag = tag;
+    }
+    return self;
+}
+- (void)configOwnProperties {
+    
+    self.view.backgroundColor = [UIColor colorWithRed: arc4random() % 255 / 255.0f green:arc4random() % 255 / 255.0f blue:arc4random() % 255 / 255.0f alpha:1];
+}
 
 @end
