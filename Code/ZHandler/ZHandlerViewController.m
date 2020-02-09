@@ -127,7 +127,7 @@
     
     self.bridge = [ZHandlerBridge new];
     
-    [self.bridge createHandler:self pTag:@"金牌月嫂" keyValues:ZPubKeyValues];
+    [self.bridge createHandler:self pTag:@"已发布" keyValues:ZPubKeyValues];
     
     [self.bridge updateLocation:self.location];
     

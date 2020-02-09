@@ -14,7 +14,9 @@ typedef NS_ENUM(NSInteger ,ZConfigureType) {
     /** 商城  */
     ZConfigureTypeStore NS_SWIFT_NAME(store) = 2,
     /** 地图  */
-    ZConfigureTypeMap NS_SWIFT_NAME(map) = 3
+    ZConfigureTypeMap NS_SWIFT_NAME(map) = 3,
+    /** 游戏  */
+    ZConfigureTypeGame NS_SWIFT_NAME(game) = 4,
 };
 
 NS_ASSUME_NONNULL_BEGIN

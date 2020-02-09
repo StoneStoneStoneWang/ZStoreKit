@@ -112,6 +112,7 @@
     }
     return _bridge;
 }
+
 - (ZSearchUtil *)searchManager {
     
     if (!_searchManager) {

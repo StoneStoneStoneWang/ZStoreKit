@@ -7,13 +7,19 @@
 //
 
 #import <ZTable/ZTable.h>
-
+@import ZBridge;    
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface ZOrderViewController : ZTableNoLoadingViewConntroller
+@interface ZOrderViewController : ZTableLoadingViewController
 
 + (instancetype)createOrder:(NSString *)tag;
+
+@end
+
+@interface ZOrderTableViewCell : ZBaseTableViewCell
+
+@property (nonatomic ,strong) ZCircleBean *circleBean;
 
 @end
 
