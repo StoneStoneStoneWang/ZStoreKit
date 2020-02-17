@@ -8,7 +8,7 @@
 
 #pragma mark ---- 类型App
 
-#define ZAppFormGlobalOne 0 // 地图类型 含有抽屉
+#define ZAppFormGlobalOne 1 // 地图类型 含有抽屉
 
 #define ZAppFormGlobalTwo 0 // 地图类型 不含抽屉
 
@@ -141,6 +141,7 @@
 
 #define ZPubKeyValues @[\
 @{@"type": @"头/二胎",@"value": @"",@"place": @"请选择头/二胎"} ,\
+@{@"type": @"生产状态",@"value": @"",@"place": @"请选择是否生产"} ,\
 @{@"type": @"服务时间",@"value": @"",@"place": @"请选择服务时间"} ,\
 @{@"type": @"详细地址",@"value": @"",@"place": @"请输入详细地址"} ,\
 @{@"type": @"联系人",@"value": @"",@"place": @"请输入联系人"} ,\
