@@ -42,10 +42,11 @@ Pod::Spec.new do |spec|
   end
   spec.subspec 'Black' do |black|
     black.source_files = "Code/ZBean/Black/*.{swift}"
-    
+    black.dependency 'ZBean/User'
   end
   spec.subspec 'Focus' do |focus|
     focus.source_files = "Code/ZBean/Focus/*.{swift}"
+    focus.dependency 'ZBean/User'
   end
   
   spec.subspec 'KeyValue' do |keyValue|
