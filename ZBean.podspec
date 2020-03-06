@@ -56,12 +56,15 @@ Pod::Spec.new do |spec|
   spec.subspec 'Circle' do |circle|
     circle.source_files = "Code/ZBean/Circle/*.{swift}"
     circle.dependency 'ZBean/KeyValue'
+    circle.dependency 'ZBean/User'
     circle.dependency 'WLToolsKit/JsonCast'
+    
   end
   
   spec.subspec 'Commodity' do |commodity|
     commodity.source_files = "Code/ZBean/Commodity/*.{swift}"
     commodity.dependency 'ZBean/KeyValue'
+    commodity.dependency 'ZBean/User'
     commodity.dependency 'WLToolsKit/JsonCast'
   end
   spec.subspec 'Comment' do |comment|
