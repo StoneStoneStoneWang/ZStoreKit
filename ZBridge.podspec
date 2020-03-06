@@ -604,5 +604,28 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZCocoa/ASM'
     end
   end
-  
+  # 列表
+  spec.subspec 'Characters' do |character|
+    
+    character.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Characters/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZBean/Circle'
+    end
+    
+    character.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Characters/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Order/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/SM'
+    end
+  end
 end

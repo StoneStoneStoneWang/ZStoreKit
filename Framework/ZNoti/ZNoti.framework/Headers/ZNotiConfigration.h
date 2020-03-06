@@ -61,6 +61,8 @@ FOUNDATION_EXPORT NSString * const ZNotiAvatar;
 
 FOUNDATION_EXPORT NSString * const ZNotiContactUs;
 
+FOUNDATION_EXPORT NSString * const ZNotiCharacters;
+
 FOUNDATION_EXPORT NSString * const ZNotiGoldCleaner;
 
 FOUNDATION_EXPORT NSString * const ZNotiGoToEvaluate;
@@ -121,8 +123,20 @@ FOUNDATION_EXPORT NSString * const ZNotiBannerClick;
 
 #pragma mark ---- item
 
-
 FOUNDATION_EXPORT NSString * const ZNotiItemClick;
+
+#pragma mark ---- game
+
+FOUNDATION_EXPORT NSString * const ZNotiCharacterItemClick;
+
+FOUNDATION_EXPORT NSString * const ZNotiCharacterAccesoryClick;
+
+FOUNDATION_EXPORT NSString * const ZNotiCharacterAddClick;
+
+FOUNDATION_EXPORT NSString * const ZNotiCharacterEditClick;
+
+FOUNDATION_EXPORT NSString * const ZNotiEquipCompleteClick;
+
 
 @interface ZNotiConfigration: NSObject
 

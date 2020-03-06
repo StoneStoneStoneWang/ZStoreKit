@@ -60,6 +60,8 @@ public enum ZProfileType : Int{
     case order
     
     case address
+    
+    case characters
 }
 
 extension ZProfileType {
@@ -72,6 +74,10 @@ extension ZProfileType {
         } else if ZConfigure.fetchPType() == .map {
             
             return [.space,userInfo,.order,.focus,.space,.contactUS,.pravicy,.about,.space,.setting]
+            
+        } else if ZConfigure.fetchPType() == .game {
+            
+            return [.space,userInfo,.characters,.space,.contactUS,.pravicy,.about,.space,.setting]
             
         } else {
             
@@ -118,6 +124,8 @@ extension ZProfileType {
             
         case .order: return "我的订单"
             
+        case .characters: return "角色信息"
+            
         default: return ""
             
         }
@@ -145,6 +153,8 @@ extension ZProfileType {
             
         case .userInfo: result = ZNotiUserInfo
             
+        case .characters: result = ZNotiCharacters
+        
         default: break
             
         }
