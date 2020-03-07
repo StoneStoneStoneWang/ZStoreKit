@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZLoading"
-  spec.version      = "0.0.2"
+  spec.version      = "0.0.3"
   spec.summary      = "A Lib For loading."
   spec.description  = <<-DESC
   ZLoading是loading封装

@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZTable"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.3"
   spec.summary      = "A Lib For table vc."
   spec.description  = <<-DESC
   ZTable是oc tableview 容器的封装

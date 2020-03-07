@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZInner"
-  spec.version      = "0.0.2"
+  spec.version      = "0.0.3"
   spec.summary      = "A Lib For inner."
   spec.description  = <<-DESC
   ZInner是内置浏览器封装
