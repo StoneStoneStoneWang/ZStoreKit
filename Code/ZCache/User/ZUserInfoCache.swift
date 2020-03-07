@@ -10,7 +10,6 @@ import Foundation
 import ZBean
 import ZYYCache
 
-
 @objc (ZUserInfoCache)
 public final class ZUserInfoCache: NSObject {
     @objc (shared)
