@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZTextField"
+  spec.name         = "ZTField"
   spec.version      = "0.0.1"
   spec.summary      = "A Lib For 地图."
   spec.description  = <<-DESC
-  ZTextField是地图
+  ZTField是地图
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -29,33 +29,33 @@ Pod::Spec.new do |spec|
   spec.subspec 'Base' do |base|
     base.source_files = "Code/ZTextFeild/Base/*.{swift}"
     base.dependency 'WLToolsKit/Then'
-    base.dependency 'ZTextField/Setting'
+    base.dependency 'ZTField/Setting'
   end
   
   spec.subspec 'LeftTitle' do |leftTitle|
     leftTitle.source_files = "Code/ZTextFeild/LeftTitle/*.{swift}"
-    leftTitle.dependency 'ZTextField/Base'
+    leftTitle.dependency 'ZTField/Base'
     leftTitle.dependency 'WLToolsKit/Color'
   end
   spec.subspec 'LeftImage' do |leftImage|
     leftImage.source_files = "Code/ZTextFeild/LeftImg/*.{swift}"
-    leftImage.dependency 'ZTextField/Base'
+    leftImage.dependency 'ZTField/Base'
   end
   spec.subspec 'NickName' do |nickName|
     nickName.source_files = "Code/ZTextFeild/NickName/*.{swift}"
-    nickName.dependency 'ZTextField/Base'
+    nickName.dependency 'ZTField/Base'
   end
   
   spec.subspec 'Password' do |password|
     password.source_files = "Code/ZTextFeild/Password/*.{swift}"
-    password.dependency 'ZTextField/LeftImage'
-    password.dependency 'ZTextField/LeftTitle'
+    password.dependency 'ZTField/LeftImage'
+    password.dependency 'ZTField/LeftTitle'
   end
   
   spec.subspec 'Vcode' do |vcode|
     vcode.source_files = "Code/ZTextFeild/Vcode/*.{swift}"
-    vcode.dependency 'ZTextField/LeftImage'
-    vcode.dependency 'ZTextField/LeftTitle'
+    vcode.dependency 'ZTField/LeftImage'
+    vcode.dependency 'ZTField/LeftTitle'
   end
   
 end

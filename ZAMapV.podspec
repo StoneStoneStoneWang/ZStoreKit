@@ -30,7 +30,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'Masonry'
   spec.dependency 'ZAli/AMap'
   spec.dependency 'ZDatePicker'
-  spec.dependency 'ZTextField'
+  spec.dependency 'ZTField'
 
   spec.pod_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 
