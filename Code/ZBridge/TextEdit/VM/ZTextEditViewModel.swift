@@ -11,7 +11,6 @@ import RxCocoa
 import WLReqKit
 import WLBaseViewModel
 import WLToolsKit
-import ZBean
 
 struct ZTextEditViewModel: WLBaseViewModel {
     

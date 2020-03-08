@@ -146,7 +146,7 @@ extension ZPublishBridge {
         
         ZHudUtil.show(withStatus: "上传图片中...")
         
-        ZUserInfoViewModel
+        ZPublishViewModel
             .fetchAliToken()
             .drive(onNext: { (result) in
                 

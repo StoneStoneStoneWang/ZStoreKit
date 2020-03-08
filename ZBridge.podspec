@@ -39,15 +39,15 @@ Pod::Spec.new do |spec|
       vm.dependency 'WLBaseViewModel'
     end
     
-    welcome.subspec 'Bridge' do |vm|
-      vm.source_files = "Code/ZBridge/Welcome/Bridge/*.{swift}"
-      vm.dependency 'ZBridge/Welcome/VM'
-      vm.dependency 'ZCollection'
-      vm.dependency 'ZNoti'
-      vm.dependency 'ZCocoa'
-      vm.dependency 'ZCocoa/SM'
-      vm.dependency 'ZBridge/Base'
-      vm.dependency 'WLToolsKit/Color'
+    welcome.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Welcome/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Welcome/VM'
+      bridge.dependency 'ZCollection'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZCocoa'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'WLToolsKit/Color'
     end
   end
   # 协议
@@ -61,11 +61,13 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZSign'
     end
     
-    pravicy.subspec 'Bridge' do |vm|
-      vm.source_files = "Code/ZBridge/Pravicy/Bridge/*.{swift}"
-      vm.dependency 'ZBridge/Pravicy/VM'
-      vm.dependency 'ZCollection'
-      vm.dependency 'ZInner'
+    pravicy.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Pravicy/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Pravicy/VM'
+      bridge.dependency 'ZCollection'
+      bridge.dependency 'ZInner'
+      bridge.dependency 'ZBridge/Base'
+      
     end
   end
   
@@ -89,6 +91,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZBase'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -109,9 +112,11 @@ Pod::Spec.new do |spec|
       bridge.source_files = "Code/ZBridge/Reg/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Reg/VM'
       bridge.dependency 'ZCocoa/TextField'
+      bridge.dependency 'ZCocoa/Button'
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZBase'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   # 密码
@@ -134,6 +139,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZBase'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -148,6 +154,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZBean/Black'
       vm.dependency 'ZRealReq'
       vm.dependency 'ZApi'
+      vm.dependency 'WLBaseResult'
     end
     
     black.subspec 'Bridge' do |bridge|
@@ -158,6 +165,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/ASM'
       bridge.dependency 'ZCocoa/TableView'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   # 我的关注
@@ -171,6 +179,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZBean/Focus'
       vm.dependency 'ZRealReq'
       vm.dependency 'ZApi'
+      vm.dependency 'WLBaseResult'
     end
     
     focus.subspec 'Bridge' do |bridge|
@@ -181,6 +190,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/ASM'
       bridge.dependency 'ZCocoa/TableView'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -204,7 +214,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'RxDataSources'
-      
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -230,6 +240,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'RxDataSources'
       bridge.dependency 'RxGesture'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZHud'
     end
   end
   
@@ -241,6 +253,7 @@ Pod::Spec.new do |spec|
       vm.source_files = "Code/ZBridge/About/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
+      vm.dependency 'WLToolsKit/String'
     end
     
     about.subspec 'Bridge' do |bridge|
@@ -249,6 +262,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'RxDataSources'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   # 我的资料
@@ -272,6 +286,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'RxDataSources'
       bridge.dependency 'ZHud'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -286,6 +301,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZCache/User'
       vm.dependency 'ZRealReq'
       vm.dependency 'ZApi'
+      vm.dependency 'WLBaseResult'
     end
     
     nickName.subspec 'Bridge' do |bridge|
@@ -294,6 +310,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZBase'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -308,6 +325,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZCache/User'
       vm.dependency 'ZRealReq'
       vm.dependency 'ZApi'
+      vm.dependency 'WLBaseResult'
     end
     
     signature.subspec 'Bridge' do |bridge|
@@ -316,6 +334,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZBase'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   # 地图
@@ -332,6 +351,8 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZBean/KeyValue'
       vm.frameworks = 'UIKit', 'Foundation' ,'CoreLocation'
       vm.dependency 'ZCache'
+      vm.dependency 'WLToolsKit/JsonCast'
+      vm.dependency 'ZBean/Circle'
     end
     
     amap.subspec 'Bridge' do |bridge|
@@ -341,7 +362,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/SM'
-      
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -366,6 +387,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/TableView'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -390,6 +413,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZCollection'
       bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/TableView'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -405,6 +430,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'RxDataSources'
       vm.dependency 'ZApi'
       vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
     end
     
     report.subspec 'Bridge' do |bridge|
@@ -413,6 +439,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'RxDataSources'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZHud'
     end
   end
   
@@ -428,6 +456,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'RxDataSources'
       vm.dependency 'ZApi'
       vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
     end
     
     evaluate.subspec 'Bridge' do |bridge|
@@ -436,6 +465,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'RxDataSources'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZHud'
     end
   end
   
@@ -460,6 +491,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZCocoa/TableView'
     end
   end
   # 列表
@@ -470,6 +503,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZBean/Circle'
+      
     end
     
     content.subspec 'Bridge' do |bridge|
@@ -479,6 +513,9 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/TableView'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZCache'
     end
   end
   # 个性签名
@@ -489,12 +526,15 @@ Pod::Spec.new do |spec|
       vm.source_files = "Code/ZBridge/TextEdit/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZApi'
+      vm.dependency 'WLBaseResult'
     end
     
     textEdit.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/ZBridge/TextEdit/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/TextEdit/VM'
       bridge.dependency 'ZBase'
+      bridge.dependency 'ZHud'
     end
   end
   # 列表
@@ -505,6 +545,9 @@ Pod::Spec.new do |spec|
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZBean/Circle'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZRealReq'
     end
     
     publish.subspec 'Bridge' do |bridge|
@@ -514,7 +557,9 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'ZRealReq'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   # 列表
@@ -537,7 +582,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZCollection'
-      bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   # 列表
@@ -556,6 +602,7 @@ Pod::Spec.new do |spec|
       bridge.source_files = "Code/ZBridge/Handle/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Handle/VM'
       bridge.dependency 'ZCollection'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   # 列表
@@ -569,6 +616,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'WLBaseResult'
       vm.dependency 'ZApi'
       vm.dependency 'ZBean/Circle'
+      vm.dependency 'ZBridge/ZAMap/VM'
     end
     
     handler.subspec 'Bridge' do |bridge|
@@ -577,7 +625,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZCollection'
-      bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   
@@ -602,6 +651,10 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZCollection'
       bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZCocoa/TableView'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZTable'
     end
   end
   # 列表
@@ -620,12 +673,14 @@ Pod::Spec.new do |spec|
 
     character.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/ZBridge/Characters/Bridge/*.{swift}"
-      bridge.dependency 'ZBridge/Order/VM'
+      bridge.dependency 'ZBridge/Characters/VM'
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/ASM'
       bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZCocoa/TableView'
     end
   end
 end

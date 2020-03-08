@@ -23,8 +23,6 @@ public final class ZOrderBaseBridge: ZBaseBridge {
     var dataSource: RxCollectionViewSectionedReloadDataSource<Section>!
     
     var vc: ZCollectionNoLoadingViewController!
-    
-    var style: ZBannerStyle = .one
 }
 
 extension ZOrderBaseBridge {

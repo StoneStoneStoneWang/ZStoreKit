@@ -110,6 +110,13 @@ public final class ZPublishViewModel: WLBaseViewModel {
 
 extension ZPublishViewModel {
     
+    public static func fetchAliToken() -> Driver<WLBaseResult> {
+        
+        return onAliDictResp(ZUserApi.aliToken)
+            .map { WLBaseResult.fetchSomeObject($0 as AnyObject)}
+            .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
+    }
+    
     public func removeContent(_ idx: Int) {
         
         var value = input.tableData.value

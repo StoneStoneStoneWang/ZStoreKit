@@ -9,7 +9,6 @@
 import Foundation
 import ZBase
 import ZHud
-import ZBean
 import RxCocoa
 import ZCache
 import RxSwift

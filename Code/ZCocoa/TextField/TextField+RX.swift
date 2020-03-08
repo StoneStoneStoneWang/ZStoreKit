@@ -10,11 +10,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-extension Reactive where Base: UITextField {
-    
-    public var isSecureTextEntry: Binder<Bool> {
-        return Binder(self.base) { tf, value in
-            tf.isSecureTextEntry = value
-        }
-    }
-}
+//extension Reactive where Base: UITextField {
+//    
+//    public var isSecureTextEntry: Binder<Bool> {
+//        return Binder(self.base) { tf, value in
+//            tf.isSecureTextEntry = value
+//        }
+//    }
+//}
