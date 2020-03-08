@@ -193,7 +193,7 @@ extension ZPublishBridge {
         
         ZHudUtil.show(withStatus: "上传视频中...")
         
-        ZUserInfoViewModel
+        ZPublishViewModel
             .fetchAliToken()
             .drive(onNext: { (result) in
                 

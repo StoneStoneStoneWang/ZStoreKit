@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBridge"
-  spec.version      = "0.0.6"
+  spec.version      = "0.0.7"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZBridge是oc swift 转换的封装呢
@@ -539,6 +539,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZBridge/TextEdit/VM'
       bridge.dependency 'ZBase'
       bridge.dependency 'ZHud'
+      bridge.dependency 'ZCache'
+      bridge.dependency 'ZBridge/Base'
     end
   end
   # 列表

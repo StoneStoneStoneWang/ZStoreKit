@@ -10,6 +10,7 @@ import Foundation
 import WLBaseViewModel
 import RxCocoa
 import RxSwift
+import WLToolsKit
 
 @objc public final class ZAboutBean: NSObject {
     
