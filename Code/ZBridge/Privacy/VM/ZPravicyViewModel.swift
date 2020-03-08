@@ -31,8 +31,8 @@ public struct ZPrivacyViewModel: WLBaseViewModel {
         self.input = input
         
         let output = WLOutput()
-        //        https://zhih.ecsoi.com/other/other_privacyProtocols?encoded=7e730d5b41f7436da8b1b4a65a5aa49f
-        if let url = URL(string: "\(ZConfigure.fetchDomain())other/other_privacyProtocols?encoded=\(ZConfigure.fetchAppKey())") {
+        //        https://zhih.ecsoi.com/other/other_PrivacyProtocols?encoded=7e730d5b41f7436da8b1b4a65a5aa49f
+        if let url = URL(string: "\(ZConfigure.fetchDomain())other/other_PrivacyProtocols?encoded=\(ZConfigure.fetchAppKey())") {
             //            Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
             if UIApplication.shared.canOpenURL(url) {
                 

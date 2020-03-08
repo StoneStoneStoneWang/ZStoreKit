@@ -92,7 +92,7 @@ extension ZProfileBridge {
                 
                 switch type {
                 case .setting: fallthrough
-                case .pravicy: fallthrough
+                case .privacy: fallthrough
                 case .about:
                     
                     ZNotiConfigration.postNotification(withName: type.notificationName, andValue: nil, andFrom: vc)

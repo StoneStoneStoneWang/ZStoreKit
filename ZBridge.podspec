@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBridge"
-  spec.version      = "0.0.4"
+  spec.version      = "0.0.6"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZBridge是oc swift 转换的封装呢
@@ -51,20 +51,19 @@ Pod::Spec.new do |spec|
     end
   end
   # 协议
-  spec.subspec 'Pravicy' do |pravicy|
+  spec.subspec 'Privacy' do |privacy|
     
-    pravicy.subspec 'VM' do |vm|
+    privacy.subspec 'VM' do |vm|
       
-      vm.source_files = "Code/ZBridge/Pravicy/VM/*.{swift}"
+      vm.source_files = "Code/ZBridge/Privacy/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZSign'
     end
     
-    pravicy.subspec 'Bridge' do |bridge|
-      bridge.source_files = "Code/ZBridge/Pravicy/Bridge/*.{swift}"
-      bridge.dependency 'ZBridge/Pravicy/VM'
-      bridge.dependency 'ZCollection'
+    privacy.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Privacy/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Privacy/VM'
       bridge.dependency 'ZInner'
       bridge.dependency 'ZBridge/Base'
       
@@ -136,6 +135,7 @@ Pod::Spec.new do |spec|
       bridge.source_files = "Code/ZBridge/Password/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Password/VM'
       bridge.dependency 'ZCocoa/TextField'
+      bridge.dependency 'ZCocoa/Button'
       bridge.dependency 'ZHud'
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZBase'
@@ -503,7 +503,10 @@ Pod::Spec.new do |spec|
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZBean/Circle'
-      
+      vm.dependency 'ZApi'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLReqKit'
     end
     
     content.subspec 'Bridge' do |bridge|
@@ -513,6 +516,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZNoti'
       bridge.dependency 'ZTable'
       bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'ZCocoa/TableView'
       bridge.dependency 'ZBridge/Base'
       bridge.dependency 'ZCache'

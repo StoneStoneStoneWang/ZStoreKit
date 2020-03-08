@@ -15,6 +15,7 @@ public final class ZPrivacyBridge: ZBaseBridge {
     public var viewModel: ZPrivacyViewModel!
     
 }
+
 extension ZPrivacyBridge {
     
     @objc public func configViewModel(_ vc: ZInnerViewController) {

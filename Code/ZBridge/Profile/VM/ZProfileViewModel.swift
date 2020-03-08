@@ -49,7 +49,7 @@ public enum ZProfileType : Int{
     
     case contactUS
     
-    case pravicy
+    case privacy
     
     case focus
     
@@ -70,14 +70,14 @@ extension ZProfileType {
         
         if ZConfigure.fetchPType() == .store {
             
-            return [.space,userInfo,.order,.address,.space,.contactUS,.pravicy,.about,.space,.setting]
+            return [.space,userInfo,.order,.address,.space,.contactUS,.privacy,.about,.space,.setting]
         } else if ZConfigure.fetchPType() == .map {
             
-            return [.space,userInfo,.order,.focus,.space,.contactUS,.pravicy,.about,.space,.setting]
+            return [.space,userInfo,.order,.focus,.space,.contactUS,.privacy,.about,.space,.setting]
             
         } else if ZConfigure.fetchPType() == .game {
             
-            return [.space,userInfo,.characters,.space,.contactUS,.pravicy,.about,.space,.setting]
+            return [.space,userInfo,.characters,.space,.contactUS,.privacy,.about,.space,.setting]
             
         } else {
             
@@ -85,11 +85,11 @@ extension ZProfileType {
                 
                 if version > "1.1.0" {
                     
-                    return [.space,userInfo,.myCircle,.focus,.space,.contactUS,.pravicy,.about,.space,.setting]
+                    return [.space,userInfo,.myCircle,.focus,.space,.contactUS,.privacy,.about,.space,.setting]
                 }
             }
             
-            return [.space,userInfo,.space,.contactUS,.pravicy,.about,.space,.setting]
+            return [.space,userInfo,.space,.contactUS,.privacy,.about,.space,.setting]
         }
     }
     
@@ -114,7 +114,7 @@ extension ZProfileType {
             
         case .setting: return "设置"
             
-        case .pravicy: return "隐私政策"
+        case .privacy: return "隐私政策"
             
         case .focus: return "我的关注"
             
@@ -147,7 +147,7 @@ extension ZProfileType {
             
         case .focus: result = ZNotiFocus
             
-        case .pravicy: result = ZNotiPrivacy
+        case .privacy: result = ZNotiPrivacy
             
         case .setting: result = ZNotiSetting
             

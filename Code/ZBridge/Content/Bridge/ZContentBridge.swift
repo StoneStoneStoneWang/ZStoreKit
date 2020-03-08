@@ -95,7 +95,7 @@ extension ZContentBridge: UITableViewDelegate {
         
         ZHudUtil.show(withStatus: "添加黑名单中...")
         
-        ZTListViewModel
+        ZContentViewModel
             .addBlack(OUsEncoded, targetEncoded: targetEncoded, content: content)
             .drive(onNext: { (result) in
                 
@@ -129,7 +129,7 @@ extension ZContentBridge: UITableViewDelegate {
         
         ZHudUtil.show(withStatus: isFocus ? "取消关注中..." : "关注中...")
         
-        ZTListViewModel
+        ZContentViewModel
             .focus(uid, encode: encode)
             .drive(onNext: { (result) in
                 
@@ -169,7 +169,7 @@ extension ZContentBridge: UITableViewDelegate {
         
         ZHudUtil.show(withStatus: isLike ? "取消点赞中..." : "点赞中...")
         
-        ZTListViewModel
+        ZContentViewModel
             .like(encoded, isLike: !isLike)
             .drive(onNext: { [unowned self] (result) in
                 
