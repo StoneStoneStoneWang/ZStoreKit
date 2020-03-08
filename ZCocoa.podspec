@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZCocoa"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.5"
   spec.summary      = "A Lib For rxcocoa."
   spec.description  = <<-DESC
   ZCocoa是rxcocoa封装
