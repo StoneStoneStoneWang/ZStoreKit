@@ -8,7 +8,6 @@
 
 #import "ZUserInfoViewController.h"
 #import "ZUserInfoTableViewCell.h"
-#import "ZProfileTableHeaderView.h"
 #import "ZNickNameViewController.h"
 #import "ZSignatureViewController.h"
 #import "ZFragmentConfig.h"

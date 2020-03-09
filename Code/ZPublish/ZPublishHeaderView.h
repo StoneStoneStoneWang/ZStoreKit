@@ -9,7 +9,7 @@
 #import <ZTable/ZTable.h>
 #import "ZFragmentMix.h"
 #import "ZFragmentConfig.h"
-@import ZTextField;
+@import ZTField;
 
 NS_ASSUME_NONNULL_BEGIN
 

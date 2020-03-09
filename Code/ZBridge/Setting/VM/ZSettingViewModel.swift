@@ -64,6 +64,9 @@ extension ZSettingType {
             } else if ZConfigure.fetchPType() == .store {
                 
                 return [.space,.password,.space,.clear,.push,.space,.logout]
+            }else if ZConfigure.fetchPType() == .game {
+                
+                return [.space,.password,.space,.clear,.push,.space,.logout]
             } else {
                 
                 return [.space,.password,.black,.space,.clear,.push,.space,.logout]

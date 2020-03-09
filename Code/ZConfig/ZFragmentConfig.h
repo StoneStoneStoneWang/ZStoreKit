@@ -8,15 +8,27 @@
 
 #pragma mark ---- 类型App
 
-#define ZAppFormGlobalOne 1 // 地图类型 含有抽屉
+#define ZAppFormGlobalMap 0 // 地图类型 含有抽屉
 
-#define ZAppFormGlobalTwo 0 // 地图类型 不含抽屉
+#define ZMapFormOne 0 // 含有抽屉
 
-#define ZAppFormGlobalThree 1 // 朋友圈类型
+#define ZMapFormTwo 0 // 不含抽屉
 
-#define ZCircleFormOne 1  // 朋友圈类型 1 图片比例 4 / 3 左边
+#define ZAppFormGlobalMapTwo 0 // 地图类型 不含抽屉
 
-#if ZAppFormGlobalOne
+#define ZAppFormGlobalCircle 0 // 朋友圈类型
+
+#define ZCircleFormOne 0  // 朋友圈类型 1 图片比例 4 / 3 左边
+
+#define ZAppFormGlobalGame 1 // 朋友圈类型
+
+#define ZGameFormOne 1 // 含有抽屉
+
+#define ZGameFormOne 0 // 不含抽屉
+
+#if ZAppFormGlobalMap
+
+#if ZMapFormOne
 
 #define ZKeyValues @[\
 @{@"type": @"时间",@"value": @"",@"place": @"请选择上门服务时间"} ,\
@@ -60,7 +72,7 @@
 
 #define ZGoldCleanerTag "金牌保洁"
 
-#elif ZAppFormGlobalTwo
+#elif ZMapFormTwo
 
 #define ZKeyValues @[\
 @{@"type": @"时间",@"value": @"",@"place": @"请选择上门服务时间"} ,\
@@ -105,7 +117,9 @@
 
 #define ZGoldCleanerTag "金牌保洁"
 
-#elif ZAppFormGlobalThree
+#endif
+
+#elif ZAppFormGlobalCircle
 
 #define ZReportKeyValues @[\
 @{@"type": @"1",@"title": @"标题夸张",@"isSelected": @true} ,\
@@ -115,6 +129,13 @@
 @{@"type": @"5",@"title": @"涉嫌违法犯罪",@"isSelected": @false} ,\
 @{@"type": @"6",@"title": @"其他问题",@"isSelected": @false} ,\
 ]
+#elif ZAppFormGlobalGame
+
+#if ZGameFormOne  // 含有抽屉
+
+#elif ZGameFormOne // 不含抽屉
+
+#endif
 
 #endif
 
@@ -196,7 +217,7 @@
 
 #define FocusIcon "我的关注"
 
-#define PravicyIcon "隐私政策"
+#define PrivacyIcon "隐私政策"
 
 #define UserInfoIcon "用户资料"
 
@@ -205,6 +226,8 @@
 #define CircleIcon "我的发布"
 
 #define OrderIcon "我的订单"
+
+#define CharatersIcon "我的角色"
 
 #define AddressIcon "我的地址"
 

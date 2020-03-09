@@ -8,7 +8,7 @@
 
 #import "ZLoginViewController.h"
 @import Masonry;
-@import ZTextField;
+@import ZTField;
 @import SToolsKit;
 @import ZBridge;
 
