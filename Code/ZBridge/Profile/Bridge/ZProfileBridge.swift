@@ -101,6 +101,7 @@ extension ZProfileBridge {
                 case .address: fallthrough
                 case .order: fallthrough
                 case .focus: fallthrough
+                case .characters: fallthrough
                 case .myCircle:
                     
                     if ZAccountCache.default.isLogin() {
