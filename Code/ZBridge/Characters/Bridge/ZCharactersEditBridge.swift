@@ -88,6 +88,44 @@ extension ZCharactersEditBridge {
                 .setDelegate(self)
                 .disposed(by: disposed)
             
+            
+            viewModel
+                .output
+                .completing
+                .drive(onNext: { _ in
+                    
+                    vc.view.endEditing(true)
+                    
+                    ZHudUtil.show(withStatus: "编辑角色信息中")
+                    
+                })
+                .disposed(by: disposed)
+            
+            // MARK: 登录事件返回序列
+            viewModel
+                .output
+                .completed
+                .drive(onNext: {
+                    
+                    ZHudUtil.pop()
+                    
+                    switch $0 {
+                        
+                    case let .failed(msg): ZHudUtil.showInfo(msg)
+                        
+                    case let .operation(obj):
+                        
+                        ZHudUtil.showInfo("编辑角色信息成功")
+                        
+                        succ(obj as? ZCircleBean)
+                        
+                        vc.dismiss(animated: true, completion: nil)
+                        
+                    default: break
+                    }
+                })
+                .disposed(by: disposed)
+            
             let values = viewModel.output.tableData.value
             
             if let temp = temp {
@@ -120,81 +158,32 @@ extension ZCharactersEditBridge {
                             
                         } else if char.value.hasPrefix("equip=") {
                             
-                            if let idx = values.firstIndex(where: { $0.type == .name }) {
+                            if let idx = values.firstIndex(where: { $0.type == .equip }) {
                                 
                                 let equip = values[idx]
                                 
-                                let equipStr = char.value.components(separatedBy: "=").last!
+                                equip.subtitle =
+                                    char.value
                                 
-                                let equips = equipStr.components(separatedBy: ",")
-                                
-                                var t0: Int = 0
-                                
-                                var t1: Int = 0
-                                
-                                var t2: Int = 0
-                                
-                                for item in equips {
-                                    
-                                    let last = item.components(separatedBy: ":").last!
-                                    
-                                    if last == "T0" {
-                                        
-                                        t0 += 1
-                                    } else if last == "T1" {
-                                        
-                                        t1 += 1
-                                    } else if last == "T2" {
-                                        
-                                        t2 += 1
-                                    } else {
-                                        
-                                        
-                                    }
-                                }
-                                
-                                if t0 == 0 {
-                                    
-                                    if t1 == 0 {
-                                        
-                                        equip.subtitle = "8T2"
-                                    } else {
-                                        
-                                        equip.subtitle = "\(t1)T1 \(t2)T2"
-                                    }
-                                } else {
-                                    
-                                    if t1 == 0 {
-                                        
-                                        equip.subtitle = "\(t0)T0 \(t2)T2"
-                                    } else {
-                                        
-                                        equip.subtitle = "\(t0)T0 \(t1)T1 \(t2)T2"
-                                    }
-                                }
-                                self.equips.accept(equip.subtitle)
+                                self.equips.accept(char.value)
                             }
                             
                         } else if char.value.hasPrefix("sex=") {
                             
-                            if let idx = values.firstIndex(where: { $0.type == .name }) {
+                            if let idx = values.firstIndex(where: { $0.type == .sex }) {
                                 
                                 let sex = values[idx]
                                 
                                 sex.subtitle = char.value.components(separatedBy: "=").last!
                                 
-                                self.equips.accept(sex.subtitle)
+                                self.sex.accept(sex.subtitle)
                             }
-                            
                         }
-                        
                     }
-                    
                 }
                 
                 vc.tableView.reloadData()
             }
-            
         }
     }
     
@@ -208,8 +197,6 @@ extension ZCharactersEditBridge {
             
             edit.subtitle = value
             
-            vc.tableView.reloadData()
-            
             if type == .character {
                 
                 title.accept(value)
@@ -221,8 +208,10 @@ extension ZCharactersEditBridge {
                 equips.accept(value)
             } else if type == .sex {
                 
-                equips.accept(value)
+                sex.accept(value)
             }
+            
+            vc.tableView.reloadRows(at: [IndexPath(item: idx, section: 0)], with: .fade)
         }
         
     }

@@ -7,10 +7,16 @@
 //
 
 #import <ZTable/ZTable.h>
-
+#import "ZFragmentConfig.h"
+#import "ZFragmentMix.h"
+@import ZBean;
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void (^ZCharactersIsSelectedBlock)( ZCircleBean *_Nullable circleBean);
+
 @interface ZCharactersViewController : ZTableLoadingViewController
+
++ (instancetype)createCharacters:(BOOL )isSelected andBlock:(ZCharactersIsSelectedBlock )block;
 
 @end
 

@@ -17,6 +17,12 @@ import ZBean
 import ZNoti
 import ZCache
 
+public typealias ZCharactersLoadingStatus = (_ status: Int) -> ()
+
+public typealias ZCharactersInsertStatus = (_ status: Int) -> ()
+
+public typealias ZCharactersAccessoryBlock = (_ ip: IndexPath ,_ circle: ZCircleBean) -> ()
+
 @objc (ZCharactersBridge)
 public final class ZCharactersBridge: ZBaseBridge {
     
@@ -31,7 +37,7 @@ public final class ZCharactersBridge: ZBaseBridge {
 
 extension ZCharactersBridge {
     
-    @objc public func createCharacters(_ vc: ZTableLoadingViewController ) {
+    @objc public func createCharacters(_ vc: ZTableLoadingViewController ,status: @escaping ZCharactersLoadingStatus ,accessoryBlock: @escaping ZCharactersAccessoryBlock) {
         
         if let addItem = vc.view.viewWithTag(301) as? UIButton {
             
@@ -67,7 +73,7 @@ extension ZCharactersBridge {
                 .zip
                 .subscribe(onNext: { (type,ip) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiCharacterItemClick), andValue: type, andFrom: vc)
+                    vc.tableViewSelectData(type, for: ip)
                 })
                 .disposed(by: disposed)
             
@@ -78,7 +84,8 @@ extension ZCharactersBridge {
                     
                     var values = self.viewModel.output.tableData.value
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiCharacterAccesoryClick), andValue:values[ip.section], andFrom: vc)
+                    accessoryBlock(ip ,values[ip.section]);
+                    
                 })
                 .disposed(by: disposed)
             
@@ -97,10 +104,79 @@ extension ZCharactersBridge {
                 .setDelegate(self)
                 .disposed(by: disposed)
             
+            let endHeaderRefreshing = viewModel.output.endHeaderRefreshing
+            
+            endHeaderRefreshing
+                .map({ _ in return true })
+                .drive(vc.tableView.mj_header!.rx.endRefreshing)
+                .disposed(by: disposed)
+            
+            endHeaderRefreshing
+                .drive(onNext: { (res) in
+                    switch res {
+                    case .fetchList:
+                        vc.loadingStatus = .succ
+                        
+                        status(0)
+                    case let .failed(msg):
+                        ZHudUtil.showInfo(msg)
+                        vc.loadingStatus = .fail
+                        status(-1)
+                    case .empty:
+                        vc.loadingStatus = .succ
+                        
+                        vc.tableViewEmptyShow()
+                        status(1);
+                        
+                    default:
+                        break
+                    }
+                })
+                .disposed(by: disposed)
+            
+            let endFooterRefreshing = viewModel.output.endFooterRefreshing
+            
+            endFooterRefreshing
+                .map({ _ in return true })
+                .drive(vc.tableView.mj_footer!.rx.endRefreshing)
+                .disposed(by: disposed)
+            
+            viewModel
+                .output
+                .footerHidden
+                .bind(to: vc.tableView.mj_footer!.rx.isHidden)
+                .disposed(by: disposed)
+            
         }
-        
     }
     
+    @objc public func insertCharacters(_ characters: ZCircleBean ,status: @escaping ZCharactersInsertStatus ) {
+        
+        var values = viewModel.output.tableData.value
+        
+        values.insert(characters, at: 0)
+        
+        viewModel.output.tableData.accept(values)
+        
+        if values.isEmpty {
+            
+            status(0)
+            
+            self.vc.tableViewEmptyHidden()
+        } else {
+            
+            status(1)
+        }
+    }
+    @objc public func updateCharacters(_ characters: ZCircleBean ,ip: IndexPath) {
+        
+        var values = viewModel.output.tableData.value
+        
+        values.replaceSubrange(ip.row..<ip.row+1, with: [characters])
+        
+        viewModel.output.tableData.accept(values)
+        
+    }
     
 }
 extension ZCharactersBridge: UITableViewDelegate {

@@ -31,8 +31,8 @@ extension ZCharactersNameBridge {
             nickname.accept(nameValue)
             
             let inputs = ZCharactersNameViewModel.WLInput(orignal: nickname.asDriver(),
-                                                    updated: name.rx.text.orEmpty.asDriver(),
-                                                    completTaps: completeItem.rx.tap.asSignal())
+                                                          updated: name.rx.text.orEmpty.asDriver(),
+                                                          completTaps: completeItem.rx.tap.asSignal())
             
             name.text = nickname.value
             

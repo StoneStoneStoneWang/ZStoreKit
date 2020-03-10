@@ -86,7 +86,7 @@ extension ZEquipBridge {
                     
                     for item in values {
                         
-                        if item.level == .none {
+                        if item.level == .none && item.type != .space {
                             
                             flag = false
                             
@@ -111,7 +111,9 @@ extension ZEquipBridge {
             
             if !equips.isEmpty {
                 
-                let mutables = equips.components(separatedBy: ",")
+                let temp = equips.components(separatedBy: "=").last!
+                
+                let mutables = temp.components(separatedBy: ",")
                 
                 var values = viewModel.output.tableData.value
                 
@@ -132,21 +134,29 @@ extension ZEquipBridge {
                         
                         head.level = ZEquipLevel(last)
                         
+                        head.subtitle = head.level.title
+                        
                     case .shoulder:
                         
                         let shoulder = values[2]
                         
                         shoulder.level = ZEquipLevel(last)
+                        
+                        shoulder.subtitle = shoulder.level.title
                     case .breastplate:
                         
                         let breastplate = values[3]
                         
                         breastplate.level = ZEquipLevel(last)
+                        
+                        breastplate.subtitle = breastplate.level.title
                     case .artifice:
                         
                         let artifice = values[4]
                         
                         artifice.level = ZEquipLevel(last)
+                        
+                        artifice.subtitle = artifice.level.title
                         
                     case .hand:
                         
@@ -154,27 +164,36 @@ extension ZEquipBridge {
                         
                         hand.level = ZEquipLevel(last)
                         
+                        hand.subtitle = hand.level.title
+                        
                     case .waistband:
                         
                         let waistband = values[6]
                         
                         waistband.level = ZEquipLevel(last)
                         
+                        waistband.subtitle = waistband.level.title
                     case .pants:
                         
                         let pants = values[7]
                         
                         pants.level = ZEquipLevel(last)
                         
+                        pants.subtitle = pants.level.title
+                        
                     case .foot:
                         let foot = values[8]
                         
                         foot.level = ZEquipLevel(last)
+                        
+                        foot.subtitle = foot.level.title
                     default:
                         break
                     }
                     
                 }
+                
+                vc.tableView.reloadData()
                 
             }
         }
@@ -191,7 +210,9 @@ extension ZEquipBridge {
             
             edit.level = level
             
-            vc.tableView.reloadData()
+            edit.subtitle = level.title
+            
+            vc.tableView.reloadRows(at: [IndexPath(item: idx, section: 0)], with: .fade)
         }
         
     }

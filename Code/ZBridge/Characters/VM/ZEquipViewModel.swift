@@ -25,6 +25,16 @@ import WLBaseResult
         return type.title
     }
     
+    @objc public var subTitle: String {
+        
+        return level.title
+    }
+    @objc public var placeholder: String {
+        
+        return type.errorInfo
+    }
+    
+    
     static var types: [ZEquipBean] {
         
         let space = ZEquipBean()

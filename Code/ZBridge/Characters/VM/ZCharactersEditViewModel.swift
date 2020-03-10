@@ -56,6 +56,23 @@ extension ZCharactersEditType {
         }
     }
     
+    var placeholder: String {
+        
+        switch self {
+            
+        case .character: return "请选择角色信息"
+            
+        case .name: return "请输入角色昵称"
+            
+        case .sex: return "请选择角色性别信息"
+            
+        case .equip: return "请选择角色装备信息"
+            
+        case .space: return ""
+            
+        }
+    }
+    
     var cellHeight: CGFloat {
         switch self {
         case .space: return 10
@@ -76,6 +93,11 @@ extension ZCharactersEditType {
     @objc public var title: String {
         
         return type.title;
+    }
+    
+    @objc public var placeholder: String {
+        
+        return type.placeholder;
     }
     
     static var types: [ZCharactersEditBean] {
@@ -180,9 +202,9 @@ public struct ZCharactersEditViewModel: WLBaseViewModel {
                 
                 var result = [title]
                 
-                let name = ZKeyValueBean(JSON: ["type":"txt","value":$0.3])!
+                let name = ZKeyValueBean(JSON: ["type":"txt","value":"cName=\($0.3)"])!
                 
-                let sex = ZKeyValueBean(JSON: ["type":"txt","value":$0.1])!
+                let sex = ZKeyValueBean(JSON: ["type":"txt","value":"sex=\($0.1)"])!
                 
                 let equips = ZKeyValueBean(JSON: ["type":"txt","value":$0.2])!
                 
@@ -200,14 +222,4 @@ public struct ZCharactersEditViewModel: WLBaseViewModel {
         
         self.output = output
     }
-    
-    //    public static func editCharacters(encoded: String,content: String) -> Driver<WLBaseResult>{
-    //
-    //        return onUserDictResp(ZUserApi.updateUserInfo(type.updateKey, value: value))
-    //            .mapObject(type: ZUserBean.self)
-    //            .map({ ZUserInfoCache.default.saveUser(data: $0) })
-    //            .map { _ in WLBaseResult.ok("")}
-    //            .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
-    //    }
-    
 }
