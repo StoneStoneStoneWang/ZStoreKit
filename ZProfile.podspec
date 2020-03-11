@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZProfile"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.3"
   spec.summary      = "A Lib For 关于我们."
   spec.description  = <<-DESC
   ZProfile是关于我们界面
@@ -29,4 +29,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'SDWebImage'
+  spec.dependency 'ZTransition'
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end

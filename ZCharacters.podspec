@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZConfig"
+  spec.name         = "ZCharacters"
   spec.version      = "0.1.3"
-  spec.summary      = "A Lib For config."
+  spec.summary      = "A Lib For 圈子."
   spec.description  = <<-DESC
-  ZConfig是是所有的配置
+  ZCharacters是角色信息
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -19,10 +19,19 @@ Pod::Spec.new do |spec|
   
   spec.static_framework = true
   
-  spec.frameworks = 'UIKit', 'Foundation'
+  spec.frameworks = 'UIKit', 'Foundation' ,'AVFoundation'
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZConfig/*.{h}"
-  
+  spec.source_files = "Code/ZCharacters/*.{h,m}"
+  spec.dependency 'ZConfig'
+  spec.dependency 'ZBridge/Characters'
+  spec.dependency 'ZTable'
+  spec.dependency 'Masonry'
+  spec.dependency 'JXTAlertManager'
+  spec.dependency 'SToolsKit'
+  spec.dependency 'ZNoti'
+  spec.dependency 'ZTField'
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end
+

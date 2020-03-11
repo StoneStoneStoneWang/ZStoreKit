@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBridge"
-  spec.version      = "0.1.2"
+  spec.version      = "0.1.4"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZBridge是oc swift 转换的封装呢
@@ -26,6 +26,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'Base' do |base|
     base.source_files = "Code/ZBridge/Base/*.{swift}"
     base.dependency 'RxCocoa'
+    base.dependency 'RxSwift'
   end
   
   # 欢迎界面碎片
@@ -663,7 +664,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZTable'
     end
   end
-  # 列表
+  列表
   spec.subspec 'Characters' do |character|
     
     character.subspec 'VM' do |vm|
@@ -689,6 +690,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZCocoa/TableView'
     end
   end
+  
   # 列表
   spec.subspec 'Enroll' do |enrolls|
     

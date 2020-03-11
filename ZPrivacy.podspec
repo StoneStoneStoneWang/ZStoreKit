@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZPrivacy"
-  spec.version      = "0.1.2"
+  spec.version      = "0.1.3"
   spec.summary      = "A Lib For 隐私与协议."
   spec.description  = <<-DESC
   ZPravicy是隐私与协议

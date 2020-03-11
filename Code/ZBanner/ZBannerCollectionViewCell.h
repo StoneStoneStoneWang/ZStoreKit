@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZBannerImageCollectionViewCell : ZBannerCollectionViewCell
 
+- (void)setImage:(NSString *)image;
+
 @end
 
 @interface ZBannerVideoCollectionViewCell : ZBannerCollectionViewCell

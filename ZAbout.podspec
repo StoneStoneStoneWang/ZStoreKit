@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZAbout"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.3"
   spec.summary      = "A Lib For 关于我们."
   spec.description  = <<-DESC
   ZAbout是关于我们界面
@@ -28,5 +28,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZBridge/About'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
+  spec.dependency 'ZNoti'
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
   
 end
