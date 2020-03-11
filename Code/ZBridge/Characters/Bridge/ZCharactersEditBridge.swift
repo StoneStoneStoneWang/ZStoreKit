@@ -213,7 +213,6 @@ extension ZCharactersEditBridge {
             
             vc.tableView.reloadRows(at: [IndexPath(item: idx, section: 0)], with: .fade)
         }
-        
     }
 }
 extension ZCharactersEditBridge: UITableViewDelegate {

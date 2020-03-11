@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBanner"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.1"
   spec.summary      = "A Lib For 轮播."
   spec.description  = <<-DESC
   ZBanner是轮播
@@ -29,5 +29,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZCollection'
   spec.dependency 'Masonry'
   spec.dependency 'SDWebImage'
+  
 end
 

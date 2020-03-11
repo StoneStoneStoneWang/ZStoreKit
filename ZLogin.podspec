@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZLogin"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.1"
   spec.summary      = "A Lib For 登陆."
   spec.description  = <<-DESC
   ZLogin是登陆界面
@@ -24,9 +24,10 @@ Pod::Spec.new do |spec|
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
   spec.source_files = "Code/ZLogin/*.{h,m}"
-  spec.dependency 'ZTextField'
+  spec.dependency 'ZTField'
   spec.dependency 'ZConfig'
   spec.dependency 'ZBridge/Login'
   spec.dependency 'Masonry'
-  
+  spec.dependency 'ZTransition'
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end

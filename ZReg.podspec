@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZReg"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.1"
   spec.summary      = "A Lib For 注册."
   spec.description  = <<-DESC
   ZReg是注册界面
@@ -24,8 +24,10 @@ Pod::Spec.new do |spec|
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
   spec.source_files = "Code/ZReg/*.{h,m}"
-  spec.dependency 'ZTextField'
+  spec.dependency 'ZTField'
   spec.dependency 'ZConfig'
   spec.dependency 'ZBridge/Reg'
   spec.dependency 'Masonry'
+  spec.dependency 'ZTransition'
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end

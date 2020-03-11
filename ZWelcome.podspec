@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZWelcome"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.1"
   spec.summary      = "A Lib For 欢迎界面."
   spec.description  = <<-DESC
   ZWelcome是欢迎界面
@@ -30,4 +30,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'SToolsKit'
   spec.dependency 'Masonry'
   
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end

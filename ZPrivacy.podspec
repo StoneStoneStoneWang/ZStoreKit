@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZPravicy"
-  spec.version      = "0.0.1"
+  spec.name         = "ZPrivacy"
+  spec.version      = "0.1.2"
   spec.summary      = "A Lib For 隐私与协议."
   spec.description  = <<-DESC
   ZPravicy是隐私与协议
@@ -23,9 +23,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZPravicy/*.{h,m}"
+  spec.source_files = "Code/ZPrivacy/*.{h,m}"
   spec.dependency 'ZInner'
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/Pravicy'
+  spec.dependency 'ZBridge/Privacy'
   
 end

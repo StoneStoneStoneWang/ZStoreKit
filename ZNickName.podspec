@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZNickName"
-  spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 昵称蛇追."
+  spec.version      = "0.1.1"
+  spec.summary      = "A Lib For 昵称."
   spec.description  = <<-DESC
   ZNickName是昵称蛇追
   DESC
@@ -24,10 +24,11 @@ Pod::Spec.new do |spec|
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
   spec.source_files = "Code/ZNickName/*.{h,m}"
-  spec.dependency 'ZTextField'
+  spec.dependency 'ZTField'
   spec.dependency 'ZConfig'
   spec.dependency 'ZBridge/NickName'
   spec.dependency 'Masonry'
   spec.dependency 'ZTransition'
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
   
 end
