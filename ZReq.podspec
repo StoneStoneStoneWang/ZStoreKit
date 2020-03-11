@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZReq"
-  spec.version      = "0.0.2"
+  spec.version      = "0.1.6"
   spec.summary      = "A Lib For req."
   spec.description  = <<-DESC
   ZRep是请求的封装
@@ -29,5 +29,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'AFNetworking'
   
   spec.dependency 'ZSign'
-  
+
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end

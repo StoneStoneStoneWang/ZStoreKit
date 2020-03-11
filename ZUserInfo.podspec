@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     
     spec.name         = "ZUserInfo"
-    spec.version      = "0.1.1"
+    spec.version      = "0.1.6"
     spec.summary      = "A Lib For 个人中心."
     spec.description  = <<-DESC
     ZUserInfo是个性签名
@@ -37,4 +37,4 @@ Pod::Spec.new do |spec|
     spec.dependency 'ZDatePicker'
     spec.dependency 'ZTransition'
     spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
-end
+end 
