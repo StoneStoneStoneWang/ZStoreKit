@@ -14,6 +14,7 @@
 @interface ZSettingViewController()
 
 @property (nonatomic ,strong) ZSettingBridge *bridge;
+
 @end
 
 @implementation ZSettingViewController

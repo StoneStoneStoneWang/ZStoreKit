@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZSetting"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.2"
   spec.summary      = "A Lib For 设置."
   spec.description  = <<-DESC
   ZSetting是设置界面
@@ -28,5 +28,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZBridge/Setting'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
-  
+  spec.dependency 'SToolsKit'
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end

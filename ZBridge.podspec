@@ -638,9 +638,9 @@ Pod::Spec.new do |spec|
   
   # 列表
   spec.subspec 'Order' do |order|
-
+    
     order.subspec 'VM' do |vm|
-
+      
       vm.source_files = "Code/ZBridge/Order/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
@@ -649,7 +649,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZApi'
       vm.dependency 'ZBean/Circle'
     end
-
+    
     order.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/ZBridge/Order/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Order/VM'
@@ -665,9 +665,9 @@ Pod::Spec.new do |spec|
   end
   # 列表
   spec.subspec 'Characters' do |character|
-
+    
     character.subspec 'VM' do |vm|
-
+      
       vm.source_files = "Code/ZBridge/Characters/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
@@ -676,7 +676,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZApi'
       vm.dependency 'ZBean/Circle'
     end
-
+    
     character.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/ZBridge/Characters/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Characters/VM'
@@ -704,7 +704,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'WLToolsKit/Date'
     end
     
-    character.subspec 'Bridge' do |bridge|
+    enrolls.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/ZBridge/Enroll/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/Enroll/VM'
       bridge.dependency 'ZHud'

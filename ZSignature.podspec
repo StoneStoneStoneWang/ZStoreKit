@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZSignature"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.3"
   spec.summary      = "A Lib For 个性签名."
   spec.description  = <<-DESC
   ZSignature是个性签名
@@ -28,5 +28,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZBridge/Signature'
   spec.dependency 'Masonry'
   spec.dependency 'ZTransition'
-  
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end
