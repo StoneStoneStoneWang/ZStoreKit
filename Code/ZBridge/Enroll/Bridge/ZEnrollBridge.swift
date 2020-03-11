@@ -40,7 +40,7 @@ public final class ZEnrollBridge: ZBaseBridge {
 
 extension ZEnrollBridge {
     
-    @objc public func createEnrollEdit(_ vc: ZTableNoLoadingViewConntroller,succ: @escaping ZCharactersEditSucc) {
+    @objc public func createEnrollEdit(_ vc: ZTableNoLoadingViewConntroller,succ: @escaping ZEnrollssEditSucc) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             

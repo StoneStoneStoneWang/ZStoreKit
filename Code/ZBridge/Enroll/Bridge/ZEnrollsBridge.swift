@@ -19,6 +19,8 @@ import ZCache
 
 public typealias ZEnrollsLoadingStatus = (_ status: Int) -> ()
 
+public typealias ZEnrollsInsertStatus = (_ status: Int) -> ()
+
 @objc (ZEnrollsBridge)
 public final class ZEnrollsBridge: ZBaseBridge {
     
@@ -132,11 +134,11 @@ extension ZEnrollsBridge {
         }
     }
     
-    @objc public func insertEnrolls(_ characters: ZCircleBean ,status: @escaping ZCharactersInsertStatus ) {
+    @objc public func insertEnrolls(_ enrolls: ZCircleBean ,status: @escaping ZEnrollsInsertStatus ) {
         
         var values = viewModel.output.tableData.value
         
-        values.insert(characters, at: 0)
+        values.insert(enrolls, at: 0)
         
         viewModel.output.tableData.accept(values)
         

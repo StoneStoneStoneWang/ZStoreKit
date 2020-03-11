@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBridge"
-  spec.version      = "0.1.4"
+  spec.version      = "0.1.6"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZBridge是oc swift 转换的封装呢
@@ -665,58 +665,58 @@ Pod::Spec.new do |spec|
   #    end
   #  end
   #  列表
-  #  spec.subspec 'Characters' do |character|
+#    spec.subspec 'Characters' do |character|
+#
+#      character.subspec 'VM' do |vm|
+#
+#        vm.source_files = "Code/ZBridge/Characters/VM/*.{swift}"
+#        vm.dependency 'RxCocoa'
+#        vm.dependency 'WLBaseViewModel'
+#        vm.dependency 'ZRealReq'
+#        vm.dependency 'WLBaseResult'
+#        vm.dependency 'ZApi'
+#        vm.dependency 'ZBean/Circle'
+#      end
+#
+#      character.subspec 'Bridge' do |bridge|
+#        bridge.source_files = "Code/ZBridge/Characters/Bridge/*.{swift}"
+#        bridge.dependency 'ZBridge/Characters/VM'
+#        bridge.dependency 'ZHud'
+#        bridge.dependency 'ZNoti'
+#        bridge.dependency 'ZTable'
+#        bridge.dependency 'ZCocoa/ASM'
+#        bridge.dependency 'ZCocoa/SM'
+#        bridge.dependency 'ZBridge/Base'
+#        bridge.dependency 'ZCocoa/TableView'
+#      end
+#    end
   #
-  #    character.subspec 'VM' do |vm|
-  #
-  #      vm.source_files = "Code/ZBridge/Characters/VM/*.{swift}"
-  #      vm.dependency 'RxCocoa'
-  #      vm.dependency 'WLBaseViewModel'
-  #      vm.dependency 'ZRealReq'
-  #      vm.dependency 'WLBaseResult'
-  #      vm.dependency 'ZApi'
-  #      vm.dependency 'ZBean/Circle'
-  #    end
-  #
-  #    character.subspec 'Bridge' do |bridge|
-  #      bridge.source_files = "Code/ZBridge/Characters/Bridge/*.{swift}"
-  #      bridge.dependency 'ZBridge/Characters/VM'
-  #      bridge.dependency 'ZHud'
-  #      bridge.dependency 'ZNoti'
-  #      bridge.dependency 'ZTable'
-  #      bridge.dependency 'ZCocoa/ASM'
-  #      bridge.dependency 'ZCocoa/SM'
-  #      bridge.dependency 'ZBridge/Base'
-  #      bridge.dependency 'ZCocoa/TableView'
-  #    end
-  #  end
-  #
-  #  # 列表
-  #  spec.subspec 'Enroll' do |enrolls|
-  #
-  #    enrolls.subspec 'VM' do |vm|
-  #
-  #      vm.source_files = "Code/ZBridge/Enroll/VM/*.{swift}"
-  #      vm.dependency 'RxCocoa'
-  #      vm.dependency 'WLBaseViewModel'
-  #      vm.dependency 'ZRealReq'
-  #      vm.dependency 'WLBaseResult'
-  #      vm.dependency 'ZApi'
-  #      vm.dependency 'ZBean/Circle'
-  #      vm.dependency 'WLToolsKit/Date'
-  #    end
-  #
-  #    enrolls.subspec 'Bridge' do |bridge|
-  #      bridge.source_files = "Code/ZBridge/Enroll/Bridge/*.{swift}"
-  #      bridge.dependency 'ZBridge/Enroll/VM'
-  #      bridge.dependency 'ZHud'
-  #      bridge.dependency 'ZNoti'
-  #      bridge.dependency 'ZTable'
-  #      bridge.dependency 'ZCocoa/ASM'
-  #      bridge.dependency 'ZCocoa/SM'
-  #      bridge.dependency 'ZBridge/Base'
-  #      bridge.dependency 'ZCocoa/TableView'
-  #    end
-  #  end
+    # 列表
+    spec.subspec 'Enroll' do |enrolls|
+  
+      enrolls.subspec 'VM' do |vm|
+  
+        vm.source_files = "Code/ZBridge/Enroll/VM/*.{swift}"
+        vm.dependency 'RxCocoa'
+        vm.dependency 'WLBaseViewModel'
+        vm.dependency 'ZRealReq'
+        vm.dependency 'WLBaseResult'
+        vm.dependency 'ZApi'
+        vm.dependency 'ZBean/Circle'
+        vm.dependency 'WLToolsKit/Date'
+      end
+  
+      enrolls.subspec 'Bridge' do |bridge|
+        bridge.source_files = "Code/ZBridge/Enroll/Bridge/*.{swift}"
+        bridge.dependency 'ZBridge/Enroll/VM'
+        bridge.dependency 'ZHud'
+        bridge.dependency 'ZNoti'
+        bridge.dependency 'ZTable'
+        bridge.dependency 'ZCocoa/ASM'
+        bridge.dependency 'ZCocoa/SM'
+        bridge.dependency 'ZBridge/Base'
+        bridge.dependency 'ZCocoa/TableView'
+      end
+    end
   
 end
