@@ -88,49 +88,54 @@
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     switch (profile.type) {
-            case ZProfileTypeAbout:
+        case ZProfileTypeAbout:
             
             self.iconImageView.image = [UIImage imageNamed: @AboutIcon];
             break;
-            case  ZProfileTypeFocus:
+        case  ZProfileTypeFocus:
             
             self.iconImageView.image = [UIImage imageNamed: @FocusIcon];
             break;
-            case  ZProfileTypeOrder:
+        case  ZProfileTypeOrder:
             
             self.iconImageView.image = [UIImage imageNamed: @OrderIcon];
             break;
-            case ZProfileTypeAddress:
+        case ZProfileTypeAddress:
             
             self.iconImageView.image = [UIImage imageNamed: @AddressIcon];
             break;
-            case  ZProfileTypePrivacy:
+        case  ZProfileTypePrivacy:
             
             self.iconImageView.image = [UIImage imageNamed: @PrivacyIcon];
             break;
-            case  ZProfileTypeSetting:
+        case  ZProfileTypeSetting:
             
             self.iconImageView.image = [UIImage imageNamed: @SettingIcon];
             break;
-            case ZProfileTypeMyCircle:
+        case ZProfileTypeMyCircle:
             
             self.iconImageView.image = [UIImage imageNamed: @CircleIcon];
             break;
-            case ZProfileTypeContactUS:
+        case ZProfileTypeContactUS:
             
             self.iconImageView.image = [UIImage imageNamed: @ContactUsIcon];
+        case ZProfileTypeCharacters:
             
+            self.iconImageView.image = [UIImage imageNamed: @CharatersIcon];
+            
+            self.subTitleLabel.hidden = false;
+            break;
             self.subTitleLabel.text = @ZPhoneNum;
             
             self.subTitleLabel.hidden = false;
             break;
-            case ZProfileTypeUserInfo:
+        case ZProfileTypeUserInfo:
             
             self.iconImageView.image = [UIImage imageNamed: @UserInfoIcon];
             
             self.subTitleLabel.hidden = false;
             break;
-            case  ZProfileTypeSpace:
+        case  ZProfileTypeSpace:
             
             self.selectionStyle = UITableViewCellSelectionStyleNone;
             

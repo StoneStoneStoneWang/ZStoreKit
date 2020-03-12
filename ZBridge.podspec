@@ -593,6 +593,26 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZBridge/Base'
     end
   end
+  # 列表
+  spec.subspec 'Carousel' do |carousel|
+    
+    carousel.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Carousel/VM/*.{swift}"
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'WLBaseResult'
+    end
+    
+    carousel.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Carousel/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Carousel/VM'
+      bridge.dependency 'ZNoti'
+      bridge.dependency 'ZCollection'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'WLToolsKit/Common'
+    end
+  end
 #  # 列表
 #  spec.subspec 'Handle' do |handle|
 #

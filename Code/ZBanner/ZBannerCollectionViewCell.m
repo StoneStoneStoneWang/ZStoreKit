@@ -57,6 +57,11 @@
     }
     return _iconImageView;
 }
+
+- (void)setImage:(NSString *)image {
+    
+    self.iconImageView.image = [UIImage imageNamed:image];
+}
 - (void)setCircleBean:(ZCircleBean *)circleBean {
     [super setCircleBean:circleBean];
     
