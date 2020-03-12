@@ -23,30 +23,20 @@
     
     [self.tableView registerClass:[ZProfileTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-#if ZAppFormGlobalOne
+#if ZContainDrawer
     
-    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds) - 100, 100)];
-    
-    self.tableView.tableHeaderView = self.headerView;
-    
-    self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds) - 100, CGRectGetHeight(self.view.bounds));
-    
-#elif ZAppFormGlobalTwo
-    
-    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 100)];
+    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 100, 120)];
     
     self.tableView.tableHeaderView = self.headerView;
     
-    self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
+    self.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 100, CGRectGetHeight(self.view.bounds));
+#else
     
-#elif ZAppFormGlobalThree
-    
-    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 120)];
+    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 100, 120)];
     
     self.tableView.tableHeaderView = self.headerView;
     
-    self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
-    
+    self.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 100, CGRectGetHeight(self.view.bounds));
 #endif
 }
 
