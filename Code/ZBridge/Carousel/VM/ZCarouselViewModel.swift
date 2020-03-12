@@ -13,7 +13,7 @@ import RxSwift
 import WLToolsKit
 import WLBaseResult
 
-@objc (ZBannerStyle)
+@objc (ZCarouselStyle)
 public enum ZCarouselStyle: Int {
     case one
     case two
