@@ -40,7 +40,7 @@ public final class ZEnrollBridge: ZBaseBridge {
 
 extension ZEnrollBridge {
     
-    @objc public func createEnrollEdit(_ vc: ZTableNoLoadingViewConntroller,succ: @escaping ZEnrollssEditSucc) {
+    @objc public func createEnrollEdit(_ vc: ZTableNoLoadingViewConntroller,tag: String,succ: @escaping ZEnrollssEditSucc) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
@@ -51,7 +51,8 @@ extension ZEnrollBridge {
                                                          enrollItemTapped: completeItem.rx.tap.asSignal(),
                                                          charater: character.asDriver(),
                                                          time: time.asDriver(),
-                                                         team: team.asDriver())
+                                                         team: team.asDriver(),
+                                                         tag: tag)
             
             viewModel = ZEnrollViewModel(input, disposed: disposed)
             

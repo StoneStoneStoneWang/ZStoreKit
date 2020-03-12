@@ -38,6 +38,8 @@ struct ZEnrollsViewModel: WLBaseViewModel {
         let addItemTapped: Signal<Void>
         
         let page: BehaviorRelay<Int> = BehaviorRelay<Int>(value: 1)
+        
+        let tag: String 
     }
     
     struct WLOutput {
@@ -64,7 +66,7 @@ struct ZEnrollsViewModel: WLBaseViewModel {
             .headerRefresh
             .flatMapLatest({_ in
                 
-                return onUserArrayResp(ZUserApi.fetchMyList("\(cTag)-\(Date().currentWeek)", page: 1))
+                return onUserArrayResp(ZUserApi.fetchMyList("\(cTag)-\(input.tag)-\(Date().currentWeek)", page: 1))
                     .mapArray(type: ZCircleBean.self)
                     .map({ return $0.count > 0 ? WLBaseResult.fetchList($0) : WLBaseResult.empty })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
@@ -76,7 +78,7 @@ struct ZEnrollsViewModel: WLBaseViewModel {
             .footerRefresh
             .flatMapLatest({_ in
                 
-                return onUserArrayResp(ZUserApi.fetchMyList("\(cTag)-\(Date().currentWeek)", page: input.page.value))
+                return onUserArrayResp(ZUserApi.fetchMyList("\(cTag)-\(input.tag)-\(Date().currentWeek)", page: input.page.value))
                     .mapArray(type: ZCircleBean.self)
                     .map({ return $0.count > 0 ? WLBaseResult.fetchList($0) : WLBaseResult.empty })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })

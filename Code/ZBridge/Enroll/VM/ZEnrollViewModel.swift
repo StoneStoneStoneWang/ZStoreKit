@@ -123,6 +123,8 @@ struct ZEnrollViewModel: WLBaseViewModel {
         let time: Driver<String>
         
         let team: Driver<String>
+        
+        let tag: String
     }
     
     struct WLOutput {
@@ -174,7 +176,7 @@ struct ZEnrollViewModel: WLBaseViewModel {
                 
                 let content = WLJsonCast.cast(argu: result.toJSON())
                 
-                return onUserDictResp(ZUserApi.publish("\(cTag)-\(Date().currentWeek)", content: content))
+                return onUserDictResp(ZUserApi.publish("\(cTag)-\(input.tag)-\(Date().currentWeek)", content: content))
                     .mapObject(type: ZCircleBean.self)
                     .map({ WLBaseResult.operation($0) })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })

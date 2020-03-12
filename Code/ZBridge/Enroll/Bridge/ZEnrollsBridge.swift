@@ -35,7 +35,7 @@ public final class ZEnrollsBridge: ZBaseBridge {
 
 extension ZEnrollsBridge {
     
-    @objc public func createEnrolls(_ vc: ZTableLoadingViewController ,status: @escaping ZEnrollsLoadingStatus) {
+    @objc public func createEnrolls(_ vc: ZTableLoadingViewController ,tag: String,status: @escaping ZEnrollsLoadingStatus) {
         
         if let addItem = vc.view.viewWithTag(301) as? UIButton {
             
@@ -45,7 +45,8 @@ extension ZEnrollsBridge {
                                                      itemSelect: vc.tableView.rx.itemSelected,
                                                      headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver(),
                                                      footerRefresh: vc.tableView.mj_footer!.rx.refreshing.asDriver(),
-                                                     addItemTapped: addItem.rx.tap.asSignal())
+                                                     addItemTapped: addItem.rx.tap.asSignal(),
+                                                     tag: tag)
             
             viewModel = ZEnrollsViewModel(input, disposed: disposed)
             

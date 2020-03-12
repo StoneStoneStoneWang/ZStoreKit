@@ -601,6 +601,8 @@ Pod::Spec.new do |spec|
       vm.source_files = "Code/ZBridge/Carousel/VM/*.{swift}"
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'WLBaseResult'
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLToolsKit/Common'
     end
     
     carousel.subspec 'Bridge' do |bridge|
