@@ -13,7 +13,7 @@
 
 #else
 
-#if ZAppFormGlobalOne
+#if ZAppFormGlobalMap
 
 #define ZAMapBunddleView n5kbxJhhFETy
 
@@ -47,7 +47,7 @@
 
 #define ZReportTableViewCell ZReportTableViewCell111
 
-#elif ZAppFormGlobalTwo
+#elif ZAppFormGlobalGame
 
 #define ZAMapBunddleView O5pFNa0VCo1
 
@@ -97,7 +97,7 @@
 
 #define ZCircleVideoTableViewCell KiPdTILfgQ
 
-#elif ZAppFormGlobalThree
+#elif ZAppFormGlobalCircle
 
 #define ZAMapBunddleView O5pFNa0VCo1
 
