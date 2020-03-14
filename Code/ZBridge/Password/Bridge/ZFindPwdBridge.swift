@@ -9,10 +9,11 @@
 import Foundation
 import ZBase
 import ZHud
-import ZNoti
 import RxCocoa
 import RxSwift
 import ZCocoa
+
+public typealias ZFindPwdAction = (_ vc: ZBaseViewController) -> ()
 
 @objc (ZFindPwdBridge)
 public final class ZFindPwdBridge: ZBaseBridge {
@@ -22,7 +23,7 @@ public final class ZFindPwdBridge: ZBaseBridge {
 // MARK:  手机号 201  验证码 202  密码 203  完成按钮 204
 extension ZFindPwdBridge {
     
-    @objc public func configViewModel(_ vc: ZBaseViewController) {
+    @objc public func configViewModel(_ vc: ZBaseViewController,pwdAction: @escaping ZFindPwdAction ) {
         
         if let phone = vc.view.viewWithTag(201) as? UITextField ,let vcode = vc.view.viewWithTag(202) as? UITextField ,let vcodeItem = vcode.rightView as? UIButton,let password = vc.view.viewWithTag(203) as? UITextField, let passwordItem = password.rightView
             as? UIButton ,let completeItem = vc.view.viewWithTag(204) as? UIButton {
@@ -65,7 +66,7 @@ extension ZFindPwdBridge {
                         
                         ZHudUtil.showInfo(msg)
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiFindPwdSucc), andValue: nil, andFrom: vc)
+                        pwdAction(vc)
                         
                     default: break
                     }

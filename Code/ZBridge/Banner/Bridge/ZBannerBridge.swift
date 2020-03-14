@@ -14,9 +14,10 @@ import RxDataSources
 import ZCocoa
 import WLToolsKit
 import ZCocoa
-import ZNoti
 import ZBean
 import ZHud
+
+public typealias ZBannerAction = (_ banner: ZCircleBean ,_ vc: ZBaseViewController) -> ()
 
 @objc (ZBannerBridge)
 public final class ZBannerBridge: ZBaseBridge {
@@ -34,7 +35,7 @@ public final class ZBannerBridge: ZBaseBridge {
 // MARK: skip item 101 pagecontrol 102
 extension ZBannerBridge {
     
-    @objc public func createBanner(_ vc: ZCollectionLoadingViewController ,canPageHidden: Bool ,style: ZBannerStyle) {
+    @objc public func createBanner(_ vc: ZCollectionLoadingViewController ,canPageHidden: Bool ,style: ZBannerStyle ,bannerAction: @escaping ZBannerAction) {
         
         if let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
             
@@ -112,7 +113,7 @@ extension ZBannerBridge {
                 .zip
                 .subscribe(onNext: { (banner,ip) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiBannerClick), andValue: banner, andFrom: vc)
+                    bannerAction(banner,vc)
                 })
                 .disposed(by: disposed)
             

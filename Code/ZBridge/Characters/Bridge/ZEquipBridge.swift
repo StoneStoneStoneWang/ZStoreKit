@@ -14,7 +14,6 @@ import RxCocoa
 import ZCache
 import RxSwift
 import RxDataSources
-import ZNoti
 import ZCocoa
 
 public typealias ZEquipSucc = (_ equips: String) -> ()

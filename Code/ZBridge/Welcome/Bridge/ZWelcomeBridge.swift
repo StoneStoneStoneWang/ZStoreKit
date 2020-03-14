@@ -14,7 +14,8 @@ import RxDataSources
 import ZCocoa
 import WLToolsKit
 import ZCocoa
-import ZNoti
+
+public typealias ZWelcomeSkipAction = (_ vc: ZBaseViewController) -> ()
 
 @objc (ZWelcomeBridge)
 public final class ZWelcomeBridge: ZBaseBridge {
@@ -28,7 +29,7 @@ public final class ZWelcomeBridge: ZBaseBridge {
 // MARK: skip item 101 pagecontrol 102
 extension ZWelcomeBridge {
     
-    @objc public func configViewModel(_ vc: ZCollectionNoLoadingViewController ,welcomeImgs: [String],canPageHidden: Bool) {
+    @objc public func configViewModel(_ vc: ZCollectionNoLoadingViewController ,welcomeImgs: [String],canPageHidden: Bool ,skipAction: @escaping ZWelcomeSkipAction) {
         
         if let skipItem = vc.view.viewWithTag(101) as? UIButton  ,let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
             
@@ -92,7 +93,7 @@ extension ZWelcomeBridge {
                 .skiped
                 .drive(onNext: { (_) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiWelcomeSkip), andValue: nil, andFrom: vc)
+                    skipAction(vc)
                 })
                 .disposed(by: disposed)
         }

@@ -14,7 +14,8 @@ import RxDataSources
 import ZCocoa
 import WLToolsKit
 import ZCocoa
-import ZNoti
+
+public typealias ZCarouselAction = (_ banner: String ,_ vc: ZBaseViewController) -> ()
 
 @objc (ZCarouselBridge)
 public final class ZCarouselBridge: ZBaseBridge {
@@ -33,7 +34,7 @@ public final class ZCarouselBridge: ZBaseBridge {
 // MARK: skip item 101 pagecontrol 102
 extension ZCarouselBridge {
     
-    @objc public func createCarousel(_ vc: ZCollectionLoadingViewController ,canPageHidden: Bool ,images: [String],style: ZCarouselStyle) {
+    @objc public func createCarousel(_ vc: ZCollectionLoadingViewController ,canPageHidden: Bool ,images: [String],style: ZCarouselStyle ,bannerAction: @escaping ZCarouselAction) {
         
         if let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
             
@@ -69,7 +70,8 @@ extension ZCarouselBridge {
                 .zip
                 .subscribe(onNext: { (banner,ip) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiBannerClick), andValue: banner, andFrom: vc)
+                    bannerAction(banner,vc)
+
                 })
                 .disposed(by: disposed)
             

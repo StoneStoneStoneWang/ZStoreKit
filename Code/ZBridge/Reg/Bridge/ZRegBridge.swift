@@ -9,10 +9,21 @@
 import Foundation
 import ZBase
 import ZHud
-import ZNoti
 import RxCocoa
 import RxSwift
 import ZCocoa
+
+@objc(ZRegActionType)
+public enum ZRegActionType: Int ,Codable {
+    
+    case backLogin = 0
+    
+    case regSucc = 1
+    
+    case privacy = 2
+}
+
+public typealias ZRegAction = (_ action: ZRegActionType ,_ vc: ZBaseViewController) -> ()
 
 @objc (ZRegBridge)
 public final class ZRegBridge: ZBaseBridge {
@@ -23,7 +34,7 @@ public final class ZRegBridge: ZBaseBridge {
 // MARK: 201 手机号 202 密码 203 登陆按钮 204 快捷登录按钮 205 忘记密码按钮 206
 extension ZRegBridge {
     
-    @objc public func configViewModel(_ vc: ZBaseViewController) {
+    @objc public func configViewModel(_ vc: ZBaseViewController ,regAction: @escaping ZRegAction) {
         
         if let phone = vc.view.viewWithTag(201) as? UITextField ,let vcode = vc.view.viewWithTag(202) as? UITextField ,let vcodeItem = vcode.rightView as? UIButton ,let loginItem = vc.view.viewWithTag(203) as? UIButton
             , let backLoginItem = vc.view.viewWithTag(204) as? UIButton ,let proItem = vc.view.viewWithTag(205) as? UIButton {
@@ -42,7 +53,7 @@ extension ZRegBridge {
                 .tap
                 .subscribe({ (_) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiBackLogin), andValue: nil, andFrom: vc)
+                    regAction(.backLogin,vc)
                 })
                 .disposed(by: disposed)
             
@@ -75,7 +86,7 @@ extension ZRegBridge {
                         
                         ZHudUtil.showInfo("注册成功")
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiRegSucc), andValue: nil, andFrom: vc)
+                        regAction(.regSucc,vc)
                         
                     default: break
                     }
@@ -87,7 +98,7 @@ extension ZRegBridge {
                 .pro
                 .drive(onNext: {(_) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiGotoProtocol), andValue: nil, andFrom: vc)
+                    regAction(.privacy,vc)
                 })
                 .disposed(by: disposed)
             

@@ -9,10 +9,23 @@
 import Foundation
 import ZBase
 import ZHud
-import ZNoti
 import RxCocoa
 import RxSwift
 import ZCocoa
+
+@objc(ZLoginActionType)
+public enum ZLoginActionType: Int ,Codable {
+    
+    case swiftLogin = 0
+    
+    case loginSucc = 1
+    
+    case gotoFindPwd = 2
+    
+    case backItem = 3
+}
+
+public typealias ZLoginAction = (_ action: ZLoginActionType ,_ vc: ZBaseViewController) -> ()
 
 @objc (ZLoginBridge)
 public final class ZLoginBridge: ZBaseBridge {
@@ -23,7 +36,7 @@ public final class ZLoginBridge: ZBaseBridge {
 // MARK: 201 手机号 202 密码 203 登陆按钮 204 快捷登录按钮 205 忘记密码按钮 206
 extension ZLoginBridge {
     
-    @objc public func configViewModel(_ vc: ZBaseViewController ) {
+    @objc public func configViewModel(_ vc: ZBaseViewController ,loginAction: @escaping ZLoginAction) {
         
         if let phone = vc.view.viewWithTag(201) as? UITextField ,let password = vc.view.viewWithTag(202) as? UITextField ,let loginItem = vc.view.viewWithTag(203) as? UIButton
             , let swiftLoginItem = vc.view.viewWithTag(204) as? UIButton ,let forgetItem = vc.view.viewWithTag(205) as? UIButton , let passwordItem = password.rightView
@@ -43,7 +56,7 @@ extension ZLoginBridge {
                 .tap
                 .subscribe(onNext: { (_) in
                     
-                    vc.navigationController?.dismiss(animated: true, completion: nil)
+                    loginAction(.backItem,vc)
                 })
                 .disposed(by: disposed)
             
@@ -75,7 +88,8 @@ extension ZLoginBridge {
                         
                         ZHudUtil.showInfo("登录成功")
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiLoginSucc), andValue: nil, andFrom: vc)
+                        loginAction(.loginSucc,vc)
+
                         
                     default: break
                     }
@@ -87,8 +101,8 @@ extension ZLoginBridge {
                 .swiftLogined
                 .drive(onNext: { (_) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiGotoReg), andValue: nil, andFrom: vc)
-                    
+                    loginAction(.swiftLogin,vc)
+    
                 })
                 .disposed(by: disposed)
             
@@ -97,7 +111,7 @@ extension ZLoginBridge {
                 .forgeted
                 .drive(onNext: {(_) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiGotoFindPwd), andValue: nil, andFrom: vc)
+                    loginAction(.gotoFindPwd,vc)
                     
                 })
                 .disposed(by: disposed)

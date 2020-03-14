@@ -14,12 +14,13 @@ import ZHud
 import RxCocoa
 import RxSwift
 import ZBean
-import ZNoti
 import ZCache
 
 public typealias ZEnrollsLoadingStatus = (_ status: Int) -> ()
 
 public typealias ZEnrollsInsertStatus = (_ status: Int) -> ()
+
+public typealias ZEnrollsAddAction = (_ vc:ZBaseViewController) -> ()
 
 @objc (ZEnrollsBridge)
 public final class ZEnrollsBridge: ZBaseBridge {
@@ -35,7 +36,7 @@ public final class ZEnrollsBridge: ZBaseBridge {
 
 extension ZEnrollsBridge {
     
-    @objc public func createEnrolls(_ vc: ZTableLoadingViewController ,tag: String,status: @escaping ZEnrollsLoadingStatus) {
+    @objc public func createEnrolls(_ vc: ZTableLoadingViewController ,tag: String,status: @escaping ZEnrollsLoadingStatus,enrollsAction: @escaping ZEnrollsAddAction) {
         
         if let addItem = vc.view.viewWithTag(301) as? UIButton {
             
@@ -78,8 +79,9 @@ extension ZEnrollsBridge {
                 .output
                 .added
                 .drive(onNext: { (_) in
-                    
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiCharacterAddClick), andValue: nil, andFrom: vc)
+                
+                    enrollsAction(vc)
+
                 })
                 .disposed(by: disposed)
             

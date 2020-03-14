@@ -10,13 +10,42 @@ import Foundation
 import ZTable
 import RxDataSources
 import ZCocoa
-import ZNoti
 import ZCache
 import ZHud
 import RxCocoa
 import RxSwift
 import ZBean
 import RxGesture
+
+@objc(ZProfileActionType)
+public enum ZProfileActionType: Int ,Codable {
+    
+    case about
+    
+    case userInfo
+    
+    case setting
+    
+    case contactUS
+    
+    case privacy
+    
+    case focus
+    
+    case space
+    
+    case myCircle
+    
+    case order
+    
+    case address
+    
+    case characters
+    
+    case unLogin
+}
+
+public typealias ZProfileAction = (_ action: ZProfileActionType ,_ vc: ZBaseViewController) -> ()
 
 private var key: Void?
 
@@ -57,7 +86,7 @@ public final class ZProfileBridge: ZBaseBridge {
 
 extension ZProfileBridge {
     
-    @objc public func createProfile(_ vc: ZTableNoLoadingViewConntroller) {
+    @objc public func createProfile(_ vc: ZTableNoLoadingViewConntroller,profileAction:@escaping ZProfileAction) {
         
         let input = ZProfileViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZProfileType.self),
                                               itemSelect: vc.tableView.rx.itemSelected)
@@ -90,27 +119,20 @@ extension ZProfileBridge {
                 
                 vc.tableView.deselectRow(at: ip, animated: true)
                 
+                let isLogin = ZAccountCache.default.isLogin()
+                
                 switch type {
-                case .setting: fallthrough
-                case .privacy: fallthrough
-                case .about:
+                case .setting: profileAction(.setting,vc)
                     
-                    ZNotiConfigration.postNotification(withName: type.notificationName, andValue: nil, andFrom: vc)
+                case .privacy: profileAction(.privacy,vc)
+                case .about: profileAction(.about,vc)
                     
-                case .userInfo:fallthrough
-                case .address: fallthrough
-                case .order: fallthrough
-                case .focus: fallthrough
-                case .characters: fallthrough
-                case .myCircle:
-                    
-                    if ZAccountCache.default.isLogin() {
-                        
-                        ZNotiConfigration.postNotification(withName: type.notificationName, andValue: nil, andFrom: vc)
-                    } else {
-                        
-                        ZNotiConfigration.postNotification(withName: Notification.Name(ZNotiUnLogin), andValue: nil, andFrom: vc)
-                    }
+                case .userInfo: profileAction(isLogin ? .userInfo : .unLogin,vc)
+                case .address: profileAction(isLogin ? .address : .unLogin,vc)
+                case .order: profileAction(isLogin ? .order : .unLogin,vc)
+                case .focus: profileAction(isLogin ? .focus : .unLogin,vc)
+                case .characters: profileAction(isLogin ? .characters : .unLogin,vc)
+                case .myCircle: profileAction(isLogin ? .myCircle : .unLogin,vc)
                     
                 case .contactUS:
                     
@@ -134,13 +156,10 @@ extension ZProfileBridge {
             .when(.recognized)
             .subscribe(onNext: { (_) in
                 
-                if ZAccountCache.default.isLogin() {
-                    
-                    ZNotiConfigration.postNotification(withName: ZProfileType.userInfo.notificationName, andValue: nil, andFrom: vc)
-                } else {
-                    
-                    ZNotiConfigration.postNotification(withName: Notification.Name(ZNotiUnLogin), andValue: nil, andFrom: vc)
-                }
+                let isLogin = ZAccountCache.default.isLogin()
+                
+                profileAction(isLogin ? .userInfo : .unLogin,vc)
+            
             })
             .disposed(by: disposed)
     }

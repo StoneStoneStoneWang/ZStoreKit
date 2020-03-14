@@ -14,7 +14,6 @@ import ZHud
 import RxCocoa
 import RxSwift
 import ZBean
-import ZNoti
 import ZCache
 
 public typealias ZCharactersLoadingStatus = (_ status: Int) -> ()
@@ -22,6 +21,8 @@ public typealias ZCharactersLoadingStatus = (_ status: Int) -> ()
 public typealias ZCharactersInsertStatus = (_ status: Int) -> ()
 
 public typealias ZCharactersAccessoryBlock = (_ ip: IndexPath ,_ circle: ZCircleBean) -> ()
+
+public typealias ZCharactersAddAction = (_ vc:ZBaseViewController) -> ()
 
 @objc (ZCharactersBridge)
 public final class ZCharactersBridge: ZBaseBridge {
@@ -37,7 +38,7 @@ public final class ZCharactersBridge: ZBaseBridge {
 
 extension ZCharactersBridge {
     
-    @objc public func createCharacters(_ vc: ZTableLoadingViewController ,status: @escaping ZCharactersLoadingStatus ,accessoryBlock: @escaping ZCharactersAccessoryBlock) {
+    @objc public func createCharacters(_ vc: ZTableLoadingViewController ,status: @escaping ZCharactersLoadingStatus ,accessoryBlock: @escaping ZCharactersAccessoryBlock ,addAction: @escaping ZCharactersAddAction) {
         
         if let addItem = vc.view.viewWithTag(301) as? UIButton {
             
@@ -94,7 +95,7 @@ extension ZCharactersBridge {
                 .added
                 .drive(onNext: { (_) in
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiCharacterAddClick), andValue: nil, andFrom: vc)
+                    addAction(vc)
                 })
                 .disposed(by: disposed)
             
@@ -154,8 +155,6 @@ extension ZCharactersBridge {
         
         var values = viewModel.output.tableData.value
         
-        values.insert(characters, at: 0)
-        
         if values.isEmpty {
             
             status(0)
@@ -165,6 +164,7 @@ extension ZCharactersBridge {
             
             status(1)
         }
+        values.insert(characters, at: 0)
         
         viewModel.output.tableData.accept(values)
     }

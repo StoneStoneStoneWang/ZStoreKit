@@ -9,10 +9,11 @@
 import Foundation
 import ZBase
 import ZHud
-import ZNoti
 import RxCocoa
 import RxSwift
 import ZCocoa
+
+public typealias ZModifyPwdAction = (_ vc: ZBaseViewController) -> ()
 
 @objc (ZModifyPwdBridge)
 public final class ZModifyPwdBridge: ZBaseBridge {
@@ -22,7 +23,7 @@ public final class ZModifyPwdBridge: ZBaseBridge {
 // MARK:  旧密码201 新密码 202 确认密码 203 修改密码
 extension ZModifyPwdBridge {
     
-    @objc public func configViewModel(_ vc: ZBaseViewController) {
+    @objc public func configViewModel(_ vc: ZBaseViewController ,pwdAction: @escaping ZModifyPwdAction) {
         
         if let oldpassword = vc.view.viewWithTag(201) as? UITextField ,let password = vc.view.viewWithTag(202) as? UITextField ,let passwordAgain = vc.view.viewWithTag(203) as? UITextField ,let completeItem = vc.view.viewWithTag(204) as? UIButton {
             
@@ -62,7 +63,7 @@ extension ZModifyPwdBridge {
                         
                         ZHudUtil.showInfo(msg)
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiModifyPwdSucc), andValue: nil, andFrom: vc)
+                        pwdAction(vc)
                         
                     default: break
                     }

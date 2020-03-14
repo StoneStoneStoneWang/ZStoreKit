@@ -10,8 +10,24 @@ import Foundation
 import ZTable
 import RxDataSources
 import ZCocoa
-import ZNoti
 import ZCache
+
+@objc(ZSettingActionType)
+public enum ZSettingActionType: Int ,Codable {
+    
+    case gotoFindPwd = 0
+    
+    case gotoModifyPwd = 1
+    
+    case logout = 2
+    
+    case unlogin = 3
+    
+    case black = 4
+}
+
+public typealias ZSettingAction = (_ action: ZSettingActionType ,_ vc: ZBaseViewController) -> ()
+
 
 @objc (ZSettingBridge)
 public final class ZSettingBridge: ZBaseBridge {
@@ -26,7 +42,7 @@ public final class ZSettingBridge: ZBaseBridge {
 }
 extension ZSettingBridge {
     
-    @objc public func createSetting(_ vc: ZTableNoLoadingViewConntroller) {
+    @objc public func createSetting(_ vc: ZTableNoLoadingViewConntroller ,settingAction: @escaping ZSettingAction) {
         
         self.vc = vc
         
@@ -59,25 +75,24 @@ extension ZSettingBridge {
                     
                 case .pwd:
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiGotoFindPwd), andValue: nil, andFrom: vc)
-                    
+                    settingAction(.gotoFindPwd,vc)
                 case .password:
                     
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiGotoModifyPwd), andValue: nil, andFrom: vc)
+                    settingAction(.gotoModifyPwd,vc)
                     
                 case .logout:
-                    
-                    ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiLogout), andValue: nil, andFrom: vc)
+                    settingAction(.logout,vc)
                     
                 case .black:
                     
                     if ZAccountCache.default.isLogin() {
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiGotoBlack), andValue: nil, andFrom: vc)
+                        settingAction(.black,vc)
                         
                     } else {
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiUnLogin), andValue: nil, andFrom: vc)
+                        settingAction(.unlogin,vc)
+
                     }
                     
                 default:
