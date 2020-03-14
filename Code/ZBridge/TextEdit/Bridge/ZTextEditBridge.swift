@@ -10,16 +10,14 @@ import Foundation
 import ZBase
 import ZHud
 import RxCocoa
-import ZCache
 import RxSwift
-
 
 @objc (ZTextEditBridge)
 public final class ZTextEditBridge: ZBaseBridge {
     
     var viewModel: ZTextEditViewModel!
     
-    let signature: BehaviorRelay<String> = BehaviorRelay<String>(value: ZUserInfoCache.default.userBean.signature)
+    let signature: BehaviorRelay<String> = BehaviorRelay<String>(value: "")
 }
 
 extension ZTextEditBridge {
