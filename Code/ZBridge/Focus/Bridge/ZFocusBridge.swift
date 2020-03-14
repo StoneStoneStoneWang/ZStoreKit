@@ -13,7 +13,7 @@ import ZCocoa
 import ZBean
 import ZHud
 import ZNoti
-
+import ZBridge
 @objc (ZFocusBridge)
 public final class ZFocusBridge: ZBaseBridge {
     

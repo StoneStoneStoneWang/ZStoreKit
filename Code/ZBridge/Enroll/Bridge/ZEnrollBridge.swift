@@ -17,7 +17,7 @@ import RxDataSources
 import ZCocoa
 import ZRealReq
 import WLToolsKit
-
+import ZBridge
 public typealias ZEnrollssEditSucc = (_ character: ZCircleBean?) -> ()
 
 @objc (ZEnrollBridge)

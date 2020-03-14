@@ -16,7 +16,7 @@ import WLToolsKit
 import ZCocoa
 import ZBean
 import ZHud
-
+import ZBridge
 public typealias ZBannerAction = (_ banner: ZCircleBean ,_ vc: ZBaseViewController) -> ()
 
 @objc (ZBannerBridge)

@@ -13,6 +13,7 @@ import ZBean
 import RxCocoa
 import ZCache
 import RxSwift
+import ZBridge
 
 @objc (ZCharactersNameBridge)
 public final class ZCharactersNameBridge: ZBaseBridge {

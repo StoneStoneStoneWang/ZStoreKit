@@ -12,7 +12,7 @@ import RxDataSources
 import ZCocoa
 import ZBean
 import ZHud
-
+import ZBridge
 @objc (ZCommentBridge)
 public final class ZCommentBridge: ZBaseBridge {
     

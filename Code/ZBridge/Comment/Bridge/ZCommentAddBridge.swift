@@ -12,7 +12,7 @@ import RxDataSources
 import ZCocoa
 import ZBean
 import ZHud
-
+import ZBridge
 public typealias ZCommentAddSucc = () -> ()
 
 @objc (ZCommentAddBridge)

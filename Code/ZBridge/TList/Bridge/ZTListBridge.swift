@@ -13,7 +13,7 @@ import ZCocoa
 import ZBean
 import ZHud
 import ZCache
-
+import ZBridge
 @objc(ZTListActionType)
 public enum ZTListActionType: Int ,Codable {
     

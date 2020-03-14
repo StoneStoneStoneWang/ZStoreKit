@@ -14,7 +14,7 @@ import RxDataSources
 import ZCocoa
 import WLToolsKit
 import ZCocoa
-
+import ZBridge
 public typealias ZCarouselAction = (_ banner: String ,_ vc: ZBaseViewController) -> ()
 
 @objc (ZCarouselBridge)

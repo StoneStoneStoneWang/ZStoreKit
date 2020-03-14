@@ -1,137 +1,433 @@
-#
-#  Be sure to run `pod spec lint ZActionBridge.podspec' to ensure this is a
-#  valid spec and to remove all comments including this before submitting the spec.
-#
-#  To learn more about Podspec attributes see https://guides.cocoapods.org/syntax/podspec.html
-#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
-#
-
 Pod::Spec.new do |spec|
-
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
-
+  
   spec.name         = "ZActionBridge"
-  spec.version      = "0.0.1"
-  spec.summary      = "A short description of ZActionBridge."
-
-  # This description is used to generate tags and improve search results.
-  #   * Think: What does it do? Why did you write it? What is the focus?
-  #   * Try to keep it short, snappy and to the point.
-  #   * Write the description between the DESC delimiters below.
-  #   * Finally, don't worry about the indent, CocoaPods strips it!
+  spec.version      = "0.3.1"
+  spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
-                   DESC
-
-  spec.homepage     = "http://EXAMPLE/ZActionBridge"
-  # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
-
-
-  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Licensing your code is important. See https://choosealicense.com for more info.
-  #  CocoaPods will detect a license file if there is a named LICENSE*
-  #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
-  #
-
-  spec.license      = "MIT (example)"
-  # spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-
-
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the authors of the library, with email addresses. Email addresses
-  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also
-  #  accepts just a name if you'd rather not provide an email address.
-  #
-  #  Specify a social_media_url where others can refer to, for example a twitter
-  #  profile URL.
-  #
-
+  ZActionBridge是oc swift 转换的封装呢
+  DESC
+  
+  spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
+  spec.license      = { :type => "MIT", :file => "LICENSE.md" }
   spec.author             = { "StoneStoneStoneWang" => "yuanxingfu1314@163.com" }
-  # Or just: spec.author    = "StoneStoneStoneWang"
-  # spec.authors            = { "StoneStoneStoneWang" => "yuanxingfu1314@163.com" }
-  # spec.social_media_url   = "https://twitter.com/StoneStoneStoneWang"
-
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  spec.platform     = :ios, "10.0"
+  spec.ios.deployment_target = "10.0"
+  
+  spec.swift_version = '5.0'
+  
+  spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
+  
+  spec.static_framework = true
+  
+  spec.frameworks = 'UIKit', 'Foundation'
+  
+  spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
+  # 举报
+  spec.subspec 'Report' do |report|
+    
+    report.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZActionBridge/Report/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ObjectMapper'
+      vm.dependency 'RxDataSources'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
+    end
+    
+    report.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZActionBridge/Report/Bridge/*.{swift}"
+      bridge.dependency 'ZActionBridge/Report/VM'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'RxDataSources'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZHud'
+    end
+  end
+  #  # 举报
+  #  spec.subspec 'Evaluate' do |evaluate|
   #
-  #  If this Pod runs only on iOS or OS X, then specify the platform and
-  #  the deployment target. You can optionally include the target after the platform.
+  #    evaluate.subspec 'VM' do |vm|
   #
-
-  # spec.platform     = :ios
-  # spec.platform     = :ios, "5.0"
-
-  #  When using multiple platforms
-  # spec.ios.deployment_target = "5.0"
-  # spec.osx.deployment_target = "10.7"
-  # spec.watchos.deployment_target = "2.0"
-  # spec.tvos.deployment_target = "9.0"
-
-
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #      vm.source_files = "Code/ZActionBridge/Evaluate/VM/*.{swift}"
+  #      vm.dependency 'RxCocoa'
+  #      vm.dependency 'WLBaseViewModel'
+  #      vm.dependency 'ObjectMapper'
+  #      vm.dependency 'RxDataSources'
+  #      vm.dependency 'ZApi'
+  #      vm.dependency 'ZRealReq'
+  #      vm.dependency 'WLBaseResult'
+  #    end
   #
-  #  Specify the location from where the source should be retrieved.
-  #  Supports git, hg, bzr, svn and HTTP.
+  #    evaluate.subspec 'Bridge' do |bridge|
+  #      bridge.source_files = "Code/ZActionBridge/Evaluate/Bridge/*.{swift}"
+  #      bridge.dependency 'ZActionBridge/Evaluate/VM'
+  #      bridge.dependency 'ZTable'
+  #      bridge.dependency 'ZCocoa/SM'
+  #      bridge.dependency 'RxDataSources'
+  #      bridge.dependency 'ZBridge/Base'
+  #      bridge.dependency 'ZHud'
+  #    end
+  #  end
   #
+  # 黑名单
+#  spec.subspec 'Black' do |black|
+#
+#    black.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/Black/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZBean/Black'
+#      vm.dependency 'ZRealReq'
+#      vm.dependency 'ZApi'
+#      vm.dependency 'WLBaseResult'
+#    end
+#
+#    black.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Black/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Black/VM'
+#      bridge.dependency 'ZHud'
+#      bridge.dependency 'ZNoti'
+#      bridge.dependency 'ZTable'
+#      bridge.dependency 'ZCocoa/ASM'
+#      bridge.dependency 'ZCocoa/TableView'
+#      bridge.dependency 'ZBridge/Base'
+#    end
+#  end
+#  # 我的关注
+#  spec.subspec 'Focus' do |focus|
+#
+#    focus.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/Focus/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZBean/Focus'
+#      vm.dependency 'ZRealReq'
+#      vm.dependency 'ZApi'
+#      vm.dependency 'WLBaseResult'
+#    end
+#
+#    focus.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Focus/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Focus/VM'
+#      bridge.dependency 'ZHud'
+#      bridge.dependency 'ZNoti'
+#      bridge.dependency 'ZTable'
+#      bridge.dependency 'ZCocoa/ASM'
+#      bridge.dependency 'ZCocoa/TableView'
+#      bridge.dependency 'ZBridge/Base'
+#    end
+#  end
+#
+#  # 列表
+#  spec.subspec 'Comment' do |comment|
+#
+#    comment.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/Comment/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZRealReq'
+#      vm.dependency 'WLBaseResult'
+#      vm.dependency 'ZApi'
+#      vm.dependency 'ZBean/Comment'
+#    end
+#
+#    comment.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Comment/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Comment/VM'
+#      bridge.dependency 'ZHud'
+#      bridge.dependency 'ZTable'
+#      bridge.dependency 'ZCocoa/ASM'
+#      bridge.dependency 'ZBridge/Base'
+#      bridge.dependency 'ZCocoa/TableView'
+#    end
+#  end
+#  # 列表
+#  spec.subspec 'Content' do |content|
+#
+#    content.subspec 'VM' do |vm|
+#      vm.source_files = "Code/ZActionBridge/Content/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZBean/KeyValue'
+#      vm.dependency 'ZBean/Circle'
+#      vm.dependency 'WLBaseResult'
+#    end
+#
+#    content.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Content/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Content/VM'
+#      bridge.dependency 'ZTable'
+#      bridge.dependency 'ZCocoa/SM'
+#      bridge.dependency 'ZCocoa/TableView'
+#      bridge.dependency 'ZBridge/Base'
+#    end
+#  end
+#  spec.subspec 'TextEdit' do |textEdit|
+#
+#    textEdit.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/TextEdit/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'WLBaseResult'
+#      vm.dependency 'WLToolsKit/String'
+#    end
+#
+#    textEdit.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/TextEdit/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/TextEdit/VM'
+#      bridge.dependency 'ZBase'
+#      bridge.dependency 'ZBridge/Base'
+#    end
+#  end
+#  # 列表
+#  spec.subspec 'Publish' do |publish|
+#
+#    publish.subspec 'VM' do |vm|
+#      vm.source_files = "Code/ZActionBridge/Publish/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZBean/Circle'
+#      vm.dependency 'WLBaseResult'
+#      vm.dependency 'ZApi'
+#      vm.dependency 'ZRealReq'
+#    end
+#
+#    publish.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Publish/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Publish/VM'
+#      bridge.dependency 'ZHud'
+#      bridge.dependency 'ZTable'
+#      bridge.dependency 'ZCocoa/SM'
+#      bridge.dependency 'ZRealReq'
+#      bridge.dependency 'ZBridge/Base'
+#    end
+#  end
+#  # 列表
+#  spec.subspec 'Banner' do |banner|
+#
+#    banner.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/Banner/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZRealReq'
+#      vm.dependency 'WLBaseResult'
+#      vm.dependency 'ZApi'
+#      vm.dependency 'ZBean/Circle'
+#    end
+#
+#    banner.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Banner/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Banner/VM'
+#      bridge.dependency 'ZHud'
+#      bridge.dependency 'ZCollection'
+#      bridge.dependency 'ZCocoa/SM'
+#      bridge.dependency 'ZBridge/Base'
+#    end
+#  end
+#  列表
+#  spec.subspec 'Carousel' do |carousel|
+#
+#    carousel.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/Carousel/VM/*.{swift}"
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'WLBaseResult'
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLToolsKit/Common'
+#    end
+#
+#    carousel.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Carousel/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Carousel/VM'
+#      bridge.dependency 'ZCollection'
+#      bridge.dependency 'ZCocoa/SM'
+#      bridge.dependency 'ZBridge/Base'
+#      bridge.dependency 'WLToolsKit/Common'
+#    end
+#  end
+#  # 列表
+#  #  spec.subspec 'Handle' do |handle|
+#  #
+#  #    handle.subspec 'VM' do |vm|
+#  #
+#  #      vm.source_files = "Code/ZActionBridge/Handle/VM/*.{swift}"
+#  #      vm.dependency 'RxCocoa'
+#  #      vm.dependency 'WLBaseViewModel'
+#  #      vm.dependency 'ZCache'
+#  #      vm.frameworks = 'UIKit', 'Foundation' ,'CoreLocation'
+#  #    end
+#  #
+#  #    handle.subspec 'Bridge' do |bridge|
+#  #      bridge.source_files = "Code/ZActionBridge/Handle/Bridge/*.{swift}"
+#  #      bridge.dependency 'ZActionBridge/Handle/VM'
+#  #      bridge.dependency 'ZCollection'
+#  #      bridge.dependency 'ZBridge/Base'
+#  #    end
+#  #  end
+#  # 列表
+#  #  spec.subspec 'Handler' do |handler|
+#  #
+#  #    handler.subspec 'VM' do |vm|
+#  #      vm.source_files = "Code/ZActionBridge/Handler/VM/*.{swift}"
+#  #      vm.dependency 'RxCocoa'
+#  #      vm.dependency 'WLBaseViewModel'
+#  #      vm.dependency 'ZRealReq'
+#  #      vm.dependency 'WLBaseResult'
+#  #      vm.dependency 'ZApi'
+#  #      vm.dependency 'ZBean/Circle'
+#  #      vm.dependency 'ZActionBridge/ZAMap/VM'
+#  #    end
+#  #
+#  #    handler.subspec 'Bridge' do |bridge|
+#  #      bridge.source_files = "Code/ZActionBridge/Handler/Bridge/*.{swift}"
+#  #      bridge.dependency 'ZActionBridge/Handler/VM'
+#  #      bridge.dependency 'ZHud'
+#  #      bridge.dependency 'ZNoti'
+#  #      bridge.dependency 'ZCollection'
+#  #      bridge.dependency 'ZCocoa/SM'
+#  #      bridge.dependency 'ZBridge/Base'
+#  #    end
+#  #  end
+#
+#  #  # 列表
+#  #  spec.subspec 'Order' do |order|
+#  #
+#  #    order.subspec 'VM' do |vm|
+#  #
+#  #      vm.source_files = "Code/ZActionBridge/Order/VM/*.{swift}"
+#  #      vm.dependency 'RxCocoa'
+#  #      vm.dependency 'WLBaseViewModel'
+#  #      vm.dependency 'ZRealReq'
+#  #      vm.dependency 'WLBaseResult'
+#  #      vm.dependency 'ZApi'
+#  #      vm.dependency 'ZBean/Circle'
+#  #    end
+#  #
+#  #    order.subspec 'Bridge' do |bridge|
+#  #      bridge.source_files = "Code/ZActionBridge/Order/Bridge/*.{swift}"
+#  #      bridge.dependency 'ZActionBridge/Order/VM'
+#  #      bridge.dependency 'ZHud'
+#  #      bridge.dependency 'ZNoti'
+#  #      bridge.dependency 'ZCollection'
+#  #      bridge.dependency 'ZCocoa/ASM'
+#  #      bridge.dependency 'ZCocoa/SM'
+#  #      bridge.dependency 'ZCocoa/TableView'
+#  #      bridge.dependency 'ZBridge/Base'
+#  #      bridge.dependency 'ZTable'
+#  #    end
+#  #  end
+#  #  列表
+#  spec.subspec 'Characters' do |character|
+#
+#    character.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/Characters/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZRealReq'
+#      vm.dependency 'WLBaseResult'
+#      vm.dependency 'ZApi'
+#      vm.dependency 'ZBean/Circle'
+#    end
+#
+#    character.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Characters/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Characters/VM'
+#      bridge.dependency 'ZHud'
+#      bridge.dependency 'ZTable'
+#      bridge.dependency 'ZCocoa/ASM'
+#      bridge.dependency 'ZCocoa/SM'
+#      bridge.dependency 'ZBridge/Base'
+#      bridge.dependency 'ZCocoa/TableView'
+#    end
+#  end
+#
+#  # 列表
+#  spec.subspec 'Enroll' do |enrolls|
+#
+#    enrolls.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/Enroll/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZRealReq'
+#      vm.dependency 'WLBaseResult'
+#      vm.dependency 'ZApi'
+#      vm.dependency 'ZBean/Circle'
+#      vm.dependency 'WLToolsKit/Date'
+#    end
+#
+#    enrolls.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/Enroll/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/Enroll/VM'
+#      bridge.dependency 'ZHud'
+#      bridge.dependency 'ZTable'
+#      bridge.dependency 'ZCocoa/ASM'
+#      bridge.dependency 'ZCocoa/SM'
+#      bridge.dependency 'ZBridge/Base'
+#      bridge.dependency 'ZCocoa/TableView'
+#    end
+#  end
+#
+#  #  # 列表
+#  spec.subspec 'TList' do |tList|
+#
+#    tList.subspec 'VM' do |vm|
+#
+#      vm.source_files = "Code/ZActionBridge/TList/VM/*.{swift}"
+#      vm.dependency 'RxCocoa'
+#      vm.dependency 'WLBaseViewModel'
+#      vm.dependency 'ZRealReq'
+#      vm.dependency 'WLBaseResult'
+#      vm.dependency 'ZApi'
+#      vm.dependency 'ZBean/Circle'
+#    end
+#
+#    tList.subspec 'Bridge' do |bridge|
+#      bridge.source_files = "Code/ZActionBridge/TList/Bridge/*.{swift}"
+#      bridge.dependency 'ZActionBridge/TList/VM'
+#      bridge.dependency 'ZHud'
+#      bridge.dependency 'ZTable'
+#      bridge.dependency 'ZCocoa/ASM'
+#      bridge.dependency 'ZCocoa/TableView'
+#      bridge.dependency 'ZBridge/Base'
+#    end
+#  end
+#  #
+#  #  # 列表
+#  #  spec.subspec 'CList' do |cList|
+#  #
+#  #    cList.subspec 'VM' do |vm|
+#  #
+#  #      vm.source_files = "Code/ZActionBridge/CList/VM/*.{swift}"
+#  #      vm.dependency 'RxCocoa'
+#  #      vm.dependency 'WLBaseViewModel'
+#  #      vm.dependency 'ZRealReq'
+#  #      vm.dependency 'WLBaseResult'
+#  #      vm.dependency 'ZApi'
+#  #      vm.dependency 'ZBean/Commodity'
+#  #    end
+#  #
+#  #    cList.subspec 'Bridge' do |bridge|
+#  #      bridge.source_files = "Code/ZActionBridge/CList/Bridge/*.{swift}"
+#  #      bridge.dependency 'ZActionBridge/CList/VM'
+#  #      bridge.dependency 'ZHud'
+#  #      bridge.dependency 'ZNoti'
+#  #      bridge.dependency 'ZCollection'
+#  #      bridge.dependency 'ZCocoa/ASM'
+#  #      bridge.dependency 'ZCocoa/TableView'
+#  #      bridge.dependency 'ZBridge/Base'
+#  #    end
+#  #  end
 
-  spec.source       = { :git => "http://EXAMPLE/ZActionBridge.git", :tag => "#{spec.version}" }
-
-
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  CocoaPods is smart about how it includes source code. For source files
-  #  giving a folder will include any swift, h, m, mm, c & cpp files.
-  #  For header files it will include any header in the folder.
-  #  Not including the public_header_files will make all headers public.
-  #
-
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
-
-  # spec.public_header_files = "Classes/**/*.h"
-
-
-  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  A list of resources included with the Pod. These are copied into the
-  #  target bundle with a build phase script. Anything else will be cleaned.
-  #  You can preserve files from being cleaned, please don't preserve
-  #  non-essential files like tests, examples and documentation.
-  #
-
-  # spec.resource  = "icon.png"
-  # spec.resources = "Resources/*.png"
-
-  # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
-
-
-  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Link your library with frameworks, or libraries. Libraries do not include
-  #  the lib prefix of their name.
-  #
-
-  # spec.framework  = "SomeFramework"
-  # spec.frameworks = "SomeFramework", "AnotherFramework"
-
-  # spec.library   = "iconv"
-  # spec.libraries = "iconv", "xml2"
-
-
-  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If your library depends on compiler flags you can set them in the xcconfig hash
-  #  where they will only apply to your library. If you depend on other Podspecs
-  #  you can include multiple dependencies to ensure it works.
-
-  # spec.requires_arc = true
-
-  # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # spec.dependency "JSONKit", "~> 1.4"
-
+  
 end

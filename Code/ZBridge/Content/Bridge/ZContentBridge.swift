@@ -13,7 +13,7 @@ import ZCocoa
 import RxCocoa
 import RxSwift
 import ZBean
-
+import ZBridge
 public typealias ZContentAction = (_ keyValue: ZKeyValueBean,_ ip: IndexPath) -> ()
 
 @objc (ZContentBridge)

@@ -10,7 +10,7 @@ import Foundation
 import ZBase
 import RxCocoa
 import RxSwift
-
+import ZBridge
 @objc (ZTextEditBridge)
 public final class ZTextEditBridge: ZBaseBridge {
     

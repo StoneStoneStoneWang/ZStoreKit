@@ -16,7 +16,7 @@ import RxSwift
 import RxDataSources
 import ZCocoa
 import ZRealReq
-
+import ZBridge
 public typealias ZCharactersEditSucc = (_ character: ZCircleBean?) -> ()
 
 @objc (ZCharactersEditBridge)

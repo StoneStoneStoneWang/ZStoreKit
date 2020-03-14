@@ -17,6 +17,7 @@ import ZBean
 import ZRealReq
 import ZUpload
 import AVFoundation
+import ZBridge
 
 public typealias ZPublishOperateSucc = (_ value: String) -> ()
 

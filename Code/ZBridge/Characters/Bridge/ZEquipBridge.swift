@@ -15,7 +15,7 @@ import ZCache
 import RxSwift
 import RxDataSources
 import ZCocoa
-
+import ZBridge
 public typealias ZEquipSucc = (_ equips: String) -> ()
 
 @objc (ZEquipBridge)

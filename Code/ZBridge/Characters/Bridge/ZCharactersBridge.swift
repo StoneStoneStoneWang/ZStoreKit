@@ -15,7 +15,7 @@ import RxCocoa
 import RxSwift
 import ZBean
 import ZCache
-
+import ZBridge
 public typealias ZCharactersLoadingStatus = (_ status: Int) -> ()
 
 public typealias ZCharactersInsertStatus = (_ status: Int) -> ()
