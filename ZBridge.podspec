@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBridge"
-  spec.version      = "0.2.6"
+  spec.version      = "0.2.7"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZBridge是oc swift 转换的封装呢
@@ -473,9 +473,9 @@ Pod::Spec.new do |spec|
   #
   # 列表
 #  spec.subspec 'Comment' do |comment|
-#    
+#
 #    comment.subspec 'VM' do |vm|
-#      
+#
 #      vm.source_files = "Code/ZBridge/Comment/VM/*.{swift}"
 #      vm.dependency 'RxCocoa'
 #      vm.dependency 'WLBaseViewModel'
@@ -484,7 +484,7 @@ Pod::Spec.new do |spec|
 #      vm.dependency 'ZApi'
 #      vm.dependency 'ZBean/Comment'
 #    end
-#    
+#
 #    comment.subspec 'Bridge' do |bridge|
 #      bridge.source_files = "Code/ZBridge/Comment/Bridge/*.{swift}"
 #      bridge.dependency 'ZBridge/Comment/VM'
@@ -497,7 +497,7 @@ Pod::Spec.new do |spec|
 #  end
 #  # 列表
 #  spec.subspec 'Content' do |content|
-#    
+#
 #    content.subspec 'VM' do |vm|
 #      vm.source_files = "Code/ZBridge/Content/VM/*.{swift}"
 #      vm.dependency 'RxCocoa'
@@ -505,7 +505,7 @@ Pod::Spec.new do |spec|
 #      vm.dependency 'ZBean/KeyValue'
 #      vm.dependency 'WLBaseResult'
 #    end
-#    
+#
 #    content.subspec 'Bridge' do |bridge|
 #      bridge.source_files = "Code/ZBridge/Content/Bridge/*.{swift}"
 #      bridge.dependency 'ZBridge/Content/VM'
@@ -525,7 +525,6 @@ Pod::Spec.new do |spec|
       vm.source_files = "Code/ZBridge/TextEdit/VM/*.{swift}"
       vm.dependency 'RxCocoa'
       vm.dependency 'WLBaseViewModel'
-      vm.dependency 'ZApi'
       vm.dependency 'WLBaseResult'
     end
     
@@ -533,7 +532,6 @@ Pod::Spec.new do |spec|
       bridge.source_files = "Code/ZBridge/TextEdit/Bridge/*.{swift}"
       bridge.dependency 'ZBridge/TextEdit/VM'
       bridge.dependency 'ZBase'
-      bridge.dependency 'ZHud'
       bridge.dependency 'ZBridge/Base'
     end
   end

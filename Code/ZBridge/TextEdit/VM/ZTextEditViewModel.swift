@@ -8,7 +8,6 @@
 
 import Foundation
 import RxCocoa
-import WLReqKit
 import WLBaseViewModel
 import WLToolsKit
 
