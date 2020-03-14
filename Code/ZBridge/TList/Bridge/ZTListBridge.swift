@@ -12,8 +12,17 @@ import RxDataSources
 import ZCocoa
 import ZBean
 import ZHud
-import ZNoti
 import ZCache
+
+@objc(ZTListActionType)
+public enum ZTListActionType: Int ,Codable {
+    
+    case myCircle = 0
+    
+    case circle = 1
+}
+
+public typealias ZTListAction = (_ action: ZTListActionType ,_ vc: ZTableLoadingViewController ,_ circle: ZCircleBean ,_ ip: IndexPath) -> ()
 
 @objc (ZTListBridge)
 public final class ZTListBridge: ZBaseBridge {
@@ -28,7 +37,7 @@ public final class ZTListBridge: ZBaseBridge {
 }
 extension ZTListBridge {
     
-    @objc public func createTList(_ vc: ZTableLoadingViewController ,isMy: Bool ,tag: String) {
+    @objc public func createTList(_ vc: ZTableLoadingViewController ,isMy: Bool ,tag: String ,tAction: @escaping ZTListAction) {
         
         self.vc = vc
         
@@ -96,7 +105,7 @@ extension ZTListBridge {
             .zip
             .subscribe(onNext: { (type,ip) in
                 
-                ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: isMy ? ZNotiMyCircleItemClick : ZNotiCircleItemClick), andValue: type, andFrom: vc)
+                tAction(isMy ? .myCircle : .circle,vc,type,ip)
                 
             })
             .disposed(by: disposed)
@@ -112,6 +121,15 @@ extension ZTListBridge {
             .rx
             .setDelegate(self)
             .disposed(by: disposed)
+    }
+    
+    @objc func updateCircle(_ circle: ZCircleBean ,ip: IndexPath) {
+        
+        var values = viewModel.output.tableData.value
+        
+        values.replaceSubrange(ip.row..<ip.row+1, with: [circle])
+        
+        viewModel.output.tableData.accept(values)
     }
 }
 
@@ -192,11 +210,11 @@ extension ZTListBridge: UITableViewDelegate {
 }
 extension ZTListBridge {
     
-    @objc public func addBlack(_ OUsEncoded: String,targetEncoded: String ,content: String ,succ: @escaping () -> () ) {
+    @objc public func addBlack(_ OUsEncoded: String,targetEncoded: String ,content: String ,unLogin: @escaping (_ vc: ZBaseViewController) -> (),succ: @escaping () -> () ) {
         
         if !ZAccountCache.default.isLogin() {
             
-            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
+            unLogin(vc)
             
             return
         }
@@ -226,11 +244,11 @@ extension ZTListBridge {
             })
             .disposed(by: disposed)
     }
-    @objc public func focus(_ uid: String ,encode: String ,isFocus: Bool ,succ: @escaping () -> () ) {
+    @objc public func focus(_ uid: String ,encode: String ,isFocus: Bool ,unLogin: @escaping (_ vc: ZBaseViewController) -> (),succ: @escaping () -> () ) {
         
         if !ZAccountCache.default.isLogin() {
             
-            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
+            unLogin(vc)
             
             return
         }
@@ -276,11 +294,11 @@ extension ZTListBridge {
         return circle.toJSON()
     }
     
-    @objc public func like(_ encoded: String,isLike: Bool ,succ: @escaping () -> () ) {
+    @objc public func like(_ encoded: String,isLike: Bool ,unLogin: @escaping (_ vc: ZBaseViewController) -> (),succ: @escaping () -> () ) {
         
         if !ZAccountCache.default.isLogin() {
             
-            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
+            unLogin(vc)
             
             return
         }

@@ -10,7 +10,6 @@ import Foundation
 import WLBaseViewModel
 import RxCocoa
 import RxSwift
-import ZNoti
 import ZBean
 import ZSign
 import ZApi
@@ -129,37 +128,6 @@ extension ZProfileType {
         default: return ""
             
         }
-    }
-    
-    public var notificationName: Notification.Name {
-        
-        var result: String = ""
-        
-        switch self {
-            
-        case .myCircle: result = ZNotiMyCircle
-            
-        case .order: result = ZNotiMyOrder
-            
-        case .about: result = ZNotiAboutUs
-            
-        case .address: result = ZNotiMyAddress
-            
-        case .focus: result = ZNotiFocus
-            
-        case .privacy: result = ZNotiPrivacy
-            
-        case .setting: result = ZNotiSetting
-            
-        case .userInfo: result = ZNotiUserInfo
-            
-        case .characters: result = ZNotiCharacters
-        
-        default: break
-            
-        }
-        
-        return Notification.Name(rawValue: result)
     }
 }
 

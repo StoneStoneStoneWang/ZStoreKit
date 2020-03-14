@@ -45,7 +45,7 @@ extension ZAccountCache {
     
     @objc public func isLogin() -> Bool {
         
-        return !token.isEmpty
+        return !token.isEmpty && token != ""
     }
     
     public func saveAccount(acc: ZAccountBean) -> ZAccountBean {

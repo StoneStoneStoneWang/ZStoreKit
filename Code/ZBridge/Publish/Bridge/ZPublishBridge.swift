@@ -14,7 +14,6 @@ import ZHud
 import RxCocoa
 import RxSwift
 import ZBean
-import ZNoti
 import ZRealReq
 import ZUpload
 import AVFoundation
