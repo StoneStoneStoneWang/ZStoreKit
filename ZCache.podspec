@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZCache"
-  spec.version      = "0.0.2"
+  spec.version      = "0.3.0"
   spec.summary      = "A Lib For cache."
   spec.description  = <<-DESC
   ZCache是user 和account 的封装

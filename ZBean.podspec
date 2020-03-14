@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBean"
-  spec.version      = "0.0.1"
+  spec.version      = "0.2.9"
   spec.summary      = "A Lib For Bean."
   spec.description  = <<-DESC
   ZBean是所有模型的封装
@@ -25,7 +25,6 @@ Pod::Spec.new do |spec|
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
   spec.dependency 'ObjectMapper'
-  spec.dependency 'RxDataSources'
   
   spec.subspec 'Gender' do |gender|
     gender.source_files = "Code/ZBean/Gender/*.{swift}"
@@ -33,7 +32,6 @@ Pod::Spec.new do |spec|
   
   spec.subspec 'Account' do |account|
     account.source_files = "Code/ZBean/Account/*.{swift}"
-    account.dependency 'ZBean/Gender'
   end
   
   spec.subspec 'User' do |user|
@@ -43,14 +41,17 @@ Pod::Spec.new do |spec|
   spec.subspec 'Black' do |black|
     black.source_files = "Code/ZBean/Black/*.{swift}"
     black.dependency 'ZBean/User'
+    black.dependency 'RxDataSources'
   end
   spec.subspec 'Focus' do |focus|
     focus.source_files = "Code/ZBean/Focus/*.{swift}"
     focus.dependency 'ZBean/User'
+    focus.dependency 'RxDataSources'
   end
   
   spec.subspec 'KeyValue' do |keyValue|
     keyValue.source_files = "Code/ZBean/KeyValue/*.{swift}"
+    keyValue.dependency 'RxDataSources'
   end
   
   spec.subspec 'Circle' do |circle|
@@ -58,7 +59,6 @@ Pod::Spec.new do |spec|
     circle.dependency 'ZBean/KeyValue'
     circle.dependency 'ZBean/User'
     circle.dependency 'WLToolsKit/JsonCast'
-    
   end
   
   spec.subspec 'Commodity' do |commodity|
@@ -70,14 +70,17 @@ Pod::Spec.new do |spec|
   spec.subspec 'Comment' do |comment|
     comment.source_files = "Code/ZBean/Comment/*.{swift}"
     comment.dependency 'ZBean/User'
+    comment.dependency 'RxDataSources'
   end
   
   spec.subspec 'Area' do |area|
     area.source_files = "Code/ZBean/Area/*.{swift}"
+    area.dependency 'RxDataSources'
   end
   
   spec.subspec 'Address' do |address|
     address.source_files = "Code/ZBean/Address/*.{swift}"
+    address.dependency 'RxDataSources'
   end
   
 end
