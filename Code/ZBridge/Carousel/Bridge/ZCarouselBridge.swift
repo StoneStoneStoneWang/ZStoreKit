@@ -88,8 +88,19 @@ extension ZCarouselBridge {
             
             viewModel.output.currentPage.bind(to: pageControl.rx.currentPage).disposed(by: disposed)
             
+            var mutable: [String] = []
+            
+            for _ in 0..<999 {
+                
+                mutable += images
+            }
+            
+            viewModel.output.tableData.accept(mutable)
+            
             vc.collectionView.rx.setDelegate(self).disposed(by: disposed)
         }
+        
+        
     }
 }
 extension ZCarouselBridge: UICollectionViewDelegate {

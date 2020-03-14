@@ -107,56 +107,33 @@ extension ZCommentBridge {
             .setDelegate(self)
             .disposed(by: disposed)
     }
-    
-    @objc public func addComment(_ encoded: String,content: String ,succ: @escaping () -> () ) {
+    @objc public func addComment(_ comment: ZCommentBean) {
         
-        ZHudUtil.show(withStatus: "发表评论中....")
+        var value = self.viewModel.output.tableData.value
         
-        ZCommentViewModel
-            .addComment(encoded, content: content)
-            .drive(onNext: { [unowned self] (result) in
-                
-                ZHudUtil.pop()
-                
-                switch result {
-                case .operation(let comment):
-                    
-                    var value = self.viewModel.output.tableData.value
-                    
-                    if value.last!.type == .empty {
-                        
-                        value.removeLast()
-                        
-                        value.insert(comment as! ZCommentBean, at: 2)
-                        
-                        self.viewModel.output.tableData.accept(value)
-                        
-                    } else if value.last!.type == .failed {
-                        
-                        self.vc.tableView.mj_header!.beginRefreshing()
-                        
-                    } else {
-                        
-                        value.insert(comment as! ZCommentBean, at: 2)
-                        
-                        self.viewModel.output.tableData.accept(value)
-                    }
-                    
-                    succ()
-                    
-                    self.vc.tableView.scrollsToTop = true
-                    
-                    ZHudUtil.showInfo("发表评论成功!")
-                    
-                case .failed(let msg):
-                    
-                    ZHudUtil.showInfo(msg)
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposed)
+        if value.last!.type == .empty {
+            
+            value.removeLast()
+            
+            value.insert(comment, at: 2)
+            
+            self.viewModel.output.tableData.accept(value)
+            
+        } else if value.last!.type == .failed {
+            
+            self.vc.tableView.mj_header!.beginRefreshing()
+            
+        } else {
+            
+            value.insert(comment , at: 2)
+            
+            self.viewModel.output.tableData.accept(value)
+        }
+        
+        self.vc.tableView.scrollsToTop = true
+
     }
+
 }
 
 extension ZCommentBridge: UITableViewDelegate {

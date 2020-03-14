@@ -223,12 +223,4 @@ struct ZCommentViewModel: WLBaseViewModel {
         
         self.output = output
     }
-    
-    static func addComment(_ encoded: String,content: String) -> Driver<WLBaseResult> {
-        
-        return onUserDictResp(ZUserApi.addComment(encoded, content: content, tablename: "CircleFriends", type: "0"))
-            .mapObject(type: ZCommentBean.self)
-            .map({ WLBaseResult.operation($0) })
-            .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
-    }
 }

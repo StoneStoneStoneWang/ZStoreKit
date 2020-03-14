@@ -43,7 +43,7 @@ public final class ZPublishViewModel: WLBaseViewModel {
         
         let completeTaps: Signal<Void>
         
-        let tableData: BehaviorRelay<[ZKeyValueBean]> = BehaviorRelay<[ZKeyValueBean]>(value: [])
+        let values: BehaviorRelay<[ZKeyValueBean]> = BehaviorRelay<[ZKeyValueBean]>(value: [])
     }
     
     public struct WLOutput {
@@ -53,6 +53,8 @@ public final class ZPublishViewModel: WLBaseViewModel {
         let completing: Driver<Void>
         /* 完成结果 */
         let completed: Driver<WLBaseResult>
+        
+        let tableData: BehaviorRelay<[ZKeyValueBean]> = BehaviorRelay<[ZKeyValueBean]>(value: [])
     }
     
     public init(_ input: WLInput ,type: ZPublishType) {
@@ -63,7 +65,7 @@ public final class ZPublishViewModel: WLBaseViewModel {
         
         let completing = input.completeTaps.flatMap { Driver.just($0) }
         
-        let combine = Driver.combineLatest(input.title, input.tableData.asDriver())
+        let combine = Driver.combineLatest(input.title, input.values.asDriver())
         
         let completed: Driver<WLBaseResult> = input
             .completeTaps
@@ -105,6 +107,8 @@ public final class ZPublishViewModel: WLBaseViewModel {
         }
         
         self.output = WLOutput(zip: zip, completing: completing, completed: completed)
+        
+        self.output.tableData.accept(input.values.value)
     }
 }
 
@@ -119,10 +123,11 @@ extension ZPublishViewModel {
     
     public func removeContent(_ idx: Int) {
         
-        var value = input.tableData.value
+        var value = input.values.value
         
         value.remove(at: idx)
         
-        input.tableData.accept(value)
+        input.values.accept(value)
+    
     }
 }

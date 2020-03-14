@@ -1,8 +1,8 @@
 //
-//  ZCharactersBridge.swift
+//  ZAddressBridge.swift
 //  ZBridge
 //
-//  Created by three stone 王 on 2020/3/4.
+//  Created by three stone 王 on 2020/3/13.
 //  Copyright © 2020 three stone 王. All rights reserved.
 //
 
@@ -17,40 +17,38 @@ import ZBean
 import ZNoti
 import ZCache
 
-public typealias ZCharactersLoadingStatus = (_ status: Int) -> ()
+public typealias ZAddressLoadingStatus = (_ status: Int) -> ()
 
-public typealias ZCharactersInsertStatus = (_ status: Int) -> ()
+public typealias ZAddressAccessoryBlock = (_ ip: IndexPath ,_ circle: ZAddressBean) -> ()
 
-public typealias ZCharactersAccessoryBlock = (_ ip: IndexPath ,_ circle: ZCircleBean) -> ()
-
-@objc (ZCharactersBridge)
-public final class ZCharactersBridge: ZBaseBridge {
+@objc (ZAddressBridge)
+public final class ZAddressBridge: ZBaseBridge {
     
-    typealias Section = ZAnimationSetionModel<ZCircleBean>
+    typealias Section = ZAnimationSetionModel<ZAddressBean>
     
     var dataSource: RxTableViewSectionedAnimatedDataSource<Section>!
     
-    var viewModel: ZCharactersViewModel!
+    var viewModel: ZAddressViewModel!
     
     weak var vc: ZTableLoadingViewController!
 }
 
-extension ZCharactersBridge {
+extension ZAddressBridge {
     
-    @objc public func createCharacters(_ vc: ZTableLoadingViewController ,status: @escaping ZCharactersLoadingStatus ,accessoryBlock: @escaping ZCharactersAccessoryBlock) {
+    @objc public func createCharacters(_ vc: ZTableLoadingViewController ,status: @escaping ZAddressLoadingStatus ,accessoryBlock: @escaping ZAddressAccessoryBlock) {
         
         if let addItem = vc.view.viewWithTag(301) as? UIButton {
             
             self.vc = vc
             
-            let input = ZCharactersViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZCircleBean.self),
+            let input = ZAddressViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZAddressBean.self),
                                                      itemSelect: vc.tableView.rx.itemSelected,
                                                      headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver(),
                                                      footerRefresh: vc.tableView.mj_footer!.rx.refreshing.asDriver(),
                                                      itemAccessoryButtonTapped: vc.tableView.rx.itemAccessoryButtonTapped.asDriver() ,
                                                      addItemTapped: addItem.rx.tap.asSignal())
             
-            viewModel = ZCharactersViewModel(input, disposed: disposed)
+            viewModel = ZAddressViewModel(input, disposed: disposed)
             
             let dataSource = RxTableViewSectionedAnimatedDataSource<Section>(
                 animationConfiguration: AnimationConfiguration(insertAnimation: .fade, reloadAnimation: .fade, deleteAnimation: .left),
@@ -150,40 +148,36 @@ extension ZCharactersBridge {
         }
     }
     
-    @objc public func insertCharacters(_ characters: ZCircleBean ,status: @escaping ZCharactersInsertStatus ) {
+    @objc public func insertAddress(_ address: ZAddressBean ) {
         
         var values = viewModel.output.tableData.value
         
-        values.insert(characters, at: 0)
+        values.insert(address, at: 0)
         
         if values.isEmpty {
             
-            status(0)
-            
             self.vc.tableViewEmptyHidden()
-        } else {
-            
-            status(1)
         }
         
         viewModel.output.tableData.accept(values)
     }
-    @objc public func updateCharacters(_ characters: ZCircleBean ,ip: IndexPath) {
+    
+    @objc public func updateAddress(_ address: ZAddressBean ,ip: IndexPath) {
         
         var values = viewModel.output.tableData.value
         
-        values.replaceSubrange(ip.row..<ip.row+1, with: [characters])
+        values.replaceSubrange(ip.row..<ip.row+1, with: [address])
         
         viewModel.output.tableData.accept(values)
         
     }
     
 }
-extension ZCharactersBridge: UITableViewDelegate {
+extension ZAddressBridge: UITableViewDelegate {
     
-    @objc public func converToCircle(_ circleJson: [String : Any]) -> ZCircleBean {
+    @objc public func converToCircle(_ circleJson: [String : Any]) -> ZAddressBean {
         
-        return ZCircleBean(JSON: circleJson)!
+        return ZAddressBean(JSON: circleJson)!
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -192,15 +186,9 @@ extension ZCharactersBridge: UITableViewDelegate {
         
         return vc.caculate(forCell: datasource[indexPath], for: indexPath)
     }
-    
-    @objc public func converToJson(_ circle: ZCircleBean) -> [String: Any] {
-        
-        return circle.toJSON()
-    }
-    
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let delete = UITableViewRowAction(style: .destructive, title: "移除") { [weak self] (a, ip) in
+        let delete = UITableViewRowAction(style: .destructive, title: "删除") { [weak self] (a, ip) in
             
             guard let `self` = self else { return }
             
@@ -216,39 +204,41 @@ extension ZCharactersBridge: UITableViewDelegate {
                 
                 ZHudUtil.show(withStatus: "移除角色中...")
                 
-                ZCharactersViewModel
-                    .removeMyCharacters(type.encoded)
-                    .drive(onNext: { [weak self] (result) in
-                        
-                        guard let `self` = self else { return }
-                        switch result {
-                        case .ok:
-                            
-                            ZHudUtil.pop()
-                            
-                            ZHudUtil.showInfo("移除角色成功")
-                            
-                            var value = self.viewModel.output.tableData.value
-                            
-                            value.remove(at: ip.row)
-                            
-                            self.viewModel.output.tableData.accept(value)
-                            
-                            if value.isEmpty {
-                                
-                                self.vc.tableViewEmptyShow()
-                            }
-                            
-                        case .failed:
-                            
-                            ZHudUtil.pop()
-                            
-                            ZHudUtil.showInfo("移除当前角色失败")
-                        default: break;
-                            
-                        }
-                    })
-                    .disposed(by: self.disposed)
+//                ZFocusViewModel
+//                    .removeFocus(type.users.encoded, encode: type.encoded)
+//                    .drive(onNext: { [weak self] (result) in
+//
+//                        guard let `self` = self else { return }
+//                        switch result {
+//                        case .ok:
+//
+//                            ZHudUtil.pop()
+//
+//                            ZHudUtil.showInfo("移除\(type.users.nickname)成功")
+//
+//                            var value = self.viewModel.output.tableData.value
+//
+//                            value.remove(at: ip.section)
+//
+//                            self.viewModel.output.tableData.accept(value)
+//
+//                            if value.isEmpty {
+//
+//                                self.vc.tableViewEmptyShow()
+//                            }
+//
+//                            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiRemoveFocus), andValue: nil, andFrom: self.vc)
+//
+//                        case .failed:
+//
+//                            ZHudUtil.pop()
+//
+//                            ZHudUtil.showInfo("移除\(type.users.nickname)失败")
+//                        default: break;
+//
+//                        }
+//                    })
+//                    .disposed(by: self.disposed)
             }
             
             alert.addAction(cancel)

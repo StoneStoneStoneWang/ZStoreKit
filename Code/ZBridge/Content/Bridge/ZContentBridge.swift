@@ -14,8 +14,8 @@ import ZHud
 import RxCocoa
 import RxSwift
 import ZBean
-import ZNoti
-import ZCache
+
+public typealias ZContentAction = (_ keyValue: ZKeyValueBean,_ ip: IndexPath) -> ()
 
 @objc (ZContentBridge)
 public final class ZContentBridge: ZBaseBridge {
@@ -28,15 +28,15 @@ public final class ZContentBridge: ZBaseBridge {
     
     weak var vc: ZTableNoLoadingViewConntroller!
 }
+
 extension ZContentBridge {
     
-    @objc public func createContent(_ vc: ZTableNoLoadingViewConntroller ,circleBean: ZCircleBean ,type: ZContentType) {
+    @objc public func createContent(_ vc: ZTableNoLoadingViewConntroller ,circleBean: ZCircleBean ,contentAction: @escaping ZContentAction) {
         
         self.vc = vc
         
         let input = ZContentViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZKeyValueBean.self),
                                               itemSelect: vc.tableView.rx.itemSelected,
-                                              type: type,
                                               circle: circleBean)
         
         viewModel = ZContentViewModel(input)
@@ -59,7 +59,7 @@ extension ZContentBridge {
             .zip
             .subscribe(onNext: { (type,ip) in
                 
-                ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiCircleImageClick), andValue: circleBean, andFrom: vc)
+                contentAction(type,ip)
             })
             .disposed(by: disposed)
         
@@ -83,111 +83,5 @@ extension ZContentBridge: UITableViewDelegate {
         guard let datasource = dataSource else { return 0}
         
         return vc.caculate(forCell: datasource[indexPath], for: indexPath)
-    }
-    @objc public func addBlack(_ OUsEncoded: String,targetEncoded: String ,content: String ,succ: @escaping () -> () ) {
-        
-        if !ZAccountCache.default.isLogin() {
-            
-            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
-            
-            return
-        }
-        
-        ZHudUtil.show(withStatus: "添加黑名单中...")
-        
-        ZContentViewModel
-            .addBlack(OUsEncoded, targetEncoded: targetEncoded, content: content)
-            .drive(onNext: { (result) in
-                
-                ZHudUtil.pop()
-                
-                switch result {
-                case .ok(let msg):
-                    
-                    succ()
-                    
-                    self.vc.tableView.mj_header?.beginRefreshing()
-                    
-                    ZHudUtil.showInfo(msg)
-                case .failed(let msg):
-                    
-                    ZHudUtil.showInfo(msg)
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposed)
-    }
-    @objc public func focus(_ uid: String ,encode: String ,isFocus: Bool ,succ: @escaping () -> () ) {
-        
-        if !ZAccountCache.default.isLogin() {
-            
-            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
-            
-            return
-        }
-        
-        ZHudUtil.show(withStatus: isFocus ? "取消关注中..." : "关注中...")
-        
-        ZContentViewModel
-            .focus(uid, encode: encode)
-            .drive(onNext: { (result) in
-                
-                ZHudUtil.pop()
-                
-                switch result {
-                case .ok:
-                    
-                    succ()
-                    
-                    ZHudUtil.showInfo(isFocus ? "取消关注成功" : "关注成功")
-                    
-                case .failed(let msg):
-                    
-                    ZHudUtil.showInfo(msg)
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposed)
-        
-    }
-    
-    @objc public func converToJson(_ circle: ZCircleBean) -> [String: Any] {
-        
-        return circle.toJSON()
-    }
-    
-    @objc public func like(_ encoded: String,isLike: Bool ,succ: @escaping () -> () ) {
-        
-        if !ZAccountCache.default.isLogin() {
-            
-            ZNotiConfigration.postNotification(withName: NSNotification.Name(rawValue: ZNotiUnLogin), andValue: nil, andFrom: vc)
-            
-            return
-        }
-        
-        ZHudUtil.show(withStatus: isLike ? "取消点赞中..." : "点赞中...")
-        
-        ZContentViewModel
-            .like(encoded, isLike: !isLike)
-            .drive(onNext: { [unowned self] (result) in
-                
-                ZHudUtil.pop()
-                
-                switch result {
-                case .ok(let msg):
-                    
-                    succ()
-                    
-                    ZHudUtil.showInfo(msg)
-                case .failed(let msg):
-                    
-                    ZHudUtil.showInfo(msg)
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposed)
     }
 }

@@ -21,6 +21,8 @@ import AVFoundation
 
 public typealias ZPublishOperateSucc = (_ value: String) -> ()
 
+public typealias ZPublishActionSucc = (_ tag: String ,_ circle: ZCircleBean) -> ()
+
 @objc (ZPublishBridge)
 public final class ZPublishBridge: ZBaseBridge {
     
@@ -35,7 +37,7 @@ public final class ZPublishBridge: ZBaseBridge {
 
 extension ZPublishBridge {
     
-    @objc public func createPublish(_ vc: ZTableNoLoadingViewConntroller ,type: ZPublishType,pTag: String,tf: UITextField ) {
+    @objc public func createPublish(_ vc: ZTableNoLoadingViewConntroller ,type: ZPublishType,pTag: String,tf: UITextField ,pubAction: @escaping ZPublishActionSucc) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
@@ -54,7 +56,7 @@ extension ZPublishBridge {
                 canEditRowAtIndexPath: { _,_ in return true })
             
             viewModel
-                .input
+                .output
                 .tableData
                 .asDriver()
                 .map({ [Section(model: (), items: $0)]  })
@@ -106,7 +108,7 @@ extension ZPublishBridge {
                         
                         ZHudUtil.showInfo("发布成功")
                         
-                        ZNotiConfigration.postNotification(withName: NSNotification.Name(ZNotiCirclePublishSucc), andValue: ["tag": pTag,"circle": obj], andFrom: vc)
+                        pubAction(pTag,obj as! ZCircleBean)
                         
                         vc.dismiss(animated: true, completion: nil)
                         
@@ -119,23 +121,23 @@ extension ZPublishBridge {
     
     @objc public func removeContent(_ keyValue: ZKeyValueBean) {
         
-        var value = viewModel.input.tableData.value
+        var value = viewModel.output.tableData.value
         
         if let idx = value.firstIndex(of: keyValue) {
             
             value.remove(at: idx)
         }
         
-        viewModel.input.tableData.accept(value)
+        viewModel.input.values.accept(value)
     }
     
     @objc public func addContent(_ keyValue: ZKeyValueBean) {
         
-        var value = viewModel.input.tableData.value
+        var value = viewModel.output.tableData.value
         
         value += [keyValue]
         
-        viewModel.input.tableData.accept(value)
+        viewModel.input.values.accept(value)
     }
     @objc public func replaceContent(_ keyValue: ZKeyValueBean) {
         
