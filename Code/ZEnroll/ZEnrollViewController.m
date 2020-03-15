@@ -19,8 +19,6 @@
 
 @property (nonatomic ,strong) WLBaseTextField *subTitleLabel;
 
-@property (nonatomic ,strong) ZCharactersEditBean *characterEdit;
-
 @end
 
 
@@ -55,16 +53,15 @@
     }
     return _subTitleLabel;
 }
+- (void)setEnrollBean:(ZEnrollBean *)enrollBean {
 
-- (void)setCharacterEdit:(ZEnrollBean *)characterEdit {
-    
-    self.titleLabel.text = characterEdit.title;
+    self.titleLabel.text = enrollBean.title;
     
     self.bottomLineType = ZBottomLineTypeNormal;
     
-    self.subTitleLabel.text = characterEdit.subtitle;
+    self.subTitleLabel.text = enrollBean.subtitle;
     
-    self.subTitleLabel.placeholder = characterEdit.placeholder;
+    self.subTitleLabel.placeholder = enrollBean.placeholder;
     
     self.subTitleLabel.userInteractionEnabled = false;
     
@@ -74,11 +71,11 @@
     
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    if (characterEdit.type == ZEnrollTypeCharacter) {
+    if (enrollBean.type == ZEnrollTypeCharacter) {
         
-        if (![characterEdit.subtitle isEqualToString:@""]) {
+        if (![enrollBean.subtitle isEqualToString:@""]) {
             
-            NSData *data = [characterEdit.subtitle dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *data = [enrollBean.subtitle dataUsingEncoding:NSUTF8StringEncoding];
             
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
             
@@ -100,6 +97,7 @@
         
     }
 }
+
 
 - (void)commitInit {
     [super commitInit];
@@ -211,7 +209,7 @@
         cell = [[ZEnrollEditTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-    cell.characterEdit = data;
+    cell.enrollBean = data;
     
     return cell;
     

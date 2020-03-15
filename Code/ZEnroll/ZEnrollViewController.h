@@ -18,6 +18,8 @@ typedef void(^ZEnrollCharacterSelectedBlock)(ZEnrollEditActionType type,ZBaseVie
 
 @interface ZEnrollEditTableViewCell : ZBaseTableViewCell
 
+@property (nonatomic ,strong) ZEnrollBean *enrollBean;
+
 @end
 
 @interface ZEnrollViewController : ZTableNoLoadingViewConntroller
