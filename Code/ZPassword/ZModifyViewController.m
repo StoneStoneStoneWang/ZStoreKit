@@ -24,6 +24,7 @@
 
 @property (nonatomic ,strong) UIButton *completeItem;
 
+@property (nonatomic ,copy) ZModifyPwdBlock block;
 #if ZLoginFormOne
 
 @property (nonatomic ,strong) UIView *topView;
@@ -39,6 +40,18 @@
 
 @implementation ZModifyViewController
 
++ (instancetype)createPwdWithBlock:(ZModifyPwdBlock)block {
+    
+    return [[self alloc] initWithBlock:block];
+}
+- (instancetype)initWithBlock:(ZModifyPwdBlock)block {
+    
+    if (self = [super init]) {
+        
+        self.block = block;
+    }
+    return self;
+}
 - (WLPasswordImageTextFiled *)oldpassword {
     
     if (!_oldpassword) {
@@ -299,7 +312,12 @@
     
     self.bridge = [ZModifyPwdBridge new];
     
-    [self.bridge configViewModel:self];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge configViewModel:self pwdAction:^(ZBaseViewController * _Nonnull vc) {
+        
+        weakSelf.block(vc);
+    }];
 }
 
 - (BOOL)canPanResponse {

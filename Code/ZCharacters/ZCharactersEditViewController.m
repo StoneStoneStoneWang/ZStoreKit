@@ -10,7 +10,7 @@
 #import "ZCharacterNameViewController.h"
 #import "ZEquipViewController.h"
 @import SToolsKit;
-@import ZBridge;
+@import ZActionBridge;
 @import Masonry;
 @import JXTAlertManager;
 @import ZTField;

@@ -8,9 +8,15 @@
 
 #import <ZTransition/ZTransition.h>
 #import "ZFragmentConfig.h"
+#import "ZFragmentMix.h"
+@import ZBridge;
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^ZRegBlock)(ZRegActionType type ,ZBaseViewController *vc);
+
 @interface ZRegViewController : ZTViewController
+
++ (instancetype)createRegWithBlock:(ZRegBlock) block;
 
 @end
 

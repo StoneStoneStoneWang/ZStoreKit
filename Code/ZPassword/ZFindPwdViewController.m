@@ -24,6 +24,7 @@
 
 @property (nonatomic ,strong) UIButton *completeItem;
 
+@property (nonatomic ,copy) ZFindPwdBlock block;
 #if ZLoginFormOne
 
 @property (nonatomic ,strong) UIView *topView;
@@ -39,6 +40,18 @@
 
 @implementation ZFindPwdViewController
 
++ (instancetype)createPwdWithBlock:(ZFindPwdBlock)block {
+    
+    return [[self alloc] initWithBlock:block];
+}
+- (instancetype)initWithBlock:(ZFindPwdBlock)block {
+    
+    if (self = [super init]) {
+        
+        self.block = block;
+    }
+    return self;
+}
 - (WLLeftImageTextField *)phone {
     
     if (!_phone) {
@@ -317,7 +330,12 @@
     
     self.bridge = [ZFindPwdBridge new];
     
-    [self.bridge configViewModel:self];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge configViewModel:self pwdAction:^(ZBaseViewController * _Nonnull vc) {
+       
+        weakSelf.block(vc);
+    }];
     
 }
 

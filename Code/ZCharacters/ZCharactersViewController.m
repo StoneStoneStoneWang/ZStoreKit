@@ -10,7 +10,7 @@
 @import SToolsKit;
 #import "ZCharactersTableViewCell.h"
 #import "ZCharactersEditViewController.h"
-@import ZBridge;
+@import ZActionBridge;
 @import Masonry;
 @import ZNoti;
 
@@ -89,25 +89,8 @@
 - (void)configOwnSubViews {
     
     [self.tableView registerClass:[ZCharactersTableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCharactersAddTap) name:ZNotiCharacterAddClick object:nil ];
 }
 
-
-- (void)onCharactersAddTap {
-    
-    __weak typeof(self) weakSelf = self;
-    
-    ZCharactersEditViewController *edit = [ZCharactersEditViewController creatCharactersEdit:nil andEditSucc:^(ZCircleBean * _Nonnull circle) {
-        
-        [weakSelf.bridge insertCharacters:circle status:^(NSInteger status) {
-            
-            
-        }];
-    }];
-    
-    [self.navigationController pushViewController:edit animated:true];
-}
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
@@ -204,13 +187,25 @@
             }];
         }
     } accessoryBlock:^(NSIndexPath * _Nonnull ip, ZCircleBean * _Nonnull circle) {
-       
+        
         __weak typeof(self) weakSelf = self;
         
         ZCharactersEditViewController *edit = [ZCharactersEditViewController creatCharactersEdit:circle andEditSucc:^(ZCircleBean * _Nonnull result) {
             
             [weakSelf.bridge updateCharacters:result ip:ip];
+            
+        }];
         
+        [self.navigationController pushViewController:edit animated:true];
+        
+    } addAction:^(ZBaseViewController * _Nonnull vc) {
+        
+        ZCharactersEditViewController *edit = [ZCharactersEditViewController creatCharactersEdit:nil andEditSucc:^(ZCircleBean * _Nonnull circle) {
+            
+            [weakSelf.bridge insertCharacters:circle status:^(NSInteger status) {
+                
+                
+            }];
         }];
         
         [self.navigationController pushViewController:edit animated:true];

@@ -7,10 +7,16 @@
 //
 
 #import <ZTable/ZTable.h>
+#import "ZFragmentMix.h"
+#import "ZFragmentConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@import ZBridge;
 
+typedef void(^ZProfileBlock)(ZProfileActionType type ,ZBaseViewController *vc);
 @interface ZProfileViewController : ZTableNoLoadingViewConntroller
+
++ (instancetype)createProfileWithBlock:(ZProfileBlock) block;
 
 @end
 

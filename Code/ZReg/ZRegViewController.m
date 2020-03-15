@@ -26,6 +26,7 @@
 
 @property (nonatomic ,strong) UIButton *backLoginItem;
 
+@property (nonatomic ,copy) ZRegBlock block;
 #if ZLoginFormOne
 
 @property (nonatomic ,strong) UIView *topView;
@@ -53,6 +54,18 @@
 #endif
 }
 
++ (instancetype)createRegWithBlock:(ZRegBlock)block {
+    
+    return [[self alloc] initWithBlock:block];
+}
+- (instancetype)initWithBlock:(ZRegBlock)block {
+    
+    if (self = [super init]) {
+     
+        self.block = block;
+    }
+    return self;
+}
 - (WLLeftImageTextField *)phone {
     
     if (!_phone) {
@@ -373,7 +386,12 @@
     
     self.bridge = [ZRegBridge new];
     
-    [self.bridge configViewModel:self];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge configViewModel:self regAction:^(enum ZRegActionType type, ZBaseViewController * _Nonnull vc) {
+        
+        weakSelf.block(type, vc);
+    }];
 }
 
 - (BOOL)canPanResponse {

@@ -7,7 +7,7 @@
 //
 
 #import "ZCharacterNameViewController.h"
-@import ZBridge;
+@import ZActionBridge;
 @import ZTField;
 @import SToolsKit;
 @import Masonry;

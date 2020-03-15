@@ -10,13 +10,11 @@
 #import "ZAboutTableViewCell.h"
 #import "ZAboutTableHeaderView.h"
 @import ZBridge;
-@import ZNoti;
 @import SToolsKit;
 
 @interface ZAboutViewController ()
 
 @property (nonatomic ,strong) ZAboutBridge *bridge;
-
 
 @end
 

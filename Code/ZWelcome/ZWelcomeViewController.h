@@ -7,13 +7,13 @@
 //
 @import ZCollection;
 #import "ZFragmentConfig.h"
-
+#import "ZFragmentMix.h"
 NS_ASSUME_NONNULL_BEGIN
 
-
+typedef void(^ZWelcomeSkipBlock)(ZBaseViewController *vc);
 @interface ZWelcomeViewController : ZCollectionNoLoadingViewController
 
-+ (instancetype)createWelcome;
++ (instancetype)createWelcomeWithSkipBlock:(ZWelcomeSkipBlock )block;
 
 @end
 

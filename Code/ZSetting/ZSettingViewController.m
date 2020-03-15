@@ -15,10 +15,23 @@
 
 @property (nonatomic ,strong) ZSettingBridge *bridge;
 
+@property (nonatomic ,copy) ZSettingBlock block;
 @end
 
 @implementation ZSettingViewController
 
++ (instancetype)createSettingWithBlock:(ZSettingBlock)block {
+    
+    return [[self alloc] initWithBlock:block];
+}
+- (instancetype)initWithBlock:(ZSettingBlock)block {
+    
+    if (self = [super init]) {
+        
+        self.block = block;
+    }
+    return self;
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -45,7 +58,12 @@
     
     self.bridge = [ZSettingBridge new];
     
-    [self.bridge createSetting:self];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge createSetting:self settingAction:^(enum ZSettingActionType type, ZBaseViewController * _Nonnull vc) {
+        
+        weakSelf.block(type, vc);
+    }];
 }
 
 - (void)configNaviItem {

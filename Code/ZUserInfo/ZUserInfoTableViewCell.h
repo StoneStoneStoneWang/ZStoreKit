@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZFragmentMix.h"
+#import "ZFragmentConfig.h"
 @import ZBridge;
 @import ZTable;
 

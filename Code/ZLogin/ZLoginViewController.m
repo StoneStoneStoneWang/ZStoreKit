@@ -39,9 +39,23 @@
 #else
 
 #endif
+
+@property (nonatomic ,copy) ZLoginBlock block;
 @end
 @implementation ZLoginViewController
 
++ (instancetype)createLoginWithBlock:(ZLoginBlock)block {
+    
+    return [[self alloc] initWithBlock:block];
+}
+- (instancetype)initWithBlock:(ZLoginBlock)block  {
+    
+    if (self = [super init]) {
+        
+        self.block = block;
+    }
+    return self;
+}
 - (WLLeftImageTextField *)phone {
     
     if (!_phone) {
@@ -362,7 +376,12 @@
     
     self.bridge = [ZLoginBridge new];
     
-    [self.bridge configViewModel:self];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge configViewModel:self loginAction:^(enum ZLoginActionType type, ZBaseViewController * _Nonnull vc) {
+        
+        weakSelf.block(type, vc);
+    }];
 }
 
 @end

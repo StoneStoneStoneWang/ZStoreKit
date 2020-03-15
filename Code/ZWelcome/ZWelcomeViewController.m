@@ -20,15 +20,25 @@
 
 @property (nonatomic ,strong) ZWelcomeBridge *bridge;
 
+@property (nonatomic ,copy) ZWelcomeSkipBlock block;
+
 @end
 
 @implementation ZWelcomeViewController
 
-+ (instancetype)createWelcome {
++ (instancetype)createWelcomeWithSkipBlock:(ZWelcomeSkipBlock)block {
     
-    return [[self alloc] init];
+    return [[self alloc] initWithSkipBlock:block];
 }
 
+- (instancetype)initWithSkipBlock:(ZWelcomeSkipBlock)block {
+    
+    if (self = [super init]) {
+        
+        self.block = block;
+    }
+    return self;
+}
 - (UIButton *)skipItem {
     
     if (!_skipItem) {
@@ -160,18 +170,17 @@
     
     self.bridge = bridge;
     
-    
 #if ZWelcomeFormOne
-    [bridge configViewModel:self
-                welcomeImgs:ZWelcomeImgs
-              canPageHidden:true];
+    __weak typeof(self) weakSelf = self;
+    [bridge configViewModel:self welcomeImgs:ZWelcomeImgs canPageHidden:true skipAction:^(ZBaseViewController * _Nonnull vc) {
+        weakSelf.block(vc);
+    }];
 #elif ZWelcomeFormTwo
+    __weak typeof(self) weakSelf = self;
     
-    [bridge configViewModel:self
-                welcomeImgs:ZWelcomeImgs
-              canPageHidden:false];
-    
-#else
+    [bridge configViewModel:self welcomeImgs:ZWelcomeImgs canPageHidden:false skipAction:^(ZBaseViewController * _Nonnull vc) {
+        weakSelf.block(vc);
+    }];
     
 #endif
     

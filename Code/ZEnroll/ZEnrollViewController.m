@@ -1,29 +1,31 @@
 //
-//  ZEquipViewController.m
-//  ZFragment
+//  ZEnrollViewController.m
+//  龙卷风竞技
 //
-//  Created by three stone 王 on 2020/3/10.
+//  Created by three stone 王 on 2020/3/12.
 //  Copyright © 2020 three stone 王. All rights reserved.
 //
 
-#import "ZEquipViewController.h"
-@import ZActionBridge;
-@import ZTField;
+#import "ZEnrollViewController.h"
 @import SToolsKit;
+@import ZActionBridge;
 @import Masonry;
 @import JXTAlertManager;
+@import ZTField;
+//@import ZCharacters;
 
-@interface ZEquipTableViewCell ()
-
-@property (nonatomic ,strong) ZEquipBean *equipBean;
+@interface ZEnrollEditTableViewCell ()
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 
 @property (nonatomic ,strong) WLBaseTextField *subTitleLabel;
 
+@property (nonatomic ,strong) ZCharactersEditBean *characterEdit;
+
 @end
 
-@implementation ZEquipTableViewCell
+
+@implementation ZEnrollEditTableViewCell
 
 - (UILabel *)titleLabel {
     
@@ -55,39 +57,48 @@
     return _subTitleLabel;
 }
 
-- (void)setEquipBean:(ZEquipBean *)equipBean {
+- (void)setCharacterEdit:(ZEnrollBean *)characterEdit {
     
-    self.titleLabel.text = equipBean.title;
+    self.titleLabel.text = characterEdit.title;
     
     self.bottomLineType = ZBottomLineTypeNormal;
     
-    self.subTitleLabel.text = equipBean.subtitle;
+    self.subTitleLabel.text = characterEdit.subtitle;
     
-    self.subTitleLabel.placeholder = equipBean.placeholder;
+    self.subTitleLabel.placeholder = characterEdit.placeholder;
     
     self.subTitleLabel.userInteractionEnabled = false;
     
-    switch (equipBean.type) {
-        case ZEquipTypeSpace:
+    self.backgroundColor = [UIColor whiteColor];
+    
+    self.selectionStyle = UITableViewCellSelectionStyleDefault;
+    
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    if (characterEdit.type == ZEnrollTypeCharacter) {
+        
+        if (![characterEdit.subtitle isEqualToString:@""]) {
             
-            self.backgroundColor = [UIColor clearColor];
+            NSData *data = [characterEdit.subtitle dataUsingEncoding:NSUTF8StringEncoding];
             
-            self.selectionStyle = UITableViewCellSelectionStyleNone;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
             
-            self.accessoryType = UITableViewCellAccessoryNone;
+            NSString *contentString = json[@"content"];
             
-            break;
+            NSArray *contentJson = [NSJSONSerialization JSONObjectWithData:[contentString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
             
-        default:
+            for (NSDictionary *j in contentJson) {
+                
+                if ([j[@"type"] isEqualToString:@"title"]) {
+                    
+                    self.subTitleLabel.text = j[@"value"];
+                }
+            }
             
-            self.backgroundColor = [UIColor whiteColor];
-            
-            self.selectionStyle = UITableViewCellSelectionStyleDefault;
-            
-            self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
-            
-            break;
+            NSLog(@"%@",contentJson);
+        }
+        
+        
     }
 }
 
@@ -124,19 +135,33 @@
 
 @end
 
-@interface ZEquipViewController()
+@interface ZEnrollViewController ()
 
-@property (nonatomic ,copy) ZCharacterEquipSucc equipsBlock;
+@property (nonatomic ,copy) ZEnrollEditBlock block;
 
-@property (nonatomic ,copy) NSString *equipsValue;
-
-@property (nonatomic ,strong) ZEquipBridge *bridge;
+@property (nonatomic ,strong) ZEnrollBridge *bridge;
 
 @property (nonatomic ,strong) UIButton *completeItem;
 
+@property (nonatomic ,copy) NSString *tag;
 @end
 
-@implementation ZEquipViewController
+@implementation ZEnrollViewController
+
++ (instancetype)creatEnrollEditEditSucc:(ZEnrollEditBlock) succ andTag:(NSString *)tag {
+    
+    return [[self alloc] initWithEnrollEditEditSucc:succ andTag:tag];
+}
+- (instancetype)initWithEnrollEditEditSucc:(ZEnrollEditBlock)succ andTag:(NSString *)tag {
+    
+    if (self = [super init]) {
+        
+        self.block = succ;
+        
+        self.tag = tag;
+    }
+    return self;
+}
 
 - (UIButton *)completeItem {
     
@@ -172,100 +197,102 @@
     return _completeItem;
 }
 
-+ (instancetype)createEquip:(NSString *)equips andBlock:(nonnull ZCharacterEquipSucc)block {
-    
-    return [[self alloc] initWithEquip:equips andBlock:block];
-}
-- (instancetype)initWithEquip:(NSString *)equips andBlock:(nonnull ZCharacterEquipSucc)block {
-    
-    if (self = [super init]) {
-        
-        self.equipsValue = equips;
-        
-        self.equipsBlock = block;
-    }
-    return self;
-}
 
 - (void)configOwnSubViews {
     
-    [self.tableView registerClass:[ZEquipTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[ZEnrollEditTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
-- (void)configViewModel {
-    
-    self.bridge = [ZEquipBridge new];
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [self.bridge createEquip:self equips:self.equipsValue succ:^(NSString * _Nonnull equips) {
-        
-        weakSelf.equipsBlock(equips);
-    }];
-}
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    ZEquipTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    ZEnrollEditTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (!cell) {
         
-        cell = [[ZEquipTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[ZEnrollEditTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-    cell.equipBean = data;
+    cell.characterEdit = data;
     
     return cell;
+    
 }
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    ZEquipBean *equip = (ZEquipBean *)data;
+    ZEnrollBean *edit = (ZEnrollBean *)data;
     
-    switch (equip.type) {
-        case ZEquipTypeSpace:
-            
-            break;
-            
-        default:
+    switch (edit.type) {
+        case ZEnrollTypeCharacter:
         {
             __weak typeof(self) weakSelf = self;
             
-            [self jxt_showActionSheetWithTitle:[NSString stringWithFormat:@"请选择%@等级",equip.title] message:@"装备名称比较多样性,这里以T0 T1 T2 代替" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+//            ZCharactersViewController *character = [ZCharactersViewController createCharacters:true andBlock:^(ZCircleBean * _Nullable circleBean) {
+//
+//                [weakSelf.bridge updateCharactersEditWithType:ZEnrollTypeCharacter value:[weakSelf.bridge converToJsonString:circleBean]];
+//
+//                [weakSelf.navigationController popViewControllerAnimated:true];
+//            }];
+            
+//            [self.navigationController pushViewController:character animated:true];
+        }
+            break;
+            
+        case ZEnrollTypeTeam:
+        {
+            
+            __weak typeof(self) weakSelf = self;
+            
+            [self jxt_showActionSheetWithTitle:@"报名团队" message:nil appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
                 
                 alertMaker.
                 addActionCancelTitle(@"取消").
-                addActionDefaultTitle(@"T0").
-                addActionDefaultTitle(@"T1").
-                addActionDefaultTitle(@"T2");
+                addActionDefaultTitle(@"一团").
+                addActionDefaultTitle(@"二团").
+                addActionDefaultTitle(@"三团");
             } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
                 
                 if ([action.title isEqualToString:@"取消"]) {
                     
-                } else if ([action.title isEqualToString:@"T0"]) {
+                } else if ([action.title isEqualToString:@"一团"]) {
                     
-                    [weakSelf.bridge updateEquipWithType:equip.type level:ZEquipLevelZero];
                     
-                } else if ([action.title isEqualToString:@"T1"]) {
+                    [weakSelf.bridge updateCharactersEditWithType:ZEnrollTypeTeam value:@"一团"];
+                } else if ([action.title isEqualToString:@"二团"]) {
                     
-                    [weakSelf.bridge updateEquipWithType:equip.type level:ZEquipLevelOne];
-                } else if ([action.title isEqualToString:@"T2"]) {
+                    [weakSelf.bridge updateCharactersEditWithType:ZEnrollTypeTeam value:@"二团"];
+                } else if ([action.title isEqualToString:@"三团"]) {
                     
-                    [weakSelf.bridge updateEquipWithType:equip.type level:ZEquipLevelTwo];
+                    [weakSelf.bridge updateCharactersEditWithType:ZEnrollTypeTeam value:@"三团"];
                 }
-                
             }];
         }
-
+            break;
+        default:
             break;
     }
     
 }
 - (void)configNaviItem {
     
-    self.title = @"编辑装备信息";
+    self.title = @"活动报名";
     
     [self.completeItem sizeToFit];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.completeItem];
     
 }
+- (void)configViewModel {
+    
+    self.bridge = [ZEnrollBridge new];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge createEnrollEdit:self tag:self.tag succ:^(ZCircleBean * _Nullable circle) {
+        
+        weakSelf.block(circle);
+        
+        [weakSelf.navigationController popViewControllerAnimated:true];
+    }];
+}
+
 @end

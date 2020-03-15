@@ -7,11 +7,16 @@
 //
 
 #import <ZTable/ZTable.h>
+#import "ZFragmentMix.h"
+#import "ZFragmentConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@import ZBridge;
+typedef void(^ZSettingBlock)(ZSettingActionType type ,ZBaseViewController *vc);
 
 @interface ZSettingViewController : ZTableNoLoadingViewConntroller
 
++ (instancetype)createSettingWithBlock:(ZSettingBlock) block;
 
 @end
 

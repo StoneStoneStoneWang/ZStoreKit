@@ -14,9 +14,25 @@
 @interface ZProfileViewController ()
 
 @property (nonatomic ,strong) ZProfileBridge *bridge;
+
+@property (nonatomic ,copy) ZProfileBlock block;
+
 @end
 
 @implementation ZProfileViewController
+
++ (instancetype)createProfileWithBlock:(ZProfileBlock)block {
+    
+    return [[self alloc] initWithBlock:block];
+}
+- (instancetype)initWithBlock:(ZProfileBlock)block {
+    
+    if (self = [super init]) {
+        
+        self.block = block;
+    }
+    return self;
+}
 
 - (void)configOwnSubViews {
     [super configOwnSubViews];
@@ -53,7 +69,12 @@
     
     self.bridge = [ZProfileBridge new];
     
-    [self.bridge createProfile:self];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge createProfile:self profileAction:^(enum ZProfileActionType type, ZBaseViewController * _Nonnull vc) {
+        
+        weakSelf.block(type, vc);
+    }];
 }
 
 - (void)configNaviItem {
