@@ -10,19 +10,21 @@
 #import "ZFragmentConfig.h"
 #import "ZFragmentMix.h"
 @import ZBean;
+@import ZActionBridge;
+
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^ZEnrollEditBlock)(ZCircleBean *circle);
+typedef void(^ZEnrollCharacterSelectedBlock)(ZEnrollEditActionType type,ZBaseViewController *from , ZCircleBean *_Nullable cirlce);
 
-typedef void(^ZCharactersEditBlock)(ZCircleBean *circle);
 @interface ZEnrollEditTableViewCell : ZBaseTableViewCell
-
 
 @end
 
 @interface ZEnrollViewController : ZTableNoLoadingViewConntroller
 
-+ (instancetype)creatEnrollEditEditSucc:(ZEnrollEditBlock) succ andTag:(NSString *)tag;
++ (instancetype)creatEnrollEditEditSucc:(ZEnrollCharacterSelectedBlock) action andTag:(NSString *)tag;
+
+- (void)updateCharacters:(ZCircleBean *)circle;
 
 @end
 

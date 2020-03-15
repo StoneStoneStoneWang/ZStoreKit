@@ -48,11 +48,11 @@
     self.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 100, CGRectGetHeight(self.view.bounds));
 #else
     
-    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 100, 120)];
+    self.headerView = [[ZProfileTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 120)];
     
     self.tableView.tableHeaderView = self.headerView;
     
-    self.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 100, CGRectGetHeight(self.view.bounds));
+    self.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width , CGRectGetHeight(self.view.bounds));
 #endif
 }
 
@@ -64,7 +64,12 @@
     
     return cell;
 }
-
+- (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
+    
+    ZProfileBean *profile = (ZProfileBean *)data;
+    
+    NSLog(@"%@",profile.type);
+}
 - (void)configViewModel {
     
     self.bridge = [ZProfileBridge new];

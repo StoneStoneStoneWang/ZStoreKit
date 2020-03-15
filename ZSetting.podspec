@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZSetting"
-  spec.version      = "0.1.3"
+  spec.version      = "0.3.3"
   spec.summary      = "A Lib For 设置."
   spec.description  = <<-DESC
   ZSetting是设置界面

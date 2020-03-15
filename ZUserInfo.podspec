@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
     
     spec.name         = "ZUserInfo"
     spec.version      = "0.1.6"
-    spec.summary      = "A Lib For 个人中心."
+    spec.summary      = "A Lib For 个人信息."
     spec.description  = <<-DESC
     ZUserInfo是个性签名
     DESC

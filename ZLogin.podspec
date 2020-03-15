@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZLogin"
-  spec.version      = "0.1.1"
+  spec.version      = "0.3.3"
   spec.summary      = "A Lib For 登陆."
   spec.description  = <<-DESC
   ZLogin是登陆界面

@@ -34,12 +34,12 @@ struct ZEnrollsViewModel: WLBaseViewModel {
         let headerRefresh: Driver<Void>
         
         let footerRefresh: Driver<Void>
-
+        
         let addItemTapped: Signal<Void>
         
         let page: BehaviorRelay<Int> = BehaviorRelay<Int>(value: 1)
         
-        let tag: String 
+        let tag: String
     }
     
     struct WLOutput {

@@ -43,11 +43,11 @@ extension ZEnrollsBridge {
             self.vc = vc
             
             let input = ZEnrollsViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZCircleBean.self),
-                                                     itemSelect: vc.tableView.rx.itemSelected,
-                                                     headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver(),
-                                                     footerRefresh: vc.tableView.mj_footer!.rx.refreshing.asDriver(),
-                                                     addItemTapped: addItem.rx.tap.asSignal(),
-                                                     tag: tag)
+                                                  itemSelect: vc.tableView.rx.itemSelected,
+                                                  headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver(),
+                                                  footerRefresh: vc.tableView.mj_footer!.rx.refreshing.asDriver(),
+                                                  addItemTapped: addItem.rx.tap.asSignal(),
+                                                  tag: tag)
             
             viewModel = ZEnrollsViewModel(input, disposed: disposed)
             
@@ -79,9 +79,9 @@ extension ZEnrollsBridge {
                 .output
                 .added
                 .drive(onNext: { (_) in
-                
+                    
                     enrollsAction(vc)
-
+                    
                 })
                 .disposed(by: disposed)
             

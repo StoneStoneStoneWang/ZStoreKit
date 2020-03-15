@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZPassword"
-  spec.version      = "0.1.1"
-  spec.summary      = "A Lib For 注册."
+  spec.version      = "0.3.3"
+  spec.summary      = "A Lib For 密码."
   spec.description  = <<-DESC
   ZPassword是注册界面
   DESC

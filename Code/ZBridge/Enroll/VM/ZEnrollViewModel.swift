@@ -24,8 +24,6 @@ public enum ZEnrollType: Int {
     
     case character
     
-    case time
-    
     case team
 }
 
@@ -35,8 +33,6 @@ extension ZEnrollType {
         
         switch self {
         case .character: return "角色"
-            
-        case .time: return "时间"
             
         case .team: return "团队"
             
@@ -50,8 +46,6 @@ extension ZEnrollType {
         switch self {
         case .character: return "请选择角色"
             
-        case .time: return "请选择报名时间"
-            
         case .team: return "请选择报名团队"
             
         default: return ""
@@ -62,14 +56,12 @@ extension ZEnrollType {
     var cellHeight: CGFloat {
         
         switch self {
-        case .character: return 120
             
         default: return 55
             
         }
     }
 }
-
 @objc public final class ZEnrollBean: NSObject {
     
     @objc public var type: ZEnrollType = .character
@@ -92,18 +84,13 @@ extension ZEnrollType {
         
         character.type = .character
         
-        let time = ZEnrollBean()
-        
-        time.type = .time
-        
         let team = ZEnrollBean()
         
         team.type = .team
         
-        return [character ,time ,team ]
+        return [character ,team ]
     }
 }
-
 struct ZEnrollViewModel: WLBaseViewModel {
     
     var input: WLInput
@@ -120,8 +107,6 @@ struct ZEnrollViewModel: WLBaseViewModel {
         
         let charater: Driver<ZCircleBean?>
         
-        let time: Driver<String>
-        
         let team: Driver<String>
         
         let tag: String
@@ -131,7 +116,7 @@ struct ZEnrollViewModel: WLBaseViewModel {
         
         let zip: Observable<(ZEnrollBean,IndexPath)>
         
-        let tableData: BehaviorRelay<[ZEnrollBean]> = BehaviorRelay<[ZEnrollBean]>(value: [])
+        let tableData: BehaviorRelay<[ZEnrollBean]> = BehaviorRelay<[ZEnrollBean]>(value: ZEnrollBean.types)
         
         let enrolling: Driver<Void>
         
@@ -145,7 +130,7 @@ struct ZEnrollViewModel: WLBaseViewModel {
         
         let enrolling: Driver<Void> = input.enrollItemTapped.flatMap { Driver.just($0) }
         
-        let uap = Driver.combineLatest(input.charater, input.time,input.team)
+        let uap = Driver.combineLatest(input.charater,input.team)
         
         let enrolled: Driver<WLBaseResult> = input
             .enrollItemTapped
@@ -159,20 +144,14 @@ struct ZEnrollViewModel: WLBaseViewModel {
                 
                 if $0.1 == "" {
                     
-                    return Driver<WLBaseResult>.just(WLBaseResult.failed("请选择角色性别信息"))
-                }
-                if $0.2 == "" {
-                    
-                    return Driver<WLBaseResult>.just(WLBaseResult.failed("请选择角色装备信息"))
+                    return Driver<WLBaseResult>.just(WLBaseResult.failed("请选择报名团队"))
                 }
                 
                 var result = $0.0!.contentMap
                 
-                let time = ZKeyValueBean(JSON: ["type":"txt","value":"time=\($0.1)"])!
-                
-                let team = ZKeyValueBean(JSON: ["type":"txt","value":"team=\($0.2)"])!
+                let team = ZKeyValueBean(JSON: ["type":"txt","value":"team=\($0.1)"])!
                 //
-                result += [time,team]
+                result += [team]
                 
                 let content = WLJsonCast.cast(argu: result.toJSON())
                 

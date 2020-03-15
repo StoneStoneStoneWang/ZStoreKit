@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZWelcome"
-  spec.version      = "0.3.2"
+  spec.version      = "0.3.3"
   spec.summary      = "A Lib For 欢迎界面."
   spec.description  = <<-DESC
   ZWelcome是欢迎界面

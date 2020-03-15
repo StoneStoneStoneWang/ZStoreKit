@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZProfile"
-  spec.version      = "0.2.1"
-  spec.summary      = "A Lib For 关于我们."
+  spec.version      = "0.3.3"
+  spec.summary      = "A Lib For 个人中心."
   spec.description  = <<-DESC
   ZProfile是关于我们界面
   DESC

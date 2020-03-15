@@ -12,7 +12,6 @@
 @import Masonry;
 @import JXTAlertManager;
 @import ZTField;
-//@import ZCharacters;
 
 @interface ZEnrollEditTableViewCell ()
 
@@ -137,7 +136,7 @@
 
 @interface ZEnrollViewController ()
 
-@property (nonatomic ,copy) ZEnrollEditBlock block;
+@property (nonatomic ,copy) ZEnrollCharacterSelectedBlock block;
 
 @property (nonatomic ,strong) ZEnrollBridge *bridge;
 
@@ -148,15 +147,15 @@
 
 @implementation ZEnrollViewController
 
-+ (instancetype)creatEnrollEditEditSucc:(ZEnrollEditBlock) succ andTag:(NSString *)tag {
++ (instancetype)creatEnrollEditEditSucc:(ZEnrollCharacterSelectedBlock) action andTag:(NSString *)tag {
     
-    return [[self alloc] initWithEnrollEditEditSucc:succ andTag:tag];
+    return [[self alloc] initWithEnrollEditEditSucc:action andTag:tag];
 }
-- (instancetype)initWithEnrollEditEditSucc:(ZEnrollEditBlock)succ andTag:(NSString *)tag {
+- (instancetype)initWithEnrollEditEditSucc:(ZEnrollCharacterSelectedBlock)action andTag:(NSString *)tag {
     
     if (self = [super init]) {
         
-        self.block = succ;
+        self.block = action;
         
         self.tag = tag;
     }
@@ -217,6 +216,11 @@
     return cell;
     
 }
+- (void)updateCharacters:(ZCircleBean *)circle {
+    
+    [self.bridge updateCharactersEditWithType:ZEnrollTypeCharacter value:[self.bridge converToJsonString:circle]];
+    
+}
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
     
     ZEnrollBean *edit = (ZEnrollBean *)data;
@@ -224,16 +228,9 @@
     switch (edit.type) {
         case ZEnrollTypeCharacter:
         {
-            __weak typeof(self) weakSelf = self;
             
-//            ZCharactersViewController *character = [ZCharactersViewController createCharacters:true andBlock:^(ZCircleBean * _Nullable circleBean) {
-//
-//                [weakSelf.bridge updateCharactersEditWithType:ZEnrollTypeCharacter value:[weakSelf.bridge converToJsonString:circleBean]];
-//
-//                [weakSelf.navigationController popViewControllerAnimated:true];
-//            }];
-            
-//            [self.navigationController pushViewController:character animated:true];
+            self.block(ZEnrollEditActionTypeCharacterSelected, self, nil);
+
         }
             break;
             
@@ -287,11 +284,9 @@
     
     __weak typeof(self) weakSelf = self;
     
-    [self.bridge createEnrollEdit:self tag:self.tag succ:^(ZCircleBean * _Nullable circle) {
+    [self.bridge createEnrollEdit:self tag:self.tag action:^(ZEnrollEditActionType type,ZCircleBean * _Nullable circle) {
         
-        weakSelf.block(circle);
-        
-        [weakSelf.navigationController popViewControllerAnimated:true];
+        weakSelf.block(ZEnrollEditActionTypeCompleted, weakSelf, circle);
     }];
 }
 

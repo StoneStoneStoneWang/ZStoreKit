@@ -120,7 +120,7 @@
     ZKeyValueBean *title = nil;
     
     ZKeyValueBean *team = nil;
-
+    
     ZKeyValueBean *equip = nil;
     
     
@@ -232,14 +232,14 @@
     [super layoutSubviews];
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-       
+        
         make.left.top.mas_equalTo(10);
         
         make.width.height.mas_equalTo(50);
     }];
     
     [self.charactersLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-       
+        
         make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
         
         make.centerY.mas_equalTo(self.iconImageView.mas_centerY);
@@ -272,15 +272,16 @@
 
 @property (nonatomic ,assign) BOOL his;
 
+@property (nonatomic ,copy) ZEnrollsActionBlock block;
 @end
 
 @implementation ZEnrollsViewController
 
-+ (instancetype)createEnrolls:(NSString *)tag andTitle:(NSString *)title isHis:(BOOL )his; {
++ (instancetype)createEnrolls:(NSString *)tag andTitle:(NSString *)title isHis:(BOOL )his andBlock:( ZEnrollsActionBlock)block {
     
-    return [[self alloc] initWithEnrolls:tag andTitle:title isHis:his];
+    return [[self alloc] initWithEnrolls:tag andTitle:title isHis:his andBlock:block];
 }
-- (instancetype)initWithEnrolls:(NSString *)tag andTitle:(NSString *)title isHis:(BOOL )his {
+- (instancetype)initWithEnrolls:(NSString *)tag andTitle:(NSString *)title isHis:(BOOL )his andBlock:( ZEnrollsActionBlock)block{
     
     if (self = [super init]) {
         
@@ -291,6 +292,8 @@
         self.tag = tag;
         
         self.his = his;
+        
+        self.block = block;
     }
     return self;
 }
@@ -370,23 +373,8 @@
     
     return 120;
 }
+
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip  {
-    
-    __weak typeof(self) weakSelf = self;
-    
-//    if (self.isSelected) {
-//
-//        self.block(data);
-//    } else {
-//
-//        ZCharactersEditViewController *edit = [ZCharactersEditViewController creatCharactersEdit:data andEditSucc:^(ZCircleBean * _Nonnull circle) {
-//
-//            [weakSelf.bridge updateCharacters:circle ip:ip];
-//
-//        }];
-//
-//        [self.navigationController pushViewController:edit animated:true];
-//    }
     
     
 }
@@ -458,20 +446,36 @@
         }
     } enrollsAction:^(ZBaseViewController * _Nonnull vc) {
         
-        if (![ZAccountCache shared].token || [[ZAccountCache shared].token isEqualToString:@""]) {
+        if (![ZAccountCache shared].isLogin) {
             
-            [ZNotiConfigration postNotificationWithName:ZNotiUnLogin andValue:nil andFrom:self];
+            weakSelf.block(ZEnrollsActionTypeUnLogin ,vc);
             
         } else {
             
             __weak typeof(self) weakSelf = self;
             
-            ZEnrollViewController *enroll = [ZEnrollViewController creatEnrollEditEditSucc:^(ZCircleBean * _Nonnull circle) {
+            ZEnrollViewController *enroll = [ZEnrollViewController creatEnrollEditEditSucc:^(ZEnrollEditActionType type, ZBaseViewController * _Nonnull from, ZCircleBean * _Nullable cirlce) {
                 
-                [weakSelf.bridge insertEnrolls:circle status:^(NSInteger status) {
-                    
-                    
-                }];
+                switch (type) {
+                    case ZEnrollEditActionTypeCompleted:
+                    {
+                        [weakSelf.bridge insertEnrolls:cirlce status:^(NSInteger status) {
+                            
+                        }];
+                        
+                        [from.navigationController popViewControllerAnimated:true];
+                    }
+                        break;
+                    case ZEnrollEditActionTypeCharacterSelected:
+                    {
+                        weakSelf.block(ZEnrollsActionTypeCharacerSelected, from);
+                        
+                    }
+                        break;
+                    default:
+                        break;
+                }
+                
             } andTag:self.tag];
             
             [self.navigationController pushViewController:enroll animated:true];

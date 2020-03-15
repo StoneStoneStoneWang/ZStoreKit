@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZCharacters"
-  spec.version      = "0.1.3"
+  spec.version      = "0.3.3"
   spec.summary      = "A Lib For 圈子."
   spec.description  = <<-DESC
   ZCharacters是角色信息
@@ -25,12 +25,11 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZCharacters/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/Characters'
+  spec.dependency 'ZActionBridge/Characters'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'JXTAlertManager'
   spec.dependency 'SToolsKit'
-  spec.dependency 'ZNoti'
   spec.dependency 'ZTField'
   spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end

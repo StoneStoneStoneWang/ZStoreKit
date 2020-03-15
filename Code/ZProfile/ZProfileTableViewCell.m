@@ -119,15 +119,19 @@
         case ZProfileTypeContactUS:
             
             self.iconImageView.image = [UIImage imageNamed: @ContactUsIcon];
+            
+            self.subTitleLabel.text = @ZPhoneNum;
+            
+            self.subTitleLabel.hidden = false;
+            
+            break;
         case ZProfileTypeCharacters:
             
             self.iconImageView.image = [UIImage imageNamed: @CharatersIcon];
             
             self.subTitleLabel.hidden = false;
-            break;
-            self.subTitleLabel.text = @ZPhoneNum;
             
-            self.subTitleLabel.hidden = false;
+            
             break;
         case ZProfileTypeUserInfo:
             

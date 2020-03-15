@@ -18,7 +18,16 @@ import ZCocoa
 import ZRealReq
 import WLToolsKit
 import ZBridge
-public typealias ZEnrollssEditSucc = (_ character: ZCircleBean?) -> ()
+
+@objc (ZEnrollEditActionType)
+public enum ZEnrollEditActionType: Int {
+    
+    case completed
+    
+    case characterSelected
+}
+
+public typealias ZEnrollEditAction = (_ action: ZEnrollEditActionType,_ character: ZCircleBean?) -> ()
 
 @objc (ZEnrollBridge)
 public final class ZEnrollBridge: ZBaseBridge {
@@ -40,19 +49,18 @@ public final class ZEnrollBridge: ZBaseBridge {
 
 extension ZEnrollBridge {
     
-    @objc public func createEnrollEdit(_ vc: ZTableNoLoadingViewConntroller,tag: String,succ: @escaping ZEnrollssEditSucc) {
+    @objc public func createEnrollEdit(_ vc: ZTableNoLoadingViewConntroller,tag: String,action: @escaping ZEnrollEditAction) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
             self.vc = vc
             
             let input = ZEnrollViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(ZEnrollBean.self),
-                                                         itemSelect: vc.tableView.rx.itemSelected,
-                                                         enrollItemTapped: completeItem.rx.tap.asSignal(),
-                                                         charater: character.asDriver(),
-                                                         time: time.asDriver(),
-                                                         team: team.asDriver(),
-                                                         tag: tag)
+                                                 itemSelect: vc.tableView.rx.itemSelected,
+                                                 enrollItemTapped: completeItem.rx.tap.asSignal(),
+                                                 charater: character.asDriver(),
+                                                 team: team.asDriver(),
+                                                 tag: tag)
             
             viewModel = ZEnrollViewModel(input, disposed: disposed)
             
@@ -114,7 +122,7 @@ extension ZEnrollBridge {
                         
                         ZHudUtil.showInfo("团本信息报名成功")
                         
-                        succ(obj as? ZCircleBean)
+                        action(.completed,obj as? ZCircleBean)
                         
                         vc.dismiss(animated: true, completion: nil)
                         
@@ -137,12 +145,9 @@ extension ZEnrollBridge {
             edit.subtitle = value
             
             if type == .character {
-            
+                
                 character.accept(ZCircleBean(JSON: WLJsonCast.cast(argu: value) as! [String : Any]))
                 
-            } else if type == .time {
-                
-                time.accept(value)
             } else if type == .team {
                 
                 team.accept(value)
@@ -151,7 +156,12 @@ extension ZEnrollBridge {
             vc.tableView.reloadRows(at: [IndexPath(item: idx, section: 0)], with: .fade)
         }
     }
+    @objc public func converToJsonString(_ circle: ZCircleBean) -> String {
+        
+        return circle.toJSONString() ?? ""
+    }
 }
+
 extension ZEnrollBridge: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

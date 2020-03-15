@@ -7,12 +7,22 @@
 //
 
 #import <ZTable/ZTable.h>
-
+@import ZBean;
+#import "ZEnrollViewController.h"
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSInteger ,ZEnrollsActionType) {
+    
+    ZEnrollsActionTypeUnLogin,
+    
+    ZEnrollsActionTypeCharacerSelected,
+};
+
+typedef void(^ZEnrollsActionBlock)(ZEnrollsActionType type ,ZBaseViewController *from);
 
 @interface ZEnrollsViewController : ZTableLoadingViewController
 
-+ (instancetype)createEnrolls:(NSString *)tag andTitle:(NSString *)title isHis:(BOOL )his;
++ (instancetype)createEnrolls:(NSString *)tag andTitle:(NSString *)title isHis:(BOOL )his andBlock:(ZEnrollsActionBlock )block;
 
 @end
 
