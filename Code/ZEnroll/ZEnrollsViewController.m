@@ -12,7 +12,6 @@
 @import Masonry;
 @import SDWebImage;
 @import ZCache;
-@import ZNoti;
 
 #import "ZFragmentConfig.h"
 #import "ZEnrollViewController.h"

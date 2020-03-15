@@ -12,7 +12,6 @@
 #import "ZCharactersEditViewController.h"
 @import ZActionBridge;
 @import Masonry;
-@import ZNoti;
 
 @interface ZCharactersViewController ()
 

@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZCharacters"
-  spec.version      = "0.3.5"
+  spec.version      = "0.3.6"
   spec.summary      = "A Lib For 角色."
   spec.description  = <<-DESC
   ZCharacters是角色信息

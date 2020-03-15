@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZEnroll"
-  spec.version      = "0.3.5"
+  spec.version      = "0.3.6"
   spec.summary      = "A Lib For 报名."
   spec.description  = <<-DESC
   ZEnroll是角色信息
@@ -28,6 +28,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZActionBridge/Enroll'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
+  spec.dependency 'SDWebImage'
   spec.dependency 'JXTAlertManager'
   spec.dependency 'SToolsKit'
   spec.dependency 'ZTField'
