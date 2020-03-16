@@ -198,3 +198,22 @@ public func onUploadVideoResp(_ data: Data ,file: String ,param: ZALCredentialsB
         return Disposables.create { }
     })
 }
+
+public func onTranslateResp<T : WLObserverReq>(_ req: T) -> Observable<[String:Any]> {
+    
+    return Observable<[String:Any]>.create({ (observer) -> Disposable in
+        
+        ZReqHandler.s_postTranslateWithParams(params: req.params, succ: { (data) in
+            observer.onNext(data as! [String:Any])
+            
+            observer.onCompleted()
+        }, fail: { (error) in
+            
+            let ocError = error as NSError
+            
+            if ocError.code == 122 || ocError.code == 123 || ocError.code == 124 || ocError.code == 121 { observer.onError(WLBaseError.ServerResponseError(ocError.localizedDescription)) }
+            else { observer.onError(WLBaseError.HTTPFailed(error)) }
+        })
+        return Disposables.create { }
+    })
+}

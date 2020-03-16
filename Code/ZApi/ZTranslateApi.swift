@@ -53,8 +53,7 @@ extension ZTranslateStyle {
         }
     }
 }
-
-enum ZTranslateApi {
+public enum ZTranslateApi {
     
     case translateFromCNToKO(_ text: String ) // 韩语-> 中文
     
@@ -71,14 +70,14 @@ enum ZTranslateApi {
 
 extension ZTranslateApi: WLObserverReq {
     
-    var host: String { return "" }
+    public var host: String { return "" }
     
-    var reqName: String {
+    public var reqName: String {
         
         return ""
     }
     
-    var params: Dictionary<String, Any> {
+    public var params: Dictionary<String, Any> {
         
         switch self {
             
@@ -90,12 +89,12 @@ extension ZTranslateApi: WLObserverReq {
         }
     }
     
-    var headers: Dictionary<String, String> {
+    public var headers: Dictionary<String, String> {
         
         return [:]
     }
     
-    var method: HTTPMethod {
+    public var method: HTTPMethod {
         
         return .post
     }

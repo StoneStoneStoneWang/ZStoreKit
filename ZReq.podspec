@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZReq"
-  spec.version      = "0.1.6"
+  spec.version      = "0.3.8"
   spec.summary      = "A Lib For req."
   spec.description  = <<-DESC
   ZRep是请求的封装
