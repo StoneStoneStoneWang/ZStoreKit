@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZRealReq"
-  spec.version      = "0.0.2"
+  spec.version      = "0.3.9"
   spec.summary      = "A Lib For realReq."
   spec.description  = <<-DESC
   ZRealReq是请求的封装

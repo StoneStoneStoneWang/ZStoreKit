@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZApi"
-  spec.version      = "0.3.8"
+  spec.version      = "0.3.9"
   spec.summary      = "A Lib For Api."
   spec.description  = <<-DESC
   ZApi是请求接口的封装呢
