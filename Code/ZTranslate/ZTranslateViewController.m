@@ -12,7 +12,6 @@
 @import Masonry;
 
 
-
 @interface ZTranslateViewController ()
 
 @property (nonatomic ,strong) ZTranslateBridge *bridge;
@@ -27,9 +26,24 @@
 
 @property (nonatomic ,strong) UIButton *speaker;
 
+@property (nonatomic ,strong) UIImageView *backgroundImageView;
+
 @end
+
 @implementation ZTranslateViewController
 
+- (UIImageView *)backgroundImageView {
+    
+    if (!_backgroundImageView) {
+        
+        _backgroundImageView = [UIImageView new];
+        
+        _backgroundImageView.image = [UIImage imageNamed:@"翻译背景"];
+        
+        _backgroundImageView.contentMode = UIViewContentModeScaleToFill;
+    }
+    return _backgroundImageView;
+}
 - (UITextView *)from {
     
     if (!_from) {
@@ -149,6 +163,8 @@
 }
 - (void)addOwnSubViews {
     
+    [self.view addSubview:self.backgroundImageView];
+    
     [self.view addSubview:self.from];
     
     [self.view addSubview:self.to];
@@ -160,6 +176,8 @@
     [self.view addSubview:self.speaker];
 }
 - (void)configOwnSubViews {
+    
+    self.backgroundImageView.frame = self.view.bounds;
     
     [self.from mas_makeConstraints:^(MASConstraintMaker *make) {
        
