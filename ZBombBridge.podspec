@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBombBridge"
-  spec.version      = "0.4.1"
+  spec.version      = "0.4.2"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZBombBridge是oc swift 转换的封装呢

@@ -20,6 +20,12 @@ public enum ZTListActionType: Int ,Codable {
     case myCircle = 0
     
     case circle = 1
+    
+    case comment = 2
+    
+    case watch = 3
+    
+    case report = 4
 }
 
 public typealias ZTListAction = (_ action: ZTListActionType ,_ vc: ZTableLoadingViewController ,_ circle: ZCircleBean ,_ ip: IndexPath) -> ()
@@ -128,6 +134,20 @@ extension ZTListBridge {
         var values = viewModel.output.tableData.value
         
         values.replaceSubrange(ip.row..<ip.row+1, with: [circle])
+        
+        viewModel.output.tableData.accept(values)
+    }
+    
+    @objc func insertCircle(_ circle: ZCircleBean) {
+        
+        var values = viewModel.output.tableData.value
+        
+        values.insert(circle, at: 0)
+        
+        if values.count == 1 {
+            
+            vc.tableViewEmptyHidden()
+        }
         
         viewModel.output.tableData.accept(values)
     }
