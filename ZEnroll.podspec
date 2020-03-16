@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZEnroll"
-  spec.version      = "0.3.6"
+  spec.version      = "0.3.7"
   spec.summary      = "A Lib For 报名."
   spec.description  = <<-DESC
   ZEnroll是角色信息

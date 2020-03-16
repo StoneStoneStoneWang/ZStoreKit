@@ -76,7 +76,7 @@
 
 #endif
 
-#define ZAppKey "cc8050936ebe4cb3b6ffc7ea808b3c96"
+#define ZAppKey "3b3fec9787b041ad9249ddd022186843"
 
 #define ZWXKey "wx6daf9371d9e7472a"
 
@@ -85,7 +85,7 @@
 #define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
 
 #pragma mark ---- 主色值
-#define ZFragmentColor "#50c9c3"
+#define ZFragmentColor "#333333"
 
 #define ZBackIcon "返回"
 
@@ -109,13 +109,13 @@
 @{@"type": @"备注",@"value": @"",@"place": @"请输入备注信息"} ,\
 ]
 
-#define ZWelcomeFormOne 0
+#define ZWelcomeFormOne 1
 
-#define ZWelcomeFormTwo 1
+#define ZWelcomeFormTwo 0
 
-#define ZBannerFormOne 0
+#define ZBannerFormOne 1
 
-#define ZBannerFormTwo 1
+#define ZBannerFormTwo 0
 
 #pragma mark ---- 登陆、注册、密码、协议、图片等
 
