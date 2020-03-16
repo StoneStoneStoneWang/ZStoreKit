@@ -94,7 +94,7 @@ struct ZTranslateViewModel: WLBaseViewModel  {
                 
                 if !$0.isEmpty {
                     
-                    return onTranslateResp(ZTranslateApi.translateToCN($0, style: input.style))
+                    return onTranslateResp(ZTranslateApi.translateFromCNTo($0, style: input.style))
                         .map({ return $0["data"] as! [String: Any] })
                         .mapObject(type: ZTranslateBean.self)
                         .map { WLBaseResult.ok($0.result) }

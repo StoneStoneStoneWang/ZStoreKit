@@ -11,7 +11,7 @@
 #import "ZReportHeaderView.h"
 @import ZBridge;
 @import SToolsKit;
-#import "ZFragmentConfig.h"
+
 @interface ZReportViewController ()
 
 @property (nonatomic ,strong) ZReportBridge *bridge;
@@ -23,6 +23,7 @@
 @property (nonatomic ,copy) NSString *encode;
 
 @property (nonatomic ,strong) UIButton *completeItem;
+
 @end
 
 @implementation ZReportViewController
@@ -94,17 +95,7 @@
     [super configOwnSubViews];
     
     [self.tableView registerClass:[ZReportTableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-#if ZAppFormGlobalOne || ZAppFormGlobalTwo
-    
-    self.headerView = [[ZReportHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 200)];
-    
-    self.tableView.tableHeaderView = self.headerView;
-#elif ZAppFormGlobalThree
-    
-    
-#endif
-    
+
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 150)];
     
     footerView.backgroundColor = [UIColor whiteColor];
@@ -129,11 +120,9 @@
     
     self.bridge = [ZReportBridge new];
     
-#if ZAppFormGlobalOne || ZAppFormGlobalTwo || ZAppFormGlobalThree
+#if ZAppFormGlobalCircle
     [self.bridge createReport:self
-                      reports:ZReportKeyValues
-     
-                          uid:self.uid
+                      reports:ZReportKeyValues uid:self.uid
                       encoded:self.encode
                      textView:self.textView];
     

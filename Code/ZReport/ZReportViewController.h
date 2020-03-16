@@ -7,7 +7,8 @@
 //
 
 #import <ZTable/ZTable.h>
-
+#import "ZFragmentConfig.h"
+#import "ZFragmentMix.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZReportViewController : ZTableNoLoadingViewConntroller

@@ -8,7 +8,7 @@
 
 #import <ZTable/ZTable.h>
 #import "ZFragmentMix.h"
-@import ZBridge;
+@import ZActionBridge;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZReportTableViewCell : ZBaseTableViewCell

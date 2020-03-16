@@ -69,7 +69,16 @@ extension ZTranslateBridge {
                         
                         ZHudUtil.showInfo("翻译成功")
                         
+                        to.text = msg
+                        
                     case let .failed(message: msg):
+                        
+                        if msg == "ok" {
+                            
+                            ZHudUtil.showInfo("没有信息")
+                            
+                            return
+                        }
                         
                         ZHudUtil.showInfo(msg)
                         
@@ -111,7 +120,7 @@ extension ZTranslateBridge {
     
     @objc public func changeLanguage(_ language: String) {
         
-       speakLanguage = language
+        speakLanguage = language
     }
     
     @objc public func changeStyle(_ style: ZTranslateStyle) {

@@ -18,6 +18,7 @@
 @property (nonatomic ,strong) UIView *line;
 
 @end
+
 @implementation ZReportHeaderView
 
 - (UILabel *)textLabel {

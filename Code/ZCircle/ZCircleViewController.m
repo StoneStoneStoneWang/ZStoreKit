@@ -36,12 +36,12 @@
     
     [self.navigationController setNavigationBarHidden:false];
 }
-+ (instancetype)createTableList:(BOOL )isMy andTag:(NSString *)tag {
++ (instancetype)createCircleWithIsMy:(BOOL )isMy andTag:(NSString *)tag {
     
-    return [[self alloc] initWithTableList:isMy andTag:tag];
+    return [[self alloc] initWithIsMy:isMy andTag:tag];
 }
 
-- (instancetype)initWithTableList:(BOOL )isMy andTag:(NSString *)tag {
+- (instancetype)initWithIsMy:(BOOL )isMy andTag:(NSString *)tag {
     
     if (self = [super init]) {
         
@@ -109,7 +109,10 @@
     
     self.bridge = [ZTListBridge new];
     
-    [self.bridge createTList:self isMy:self.isMy tag:self.tag];
+    [self.bridge createTList:self isMy:self.isMy tag:self.tag tAction:^(enum ZTListActionType type, ZTableLoadingViewController * _Nonnull from, ZCircleBean * _Nonnullcircle, NSIndexPath * _Nonnull ip) {
+       
+        
+    }];
     
     [self.tableView.mj_header beginRefreshing];
     
@@ -157,21 +160,24 @@
             }
             else if ([action.title isEqualToString:@"点赞"] || [action.title isEqualToString:@"取消点赞"]) {
                 
-                [weakSelf.bridge like:circleBean.encoded isLike:circleBean.isLaud succ:^{
-                    
-                    
-                }];
+//                [weakSelf.bridge like: isLike:circleBean.isLaud unLogin:^(ZBaseViewController * _Nonnull from) {
+//                    
+//                    
+//                } succ:^{
+//                    
+//                    
+//                }];
             }
             
         }];
     } else if (itemType == ZFuncItemTypeMore){
         
-        [self jxt_showActionSheetWithTitle:@"操作" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+        [self jxt_showActionSheetWithTitle:@"" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
             
             alertMaker.
             addActionCancelTitle(@"取消").
             addActionDefaultTitle(@"举报").
-            addActionDefaultTitle(@"分享").
+            addActionDefaultTitle(circleBean.isLaud ? @"取消点赞" : @"点赞").
             addActionDefaultTitle(circleBean.isattention ? @"取消关注" : @"关注").
             addActionDestructiveTitle(@"黑名单(慎重选择)");
             
@@ -186,16 +192,16 @@
                 
             } else if ([action.title isEqualToString:@"关注"] || [action.title isEqualToString:@"取消关注"]) {
                 
-                [self.bridge focus:circleBean.users.encoded encode:circleBean.encoded isFocus:circleBean.isattention succ:^{
-                    
-                    
-                }];
+//                [self.bridge focus:circleBean.users.encoded encode:circleBean.encoded isFocus:circleBean.isattention succ:^{
+//
+//
+//                }];
                 
             } else if ([action.title isEqualToString:@"黑名单(慎重选择)"]) {
                 
-                [self.bridge addBlack:circleBean.users.encoded targetEncoded:circleBean.encoded content:@"" succ:^{
-                    
-                }];
+//                [self.bridge addBlack:circleBean.users.encoded targetEncoded:circleBean.encoded content:@"" succ:^{
+//
+//                }];
                 
             } else if ([action.title isEqualToString:@"分享"]) {
                 
