@@ -8,7 +8,7 @@
 
 #import "ZBlackViewController.h"
 #import "ZBlackTableViewCell.h"
-@import ZBridge;
+@import ZActionBridge;
 @interface ZBlackViewController ()
 
 @property (nonatomic ,strong) ZBlackBridge *bridge;

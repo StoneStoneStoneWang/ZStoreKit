@@ -8,15 +8,17 @@
 
 #import <ZTable/ZTable.h>
 @import ZBean;
-
+@import ZActionBridge;
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef void(^ZContentOperation)(void);
+@class ZContentViewController;
+typedef void(^ZContentBlock)(ZContentActionType type,ZContentViewController * from,ZKeyValueBean *_Nullable keyValue,ZCircleBean *_Nullable circleBean);
 
 @interface ZContentViewController : ZTableNoLoadingViewConntroller
 
-+ (instancetype)createContentWithCircleBean:(ZCircleBean *)circleBean andIsMy:(BOOL )isMy andOp:(ZContentOperation)op;
++ (instancetype)createContentWithCircleBean:(ZCircleBean *)circleBean andIsMy:(BOOL )isMy andOp:(ZContentBlock)op;
+
+- (void)updateCircle:(ZCircleBean *)circle;
 
 @end
 

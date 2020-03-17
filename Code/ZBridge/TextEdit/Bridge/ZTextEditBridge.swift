@@ -21,9 +21,11 @@ public final class ZTextEditBridge: ZBaseBridge {
 
 extension ZTextEditBridge {
     
-    @objc public func createTextEdit(_ vc: ZBaseViewController ,succ: @escaping (_ text: String) -> () ) {
+    @objc public func createTextEdit(_ vc: ZBaseViewController ,his: String,succ: @escaping (_ text: String) -> () ) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton ,let signaturetv = vc.view.viewWithTag(201) as? UITextView ,let backItem = vc.navigationItem.leftBarButtonItem?.customView as? UIButton {
+            
+            self.signature.accept(his)
             
             let inputs = ZTextEditViewModel.WLInput(orignal: signature.asDriver(),
                                                      updated: signaturetv.rx.text.orEmpty.asDriver(),

@@ -26,9 +26,21 @@ public enum ZTListActionType: Int ,Codable {
     case watch = 3
     
     case report = 4
+    
+    case unLogin = 5
+    
+    case like = 6
+    
+    case focus = 7
+    
+    case black = 8
+    
+    case remove = 9
+    
+    case share = 10
 }
 
-public typealias ZTListAction = (_ action: ZTListActionType ,_ vc: ZTableLoadingViewController ,_ circle: ZCircleBean ,_ ip: IndexPath) -> ()
+public typealias ZTListAction = (_ action: ZTListActionType ,_ vc: ZTableLoadingViewController ,_ circle: ZCircleBean? ,_ ip: IndexPath?) -> ()
 
 @objc (ZTListBridge)
 public final class ZTListBridge: ZBaseBridge {
@@ -129,7 +141,7 @@ extension ZTListBridge {
             .disposed(by: disposed)
     }
     
-    @objc func updateCircle(_ circle: ZCircleBean ,ip: IndexPath) {
+    @objc public func updateCircle(_ circle: ZCircleBean ,ip: IndexPath) {
         
         var values = viewModel.output.tableData.value
         
@@ -138,7 +150,7 @@ extension ZTListBridge {
         viewModel.output.tableData.accept(values)
     }
     
-    @objc func insertCircle(_ circle: ZCircleBean) {
+    @objc public func insertCircle(_ circle: ZCircleBean) {
         
         var values = viewModel.output.tableData.value
         
@@ -230,11 +242,11 @@ extension ZTListBridge: UITableViewDelegate {
 }
 extension ZTListBridge {
     
-    @objc public func addBlack(_ OUsEncoded: String,targetEncoded: String ,content: String ,unLogin: @escaping (_ vc: ZBaseViewController) -> (),succ: @escaping () -> () ) {
+    @objc public func addBlack(_ OUsEncoded: String,targetEncoded: String ,content: String ,action: @escaping ZTListAction) {
         
         if !ZAccountCache.default.isLogin() {
             
-            unLogin(vc)
+            action(.unLogin,self.vc, nil,nil)
             
             return
         }
@@ -250,11 +262,12 @@ extension ZTListBridge {
                 switch result {
                 case .ok(let msg):
                     
-                    succ()
-                    
                     self.vc.tableView.mj_header!.beginRefreshing()
                     
                     ZHudUtil.showInfo(msg)
+                    
+                    action(.black,self.vc, nil,nil)
+                    
                 case .failed(let msg):
                     
                     ZHudUtil.showInfo(msg)
@@ -264,11 +277,11 @@ extension ZTListBridge {
             })
             .disposed(by: disposed)
     }
-    @objc public func focus(_ uid: String ,encode: String ,isFocus: Bool ,unLogin: @escaping (_ vc: ZBaseViewController) -> (),succ: @escaping () -> () ) {
+    @objc public func focus(_ uid: String ,encode: String ,isFocus: Bool,action: @escaping ZTListAction) {
         
         if !ZAccountCache.default.isLogin() {
             
-            unLogin(vc)
+            action(.unLogin,self.vc, nil,nil)
             
             return
         }
@@ -293,9 +306,9 @@ extension ZTListBridge {
                         circle.isattention = !circle.isattention
                         
                         self.viewModel.output.tableData.accept(values)
+                        
+                        action(.focus,self.vc, circle,nil)
                     }
-                    
-                    succ()
                     
                     ZHudUtil.showInfo(isFocus ? "取消关注成功" : "关注成功")
                 case .failed(let msg):
@@ -308,17 +321,27 @@ extension ZTListBridge {
             .disposed(by: disposed)
         
     }
-    
+    @objc public func fetchIp(_ circle: ZCircleBean) -> IndexPath {
+        
+        let values = viewModel.output.tableData.value
+        
+        if let idx = values.firstIndex(where: { $0.encoded == circle.encoded }) {
+            
+            return IndexPath(item: 0, section: idx)
+        }
+        return IndexPath(item: 0, section: 0)
+        
+    }
     @objc public func converToJson(_ circle: ZCircleBean) -> [String: Any] {
         
         return circle.toJSON()
     }
     
-    @objc public func like(_ encoded: String,isLike: Bool ,unLogin: @escaping (_ vc: ZBaseViewController) -> (),succ: @escaping () -> () ) {
+    @objc public func like(_ encoded: String,isLike: Bool,action: @escaping ZTListAction) {
         
         if !ZAccountCache.default.isLogin() {
             
-            unLogin(vc)
+            action(.unLogin,self.vc, nil,nil)
             
             return
         }
@@ -346,9 +369,10 @@ extension ZTListBridge {
                         else { circle.countLaud += 1}
                         
                         self.viewModel.output.tableData.accept(values)
+                        
+                        action(.like,self.vc, circle,nil)
                     }
                     
-                    succ()
                     
                     ZHudUtil.showInfo(msg)
                 case .failed(let msg):
@@ -365,7 +389,8 @@ extension ZTListBridge {
         
         ZHudUtil.show(withStatus: "移除内容中...")
         
-        ZTListViewModel.removeMyCircle(encoded)
+        ZTListViewModel
+            .removeMyCircle(encoded)
             .drive(onNext: { (result) in
                 
                 ZHudUtil.pop()
@@ -375,7 +400,6 @@ extension ZTListBridge {
                     
                     succ()
                     
-                    ZHudUtil.showInfo(msg)
                 case .failed(let msg):
                     
                     ZHudUtil.showInfo(msg)

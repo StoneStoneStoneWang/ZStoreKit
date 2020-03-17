@@ -10,8 +10,8 @@
 #import "ZCircleTableViewCell.h"
 @import SToolsKit;
 @import JXTAlertManager;
-@import ZNoti;
 @import ZSign;
+@import ZCache;
 
 @interface ZCircleViewController () <ZCircleTableViewCellDelegate>
 
@@ -21,6 +21,7 @@
 
 @property (nonatomic ,strong) NSString *tag;
 
+@property (nonatomic ,strong) ZCircleBlock block;
 @end
 
 @implementation ZCircleViewController
@@ -36,18 +37,20 @@
     
     [self.navigationController setNavigationBarHidden:false];
 }
-+ (instancetype)createCircleWithIsMy:(BOOL )isMy andTag:(NSString *)tag {
++ (instancetype)createCircleWithIsMy:(BOOL )isMy andTag:(NSString *)tag andBlock:(nonnull ZCircleBlock)block {
     
-    return [[self alloc] initWithIsMy:isMy andTag:tag];
+    return [[self alloc] initWithIsMy:isMy andTag:tag andBlock:block];
 }
 
-- (instancetype)initWithIsMy:(BOOL )isMy andTag:(NSString *)tag {
+- (instancetype)initWithIsMy:(BOOL )isMy andTag:(NSString *)tag andBlock:(nonnull ZCircleBlock)block {
     
     if (self = [super init]) {
         
         self.isMy = isMy;
         
         self.tag = tag;
+        
+        self.block = block;
     }
     return self;
 }
@@ -109,14 +112,26 @@
     
     self.bridge = [ZTListBridge new];
     
-    [self.bridge createTList:self isMy:self.isMy tag:self.tag tAction:^(enum ZTListActionType type, ZTableLoadingViewController * _Nonnull from, ZCircleBean * _Nonnullcircle, NSIndexPath * _Nonnull ip) {
-       
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge createTList:self isMy:self.isMy tag:self.tag tAction:^(enum ZTListActionType type, ZTableLoadingViewController * _Nonnull from, ZCircleBean * _Nonnull circle, NSIndexPath * _Nonnull ip) {
         
+        switch (type) {
+            case ZTListActionTypeMyCircle:
+                
+                weakSelf.block(type, weakSelf, circle, ip);
+                break;
+            case ZTListActionTypeCircle:
+                
+                weakSelf.block(type, weakSelf, circle, ip);
+                break;
+                
+            default:
+                break;
+        }
     }];
     
     [self.tableView.mj_header beginRefreshing];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBlack) name:ZNotiAddBlack object:nil];
 }
 
 - (void)addBlack {
@@ -145,6 +160,13 @@
     
     __weak typeof(self) weakSelf = self;
     
+    if (![[ZAccountCache shared] isLogin]) {
+        
+        self.block(ZTListActionTypeUnLogin, self, nil, nil);
+        
+        return;
+    }
+    
     if (itemType == ZFuncItemTypeFun) {
         
         [self jxt_showAlertWithTitle:circleBean.isLaud ? @"是否取消点赞" : @"是否点赞" message:nil appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
@@ -160,13 +182,18 @@
             }
             else if ([action.title isEqualToString:@"点赞"] || [action.title isEqualToString:@"取消点赞"]) {
                 
-//                [weakSelf.bridge like: isLike:circleBean.isLaud unLogin:^(ZBaseViewController * _Nonnull from) {
-//                    
-//                    
-//                } succ:^{
-//                    
-//                    
-//                }];
+                [weakSelf.bridge like:circleBean.encoded isLike:circleBean.isLaud action:^(enum ZTListActionType type, ZTableLoadingViewController * _Nonnull vc, ZCircleBean * _Nullable circle, NSIndexPath * _Nullable ip) {
+                    
+                    switch (type) {
+                        case ZTListActionTypeUnLogin:
+                            
+                            weakSelf.block(type, weakSelf, nil, nil);
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }];
             }
             
         }];
@@ -177,7 +204,6 @@
             alertMaker.
             addActionCancelTitle(@"取消").
             addActionDefaultTitle(@"举报").
-            addActionDefaultTitle(circleBean.isLaud ? @"取消点赞" : @"点赞").
             addActionDefaultTitle(circleBean.isattention ? @"取消关注" : @"关注").
             addActionDestructiveTitle(@"黑名单(慎重选择)");
             
@@ -188,35 +214,52 @@
             }
             else if ([action.title isEqualToString:@"举报"]) {
                 
-                [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:circleBean andFrom:self];
-                
+                self.block(ZTListActionTypeReport, self, circleBean,  [self.bridge fetchIp:circleBean]);
             } else if ([action.title isEqualToString:@"关注"] || [action.title isEqualToString:@"取消关注"]) {
                 
-//                [self.bridge focus:circleBean.users.encoded encode:circleBean.encoded isFocus:circleBean.isattention succ:^{
-//
-//
-//                }];
+                [weakSelf.bridge focus:circleBean.users.encoded encode:circleBean.encoded isFocus:circleBean.isattention action:^(enum ZTListActionType type, ZTableLoadingViewController * _Nonnull vc, ZCircleBean * _Nullable circle, NSIndexPath * _Nullable ip) {
+                    
+                    switch (type) {
+                        case ZTListActionTypeUnLogin:
+                            
+                            weakSelf.block(type, weakSelf, nil, nil);
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }];
                 
             } else if ([action.title isEqualToString:@"黑名单(慎重选择)"]) {
                 
-//                [self.bridge addBlack:circleBean.users.encoded targetEncoded:circleBean.encoded content:@"" succ:^{
-//
-//                }];
+                [weakSelf.bridge addBlack:circleBean.users.encoded targetEncoded:circleBean.encoded content:@"" action:^(enum ZTListActionType type, ZTableLoadingViewController * _Nonnull vc, ZCircleBean * _Nullable circle, NSIndexPath * _Nullable ip) {
+                    
+                    switch (type) {
+                        case ZTListActionTypeUnLogin:
+                            
+                            weakSelf.block(type, weakSelf, nil, nil);
+                            break;
+                        case ZTListActionTypeBlack:
+                            
+                            break;
+                        default:
+                            break;
+                    }
+                }];
                 
             } else if ([action.title isEqualToString:@"分享"]) {
                 
-                NSString *displayname = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
+                self.block(ZTListActionTypeShare, self, circleBean,  [self.bridge fetchIp:circleBean]);
                 
-                [ZNotiConfigration postNotificationWithName:ZNotiCircleShare andValue: @{@"webUrl": [NSString stringWithFormat:@"%@mob/circleFriends_wexCircleFriendsInfo?cfs.encoded=\(item.encoded)",[ZConfigure fetchAppKey]],@"title": displayname,@"desc":[NSString stringWithFormat:@"%@欢迎您",displayname]} andFrom:self];
             }
         }];
     } else if (itemType == ZFuncItemTypeComment){
         
-        [ZNotiConfigration postNotificationWithName:ZNotiCircleItemClick andValue:circleBean andFrom:self];
+        self.block(ZTListActionTypeComment, self, circleBean, [self.bridge fetchIp:circleBean]);
         
     } else if (itemType == ZFuncItemTypeWatch){
         
-        [ZNotiConfigration postNotificationWithName:ZNotiCircleItemClick andValue:circleBean andFrom:self];
+        self.block(self.isMy ? ZTListActionTypeMyCircle : ZTListActionTypeCircle, self, circleBean, [self.bridge fetchIp:circleBean]);
     }
 }
 
@@ -224,6 +267,9 @@
     
     return false;
 }
-
+- (void)updateCircle:(ZCircleBean *)circle {
+    
+    [self.bridge updateCircle:circle ip:[self.bridge fetchIp:circle]];
+}
 @end
 

@@ -11,13 +11,18 @@
 #import "ZFragmentMix.h"
 @import ZActionBridge;
 NS_ASSUME_NONNULL_BEGIN
-@import ZBridge;
+@class ZCircleViewController;
+typedef void(^ZCircleBlock)(ZTListActionType type,ZCircleViewController *from , ZCircleBean *_Nullable cirlce ,NSIndexPath *_Nullable ip);
 
 @interface ZCircleViewController : ZTableLoadingViewController
 
-+ (instancetype)createCircleWithIsMy:(BOOL )isMy andTag:(NSString *)tag;
++ (instancetype)createCircleWithIsMy:(BOOL )isMy andTag:(NSString *)tag andBlock:(ZCircleBlock )block;
 
 @property (nonatomic ,strong ,readonly) ZTListBridge *bridge;
+
+- (void)updateCircle:(ZCircleBean *)circle;
+
+- (void)insertCircle:(ZCircleBean *)circle;
 
 @end
 

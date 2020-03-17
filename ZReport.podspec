@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZReport"
-  spec.version      = "0.0.1"
+  spec.version      = "0.4.2"
   spec.summary      = "A Lib For 地图."
   spec.description  = <<-DESC
   ZReport是地图
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZReport/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/Report'
+  spec.dependency 'ZActionBridge/Report'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
 end

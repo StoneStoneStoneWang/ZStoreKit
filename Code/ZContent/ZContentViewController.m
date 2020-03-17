@@ -10,12 +10,12 @@
 #import "ZContentTableViewCell.h"
 #import "ZContentFuncItemView.h"
 #import "ZContentHeaderView.h"
-#import "ZCommentViewController.h"
-@import ZBridge;
+//#import "ZCommentViewController.h"
+@import ZActionBridge;
 @import SToolsKit;
 @import JXTAlertManager;
-@import ZNoti;
 @import ZSign;
+@import ZCache;
 
 @interface ZContentViewController () <ZContentFuncItemViewDelegate>
 
@@ -27,16 +27,16 @@
 
 @property (nonatomic ,strong) ZCircleBean *circleBean;
 
-@property (nonatomic ,copy) ZContentOperation op;
+@property (nonatomic ,copy) ZContentBlock block;
 @end
 
 @implementation ZContentViewController
 
-+ (instancetype)createContentWithCircleBean:(ZCircleBean *)circleBean andIsMy:(BOOL )isMy andOp:(ZContentOperation)op {
++ (instancetype)createContentWithCircleBean:(ZCircleBean *)circleBean andIsMy:(BOOL )isMy andOp:(ZContentBlock)block {
     
-    return [[self alloc] initWithCircleBean:circleBean andIsMy:isMy andOp:op];
+    return [[self alloc] initWithCircleBean:circleBean andIsMy:isMy andOp:block];
 }
-- (instancetype)initWithCircleBean:(ZCircleBean *)circleBean andIsMy:(BOOL)isMy andOp:(ZContentOperation) op{
+- (instancetype)initWithCircleBean:(ZCircleBean *)circleBean andIsMy:(BOOL)isMy andOp:(ZContentBlock) block {
     
     if (self = [super init]) {
         
@@ -44,7 +44,7 @@
         
         self.isMy = isMy;
         
-        self.op = op;
+        self.block = block;
     }
     return self;
     
@@ -119,7 +119,12 @@
     
     [self.funcView setCircleBean:self.circleBean];
     
-    [self.bridge createContent:self circleBean:self.circleBean type:ZContentTypeMixed];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge createContent:self circleBean:self.circleBean contentAction:^(enum ZContentActionType type, ZTableNoLoadingViewConntroller * _Nonnull from, ZKeyValueBean * _Nullable keyValue, ZCircleBean * _Nullable circle) {
+        
+        weakSelf.block(ZContentActionTypeContent, weakSelf, keyValue, circle);
+    }];
     
     ZContentHeaderView *headerView = (ZContentHeaderView *)self.headerView;
     
@@ -128,17 +133,6 @@
     [headerView.focusItem addTarget:self action:@selector(onFocusItemClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)onFocusItemClick:(UIButton *)sender {
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [self.bridge focus:self.circleBean.users.encoded encode:self.circleBean.encoded isFocus:self.circleBean.isattention succ:^{
-        
-        sender.selected = !sender.isSelected;
-        
-        weakSelf.circleBean.isattention = !weakSelf.circleBean.isattention;
-    }];
-}
 - (void)configNaviItem {
     
     NSString *title = @"";
@@ -155,12 +149,36 @@
     
     self.title = title;
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWith:[UIImage imageNamed:@ZMoreIcon] andTarget:self andSelector:@selector(onMoreItemClick)];
-    
 }
-- (void)onMoreItemClick {
+- (void)onFocusItemClick:(UIButton *)sender {
     
-    [self onFuncItemClick:ZContentFuncItemTypeMore];
+    bool isFocus = self.circleBean.isattention;
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge focus:self.circleBean.users.encoded encode:self.circleBean.encoded isFocus:isFocus action:^(enum ZContentActionType type , ZTableNoLoadingViewConntroller * _Nonnull from, ZKeyValueBean * _Nullable keyValue, ZCircleBean * _Nullable circle) {
+        
+        switch (type) {
+            case ZContentActionTypeUnLogin:
+                
+                weakSelf.block(ZContentActionTypeUnLogin, self, nil, nil);
+                
+                break;
+                case ZContentActionTypeFocus:
+            {
+                
+                ZContentHeaderView *headerView = (ZContentHeaderView *)weakSelf.headerView;
+                
+                [headerView setCircleBean:weakSelf.circleBean];
+                
+                weakSelf.block(ZContentActionTypeFocus, (ZContentViewController *)from, nil, weakSelf.circleBean);
+            }
+                
+                break;
+            default:
+                break;
+        }
+    }];
 }
 - (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
@@ -185,6 +203,13 @@
 
 - (void)onFuncItemClick:(ZContentFuncItemType)itemType {
     
+    if (![[ZAccountCache shared] isLogin]) {
+        
+        self.block(ZContentActionTypeUnLogin, self, nil, nil);
+        
+        return;
+    }
+    
     __weak typeof(self) weakSelf = self;
     
     if (itemType == ZContentFuncItemTypeFun) {
@@ -202,22 +227,27 @@
             }
             else if ([action.title isEqualToString:@"点赞"] || [action.title isEqualToString:@"取消点赞"]) {
                 
-                [weakSelf.bridge like:weakSelf.circleBean.encoded isLike:weakSelf.circleBean.isLaud succ:^{
-                    
-                    weakSelf.circleBean.isLaud = !weakSelf.circleBean.isLaud;
-                    
-                    if (weakSelf.circleBean.isLaud) {
-                        
-                        weakSelf.circleBean.countLaud += 1;
-                        
-                    } else {
-                        
-                        weakSelf.circleBean.countLaud -= 1;
+                [weakSelf.bridge like:weakSelf.circleBean.encoded isLike:weakSelf.circleBean.isLaud action:^(enum ZContentActionType type , ZTableNoLoadingViewConntroller * _Nonnull from, ZKeyValueBean * _Nullable keyValue, ZCircleBean * _Nullable circle) {
+                   
+                    switch (type) {
+                        case ZContentActionTypeUnLogin:
+                            
+                            weakSelf.block(ZContentActionTypeUnLogin, self, nil, nil);
+                            
+                            break;
+                        case ZContentActionTypeLike:
+                        {
+                            
+                            [weakSelf.funcView setCircleBean:weakSelf.circleBean];
+                            
+                            weakSelf.block(ZContentActionTypeLike, self, nil, weakSelf.circleBean);
+                        }
+                            
+                            break;
+                        default:
+                            break;
                     }
                     
-                    weakSelf.op();
-                    
-                    [weakSelf.funcView setCircleBean:weakSelf.circleBean];
                 }];
             }
             
@@ -229,8 +259,6 @@
             alertMaker.
             addActionCancelTitle(@"取消").
             addActionDefaultTitle(@"举报").
-            addActionDefaultTitle(@"分享").
-            addActionDefaultTitle(weakSelf.circleBean.isattention ? @"取消关注" : @"关注").
             addActionDestructiveTitle(@"黑名单(慎重选择)");
             
         } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
@@ -241,51 +269,51 @@
             }
             else if ([action.title isEqualToString:@"举报"]) {
                 
-                [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:weakSelf.circleBean andFrom:self];
-                
-            } else if ([action.title isEqualToString:@"关注"] || [action.title isEqualToString:@"取消关注"]) {
-                
-                [weakSelf.bridge focus:weakSelf.circleBean.users.encoded encode:weakSelf.circleBean.encoded isFocus:weakSelf.circleBean.isattention succ:^{
-                    
-                    weakSelf.circleBean.isattention = !weakSelf.circleBean.isattention;
-                    
-                    ZContentHeaderView *headerView = (ZContentHeaderView *)weakSelf.headerView;
-                    
-                    [headerView setCircleBean:weakSelf.circleBean];
-                    
-                    weakSelf.op();
-                }];
+                weakSelf.block(ZContentActionTypeReport, weakSelf, nil, weakSelf.circleBean);
                 
             } else if ([action.title isEqualToString:@"黑名单(慎重选择)"]) {
                 
-                [weakSelf.bridge addBlack:weakSelf.circleBean.users.encoded targetEncoded:weakSelf.circleBean.encoded content:@"" succ:^{
-                    
-                    [weakSelf.navigationController popViewControllerAnimated:true];
-                    
-                    [ZNotiConfigration postNotificationWithName:ZNotiAddBlack andValue:nil andFrom:self];
-                    
-                    weakSelf.op();
+                [weakSelf.bridge addBlack:weakSelf.circleBean.users.encoded targetEncoded:weakSelf.circleBean.encoded content:@"" action:^(enum ZContentActionType type , ZTableNoLoadingViewConntroller * _Nonnull from, ZKeyValueBean * _Nullable keyValue, ZCircleBean * _Nullable circle) {
+                   
+                    switch (type) {
+                        case ZContentActionTypeUnLogin:
+                            
+                            weakSelf.block(ZContentActionTypeUnLogin, self, nil, nil);
+                            
+                            break;
+                        case ZContentActionTypeBlack:
+                        {
+                            
+                            [weakSelf.funcView setCircleBean:weakSelf.circleBean];
+                            
+                            weakSelf.block(ZContentActionTypeBlack, weakSelf, nil, nil);
+                        }
+                            
+                            break;
+                        default:
+                            break;
+                    }
                 }];
                 
             } else if ([action.title isEqualToString:@"分享"]) {
                 
-                NSString *displayname = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
-                
-                [ZNotiConfigration postNotificationWithName:ZNotiCircleShare andValue: @{@"webUrl": [NSString stringWithFormat:@"%@mob/circleFriends_wexCircleFriendsInfo?cfs.encoded=\(item.encoded)",[ZConfigure fetchAppKey]],@"title": displayname,@"desc":[NSString stringWithFormat:@"%@欢迎您",displayname]} andFrom:self];
-            }
+                self.block(ZContentActionTypeShare, self, nil, self.circleBean);
+            };
         }];
     } else if (itemType == ZContentFuncItemTypeComment){
         
-        ZCommentViewController *comment = [ZCommentViewController createCommentWithEncode:self.circleBean.encoded andOp:^{
-            
-            weakSelf.op();
-        }];
-        
-        [self.navigationController pushViewController:comment animated:true];
+        self.block(ZContentActionTypeComment, self, nil, self.circleBean);
     }
 }
 - (BOOL)canPanResponse {
     
     return true;
 }
+- (void)updateCircle:(ZCircleBean *)circle {
+    
+    self.circleBean = circle;
+    
+    [self.funcView setCircleBean:circle];
+}
+
 @end

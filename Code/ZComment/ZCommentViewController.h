@@ -8,13 +8,26 @@
 
 #import <ZTable/ZTable.h>
 #import "ZFragmentMix.h"
+@import ZBean;
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^ZCommentOperation)(void);
+@class ZCommentViewController;
+
+typedef NS_ENUM(NSInteger ,ZCommentActionType) {
+    
+    ZCommentActionTypeUnLogin,
+    
+    ZCommentActionTypeComment,
+    
+    ZCommentActionTypeReport
+    
+};
+
+typedef void(^ZCommentBlock)(ZCommentViewController *from ,ZCommentActionType type ,ZCircleBean *circleBean);
 
 @interface ZCommentViewController : ZTableLoadingViewController
 
-+ (instancetype)createCommentWithEncode:(NSString *)encode andOp:(ZCommentOperation) op;
++ (instancetype)createCommentWithEncode:(NSString *)encode andCircleBean:(ZCircleBean *)circleBean andOp:(ZCommentBlock) block;
 
 @property (nonatomic ,strong ,readonly) UIView *bottomBar;
 

@@ -11,9 +11,9 @@
 #import "ZCommentTableViewCell.h"
 @import ZCache;
 @import JXTAlertManager;
-@import ZBridge;
+@import ZActionBridge;
 @import SToolsKit;
-@import ZNoti;
+@import Masonry;
 
 #define BottomBar_Height KTABBAR_HEIGHT
 @interface ZCommentViewController () <UITextFieldDelegate ,ZCommentTableViewCellDelegate>
@@ -30,8 +30,9 @@
 
 @property (nonatomic ,strong) UIButton *coverItem;
 
-@property (nonatomic ,copy) ZCommentOperation op;
+@property (nonatomic ,copy) ZCommentBlock block;
 
+@property (nonatomic ,strong) ZCircleBean *circleBean;
 @end
 
 @implementation ZCommentViewController
@@ -43,17 +44,19 @@
     
 }
 
-+ (instancetype)createCommentWithEncode:(NSString *)encode andOp:(nonnull ZCommentOperation)op{
++ (instancetype)createCommentWithEncode:(NSString *)encode andCircleBean:(ZCircleBean *)circleBean andOp:(ZCommentBlock) block {
     
-    return [[self alloc] initWithEncode:encode andOp:op];
+    return [[self alloc] initWithEncode:encode andCircleBean:circleBean andOp:block];
 }
-- (instancetype)initWithEncode:(NSString *)endcode andOp:(nonnull ZCommentOperation)op{
+- (instancetype)initWithEncode:(NSString *)encode andCircleBean:(ZCircleBean *)circleBean andOp:(ZCommentBlock) block{
     
     if (self = [super init]) {
         
-        self.encode = endcode;
+        self.encode = encode;
         
-        self.op = op;
+        self.block = block;
+        
+        self.circleBean = circleBean;
     }
     return self;
 }
@@ -112,6 +115,10 @@
 }
 
 - (void)configOwnSubViews {
+    
+    [super configOwnSubViews];
+    
+    self.tableView.mj_insetT = -KSTATUSBAR_HEIGHT - 10;
     
     [self.tableView registerClass:[ZCommentRectangleTableViewCell class] forCellReuseIdentifier:@"rectangle"];
     
@@ -268,18 +275,22 @@
         sender.enabled = false;
     } else {
         
-        [ZNotiConfigration postNotificationWithName:ZNotiUnLogin andValue:nil andFrom:self];
+        self.block(self, ZCommentActionTypeUnLogin, self.circleBean);
     }
 }
 - (void)onPublishItemClick:(UIButton *)sender {
     
     __weak typeof(self) weakSelf = self;
     
-    [self.bridge addComment:self.encode content:self.editTF.text succ:^{
+    [self.bridge addComment:self.encode content:self.editTF.text succ:^(ZCommentBean * _Nullable comment) {
         
         [weakSelf.editTF resignFirstResponder];
         
-        weakSelf.op();
+        weakSelf.circleBean.countComment += 1;
+        
+        [weakSelf.bridge addComment:comment];
+        
+        weakSelf.block(weakSelf, ZCommentActionTypeComment ,weakSelf.circleBean);
     }];
 }
 
@@ -359,6 +370,8 @@
 
 - (void)onMoreItemClick:(ZCommentBean *)comment {
     
+    __weak typeof(self) weakSelf = self;
+    
     [self jxt_showActionSheetWithTitle:@"操作" message:@"" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
         
         alertMaker.
@@ -372,7 +385,7 @@
         }
         else if ([action.title isEqualToString:@"举报"]) {
             
-            [ZNotiConfigration postNotificationWithName:ZNotiCircleGotoReport andValue:comment andFrom:self];
+            weakSelf.block(weakSelf, ZCommentActionTypeReport,weakSelf.circleBean);
             
         }
     }];

@@ -9,8 +9,26 @@
 #import <ZTable/ZTable.h>
 
 NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger ,ZPublishActionType) {
+    
+    ZPublishActionTypeAddText,
+    
+    ZPublishActionTypeUpdateText,
+    
+    ZPublishActionTypePublish
+    
+};
+@import ZBean;
+@class ZPublishViewController;
+typedef void(^ZPublishBlock)(ZCircleBean *_Nullable circleBean ,ZPublishViewController * from ,ZPublishActionType type,ZKeyValueBean *_Nullable keyValue);
 
 @interface ZPublishViewController : ZTableNoLoadingViewConntroller
+
++ (instancetype)createPublishWithTag:(NSString *)tag andBlock:(ZPublishBlock ) block;
+
+- (void)addContent:(NSString *)text;
+
+- (void)updateContent:(ZKeyValueBean *)keyValue;
 
 @end
 

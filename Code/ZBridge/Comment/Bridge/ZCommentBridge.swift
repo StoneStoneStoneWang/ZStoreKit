@@ -133,6 +133,31 @@ extension ZCommentBridge {
         self.vc.tableView.scrollsToTop = true
 
     }
+    @objc public func addComment(_ encoded: String,content: String ,succ: @escaping (_ comment: ZCommentBean?) -> () ) {
+        
+        ZHudUtil.show(withStatus: "发表评论中....")
+        
+        ZCommentAddViewModel
+            .addComment(encoded, content: content)
+            .drive(onNext: { (result) in
+                
+                ZHudUtil.pop()
+                
+                switch result {
+                case .operation(let comment):
+                    
+                    ZHudUtil.showInfo("发表评论成功!")
+                    
+                    succ(comment as? ZCommentBean)
+                case .failed(let msg):
+                    
+                    ZHudUtil.showInfo(msg)
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposed)
+    }
 
 }
 

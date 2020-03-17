@@ -9,7 +9,7 @@
 #import "ZTextEditViewController.h"
 
 #import "ZFragmentConfig.h"
-@import ZBridge;
+@import ZActionBridge;
 @import Masonry;
 @import SToolsKit;
 
@@ -23,22 +23,26 @@
 
 @property (nonatomic ,strong) UIButton *backItem;
 
-@property (nonatomic ,strong) ZTextEditSucc succ;
+@property (nonatomic ,copy) ZTextEditBlock block;
+
+@property (nonatomic ,copy) NSString *his;
 
 @end
 
 @implementation ZTextEditViewController
 
-+ (instancetype)createTextEdit:(ZTextEditSucc)succ; {
++ (instancetype)createTextEditWithHis:(NSString *)his andBlock:(ZTextEditBlock)block{
     
-    return [[self alloc] initWithSucc:succ];
+    return [[self alloc] initWithWithHis:his andBlock:block];
     
 }
-- (instancetype)initWithSucc:(ZTextEditSucc)succ {
+- (instancetype)initWithWithHis:(NSString *)his andBlock:(ZTextEditBlock)block{
     
     if (self = [super init]) {
         
-        self.succ = succ;
+        self.block = block;
+        
+        self.his;
     }
     return self;
 }
@@ -116,6 +120,7 @@
         make.height.mas_equalTo(200);
     }];
     
+    self.textEdittv.text = self.his;
 }
 
 - (void)configNaviItem {
@@ -137,9 +142,11 @@
     
     self.bridge = [ZTextEditBridge new];
     
-    [self.bridge createTextEdit:self succ:^(NSString * _Nonnull text) {
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge createTextEdit:self his:self.his succ:^(NSString * _Nonnull text) {
         
-        self.succ(text);
+        weakSelf.block(text);
     }];
 }
 

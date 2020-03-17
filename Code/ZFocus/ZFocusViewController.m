@@ -8,7 +8,7 @@
 
 #import "ZFocusViewController.h"
 #import "ZFocusTableViewCell.h"
-@import ZBridge;
+@import ZActionBridge;
 @import SToolsKit;
 
 @interface ZFocusViewController ()

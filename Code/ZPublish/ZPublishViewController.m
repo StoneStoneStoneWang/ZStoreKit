@@ -14,7 +14,7 @@
 
 @import ZBean;
 @import SToolsKit;
-@import ZBridge;
+@import ZActionBridge;
 @import JXTAlertManager;
 @import CoreServices;
 @import WLToolsKit;
@@ -33,10 +33,28 @@
 @property (nonatomic ,strong) NSIndexPath *selectedIp;
 
 @property (nonatomic ,strong) ZKeyValueBean *selectedKv;
+
+@property (nonatomic ,copy) NSString *tag;
+
+@property (nonatomic ,copy) ZPublishBlock block;
 @end
 
 @implementation ZPublishViewController
 
++ (instancetype)createPublishWithTag:(NSString *)tag andBlock:(ZPublishBlock)block {
+    
+    return [[self alloc] initWithTag:tag andBlock:block];
+}
+- (instancetype)initWithTag:(NSString *)tag andBlock:(ZPublishBlock)block {
+    
+    if (self = [super init]) {
+        
+        self.block = block;
+        
+        self.tag = tag;
+    }
+    return self;
+}
 - (UIButton *)completeItem {
     
     if (!_completeItem) {
@@ -117,24 +135,27 @@
     
     ZPublishHeaderView *headerView = (ZPublishHeaderView *)self.headerView;
     
-    [self.bridge createPublish:self type:ZPublishTypeImage pTag:@"" tf:headerView.textField];
+    __weak typeof(self) weakSelf = self;
+    
+    [self.bridge createPublish:self type:ZPublishTypeImage pTag:self.tag tf:headerView.textField pubAction:^(NSString * _Nonnull tag, ZCircleBean * _Nonnull circleBean) {
+        
+        weakSelf.block(circleBean, weakSelf, ZPublishActionTypePublish ,nil);
+    }];
+}
+- (void)addContent:(NSString *)text {
+    
+    ZKeyValueBean *keyValue = [ZKeyValueBean new];
+    
+    keyValue.type = @"txt";
+    
+    keyValue.value = text;
+    
+    [self.bridge addContent:keyValue];
+
 }
 - (void)onTextItemClick {
     
-    __weak typeof(self) weakSelf = self;
-    
-    ZTextEditViewController *textEdit = [ZTextEditViewController createTextEdit:^(NSString * _Nonnull text) {
-        
-        ZKeyValueBean *keyValue = [ZKeyValueBean new];
-        
-        keyValue.type = @"txt";
-        
-        keyValue.value = text;
-        
-        [weakSelf.bridge addContent:keyValue];
-    }];
-    
-    [self presentViewController:[[ZTNavigationController alloc] initWithRootViewController:textEdit] animated:true completion:nil];
+    self.block(nil, self, ZPublishActionTypeAddText,nil);
 }
 - (void)onDeleteItemClick:(ZKeyValueBean *)keyValue {
     
@@ -261,6 +282,10 @@
         return cell;
     }
 }
+- (void)updateContent:(ZKeyValueBean *)keyValue {
+    
+    [self.bridge replaceContent:keyValue];
+}
 
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
     
@@ -270,14 +295,7 @@
     
     if ([keyValue.type isEqualToString:@"txt"]) {
         
-        ZTextEditViewController *textEdit = [ZTextEditViewController createTextEdit:^(NSString * _Nonnull text) {
-            
-            keyValue.value = text;
-            
-            [weakSelf.bridge replaceContent:keyValue];
-        }];
-        
-        [self presentViewController:[[ZTNavigationController alloc] initWithRootViewController:textEdit] animated:true completion:nil];
+        self.block(nil, self, ZPublishActionTypeUpdateText, keyValue);
         
         
     } else if ([keyValue.type isEqualToString:@"image"]) {

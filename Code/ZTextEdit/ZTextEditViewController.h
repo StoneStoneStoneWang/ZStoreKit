@@ -8,13 +8,13 @@
 
 #import <ZTransition/ZTransition.h>
 #import "ZFragmentMix.h"
-typedef void(^ZTextEditSucc)(NSString * _Nonnull text);
+typedef void(^ZTextEditBlock)(NSString * _Nonnull text);
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZTextEditViewController : ZTViewController
 
-+ (instancetype)createTextEdit:(ZTextEditSucc)succ;
++ (instancetype)createTextEditWithHis:(NSString *)his andBlock:(ZTextEditBlock)block;
 
 @end
 
