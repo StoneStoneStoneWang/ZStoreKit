@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZCircle"
-  spec.version      = "0.4.6"
+  spec.version      = "0.4.8"
   spec.summary      = "A Lib For 圈子."
   spec.description  = <<-DESC
   ZCircle是圈子
