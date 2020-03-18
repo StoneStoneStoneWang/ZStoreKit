@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZCircle"
-  spec.version      = "0.0.1"
+  spec.version      = "0.4.5"
   spec.summary      = "A Lib For 圈子."
   spec.description  = <<-DESC
   ZCircle是圈子
@@ -25,9 +25,8 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZCircle/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/TList'
+  spec.dependency 'ZActionBridge/TList/Bridge'
   spec.dependency 'ZTable'
-  spec.dependency 'Masonry'
   spec.dependency 'JXTAlertManager'
   spec.dependency 'SDWebImage'
 end

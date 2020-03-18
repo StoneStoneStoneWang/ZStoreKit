@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZComment"
-  spec.version      = "0.0.1"
+  spec.version      = "0.4.4"
   spec.summary      = "A Lib For 评论."
   spec.description  = <<-DESC
   ZComment是评论
@@ -25,12 +25,12 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZComment/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/Comment'
+  spec.dependency 'ZActionBridge/Comment/Bridge'
+  spec.dependency 'ZBean/Circle'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'JXTAlertManager'
   spec.dependency 'SDWebImage'
-  spec.dependency 'ZCache'
-  spec.dependency 'ZNoti'
+  spec.dependency 'ZCache/Account'
 end
 

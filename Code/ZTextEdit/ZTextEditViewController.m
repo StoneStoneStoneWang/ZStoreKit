@@ -42,7 +42,7 @@
         
         self.block = block;
         
-        self.his;
+        self.his = his;
     }
     return self;
 }

@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZContent"
-  spec.version      = "0.0.1"
+  spec.version      = "0.4.5"
   spec.summary      = "A Lib For 内容展示."
   spec.description  = <<-DESC
   ZContent是内容展示
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZContent/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/Content'
+  spec.dependency 'ZActionBridge/Content/Bridge'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'JXTAlertManager'

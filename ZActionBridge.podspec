@@ -158,6 +158,9 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZBean/KeyValue'
       vm.dependency 'ZBean/Circle'
       vm.dependency 'WLBaseResult'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZRealReq'
+      
     end
     
     content.subspec 'Bridge' do |bridge|
@@ -167,6 +170,8 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZCocoa/SM'
       bridge.dependency 'ZCocoa/TableView'
       bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZCache/Account'
+      bridge.dependency 'ZHud'
     end
   end
   spec.subspec 'TextEdit' do |textEdit|

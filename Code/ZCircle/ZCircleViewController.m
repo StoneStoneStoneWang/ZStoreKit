@@ -271,5 +271,10 @@
     
     [self.bridge updateCircle:circle ip:[self.bridge fetchIp:circle]];
 }
+- (void)insertCircle:(ZCircleBean *)circle {
+    
+    [self.bridge insertCircle:circle];
+}
+
 @end
 
