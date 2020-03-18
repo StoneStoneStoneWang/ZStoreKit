@@ -9,7 +9,6 @@
 #import "ZFuncItemView.h"
 @import SToolsKit;
 @import Masonry;
-@import ZNoti;
 @interface ZFuncItemView ()
 
 @property (nonatomic ,strong) UIButton *watchItem;

@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZPublish"
-  spec.version      = "0.0.1"
+  spec.version      = "0.4.6"
   spec.summary      = "A Lib For 发布."
   spec.description  = <<-DESC
   ZPublish是发布
@@ -28,9 +28,8 @@ Pod::Spec.new do |spec|
   spec.dependency 'Masonry'
   spec.dependency 'JXTAlertManager'
   spec.dependency 'SDWebImage'
-  spec.dependency 'ZBridge/Publish'
-  spec.dependency 'ZTextEdit'
-  spec.dependency 'ZTextField'
+  spec.dependency 'ZActionBridge/Publish/Bridge'
+  spec.dependency 'ZTField'
   spec.dependency 'WLToolsKit/Image'
 end
 

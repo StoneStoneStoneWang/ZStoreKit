@@ -10,7 +10,6 @@
 
 @import SToolsKit;
 @import Masonry;
-@import ZNoti;
 @interface ZPublishFooterView ()
 
 @property (nonatomic ,strong ,readwrite) UIButton *textItem;

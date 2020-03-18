@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZTextEdit"
-  spec.version      = "0.0.1"
+  spec.version      = "0.4.5"
   spec.summary      = "A Lib For 文本编辑"
   spec.description  = <<-DESC
   ZTextEdit是地图
@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   spec.source_files = "Code/ZTextEdit/*.{h,m}"
   spec.dependency 'ZConfig'
   spec.dependency 'ZTransition'
-  spec.dependency 'ZBridge/TextEdit'
+  spec.dependency 'ZActionBridge/TextEdit'
   spec.dependency 'Masonry'
 end
 
