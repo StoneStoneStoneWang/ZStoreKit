@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBlack"
-  spec.version      = "0.0.1"
+  spec.version      = "0.4.6"
   spec.summary      = "A Lib For 黑名单."
   spec.description  = <<-DESC
   ZBlack是黑名单界面
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZBlack/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/Black'
+  spec.dependency 'ZActionBridge/Black/Bridge'
   spec.dependency 'ZTable'
   spec.dependency 'Masonry'
   spec.dependency 'SDWebImage'

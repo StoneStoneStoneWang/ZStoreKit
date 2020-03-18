@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZFocus"
-  spec.version      = "0.0.1"
+  spec.version      = "0.4.6"
   spec.summary      = "A Lib For 我的关注."
   spec.description  = <<-DESC
   ZFocus是我的关注界面
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZFocus/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZBridge/Focus'
+  spec.dependency 'ZActionBridge/Focus/Bridge'
   spec.dependency 'ZTable'
   spec.dependency 'SDWebImage'
   spec.dependency 'Masonry'

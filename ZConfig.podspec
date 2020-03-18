@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZConfig"
-  spec.version      = "0.1.9"
+  spec.version      = "0.4.7"
   spec.summary      = "A Lib For config."
   spec.description  = <<-DESC
   ZConfig是是所有的配置

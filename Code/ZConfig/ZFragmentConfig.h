@@ -8,15 +8,15 @@
 
 #pragma mark ---- 类型App
 
-#define ZContainDrawer 1
+#define ZContainDrawer 0
 
 #define ZAppFormGlobalMap 0 // 地图类型 含有抽屉
 
-#define ZAppFormGlobalCircle 0 // 朋友圈类型
+#define ZAppFormGlobalCircle 1 // 朋友圈类型
 
-#define ZCircleFormOne 0  // 朋友圈类型 1 图片比例 4 / 3 左边
+#define ZCircleFormOne 1  // 朋友圈类型 1 图片比例 4 / 3 左边
 
-#define ZAppFormGlobalGame 1 // 朋友圈类型
+#define ZAppFormGlobalGame 0 // 游戏
 
 #if ZAppFormGlobalMap
 
@@ -85,7 +85,7 @@
 #define ZWXSecret "55e020ac03e8bafd495cda8d71933651"
 
 #pragma mark ---- 主色值
-#define ZFragmentColor "#333333"
+#define ZFragmentColor "#3e7bac"
 
 #define ZBackIcon "返回"
 
