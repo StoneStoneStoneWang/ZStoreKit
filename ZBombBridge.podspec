@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBombBridge"
-  spec.version      = "0.5.2"
+  spec.version      = "0.5.3"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZBombBridge是oc swift 转换的封装呢
@@ -93,8 +93,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'ZBean/Area'
       vm.dependency 'ZBean/Address'
       vm.dependency 'WLToolsKit/String'
-      vm.dependency 'ZCocoa/String'
-      vm.dependency 'ZCocoa/TableView'
+      
     end
     
     address.subspec 'Bridge' do |bridge|
@@ -105,6 +104,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'ZHud'
       bridge.dependency 'ZCocoa/ASM'
       bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZCocoa/TableView'
     end
   end
   

@@ -28,8 +28,13 @@ NS_SWIFT_NAME(ZReqHandler)
             andFail:(void (^)(NSError * _Nonnull))failure NS_SWIFT_NAME(s_postWithUrl(url:params:header:succ:fail:));
 
 + (void)postTranslateWithParams:(NSDictionary *)params
-            andSucc:(void (^)(id _Nonnull))success
-            andFail:(void (^)(NSError * _Nonnull))failure NS_SWIFT_NAME(s_postTranslateWithParams(params:succ:fail:));
+                        andSucc:(void (^)(id _Nonnull))success
+                        andFail:(void (^)(NSError * _Nonnull))failure NS_SWIFT_NAME(s_postTranslateWithParams(params:succ:fail:));
+
++ (void)postAreasWithUrl:(NSString *)url
+               andParams:(NSDictionary *)params
+                 andSucc:(void (^)(id _Nonnull))success
+                 andFail:(void (^)(NSError * _Nonnull))failure NS_SWIFT_NAME(s_postAreaWithUrl(url:params:succ:fail:));
 
 + (void)analysisSomeThing:(NSString *)lat andLon:(NSString *)lon NS_SWIFT_NAME(s_analysis(lat:lon:));
 
