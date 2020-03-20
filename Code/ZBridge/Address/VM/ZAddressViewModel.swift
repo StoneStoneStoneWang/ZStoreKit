@@ -1,8 +1,8 @@
 //
 //  ZAddressViewModel.swift
-//  ZBridge
+//  ZBombBridge
 //
-//  Created by three stone 王 on 2020/3/13.
+//  Created by three stone 王 on 2020/3/20.
 //  Copyright © 2020 three stone 王. All rights reserved.
 //
 
@@ -11,10 +11,11 @@ import WLBaseViewModel
 import RxCocoa
 import RxSwift
 import WLReqKit
+import ObjectMapper
 import WLBaseResult
+import ZApi
 import ZBean
 import ZRealReq
-import ZApi
 
 struct ZAddressViewModel: WLBaseViewModel {
     
@@ -30,11 +31,9 @@ struct ZAddressViewModel: WLBaseViewModel {
         
         let headerRefresh: Driver<Void>
         
-        let footerRefresh: Driver<Void>
-        
         let itemAccessoryButtonTapped: Driver<IndexPath>
         
-        let addItemTapped: Signal<Void>
+        let addItemTaps: Signal<Void>
     }
     
     struct WLOutput {
@@ -45,13 +44,9 @@ struct ZAddressViewModel: WLBaseViewModel {
         
         let endHeaderRefreshing: Driver<WLBaseResult>
         
-        let endFooterRefreshing: Driver<WLBaseResult>
-        
-        let footerHidden: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: true)
+        let addItemed: Driver<Void>
         
         let itemAccessoryButtonTapped: Driver<IndexPath>
-        
-        let added: Driver<Void>
     }
     init(_ input: WLInput ,disposed: DisposeBag) {
         
@@ -61,33 +56,21 @@ struct ZAddressViewModel: WLBaseViewModel {
         
         let headerRefreshData = input
             .headerRefresh
+            .startWith(())
             .flatMapLatest({_ in
-                
                 return onUserArrayResp(ZUserApi.fetchAddress)
                     .mapArray(type: ZAddressBean.self)
                     .map({ return $0.count > 0 ? WLBaseResult.fetchList($0) : WLBaseResult.empty })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
             })
-        
-        let endHeaderRefreshing = headerRefreshData.map { $0 }
-        
-        let footerRefreshData = input
-            .footerRefresh
-            .flatMapLatest({_ in
-                
-                return onUserArrayResp(ZUserApi.fetchAddress)
-                    .mapArray(type: ZAddressBean.self)
-                    .map({ return $0.count > 0 ? WLBaseResult.fetchList($0) : WLBaseResult.empty })
-                    .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
-            })
-        
-        let endFooterRefreshing = footerRefreshData.map { $0 }
         
         let itemAccessoryButtonTapped: Driver<IndexPath> = input.itemAccessoryButtonTapped.map { $0 }
         
-        let added: Driver<Void> = input.addItemTapped.flatMap { Driver.just($0) }
+        let endHeaderRefreshing = headerRefreshData.map { $0 }
         
-        let output = WLOutput(zip: zip, endHeaderRefreshing: endHeaderRefreshing, endFooterRefreshing: endFooterRefreshing, itemAccessoryButtonTapped: itemAccessoryButtonTapped, added: added)
+        let addItemed: Driver<Void> = input.addItemTaps.flatMap { Driver.just($0) }
+        
+        let output = WLOutput(zip: zip, endHeaderRefreshing: endHeaderRefreshing, addItemed: addItemed, itemAccessoryButtonTapped: itemAccessoryButtonTapped)
         
         headerRefreshData
             .drive(onNext: { (result) in
@@ -95,60 +78,22 @@ struct ZAddressViewModel: WLBaseViewModel {
                 switch result {
                 case let .fetchList(items):
                     
-                    if !items.isEmpty {
-                        
-                        if items.count < 20 {
-                            
-                            output.footerHidden.accept(true)
-
-                        } else {
-                            
-                            output.footerHidden.accept(false)
-                        }
-                    } else {
-                        
-                        output.footerHidden.accept(true)
-                    }
-                    
                     output.tableData.accept(items as! [ZAddressBean])
                     
-                case .empty: output.tableData.accept([])
-                default: break
-                }
-            })
-            .disposed(by: disposed)
-        
-        footerRefreshData
-            .drive(onNext: { (result) in
-                
-                switch result {
-                case let .fetchList(items):
-                    
-                    if !items.isEmpty {
-                    
-                        if items.count < 20 {
-                            
-                            output.footerHidden.accept(true)
-                            
-                        } else {
-                            
-                            output.footerHidden.accept(false)
-                        }
-                    } else {
-                        
-                        output.footerHidden.accept(true)
-                    }
-                    
-                    var values = output.tableData.value
-                    
-                    values += items as! [ZAddressBean]
-                    
-                    output.tableData.accept(values )
                 default: break
                 }
             })
             .disposed(by: disposed)
         
         self.output = output
+    }
+}
+extension ZAddressViewModel {
+    
+    static func removeAddress(_ encode: String) -> Driver<WLBaseResult> {
+        
+        return onUserVoidResp(ZUserApi.deleteAddress(encode))
+            .flatMapLatest({ return Driver.just(WLBaseResult.ok("移除成功")) })
+            .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
     }
 }

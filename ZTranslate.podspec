@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZConfig"
-  spec.version      = "0.4.9"
-  spec.summary      = "A Lib For config."
+  spec.name         = "ZTranslate"
+  spec.version      = "0.5.0"
+  spec.summary      = "A Lib For 翻译."
   spec.description  = <<-DESC
-  ZConfig是是所有的配置
+  ZTranslate是我的关注界面
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -23,6 +23,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.source_files = "Code/ZConfig/*.{h}"
-  
+  spec.source_files = "Code/ZTranslate/*.{h,m}"
+  spec.dependency 'ZConfig'
+  spec.dependency 'ZBombBridge/Translate/Bridge'
+  spec.dependency 'SToolsKit'
+  spec.dependency 'Masonry'
 end

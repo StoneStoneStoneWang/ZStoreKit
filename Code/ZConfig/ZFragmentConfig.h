@@ -76,7 +76,7 @@
 
 #endif
 
-#define ZAppKey "cc8050936ebe4cb3b6ffc7ea808b3c96"
+#define ZAppKey "e4b3ad47f0ad45808d6b742482bde513"
 
 #define ZWXKey "wx6daf9371d9e7472a"
 
@@ -168,7 +168,7 @@
 
 #define AddressIcon "我的地址"
 
-#define ZPhoneNum "+0314-8081025"
+#define ZPhoneNum "+0314-8032560"
 
 #define ZMoreIcon "更多"
 
