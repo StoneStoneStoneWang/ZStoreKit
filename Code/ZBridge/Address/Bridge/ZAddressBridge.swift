@@ -168,21 +168,11 @@ extension ZAddressBridge {
 }
 extension ZAddressBridge: UITableViewDelegate {
     
-    @objc public func converToCircle(_ circleJson: [String : Any]) -> ZCircleBean {
-        
-        return ZCircleBean(JSON: circleJson)!
-    }
-    
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         guard let datasource = dataSource else { return 0}
         
         return vc.caculate(forCell: datasource[indexPath], for: indexPath)
-    }
-    
-    @objc public func converToJson(_ circle: ZCircleBean) -> [String: Any] {
-        
-        return circle.toJSON()
     }
     
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
