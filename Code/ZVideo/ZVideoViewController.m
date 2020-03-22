@@ -13,32 +13,15 @@
 @import JXTAlertManager;
 @import ZActionBridge;
 
-#import "ZCommentViewController.h"
-
-@interface ZVideoCommentViewController :ZCommentViewController
-
-@end
-
-@implementation ZVideoCommentViewController
-
-- (BOOL)canPanResponse {
-    return false;
-}
-
-@end
 @interface ZVideoViewController () <ZVideoPlayerDelegate>
 
 @property (nonatomic ,strong) ZVideoPlayer *videoPlayer;
-
-@property (nonatomic ,strong) ZVideoCommentViewController *commentVC;
 
 @property (nonatomic ,strong) NSString *encode;
 
 @property (nonatomic ,strong) NSString *url;
 
 @property (nonatomic ,strong) ZCircleBean *circleBean;
-
-@property (nonatomic ,copy) ZCommentBlock commentBlock;
 
 @property (nonatomic ,copy) ZVideoActionBlock videoBlock;
 
@@ -59,12 +42,12 @@
     
     [self.navigationController setNavigationBarHidden:false animated:true];
 }
-+ (instancetype)createVideoWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andIp:(NSIndexPath *)ip andCommentBlock:(ZCommentBlock )commentBlock andVideoBlock:(nonnull ZVideoActionBlock)videoBlock {
++ (instancetype)createVideoWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andIp:(NSIndexPath *)ip andVideoBlock:(nonnull ZVideoActionBlock)videoBlock {
     
-    return [[self alloc] initWithEncode:encode andUrl:url andIsMy:isMy andCircleBean:circleBean andIp:ip andCommentBlock:commentBlock andVideoBlock:videoBlock];
+    return [[self alloc] initWithEncode:encode andUrl:url andIsMy:isMy andCircleBean:circleBean andIp:ip andVideoBlock:videoBlock];
 }
 
-- (instancetype)initWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andIp:(NSIndexPath *)ip andCommentBlock:(ZCommentBlock )commentBlock andVideoBlock:(nonnull ZVideoActionBlock)videoBlock{
+- (instancetype)initWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andIp:(NSIndexPath *)ip andVideoBlock:(nonnull ZVideoActionBlock)videoBlock{
     
     if (self = [super init]) {
         
@@ -73,8 +56,6 @@
         self.url = url;
         
         self.circleBean = circleBean;
-        
-        self.commentBlock = commentBlock;
         
         self.ip = ip;
         
@@ -95,26 +76,10 @@
 -(void)addOwnSubViews {
     [super addOwnSubViews];
     
-    self.commentVC = [ZVideoCommentViewController createCommentWithEncode:self.encode andCircleBean:self.circleBean andOp:self.commentBlock];
-    
-    [self.view addSubview:self.commentVC.view];
-    
     [self.view addSubview:self.videoPlayer];
 }
 - (void)configOwnSubViews {
     [super configOwnSubViews];
-    
-    [self.view addSubview:self.commentVC.view];
-    
-    self.commentVC.tableView.frame = self.view.bounds;
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) * 9 / 16)];
-    
-    self.commentVC.tableView.tableHeaderView = headerView;
-    //
-    self.commentVC.tableView.mj_insetT = -KSTATUSBAR_HEIGHT;
-    
-    [self addChildViewController:self.commentVC];
     
 }
 //http://vf1.mtime.cn/Video/2012/04/23/mp4/120423212602431929.mp4

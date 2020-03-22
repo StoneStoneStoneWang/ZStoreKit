@@ -12,29 +12,30 @@ import RxCocoa
 import RxSwift
 import RxDataSources
 import ZCocoa
+import ZBridge
 
-@objc (ZOrderBaseBridge)
-public final class ZOrderBaseBridge: ZBaseBridge {
+@objc (ZOrderHeaderBridge)
+public final class ZOrderHeaderBridge: ZBaseBridge {
     
-    var viewModel: ZOrderBaseViewModel!
+    var viewModel: ZOrderHeaderViewModel!
     
-    typealias Section = ZSectionModel<(), String>
+    typealias Section = ZSectionModel<(), ZOrderHeaderBean>
     
     var dataSource: RxCollectionViewSectionedReloadDataSource<Section>!
     
     var vc: ZCollectionNoLoadingViewController!
 }
 
-extension ZOrderBaseBridge {
+extension ZOrderHeaderBridge {
     
-    @objc public func createOrderBase(_ vc: ZCollectionNoLoadingViewController ,tableData: [String]) {
+    @objc public func createOrderBase(_ vc: ZCollectionNoLoadingViewController) {
         
         self.vc = vc
         
-        let input = ZOrderBaseViewModel.WLInput(modelSelect: vc.collectionView.rx.modelSelected(String.self),
-                                                itemSelect: vc.collectionView.rx.itemSelected, tableData: tableData)
+        let input = ZOrderHeaderViewModel.WLInput(modelSelect: vc.collectionView.rx.modelSelected(ZOrderHeaderBean.self),
+                                                itemSelect: vc.collectionView.rx.itemSelected)
         
-        viewModel = ZOrderBaseViewModel(input, disposed: disposed)
+        viewModel = ZOrderHeaderViewModel(input, disposed: disposed)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<Section>(
             configureCell: { ds, cv, ip, item in return vc.configCollectionViewCell(item, for: ip)})
@@ -53,6 +54,8 @@ extension ZOrderBaseBridge {
             .output
             .zip
             .subscribe(onNext: { (item,ip) in
+                
+                vc.collectionView.deselectItem(at: ip, animated: true)
                 
                 vc.collectionViewSelectData(item, for: ip)
             })

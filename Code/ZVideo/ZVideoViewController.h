@@ -10,7 +10,6 @@
 #import <ZTransition/ZTransition.h>
 NS_ASSUME_NONNULL_BEGIN
 @import ZBean;
-@import ZComment;
 @class ZVideoViewController;
 
 typedef NS_ENUM(NSInteger ,ZVideoActionType) {
@@ -29,7 +28,7 @@ typedef void(^ZVideoActionBlock)(ZVideoActionType type,ZVideoViewController *fro
 
 @interface ZVideoViewController : ZTViewController
 
-+ (instancetype)createVideoWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andIp:(NSIndexPath *)ip andCommentBlock:(ZCommentBlock )commentBlock andVideoBlock:(ZVideoActionBlock)videoBlock;
++ (instancetype)createVideoWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andIp:(NSIndexPath *)ip andVideoBlock:(ZVideoActionBlock)videoBlock;
 
 @end
 

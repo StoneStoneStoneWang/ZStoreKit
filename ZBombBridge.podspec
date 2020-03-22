@@ -108,6 +108,77 @@ Pod::Spec.new do |spec|
     end
   end
   
+  spec.subspec 'Evaluate' do |evaluate|
+    
+    evaluate.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Evaluate/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ObjectMapper'
+      vm.dependency 'RxDataSources'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
+    end
+    
+    evaluate.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Evaluate/Bridge/*.{swift}"
+      bridge.dependency 'ZBombBridge/Evaluate/VM'
+      bridge.dependency 'ZTable'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'RxDataSources'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZHud'
+    end
+  end
+  spec.subspec 'Video' do |video|
+    
+    video.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Video/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
+    end
+    
+    video.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Video/Bridge/*.{swift}"
+      bridge.dependency 'ZBombBridge/Video/VM'
+      bridge.dependency 'ZTransition'
+      bridge.dependency 'ZCache/Account'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZHud'
+    end
+  end
+  spec.subspec 'Order' do |order|
+    
+    order.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Order/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZRealReq'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'ZApi'
+      vm.dependency 'ZBean/Circle'
+    end
+    
+    order.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Order/Bridge/*.{swift}"
+      bridge.dependency 'ZBombBridge/Order/VM'
+      bridge.dependency 'ZHud'
+      bridge.dependency 'ZCollection'
+      bridge.dependency 'ZCocoa/ASM'
+      bridge.dependency 'ZCocoa/SM'
+      bridge.dependency 'ZCocoa/TableView'
+      bridge.dependency 'ZBridge/Base'
+      bridge.dependency 'ZTable'
+    end
+  end
+  
   spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
   
 end

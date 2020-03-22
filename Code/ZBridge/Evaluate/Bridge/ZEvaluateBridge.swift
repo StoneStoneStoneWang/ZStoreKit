@@ -13,6 +13,7 @@ import ZCocoa
 import ZHud
 import RxCocoa
 import RxSwift
+import ZBridge
 
 @objc (ZEvaluateBridge)
 public final class ZEvaluateBridge: ZBaseBridge {
