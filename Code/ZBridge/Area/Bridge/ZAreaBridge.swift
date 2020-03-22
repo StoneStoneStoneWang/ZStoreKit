@@ -87,7 +87,7 @@ extension ZAreaBridge {
                     areaAction(vc,area,type, true)
                 case .city:
                     
-                    areaAction(vc,area,type, self.fetchRegions(area.id).count > 0)
+                    areaAction(vc,area,type, self.fetchRegions(area.areaId).count > 0)
                 default:
                     break;
                 }
@@ -164,7 +164,7 @@ extension ZAreaBridge {
         
         let values = self.viewModel.output.tableData.value
         
-        let idx = values.firstIndex(where: {  $0.id == id })!
+        let idx = values.firstIndex(where: {  $0.areaId == id })!
         
         return IndexPath(row: idx, section: 0)
     }

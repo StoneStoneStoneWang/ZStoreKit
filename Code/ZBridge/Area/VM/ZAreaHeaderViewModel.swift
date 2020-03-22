@@ -15,9 +15,9 @@ import ZBean
 @objc (ZAreaHeaderBean)
 public class ZAreaHeaderBean: NSObject {
     
-    var isSelected: Bool = false
+    @objc public var isSelected: Bool = false
     
-    var areaBean: ZAreaBean!
+    @objc public var areaBean: ZAreaBean!
 }
 
 

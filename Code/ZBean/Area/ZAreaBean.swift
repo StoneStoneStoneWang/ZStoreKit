@@ -12,34 +12,34 @@ import RxDataSources
 
 @objc (ZAreaBean)
 public class ZAreaBean: NSObject,Mappable ,IdentifiableType {
-
+    
     public var identity: String = NSUUID().uuidString
     
     public typealias Identity = String
     
-    public var id: Int = 0
+    @objc public var areaId: Int = 0
     
-    public var aid: String = ""
+    @objc public var aid: String = ""
     
-    public var pid: Int = 0
+    @objc public var pid: Int = 0
     
-    public var name: String = ""
+    @objc public var name: String = ""
     
-    public var alif: String = ""
+    @objc public var alif: String = ""
     
-    public var areacode: String = ""
+    @objc public var areacode: String = ""
     
-    public var arealevel: Int = 0
+    @objc public var arealevel: Int = 0
     
-    public var typename: String = ""
+    @objc public var typename: String = ""
     
-    public var addrList: [ZAreaBean] = []
+    @objc public var addrList: [ZAreaBean] = []
     
     required public init?(map: Map) { }
     
     public func mapping(map: Map) {
         
-        id <- map["id"]
+        areaId <- map["id"]
         
         aid <- map["aid"]
         
@@ -58,7 +58,7 @@ public class ZAreaBean: NSObject,Mappable ,IdentifiableType {
         addrList <- map["addrList"]
     }
     
-    public var isSelected: Bool = false
+    @objc public var isSelected: Bool = false
     
-    public override init() { }
+    @objc public override init() { }
 }

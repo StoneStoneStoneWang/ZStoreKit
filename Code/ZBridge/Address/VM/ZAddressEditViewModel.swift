@@ -24,17 +24,27 @@ public class ZAddressEditBean: NSObject ,IdentifiableType{
     
     public typealias Identity = String
     
-    public var type: ZAddressEditType = .name
+    @objc public var type: ZAddressEditType = .name
     
-    public var value: String = ""
+    @objc public var title: String {
+        
+        return type.title
+    }
     
-    public var pArea: ZAreaBean = ZAreaBean()
+    @objc public var value: String = ""
     
-    public var cArea: ZAreaBean = ZAreaBean()
+    @objc public var pArea: ZAreaBean = ZAreaBean()
     
-    public var rArea: ZAreaBean = ZAreaBean()
+    @objc public var cArea: ZAreaBean = ZAreaBean()
     
-    public var isDef: Bool = true
+    @objc public var rArea: ZAreaBean = ZAreaBean()
+    
+    @objc public var isDef: Bool = true
+    
+    @objc public var placeholder: String {
+        
+        return type.placeholder
+    }
     
     public static var editTypes: [ZAddressEditBean] {
         
@@ -178,31 +188,31 @@ struct ZAddressEditViewModel: WLBaseViewModel {
             .completeTaps
             .withLatestFrom(uap)
             .flatMapLatest {
-
+                
                 if $0.0.wl_isEmpty {
-
+                    
                     return Driver<WLBaseResult>.just(WLBaseResult.failed("请填写收货人姓名"))
                 }
                 if $0.1.wl_isEmpty {
-
+                    
                     return Driver<WLBaseResult>.just(WLBaseResult.failed("请填写收货人手机号"))
                 }
                 if !String.validPhone(phone: $0.1) {
-
+                    
                     return Driver<WLBaseResult>.just(WLBaseResult.failed("请填写收货人11位手机号"))
                 }
-
+                
                 if $0.3.name.wl_isEmpty {
-
+                    
                     return Driver<WLBaseResult>.just(WLBaseResult.failed("请选择所在地区"))
                 }
-
+                
                 if $0.2.wl_isEmpty {
-
+                    
                     return Driver<WLBaseResult>.just(WLBaseResult.failed("请填写详细地址"))
                 }
-
-                return onUserDictResp(ZUserApi.editAddress(input.encode, name: $0.0, phone: $0.1, plcl: $0.3.id, plclne: $0.3.name, city: $0.4.id, cityne: $0.4.name, region: $0.5.id, regionne: $0.5.name, addr: $0.2, isdef: $0.6, zipCode: ""))
+                
+                return onUserDictResp(ZUserApi.editAddress(input.encode, name: $0.0, phone: $0.1, plcl: $0.3.areaId, plclne: $0.3.name, city: $0.4.areaId, cityne: $0.4.name, region: $0.5.areaId, regionne: $0.5.name, addr: $0.2, isdef: $0.6, zipCode: ""))
                     .mapObject(type: ZAddressBean.self)
                     .map({ WLBaseResult.operation($0) })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })

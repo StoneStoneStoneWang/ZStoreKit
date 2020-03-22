@@ -52,31 +52,31 @@ public class ZAddressBean: NSObject,Mappable,IdentifiableType {
         
     }
     
-    public var id: Int = 0
+    @objc public var id: Int = 0
     
-    public var intime: Int = Int.max
+    @objc public var intime: Int = Int.max
     
-    public var isdel: Bool = false
+    @objc public var isdel: Bool = false
     
-    public var phone: String = ""
+    @objc public var phone: String = ""
     
-    public var plcl: Int = 0
+    @objc public var plcl: Int = 0
     
-    public var plclne: String = ""
+    @objc public var plclne: String = ""
     
-    public var city: Int = 0
+    @objc public var city: Int = 0
     
-    public var cityne: String = ""
+    @objc public var cityne: String = ""
     
-    public var region: Int = 0
+    @objc public var region: Int = 0
     
-    public var regionne: String = ""
+    @objc public var regionne: String = ""
     
-    public var encoded: String = ""
+    @objc public var encoded: String = ""
     
-    public var name: String = ""
+    @objc public var name: String = ""
     
-    public var addr: String = ""
+    @objc public var addr: String = ""
     
-    public override init() { }
+    @objc public override init() { }
 }

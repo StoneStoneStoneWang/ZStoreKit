@@ -46,7 +46,7 @@ public final class ZAddressEditBridge: ZBaseBridge {
 
 extension ZAddressEditBridge {
     
-    @objc public func createCharactersEdit(_ vc: ZTableNoLoadingViewConntroller,temp: ZAddressBean? ,succ: @escaping ZCharactersEditSucc) {
+    @objc public func createAddressEdit(_ vc: ZTableNoLoadingViewConntroller,temp: ZAddressBean? ,succ: @escaping ZCharactersEditSucc) {
         
         if let completeItem = vc.navigationItem.rightBarButtonItem?.customView as? UIButton {
             
@@ -103,7 +103,7 @@ extension ZAddressEditBridge {
                     
                     vc.view.endEditing(true)
                     
-                    ZHudUtil.show(withStatus: "编辑角色信息中")
+                    ZHudUtil.show(withStatus: "编辑地址中")
                     
                 })
                 .disposed(by: disposed)
@@ -122,7 +122,7 @@ extension ZAddressEditBridge {
                         
                     case let .operation(obj):
                         
-                        ZHudUtil.showInfo("添加地址成功")
+                        ZHudUtil.showInfo(temp != nil ? "修改地址成功" : "添加地址成功")
                         
                         succ(obj as? ZAddressBean)
                         
@@ -155,17 +155,17 @@ extension ZAddressEditBridge {
                 
                 let p = ZAreaBean()
                 
-                p.id = temp.plcl
+                p.areaId = temp.plcl
                 p.name = temp.plclne
                 
                 let c = ZAreaBean()
                 
-                c.id = temp.city
+                c.areaId = temp.city
                 c.name = temp.cityne
                 
                 let r = ZAreaBean()
                 
-                r.id = temp.region
+                r.areaId = temp.region
                 r.name = temp.regionne
                 
                 province.accept(p)
@@ -206,7 +206,7 @@ extension ZAddressEditBridge {
                 detail.accept(value)
             }
 
-            vc.tableView.reloadRows(at: [IndexPath(item: idx, section: 0)], with: .fade)
+//            vc.tableView.reloadRows(at: [IndexPath(item: idx, section: 0)], with: .fade)
         }
     }
     
@@ -235,17 +235,17 @@ extension ZAddressEditBridge {
             
             let p = ZAreaBean()
             
-            p.id = pid
+            p.areaId = pid
             p.name = pName
             
             let c = ZAreaBean()
             
-            c.id = cid
+            c.areaId = cid
             c.name = cName
             
             let r = ZAreaBean()
             
-            r.id = rid
+            r.areaId = rid
             r.name = rName
             
             province.accept(p)

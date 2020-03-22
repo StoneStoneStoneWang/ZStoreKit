@@ -30,7 +30,7 @@ public class ZAreaManager: NSObject {
 
 extension ZAreaManager {
     
-    public func fetchAreas() -> Driver<WLBaseResult> {
+      public func fetchAreas() -> Driver<WLBaseResult> {
         
         if allAreas.count > 0 {
             
@@ -68,7 +68,7 @@ extension ZAreaManager {
         }
     }
     
-    public func fetchSomeArea(_ id: Int)  -> ZAreaBean {
+   @objc public func fetchSomeArea(_ id: Int)  -> ZAreaBean {
         
         assert(allAreas.count > 0, "请先调用 fetchArea")
         
@@ -76,7 +76,7 @@ extension ZAreaManager {
         
         for item in allAreas {
             
-            if item.id == id {
+            if item.areaId == id {
                 
                 result = item
                 
@@ -87,7 +87,7 @@ extension ZAreaManager {
         return result ?? ZAreaBean()
     }
     
-    public func saveArea(_ areas: [Any]) -> [Any] {
+   @objc public func saveArea(_ areas: [Any]) -> [Any] {
         
         for item in areas {
             
