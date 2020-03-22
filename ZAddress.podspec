@@ -1,11 +1,10 @@
-
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZPlayer"
+  spec.name         = "ZAddress"
   spec.version      = "0.5.7"
-  spec.summary      = "A Lib For 视频播放器."
+  spec.summary      = "A Lib For 地址."
   spec.description  = <<-DESC
-  ZPlayer是VC的封装
+  ZAddress是地址管理
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -24,12 +23,12 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'Framework/ZPlayer/ZPlayer.framework'
-  
-  spec.resource_bundles    = {'ZPlayer' => 'Framework/ZPlayer/ZPlayer.bundle'}
-  
-  spec.dependency 'MobileVLCKit'
-  
-  spec.dependency 'Reachability'
-  
+  spec.source_files = "Code/ZAddress/*.{h,m}"
+  spec.dependency 'ZConfig'
+  spec.dependency 'ZBombBridge/Address/Bridge'
+  spec.dependency 'Masonry'
+  spec.dependency 'SToolsKit'
+  spec.dependency 'ZTField'
+  spec.dependency 'JXTAlertManager'
 end
+

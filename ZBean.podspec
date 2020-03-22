@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBean"
-  spec.version      = "0.2.9"
+  spec.version      = "0.5.6"
   spec.summary      = "A Lib For Bean."
   spec.description  = <<-DESC
   ZBean是所有模型的封装

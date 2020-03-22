@@ -1,11 +1,10 @@
-
 Pod::Spec.new do |spec|
   
-  spec.name         = "ZPlayer"
+  spec.name         = "ZArea"
   spec.version      = "0.5.7"
-  spec.summary      = "A Lib For 视频播放器."
+  spec.summary      = "A Lib For 圈子."
   spec.description  = <<-DESC
-  ZPlayer是VC的封装
+  ZCircle是圈子
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/ZStoreKit.git"
@@ -24,12 +23,11 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/ZStoreKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'Framework/ZPlayer/ZPlayer.framework'
-  
-  spec.resource_bundles    = {'ZPlayer' => 'Framework/ZPlayer/ZPlayer.bundle'}
-  
-  spec.dependency 'MobileVLCKit'
-  
-  spec.dependency 'Reachability'
-  
+  spec.source_files = "Code/ZArea/*.{h,m}"
+  spec.dependency 'ZConfig'
+  spec.dependency 'ZBombBridge/Area/Bridge'
+  spec.dependency 'JXTAlertManager'
+  spec.dependency 'Masonry'
+  spec.dependency 'SToolsKit'
 end
+

@@ -10,12 +10,26 @@
 #import <ZTransition/ZTransition.h>
 NS_ASSUME_NONNULL_BEGIN
 @import ZBean;
+@import ZComment;
+@class ZVideoViewController;
 
-typedef void(^ZVideoOperation)(void);
+typedef NS_ENUM(NSInteger ,ZVideoActionType) {
+    
+    ZVideoActionTypeUnLogin,
+    
+    ZVideoActionTypeReport,
+    
+    ZVideoActionTypeShare,
+    
+    ZVideoActionTypeBlack
+    
+};
+
+typedef void(^ZVideoActionBlock)(ZVideoActionType type,ZVideoViewController *from , ZCircleBean *_Nullable cirlce ,NSIndexPath *_Nullable ip);
 
 @interface ZVideoViewController : ZTViewController
 
-+ (instancetype)createVideoWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andOp:(ZVideoOperation )op;
++ (instancetype)createVideoWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andIp:(NSIndexPath *)ip andCommentBlock:(ZCommentBlock )commentBlock andVideoBlock:(ZVideoActionBlock)videoBlock;
 
 @end
 
