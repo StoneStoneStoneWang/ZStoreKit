@@ -7,6 +7,7 @@
 //
 
 #import "ZCommentTableViewCell.h"
+#import "ZFragmentConfig.h"
 @import SToolsKit;
 @import Masonry;
 @import SDWebImage;

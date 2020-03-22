@@ -7,7 +7,7 @@
 //
 
 #import "ZCommentViewController.h"
-
+#import "ZFragmentConfig.h"
 #import "ZCommentTableViewCell.h"
 @import ZCache;
 @import JXTAlertManager;

@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZComment"
-  spec.version      = "0.4.4"
+  spec.version      = "0.5.9"
   spec.summary      = "A Lib For 评论."
   spec.description  = <<-DESC
   ZComment是评论
