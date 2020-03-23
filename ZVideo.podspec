@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZVideo"
-  spec.version      = "0.6.0"
+  spec.version      = "0.6.1"
   spec.summary      = "A Lib For 视频."
   spec.description  = <<-DESC
   ZVideo是视频展示
@@ -25,7 +25,6 @@ Pod::Spec.new do |spec|
   
   spec.source_files = "Code/ZVideo/*.{h,m}"
   spec.dependency 'ZConfig'
-  spec.dependency 'ZComment'
   spec.dependency 'ZPlayer'
   spec.dependency 'JXTAlertManager'
   spec.dependency 'ZActionBridge/Content/Bridge'

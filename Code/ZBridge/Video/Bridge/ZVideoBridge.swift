@@ -40,7 +40,7 @@ public enum ZVideoActionType: Int ,Codable {
 
 public typealias ZVideoAction = (_ action: ZVideoActionType ,_ vc: ZTViewController) -> ()
 
-@objc (ZTListBridge)
+@objc (ZVideoBridge)
 public final class ZVideoBridge: ZBaseBridge {
     
     var viewModel: ZVideoViewModel!

@@ -7,11 +7,10 @@
 //
 
 #import "ZVideoViewController.h"
-#import "ZCommentViewController.h"
 @import ZPlayer;
 @import SToolsKit;
+@import ZBombBridge;
 @import JXTAlertManager;
-@import ZActionBridge;
 
 @interface ZVideoViewController () <ZVideoPlayerDelegate>
 
@@ -25,7 +24,7 @@
 
 @property (nonatomic ,copy) ZVideoActionBlock videoBlock;
 
-@property (nonatomic ,strong) ZContentBridge *bridge;
+@property (nonatomic ,strong) ZVideoBridge *bridge;
 
 @property (nonatomic ,strong) NSIndexPath *ip;
 @end
@@ -93,7 +92,7 @@
     
     [self prefersStatusBarHidden];
     
-    self.bridge = [ZContentBridge new];
+    self.bridge = [ZVideoBridge new];
 }
 - (void)onVideoPlayer:(nonnull ZVideoPlayer *)player andCloseBtn:(nonnull UIButton *)closeBtn {
     
@@ -125,7 +124,7 @@
             weakSelf.videoBlock(ZVideoActionTypeReport, weakSelf, weakSelf.circleBean, weakSelf.ip);
         } else if ([action.title isEqualToString:@"黑名单(慎重选择)"]) {
             
-            [weakSelf.bridge addBlack:weakSelf.circleBean.users.encoded targetEncoded:weakSelf.circleBean.encoded content:@"" action:^(enum ZContentActionType type, ZTableNoLoadingViewConntroller * _Nonnull vc, ZKeyValueBean * _Nullable kv, ZCircleBean * _Nullable circle) {
+            [weakSelf.bridge addBlack:weakSelf.circleBean.users.encoded targetEncoded:weakSelf.circleBean.encoded content:@"" action:^(enum ZVideoActionType type, ZTViewController * _Nonnull vc) {
                
                 weakSelf.videoBlock(ZVideoActionTypeBlack, weakSelf, weakSelf.circleBean, weakSelf.ip);
                 
