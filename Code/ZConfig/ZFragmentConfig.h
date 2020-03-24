@@ -12,11 +12,13 @@
 
 #define ZAppFormGlobalMap 0 // 地图类型 含有抽屉
 
-#define ZAppFormGlobalCircle 1 // 朋友圈类型
+#define ZAppFormGlobalCircle 0 // 朋友圈类型
 
 #define ZCircleFormOne 1  // 朋友圈类型 1 图片比例 4 / 3 左边
 
 #define ZAppFormGlobalGame 0 // 朋友圈类型
+
+#define ZAppFormGlobalMix 1
 
 #if ZAppFormGlobalMap
 
@@ -72,6 +74,18 @@
 @{@"type": @"5",@"title": @"涉嫌违法犯罪",@"isSelected": @false} ,\
 @{@"type": @"6",@"title": @"其他问题",@"isSelected": @false} ,\
 ]
+
+#elif ZAppFormGlobalMix
+
+#define ZReportKeyValues @[\
+@{@"type": @"1",@"title": @"标题夸张",@"isSelected": @true} ,\
+@{@"type": @"2",@"title": @"低俗色情",@"isSelected": @false} ,\
+@{@"type": @"3",@"title": @"广告软文",@"isSelected": @false} ,\
+@{@"type": @"4",@"title": @"内容不实",@"isSelected": @false} ,\
+@{@"type": @"5",@"title": @"涉嫌违法犯罪",@"isSelected": @false} ,\
+@{@"type": @"6",@"title": @"其他问题",@"isSelected": @false} ,\
+]
+
 #elif ZAppFormGlobalGame
 
 #endif

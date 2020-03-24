@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZVideo"
-  spec.version      = "0.6.3"
+  spec.version      = "0.6.5"
   spec.summary      = "A Lib For 视频."
   spec.description  = <<-DESC
   ZVideo是视频展示

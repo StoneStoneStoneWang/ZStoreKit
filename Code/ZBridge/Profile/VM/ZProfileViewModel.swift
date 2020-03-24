@@ -78,7 +78,11 @@ extension ZProfileType {
             
             return [.space,userInfo,.characters,.space,.contactUS,.privacy,.about,.space,.setting]
             
-        } else {
+        } else if ZConfigure.fetchPType() == .mix {
+            
+            return [.space,userInfo,.myCircle,.address,.space,.contactUS,.privacy,.about,.space,.setting]
+            
+        }else {
             
             if let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
                 

@@ -35,7 +35,7 @@
 
 #define ZProfileViewController sc9PMHtRCIC4
 
-#if ZAppFormGlobalMap
+#if ZAppFormGlobalMix
 
 #define ZAMapBunddleView rcvyVtwC9wv
 
