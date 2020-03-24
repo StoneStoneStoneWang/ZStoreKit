@@ -45,7 +45,17 @@ struct ZContentViewModel: WLBaseViewModel {
         
         let output = WLOutput(zip: zip)
         
-        output.tableData.accept(input.circle.contentMap)
+        var mutable = output.tableData.value
+        
+        for item in input.circle.contentMap {
+            
+            if item.type != "title" {
+                
+                mutable += [item]
+            }
+        }
+        
+        output.tableData.accept(mutable)
         
         self.output = output
     }

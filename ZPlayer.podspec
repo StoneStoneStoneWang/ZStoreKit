@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZPlayer"
-  spec.version      = "0.5.7"
+  spec.version      = "0.6.4"
   spec.summary      = "A Lib For 视频播放器."
   spec.description  = <<-DESC
   ZPlayer是VC的封装

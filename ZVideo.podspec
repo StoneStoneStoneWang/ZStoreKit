@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZVideo"
-  spec.version      = "0.6.1"
+  spec.version      = "0.6.3"
   spec.summary      = "A Lib For 视频."
   spec.description  = <<-DESC
   ZVideo是视频展示
@@ -27,8 +27,10 @@ Pod::Spec.new do |spec|
   spec.dependency 'ZConfig'
   spec.dependency 'ZPlayer'
   spec.dependency 'JXTAlertManager'
-  spec.dependency 'ZActionBridge/Content/Bridge'
+  spec.dependency 'ZBombBridge/Video/Bridge'
   spec.dependency 'SToolsKit'
+  spec.dependency 'ZBean/Circle'
   spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
+  
 end
 

@@ -37,7 +37,7 @@ public enum ZContentActionType: Int ,Codable {
     case remove = 9
     
     case share = 10
-
+    
 }
 
 public typealias ZContentAction = (_ type: ZContentActionType,_ from: ZTableNoLoadingViewConntroller,_ keyValue: ZKeyValueBean?,_ circle: ZCircleBean?) -> ()
@@ -135,7 +135,7 @@ extension ZContentBridge {
                 
                 switch result {
                 case .ok(let msg):
-
+                    
                     ZHudUtil.showInfo(msg)
                     
                     action(.black,self.vc, nil,nil)
@@ -184,7 +184,7 @@ extension ZContentBridge {
             .disposed(by: disposed)
         
     }
-
+    
     @objc public func converToJson(_ circle: ZCircleBean) -> [String: Any] {
         
         return circle.toJSON()
@@ -209,7 +209,7 @@ extension ZContentBridge {
                 
                 switch result {
                 case .ok(let msg):
-
+                    
                     self.circleBean.isLaud = !self.circleBean.isLaud
                     
                     if isLike { self.circleBean.countLaud -= 1 }
