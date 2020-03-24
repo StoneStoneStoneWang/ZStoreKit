@@ -124,40 +124,74 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat width = (CGRectGetWidth(self.bounds) - 70) / 3;
+    NSDictionary *info = [NSBundle mainBundle].infoDictionary;
     
-    [self.textItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(self);
-        
-        make.left.mas_equalTo(15);
-        
-        make.width.mas_equalTo(width);
-        
-        make.height.mas_equalTo(30);
-    }];
+    NSString *version = info[@"CFBundleShortVersionString"];
     
-    [self.imageItem mas_makeConstraints:^(MASConstraintMaker *make) {
+    if ([version compare:@"1.1.0"] == NSOrderedAscending) {
         
-        make.centerY.equalTo(self);
         
-        make.width.mas_equalTo(width);
+        CGFloat width = (CGRectGetWidth(self.bounds) - 40) / 2;
         
-        make.left.equalTo(self.textItem.mas_right).offset(10);
+        [self.textItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.left.mas_equalTo(15);
+            
+            make.width.mas_equalTo(width);
+            
+            make.height.mas_equalTo(30);
+        }];
         
-        make.height.mas_equalTo(30);
-    }];
-    
-    [self.videoItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.imageItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.textItem.mas_right).offset(10);
+            
+            make.height.mas_equalTo(30);
+        }];
         
-        make.centerY.equalTo(self);
+    } else {
         
-        make.width.mas_equalTo(width);
+        CGFloat width = (CGRectGetWidth(self.bounds) - 70) / 3;
         
-        make.left.equalTo(self.imageItem.mas_right).offset(15);
+        [self.textItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.left.mas_equalTo(15);
+            
+            make.width.mas_equalTo(width);
+            
+            make.height.mas_equalTo(30);
+        }];
         
-        make.height.mas_equalTo(30);
-    }];
+        [self.imageItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.textItem.mas_right).offset(10);
+            
+            make.height.mas_equalTo(30);
+        }];
+        
+        [self.videoItem mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            
+            make.width.mas_equalTo(width);
+            
+            make.left.equalTo(self.imageItem.mas_right).offset(15);
+            
+            make.height.mas_equalTo(30);
+        }];
+    }
 }
 
 @end

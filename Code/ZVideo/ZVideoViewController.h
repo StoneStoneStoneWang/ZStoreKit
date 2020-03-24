@@ -30,6 +30,7 @@ typedef void(^ZVideoActionBlock)(ZVideoActionType type,ZVideoViewController *fro
 
 + (instancetype)createVideoWithEncode:(NSString *)encode andUrl:(NSString *)url andIsMy:(BOOL )isMy andCircleBean:(ZCircleBean *)circleBean andIp:(NSIndexPath *)ip andVideoBlock:(ZVideoActionBlock)videoBlock;
 
+@property (nonatomic ,strong ,readonly) ZCircleBean *circleBean;
 @end
 
 NS_ASSUME_NONNULL_END

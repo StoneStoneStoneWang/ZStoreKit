@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZSign"
-  spec.version      = "0.0.1"
+  spec.version      = "0.6.5"
   spec.summary      = "A Lib For sign."
   spec.description  = <<-DESC
   ZSign是生成用户签名的库

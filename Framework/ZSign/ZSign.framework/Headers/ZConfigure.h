@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger ,ZConfigureType) {
     ZConfigureTypeMap NS_SWIFT_NAME(map) = 3,
     /** 游戏  */
     ZConfigureTypeGame NS_SWIFT_NAME(game) = 4,
+    /** Mix  */
+    ZConfigureTypeMix NS_SWIFT_NAME(mix) = 5,
 };
 
 NS_ASSUME_NONNULL_BEGIN

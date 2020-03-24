@@ -20,7 +20,7 @@
 
 @property (nonatomic ,strong) NSString *url;
 
-@property (nonatomic ,strong) ZCircleBean *circleBean;
+@property (nonatomic ,strong ,readwrite) ZCircleBean *circleBean;
 
 @property (nonatomic ,copy) ZVideoActionBlock videoBlock;
 
