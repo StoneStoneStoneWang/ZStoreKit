@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZActionBridge"
-  spec.version      = "0.6.4"
+  spec.version      = "1.0.0"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZActionBridge是oc swift 转换的封装呢
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
     report.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Report/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ObjectMapper'
       vm.dependency 'RxDataSources'
@@ -54,7 +54,7 @@ Pod::Spec.new do |spec|
   #    evaluate.subspec 'VM' do |vm|
   #
   #      vm.source_files = "Code/ZBridge/Evaluate/VM/*.{swift}"
-  #      vm.dependency 'RxCocoa'
+  #      vm.dependency 'RxCocoa', '5.0.1'
   #      vm.dependency 'WLBaseViewModel'
   #      vm.dependency 'ObjectMapper'
   #      vm.dependency 'RxDataSources'
@@ -79,7 +79,7 @@ Pod::Spec.new do |spec|
     
     black.subspec 'VM' do |vm|
       vm.source_files = "Code/ZBridge/Black/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZBean/Black'
       vm.dependency 'ZRealReq'
@@ -104,7 +104,7 @@ Pod::Spec.new do |spec|
     focus.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Focus/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZBean/Focus'
       vm.dependency 'ZRealReq'
@@ -130,7 +130,7 @@ Pod::Spec.new do |spec|
     comment.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Comment/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZRealReq'
       vm.dependency 'WLBaseResult'
@@ -153,7 +153,7 @@ Pod::Spec.new do |spec|
     
     content.subspec 'VM' do |vm|
       vm.source_files = "Code/ZBridge/Content/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZBean/KeyValue'
       vm.dependency 'ZBean/Circle'
@@ -179,7 +179,7 @@ Pod::Spec.new do |spec|
     textEdit.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/TextEdit/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'WLBaseResult'
       vm.dependency 'WLToolsKit/String'
@@ -197,7 +197,7 @@ Pod::Spec.new do |spec|
     
     publish.subspec 'VM' do |vm|
       vm.source_files = "Code/ZBridge/Publish/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZBean/Circle'
       vm.dependency 'WLBaseResult'
@@ -221,7 +221,7 @@ Pod::Spec.new do |spec|
     banner.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Banner/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZRealReq'
       vm.dependency 'WLBaseResult'
@@ -246,7 +246,7 @@ Pod::Spec.new do |spec|
       vm.source_files = "Code/ZBridge/Carousel/VM/*.{swift}"
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'WLBaseResult'
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLToolsKit/Common'
     end
     
@@ -265,7 +265,7 @@ Pod::Spec.new do |spec|
   #    handle.subspec 'VM' do |vm|
   #
   #      vm.source_files = "Code/ZBridge/Handle/VM/*.{swift}"
-  #      vm.dependency 'RxCocoa'
+  #      vm.dependency 'RxCocoa', '5.0.1'
   #      vm.dependency 'WLBaseViewModel'
   #      vm.dependency 'ZCache'
   #      vm.frameworks = 'UIKit', 'Foundation' ,'CoreLocation'
@@ -283,7 +283,7 @@ Pod::Spec.new do |spec|
   #
   #    handler.subspec 'VM' do |vm|
   #      vm.source_files = "Code/ZBridge/Handler/VM/*.{swift}"
-  #      vm.dependency 'RxCocoa'
+  #      vm.dependency 'RxCocoa', '5.0.1'
   #      vm.dependency 'WLBaseViewModel'
   #      vm.dependency 'ZRealReq'
   #      vm.dependency 'WLBaseResult'
@@ -309,7 +309,7 @@ Pod::Spec.new do |spec|
   #    order.subspec 'VM' do |vm|
   #
   #      vm.source_files = "Code/ZBridge/Order/VM/*.{swift}"
-  #      vm.dependency 'RxCocoa'
+  #      vm.dependency 'RxCocoa', '5.0.1'
   #      vm.dependency 'WLBaseViewModel'
   #      vm.dependency 'ZRealReq'
   #      vm.dependency 'WLBaseResult'
@@ -336,7 +336,7 @@ Pod::Spec.new do |spec|
     character.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Characters/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZRealReq'
       vm.dependency 'WLBaseResult'
@@ -362,7 +362,7 @@ Pod::Spec.new do |spec|
     enrolls.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Enroll/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZRealReq'
       vm.dependency 'WLBaseResult'
@@ -389,7 +389,7 @@ Pod::Spec.new do |spec|
     tList.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/TList/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZRealReq'
       vm.dependency 'WLBaseResult'
@@ -414,7 +414,7 @@ Pod::Spec.new do |spec|
   #    cList.subspec 'VM' do |vm|
   #
   #      vm.source_files = "Code/ZBridge/CList/VM/*.{swift}"
-  #      vm.dependency 'RxCocoa'
+  #      vm.dependency 'RxCocoa', '5.0.1'
   #      vm.dependency 'WLBaseViewModel'
   #      vm.dependency 'ZRealReq'
   #      vm.dependency 'WLBaseResult'

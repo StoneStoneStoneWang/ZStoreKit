@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZCutBridge"
-  spec.version      = "0.6.9"
+  spec.version      = "0.7.0"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZCutBridge是oc swift 转换的封装呢
@@ -29,21 +29,21 @@ Pod::Spec.new do |spec|
     protocol.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Protocol/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'RxSwift'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZSign'
     end
     
-    #    protocol.subspec 'Bridge' do |bridge|
-    #      bridge.source_files = "Code/ZBridge/Protocol/Bridge/*.{swift}"
-    #      bridge.dependency 'ZCutBridge/Protocol/VM'
-    #      bridge.dependency 'ZTextInner'
-    #      bridge.dependency 'ZBridge/Base'
-    #
-    #    end
+    protocol.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Protocol/Bridge/*.{swift}"
+      bridge.dependency 'ZCutBridge/Pro/VM'
+      bridge.dependency 'ZTextInner'
+      bridge.dependency 'ZBridge/Base'
+      
+    end
   end
   
-#  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
-
+  #  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
+  
 end

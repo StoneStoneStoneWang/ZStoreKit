@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   
   spec.subspec 'Base' do |base|
     base.source_files = "Code/ZBridge/Base/*.{swift}"
-    base.dependency 'RxCocoa'
+    base.dependency 'RxCocoa', '5.0.1'
     base.dependency 'RxSwift'
   end
   
@@ -37,7 +37,7 @@ Pod::Spec.new do |spec|
       vm.source_files = "Code/ZBridge/Welcome/VM/*.{swift}"
       vm.dependency 'WLToolsKit/Common'
       vm.dependency 'WLBaseViewModel'
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
     end
     
     welcome.subspec 'Bridge' do |bridge|
@@ -56,7 +56,7 @@ Pod::Spec.new do |spec|
     privacy.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Privacy/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZSign'
     end
@@ -75,7 +75,7 @@ Pod::Spec.new do |spec|
     login.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Login/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZCheck'
       vm.dependency 'ZRealReq'
@@ -98,7 +98,7 @@ Pod::Spec.new do |spec|
     reg.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Reg/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZCheck'
       vm.dependency 'ZRealReq'
@@ -122,7 +122,7 @@ Pod::Spec.new do |spec|
     password.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Password/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZCheck'
       vm.dependency 'ZRealReq'
@@ -146,7 +146,7 @@ Pod::Spec.new do |spec|
     setting.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Setting/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZCache/Account'
       vm.dependency 'ZSign'
@@ -169,7 +169,7 @@ Pod::Spec.new do |spec|
     profile.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Profile/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZCache/Account'
       vm.dependency 'ZCache/User'
@@ -195,7 +195,7 @@ Pod::Spec.new do |spec|
     about.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/About/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'WLToolsKit/String'
     end
@@ -215,7 +215,7 @@ Pod::Spec.new do |spec|
     userinfo.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/UserInfo/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'WLBaseResult'
       vm.dependency 'ZCache/User'
@@ -240,7 +240,7 @@ Pod::Spec.new do |spec|
     nickName.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/NickName/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZCache/User'
       vm.dependency 'ZRealReq'
@@ -262,7 +262,7 @@ Pod::Spec.new do |spec|
     signature.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Signature/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZCache/User'
       vm.dependency 'ZRealReq'

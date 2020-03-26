@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZCocoa"
-  spec.version      = "0.0.5"
+  spec.version      = "1.0.0"
   spec.summary      = "A Lib For rxcocoa."
   spec.description  = <<-DESC
   ZCocoa是rxcocoa封装
@@ -25,16 +25,16 @@ Pod::Spec.new do |spec|
   
   spec.subspec 'Button' do |button|
     button.source_files = "Code/ZCocoa/Button/*.{swift}"
-    button.dependency 'RxCocoa'
+    button.dependency 'RxCocoa', '5.0.1'
   end
   spec.subspec 'TextField' do |textfield|
     textfield.source_files = "Code/ZCocoa/TextField/*.{swift}"
-    textfield.dependency 'RxCocoa'
+    textfield.dependency 'RxCocoa', '5.0.1'
   end
   
   spec.subspec 'TableView' do |tableView|
     tableView.source_files = "Code/ZCocoa/TableView/*.{swift}"
-    tableView.dependency 'RxCocoa'
+    tableView.dependency 'RxCocoa', '5.0.1'
     tableView.dependency 'MJRefresh'
   end
   spec.subspec 'SM' do |sm|

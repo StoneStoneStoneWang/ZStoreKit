@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
     translate.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Translate/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ObjectMapper'
       vm.dependency 'ZApi'
@@ -50,7 +50,7 @@ Pod::Spec.new do |spec|
     area.subspec 'Manager' do |manager|
       
       manager.source_files = "Code/ZBridge/Area/Manager/*.{swift}"
-      manager.dependency 'RxCocoa'
+      manager.dependency 'RxCocoa', '5.0.1'
       manager.dependency 'WLBaseViewModel'
       manager.dependency 'ObjectMapper'
       manager.dependency 'ZApi'
@@ -62,7 +62,7 @@ Pod::Spec.new do |spec|
     area.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Area/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'WLBaseResult'
       vm.dependency 'ZBean/Area'
@@ -84,7 +84,7 @@ Pod::Spec.new do |spec|
     address.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Address/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ObjectMapper'
       vm.dependency 'ZApi'
@@ -113,7 +113,7 @@ Pod::Spec.new do |spec|
     evaluate.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Evaluate/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ObjectMapper'
       vm.dependency 'RxDataSources'
@@ -137,7 +137,7 @@ Pod::Spec.new do |spec|
     video.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Video/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZApi'
       vm.dependency 'ZRealReq'
@@ -158,7 +158,7 @@ Pod::Spec.new do |spec|
     order.subspec 'VM' do |vm|
       
       vm.source_files = "Code/ZBridge/Order/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
+      vm.dependency 'RxCocoa', '5.0.1'
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'ZRealReq'
       vm.dependency 'WLBaseResult'
