@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZTextInner"
-  spec.version      = "0.6.7"
+  spec.version      = "0.6.8"
   spec.summary      = "A Lib For inner."
   spec.description  = <<-DESC
   ZTextInner是内置浏览器封装

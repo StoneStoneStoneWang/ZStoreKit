@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZBridge"
-  spec.version      = "0.6.6"
+  spec.version      = "0.6.9"
   spec.summary      = "A Lib For bridge."
   spec.description  = <<-DESC
   ZBridge是oc swift 转换的封装呢
@@ -70,6 +70,25 @@ Pod::Spec.new do |spec|
     end
   end
   
+  # 协议
+  spec.subspec 'Protocol' do |protocol|
+    
+    protocol.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/ZBridge/Protocol/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'ZSign'
+    end
+    
+    protocol.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/ZBridge/Protocol/Bridge/*.{swift}"
+      bridge.dependency 'ZBridge/Protocol/VM'
+      bridge.dependency 'ZTextInner'
+      bridge.dependency 'ZBridge/Base'
+      
+    end
+  end
   # 登陆
   spec.subspec 'Login' do |login|
     
