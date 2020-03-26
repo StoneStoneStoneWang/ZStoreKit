@@ -69,26 +69,6 @@ Pod::Spec.new do |spec|
       
     end
   end
-  
-  # 协议
-  spec.subspec 'Protocol' do |protocol|
-    
-    protocol.subspec 'VM' do |vm|
-      
-      vm.source_files = "Code/ZBridge/Protocol/VM/*.{swift}"
-      vm.dependency 'RxCocoa'
-      vm.dependency 'WLBaseViewModel'
-      vm.dependency 'ZSign'
-    end
-    
-    protocol.subspec 'Bridge' do |bridge|
-      bridge.source_files = "Code/ZBridge/Protocol/Bridge/*.{swift}"
-      bridge.dependency 'ZBridge/Protocol/VM'
-      bridge.dependency 'ZTextInner'
-      bridge.dependency 'ZBridge/Base'
-      
-    end
-  end
   # 登陆
   spec.subspec 'Login' do |login|
     
