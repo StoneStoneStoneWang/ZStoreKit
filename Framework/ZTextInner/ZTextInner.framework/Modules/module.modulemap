@@ -1,0 +1,6 @@
+framework module ZTextInner {
+  umbrella header "ZTextInner.h"
+
+  export *
+  module * { export * }
+}
