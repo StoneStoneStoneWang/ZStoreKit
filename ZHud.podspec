@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
   
   spec.name         = "ZHud"
-  spec.version      = "0.0.1"
+  spec.version      = "1.0.0"
   spec.summary      = "A Lib For hud."
   spec.description  = <<-DESC
   ZHud是hud封装
